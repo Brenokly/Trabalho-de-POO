@@ -58,8 +58,4 @@ class Administrador {
 
         return check;
     }
-
-    public static void main(String args[]) {
-
-    }
 }
