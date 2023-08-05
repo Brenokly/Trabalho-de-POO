@@ -1,7 +1,23 @@
+package br.edu.ufersa.poo.classes;
+
 class Administrador {
     private String nome;
     private String login;
     private String senha;
+
+    public Administrador() {
+        nome = "";
+        senha = "";
+        login = "";
+    }
+
+    public Administrador(String nome, String login, String senha) {
+        if (nome != null && nome.equals("") && senha != null && senha.equals("") && login != null && login.equals("")) {
+            this.nome = nome;
+            this.login = login;
+            this.senha = senha;
+        }
+    }
 
     public String getNome() {
         return nome;
@@ -31,8 +47,19 @@ class Administrador {
     }
 
     public boolean login(String login, String senha) {
+        boolean check = false;
+
         if (this.login.equals(login) && this.senha.equals(senha)) {
             System.out.println("Logando...");
+            check = true;
+
+            return check;
         }
+
+        return check;
+    }
+
+    public static void main(String args[]) {
+
     }
 }
