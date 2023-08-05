@@ -1,1 +1,0 @@
-Neste pacote vamos iniciailmente implementar as classes para o nosso projeto.
