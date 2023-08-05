@@ -54,8 +54,7 @@ class Administrador {
             check = true;
 
             return check;
-        }
-
-        return check;
+        } else
+            return check;
     }
 }
