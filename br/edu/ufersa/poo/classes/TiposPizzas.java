@@ -1,11 +1,15 @@
 package br.edu.ufersa.poo.classes;
 
-class TiposPizzas {
+public class TiposPizzas {
     private String tipo;
     private double valorGrande;
     private double valorPequena;
 
-    public TiposPizzas(){}
+    public TiposPizzas(){
+        tipo = "";
+        valorGrande = 0.0;
+        valorPequena = 0.0;
+    }
 
     public TiposPizzas(String tipo, double valorGrande, double valorPequena) {
         setTipo(tipo);

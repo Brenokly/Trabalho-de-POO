@@ -1,11 +1,14 @@
 package br.edu.ufersa.poo.classes;
 
-class Administrador {
+public class Administrador {
     private String nome;
     private String login;
     private String senha;
 
     public Administrador() {
+        nome = "";
+        login = "";
+        senha = "";
     }
 
     public Administrador(String nome, String login, String senha) {
