@@ -2,8 +2,10 @@ package br.edu.ufersa.poo.classes;
 
 class TiposPizzas {
     private String tipo;
-    private double ValorGrande;
-    private double ValorPequena;
+    private double valorGrande;
+    private double valorPequena;
+
+    public TiposPizzas(){}
 
     public TiposPizzas(String tipo, double valorGrande, double valorPequena) {
         setTipo(tipo);
@@ -17,25 +19,25 @@ class TiposPizzas {
 
     public void setTipo(String tipo){
         if (!tipo.isEmpty() && tipo != null)
-       this.tipo = tipo; 
+        this.tipo = tipo; 
     }
 
     public double getValorGrande() {
-        return ValorGrande;
+        return valorGrande;
     }
 
     public void setValorGrande(double valorGrande) {
         if (valorGrande > 0)
-        ValorGrande = valorGrande;
+        this.valorGrande = valorGrande;
     }
 
     public double getValorPequena() {
-        return ValorPequena;
+        return valorPequena;
     }
 
-    public void setValorpequena(double valorpequena) {
-        if (valorpequena > 0)
-        this.ValorPequena = valorPequena;
+    public void setValorPequena(double valorPequena) {
+        if (valorPequena > 0)
+        this.valorPequena = valorPequena;
     }
 
     public boolean cadastrarSabor(TiposPizzas pizzas){

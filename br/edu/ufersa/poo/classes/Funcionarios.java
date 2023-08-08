@@ -64,7 +64,7 @@ class Funcionarios {
         return true;
     }
 
-
+    public boolean excluirFuncionario(Funcionarios funcionario){
        System.out.println("Excluído com sucesso!"); 
 
         return true;

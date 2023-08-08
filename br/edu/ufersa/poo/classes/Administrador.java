@@ -9,11 +9,9 @@ class Administrador {
     }
 
     public Administrador(String nome, String login, String senha) {
-        if (!nome.isEmpty() && nome != null && !senha.isEmpty() && senha != null && !login.isEmpty() && login != null) {
-            this.nome = nome;
-            this.login = login;
-            this.senha = senha;
-        }
+        setNome(nome);
+        setLogin(login);
+        setSenha(senha);
     }
 
     public String getNome() {
