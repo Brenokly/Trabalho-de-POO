@@ -6,9 +6,6 @@ class Administrador {
     private String senha;
 
     public Administrador() {
-        nome = "";
-        senha = "";
-        login = "";
     }
 
     public Administrador(String nome, String login, String senha) {
@@ -47,14 +44,12 @@ class Administrador {
     }
 
     public boolean login(String login, String senha) {
-        boolean check = false;
 
         if (this.login.equals(login) && this.senha.equals(senha)) {
             System.out.println("Logando...");
-            check = true;
 
-            return check;
+            return true;
         } else
-            return check;   
+            return false;
     }
 }
