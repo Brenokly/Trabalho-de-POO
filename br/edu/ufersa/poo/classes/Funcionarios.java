@@ -1,19 +1,19 @@
 package br.edu.ufersa.poo.classes;
 
-class Administrador {
+class Funcionarios {
     private String nome;
+    private String cpf;
     private String login;
     private String senha;
 
-    public Administrador() {
+    public Funcionarios() {
     }
 
-    public Administrador(String nome, String login, String senha) {
-        if (!nome.isEmpty() && nome != null && !senha.isEmpty() && senha != null && !login.isEmpty() && login != null) {
-            this.nome = nome;
-            this.login = login;
-            this.senha = senha;
-        }
+    public Funcionarios(String nome, String cpf, String login, String senha) {
+        setNome(nome);
+        setCpf(cpf);
+        setLogin(login);
+        setSenha(senha);
     }
 
     public String getNome() {
@@ -23,6 +23,15 @@ class Administrador {
     public void setNome(String nome) {
         if (!nome.isEmpty() && nome != null)
             this.nome = nome;
+    }
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        if (!cpf.isEmpty() && cpf != null)
+            this.cpf = cpf;
     }
 
     public String getLogin() {
@@ -41,6 +50,24 @@ class Administrador {
     public void setSenha(String senha) {
         if (!senha.isEmpty() && senha != null)
             this.senha = senha;
+    }
+
+    public boolean cadastrarFuncionario(Funcionarios funcionario) {
+        System.out.println("Castrado com sucesso!"); 
+
+        return true;
+    }
+    
+    public boolean editarFuncionario(Funcionarios funcionario){
+        System.out.println("Editado com sucesso!"); 
+
+        return true;
+    }
+
+
+       System.out.println("Excluído com sucesso!"); 
+
+        return true;
     }
 
     public boolean login(String login, String senha) {
