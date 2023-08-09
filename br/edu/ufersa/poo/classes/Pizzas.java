@@ -131,9 +131,11 @@ public class Pizzas {
 
     public Pizzas[] buscarPizzas(TiposPizzas pizza){
         System.out.println("Buscando pizzas por tipo...");
+        return null;
     }
 
     public Pizzas[] buscarPizzas(Clientes pizza){
         System.out.println("Buscando pizzas por clientes...");
+        return null;
     }
 }
