@@ -9,15 +9,16 @@ public class Pizzas {
     private List<Adicionais> adicional = new ArrayList<Adicionais>();
     private double valor;
 
-    public Pizzas(){ // Para pizzas sem adicionais
-        tipopizza = new Tipospizzas();
-        setTamanho(EnumTamanho.GRANDE); // Por padrão as pizzas são grandes, com possibilidade de alterar.
+    public Pizzas(Adicionais adicional) { // Para pizzas com adicionais
+        tipopizza = new TiposPizzas();
+        this.adicional.add(adicional);
+        setTamanho(EnumTamanho.GRANDE);
+        valor = 0.0;
         calcValor();
     }
-
-    public Pizzas(){ // Para pizzas com adicionais
-        tipopizza = new Tipospizzas();
-        adicional.add(new Adicionais());
+    
+    public Pizzas(){ // Para pizzas sem adicionais
+        tipopizza = new TiposPizzas();
         setTamanho(EnumTamanho.GRANDE);
         calcValor();
     }
@@ -106,24 +107,23 @@ public class Pizzas {
         return true;
     }
 
-     public boolean excluirPizza(Pizzas pizza){
+    public boolean excluirPizza(Pizzas pizza){
         System.out.println("Pizza excluída!");
 
         return true;
     }
 
-    public void calcValor(){
+    public void calcValor() {
         double Valor = 0.0;
 
         if (getTamanho() == EnumTamanho.GRANDE) {
-            valor += getTipopizza().getValorGrande();
-        }
-        else{
-            valor += getTipopizza().getValorPequena();
+            Valor += getTipopizza().getValorGrande();
+        } else {
+            Valor += getTipopizza().getValorPequena();
         }
 
         for (Adicionais add : adicional) {
-            valor += add.getValor();
+            Valor += add.getValor();
         }
 
         setValor(Valor);
