@@ -21,7 +21,7 @@ class Funcionarios {
     }
 
     public void setNome(String nome) {
-        if (!nome.isEmpty() && nome != null)
+        if (nome != null && !nome.isEmpty())
             this.nome = nome;
     }
 
@@ -30,7 +30,7 @@ class Funcionarios {
     }
 
     public void setCpf(String cpf) {
-        if (!cpf.isEmpty() && cpf != null)
+        if (cpf != null && !cpf.isEmpty())
             this.cpf = cpf;
     }
 
@@ -39,7 +39,7 @@ class Funcionarios {
     }
 
     public void setLogin(String login) {
-        if (!login.isEmpty() && login != null)
+        if (login != null && !login.isEmpty())
             this.login = login;
     }
 
@@ -48,7 +48,7 @@ class Funcionarios {
     }
 
     public void setSenha(String senha) {
-        if (!senha.isEmpty() && senha != null)
+        if (senha != null && !senha.isEmpty())
             this.senha = senha;
     }
 

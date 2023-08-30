@@ -22,7 +22,7 @@ public class Administrador {
     }
 
     public void setNome(String nome) {
-        if (!nome.isEmpty() && nome != null)
+        if (nome != null && !nome.isEmpty())
             this.nome = nome;
     }
 
@@ -31,7 +31,7 @@ public class Administrador {
     }
 
     public void setLogin(String login) {
-        if (!login.isEmpty() && login != null)
+        if (login != null && !login.isEmpty())
             this.login = login;
     }
 
@@ -40,7 +40,7 @@ public class Administrador {
     }
 
     public void setSenha(String senha) {
-        if (!senha.isEmpty() && senha != null)
+        if (senha != null && !senha.isEmpty())
             this.senha = senha;
     }
 

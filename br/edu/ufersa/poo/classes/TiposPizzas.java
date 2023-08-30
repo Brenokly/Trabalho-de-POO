@@ -22,7 +22,7 @@ public class TiposPizzas {
     }
 
     public void setTipo(String tipo){
-        if (!tipo.isEmpty() && tipo != null)
+        if (tipo != null && !tipo.isEmpty())
         this.tipo = tipo; 
     }
 
