@@ -1,6 +1,6 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
-class Adicionais {
+public class Adicionais {
 	private String nome;
 	private int estoque;
 	private double valor;

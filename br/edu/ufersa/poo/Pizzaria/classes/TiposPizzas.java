@@ -1,4 +1,4 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
 public class TiposPizzas {
     private String tipo;

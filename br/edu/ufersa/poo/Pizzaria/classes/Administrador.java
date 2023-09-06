@@ -1,4 +1,4 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
 public class Administrador {
     private String nome;

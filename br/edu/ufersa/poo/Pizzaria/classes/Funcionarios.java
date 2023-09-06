@@ -1,6 +1,6 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
-class Funcionarios {
+public class Funcionarios {
     private String nome;
     private String cpf;
     private String login;

@@ -1,4 +1,4 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
 import java.util.ArrayList;
 import java.util.List;

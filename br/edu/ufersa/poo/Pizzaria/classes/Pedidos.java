@@ -1,8 +1,8 @@
-package br.edu.ufersa.poo.classes;
+package br.edu.ufersa.poo.Pizzaria.classes;
 
 import java.util.ArrayList;
 
-class Pedidos {
+public class Pedidos {
     private Clientes cliente;
     private ArrayList<Pizzas> pizza = new ArrayList<>(1);
     private EnumEstado estado;
