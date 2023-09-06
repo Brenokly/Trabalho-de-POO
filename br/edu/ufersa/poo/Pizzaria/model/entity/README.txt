@@ -1,0 +1,1 @@
+Todas as classes que representam entidades de negócios.

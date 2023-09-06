@@ -1,0 +1,1 @@
+Neste pacote vai ser abrigada as classes que controlam o fluxo de interação entre o modelo (que representa a lógica de negócios), a visualização (a interface do usuário) e as ações do usuário. 

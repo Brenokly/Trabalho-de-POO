@@ -1,0 +1,1 @@
+Aqui neste pacote vão ficar todas as classes Business Object, ou seja, as classes que vão requerir acesso ao banco de dados chamando o dao.
