@@ -16,25 +16,36 @@ import java.sql.Statement;
 public class PizzaDao extends BaseDaoImpl<Pizza> {
 
   public Long inserir(Pizza pizza) {
-    Connection con = getConnection();
-    PreparedStatement ps = null;
-    ResultSet rs = null;
     Long pizzaId = null;
+    String insertPizzaSql = "INSERT INTO tb_pizza (id_tipo_pizza, tamanho, valor, descricao) VALUES (?, ?, ?, ?)";
 
-    try {
-      TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
-      TiposPizzas tiposPizzasExistente = tiposPizzasDao.buscar(pizza.getPizza());
-      
-        
+    try (Connection con = getConnection();
+         PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
+
+        TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
+        TiposPizzas tiposPizzasExistente = tiposPizzasDao.buscar(pizza.getPizza());
+
         if (tiposPizzasExistente != null) {
             // Verifique se os Adicionais existem no banco de dados
             List<Adicional> adicionais = buscar(pizza.getAdicionais());
             boolean adicionaisValidos = adicionais.size() == pizza.getAdicionais().size();
 
+            for (Adicional adicional : pizza.getAdicionais()) {
+                boolean adicionalEncontrado = false;
+                for (Adicional adicionalNoBanco : adicionais) {
+                    if (adicionalNoBanco.getId() == adicional.getId() && adicionalNoBanco.getQuantidade() >= adicional.getQuantidade()) {
+                        adicionalEncontrado = true;
+                        break; // Sai do loop interno se o adicional for válido
+                    }
+                }
+                if (!adicionalEncontrado) {
+                    adicionaisValidos = false;
+                    break; // Saia do loop principal se um adicional não for válido
+                }
+            }
+
             if (adicionaisValidos) {
                 // Insira a Pizza no banco de dados
-                String insertPizzaSql = "INSERT INTO tb_pizza (id_tipo_pizza, tamanho, valor, descricao) VALUES (?, ?, ?, ?)";
-                ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS);
                 ps.setLong(1, tiposPizzasExistente.getId());
                 ps.setString(2, pizza.getTamanho().getDescricao());
                 ps.setDouble(3, pizza.getValor());
@@ -42,42 +53,33 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
                 ps.executeUpdate();
 
                 // Obtenha o ID da Pizza recém-inserida
-                rs = ps.getGeneratedKeys();
-                if (rs.next()) {
-                    pizzaId = rs.getLong(1);
+                try (ResultSet rs = ps.getGeneratedKeys()) {
+                    if (rs.next()) {
+                        pizzaId = rs.getLong("id");
+
+                        // insire as informações dos adicionais na tabela tb_pizza_adicional
+                        String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade_pedida) VALUES (?, ?, ?)";
+                        try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql)) {
+                            for (Adicional adicional : pizza.getAdicionais()) {
+                                psAdicional.setLong(1, pizzaId);
+                                psAdicional.setLong(2, adicional.getId());
+                                psAdicional.setInt(3, adicional.getQuantidade()); // Use a quantidade do adicional
+                                psAdicional.executeUpdate();
+                            }
+                        }
+                    }
                 }
             }
-        }
+          }
     } catch (SQLException e) {
         e.printStackTrace();
-    } finally {
-        // Feche recursos, incluindo ResultSet, PreparedStatement e Connection
-        if (rs != null) {
-            try {
-                rs.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (ps != null) {
-            try {
-                ps.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
-        if (con != null) {
-            try {
-                con.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        }
     }
 
     return pizzaId;
   }
- 
+
+
+
   public void deletar(Pizza entity) {
     Connection con = getConnection();
   }
@@ -131,7 +133,7 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
     }
 
     return resultados;
- }
+  }
 
   public List<Pizza> listar() {
     Connection con = getConnection();

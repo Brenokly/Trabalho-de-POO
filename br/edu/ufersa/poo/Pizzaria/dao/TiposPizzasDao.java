@@ -6,7 +6,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import Exceptions.NomeInvalido;
+import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 
 // Não está pronta, apenas tive que criar o esqueloto para usar o método buscar na classe PizzaDao
