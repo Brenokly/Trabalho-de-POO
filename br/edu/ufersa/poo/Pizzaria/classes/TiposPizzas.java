@@ -17,6 +17,9 @@ public class TiposPizzas {
         setValorPequena(valorPequena);
     }
 
+    public TiposPizzas(long l, String string, double d, double e) {
+    }
+
     public String getTipo() { 
         return tipo;
     }

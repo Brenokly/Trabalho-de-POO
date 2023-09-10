@@ -7,6 +7,8 @@ public class Produto {
   private double valor;
   private String descricao;
 
+  public Produto() {}
+
   public Produto(String descricao, double valor) throws Exception {
     setDescricao(descricao);
     setValor(valor);

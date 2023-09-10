@@ -12,9 +12,17 @@ public class TiposPizzas {
   }
 
   public TiposPizzas(TiposPizzas pizza) throws Exception {
+    setId(pizza.getId());
     setNome(pizza.getNome());
     setValorGrande(pizza.getValorGrande());
     setValorPequena(pizza.getValorPequena());
+  }
+
+  public TiposPizzas(Long id,String nome, double valorGrande, double valorPequena) throws Exception {
+    setId(id);
+    setNome(nome);
+    setValorGrande(valorGrande);
+    setValorPequena(valorPequena);
   }
 
   public TiposPizzas(String nome, double valorGrande, double valorPequena) throws Exception {

@@ -9,19 +9,27 @@ public class Pizza extends Produto {
   private Tamanho tamanho;
   private List<Adicional> adicionais;
 
-  public Pizza(TiposPizzas pizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao) throws Exception {
+  public Pizza(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao) throws Exception {
     super(descricao, idProduto);
+    pizza = new TiposPizzas();
 
     if (("grande".equals(tamanho.getDescricao()))) {
-      super.setValor(pizza.getValorGrande());
+      super.setValor(Tpizza.getValorGrande());
     } else if (("pequena".equals(tamanho.getDescricao()))) {
-      super.setValor(pizza.getValorPequena());
-    }
+      super.setValor(Tpizza.getValorPequena());
+    } 
     
+    this.pizza.setNome(Tpizza.getNome());
+    this.pizza.setId(Tpizza.getId());
     this.adicionais = new ArrayList<>(adicionais);
-    super.setId(idProduto);
     setPizza(pizza);
     setTamanho(tamanho);
+  }
+  
+  public Pizza(){
+    super();
+    pizza = new TiposPizzas();
+    this.adicionais = new ArrayList<>();
   }
 
   public void addAdicional(Adicional adicional) {
@@ -49,7 +57,17 @@ public class Pizza extends Produto {
   }
 
   public TiposPizzas getPizza() {
-    return pizza;
+    return this.pizza;
+  }
+
+  public void setTamanho(String tamanho) throws TamanhoInvalido {
+    if ("grande".equals(tamanho)) {
+      this.tamanho = Tamanho.GRANDE;
+    } else if ("pequena".equals(tamanho)) {
+      this.tamanho = Tamanho.PEQUENA;
+    } else {
+      throw new TamanhoInvalido("Tamanho inválido");
+    }
   }
 
   public void setTamanho(Tamanho tamanho) throws TamanhoInvalido {

@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 
 // Não está pronta, apenas tive que criar o esqueloto para usar o método buscar na classe PizzaDao
@@ -27,7 +26,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     TiposPizzas resultado = null;
 
-    String sql = "SELECT * FROM tb_tipos_pizzas WHERE nome = ?";
+    String sql = "SELECT * FROM tb_tipos_pizzas as e WHERE e.nome = ?";
 
     try {
         PreparedStatement ps = con.prepareStatement(sql);
@@ -58,7 +57,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     }
 
     return resultado;
-}
+  }
 
 	public  List<TiposPizzas> listar(){
     return null;
