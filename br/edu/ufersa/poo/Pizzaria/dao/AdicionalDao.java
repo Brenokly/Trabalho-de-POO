@@ -98,6 +98,48 @@ public class AdicionalDao extends BaseDaoImpl<Adicional>{
     return null;
   }
 
+  public List<Adicional> buscar(List<Adicional> entidades) {
+    Connection con = getConnection();
+    List<Adicional> resultados = new ArrayList<>();
+
+    String sql = "SELECT * FROM tb_adicional as e WHERE e.nome =?";
+
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+
+        for (Adicional adicional : entidades) {
+            ps.setString(1, adicional.getNome());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (rs.next()) {
+                // Se encontrou um registro, crie um objeto Adicional
+                Adicional resultado = new Adicional();
+                try {
+                  resultado.setId(rs.getLong("id"));
+                  resultado.setNome(rs.getString("nome"));
+                  resultado.setValor(rs.getDouble("valor"));
+                  resultado.setQuantidade(rs.getInt("quantidade"));
+                } catch (Exception e) {
+                  e.printStackTrace();
+                }
+
+                resultados.add(resultado);
+            }
+
+            rs.close();
+        }
+
+        ps.close();
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        closeConnection();
+    }
+
+    return resultados;
+  }
+
   public List<Adicional> listar() {
     Connection con = getConnection();
     ArrayList<Adicional> lista = new ArrayList<Adicional>();
