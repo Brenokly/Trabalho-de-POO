@@ -11,10 +11,20 @@ public class Adicional {
   private double valor;
   private int quantidade;
 
-  public Adicional() {
+  public Adicional(){}
+
+  public Adicional(String nome, int quantidade_pedida) throws Exception {
+    setNome(nome);
+    setQuantidade(quantidade_pedida);
   }
 
-  public Adicional(String nome, double valor, int quantidade) throws Exception {
+  public Adicional( String nome, Long id, int quantidade_pedida) throws Exception {
+    setId(id);
+    setNome(nome);
+    setQuantidade(quantidade_pedida);
+  }
+
+  public Adicional(Long id,String nome, double valor, int quantidade) throws Exception {
     setNome(nome);
     setValor(valor);
     setQuantidade(quantidade);
