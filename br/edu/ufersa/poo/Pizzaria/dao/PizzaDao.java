@@ -15,7 +15,7 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
     public Long inserir(Pizza pizza) {
         Connection con = getConnection();
         Long pizzaId = null;   
-        
+
         try {
             TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // Sei que essa parte é no bo, quando for implementar lá, eu mudo
             TiposPizzas tiposPizzasExistente = tiposPizzasDao.buscar(pizza.getPizza());
@@ -30,7 +30,7 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
 
                 con = getConnection();
 
-                double valorTotalAdicionais = 0.0; // Inicializa com zero
+                double valorTotalAdicionais = 0.0; 
     
                 for (Adicional adicional : pizza.getAdicionais()) {
                     boolean adicionalEncontrado = false;
@@ -57,8 +57,7 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
                     PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS);
                     double valorTotalPizza = pizza.getValor() + valorTotalAdicionais;
 
-                    System.out.println("chegou aqui!");
-    
+                    // Apenas isso 
                     // Insira a Pizza no banco de dados com o novo valor total
                     ps.setLong(1, tiposPizzasExistente.getId());
                     ps.setString(2, pizza.getTamanho().getDescricao());
@@ -70,7 +69,7 @@ public class PizzaDao extends BaseDaoImpl<Pizza> {
                     try (ResultSet rs = ps.getGeneratedKeys()) {
                         if (rs.next()) {
                             pizzaId = rs.getLong(1);
-    
+
                             // Insira as informações dos adicionais na tabela tb_pizza_adicional
                             String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade_pedida) VALUES (?, ?, ?)";
                             try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql)) {
