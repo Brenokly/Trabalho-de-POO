@@ -67,7 +67,9 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
 
     public Cliente buscar(Cliente entity) {
         Connection con = getConnection();
-        Cliente resultado = new Cliente();
+        Cliente resultado;
+        resultado = new Cliente();
+       
 
         String sql = "SELECT * FROM tb_cliente WHERE id = ?";
 
@@ -79,10 +81,14 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                resultado.setId(rs.getLong("id"));
-                resultado.setNome(rs.getString("nome"));
-                resultado.setCpf(rs.getString("cpf"));
-                resultado.setEndereco(rs.getString("endereco"));
+                try {
+                    resultado.setId(rs.getLong("id"));
+                    resultado.setNome(rs.getString("nome"));
+                    resultado.setCpf(rs.getString("cpf"));
+                    resultado.setEndereco(rs.getString("endereco"));
+                } catch (IdInvalido e) {
+                    e.printStackTrace();
+                }
             }
             
         } catch (SQLException e) {
@@ -93,6 +99,10 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         return resultado;
     }
 
+    /**
+     * @param entities
+     * @return
+     */
     public List<Cliente> buscar(List<Cliente> entities) {
         Connection con = getConnection();
         List<Cliente> resultados = new ArrayList<>(null);
@@ -108,7 +118,9 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
                 ResultSet rs = ps.executeQuery();
 
                 if (rs.next()) {
-                    Cliente resultado = new Cliente();
+                    Cliente resultado;
+                    resultado = new Cliente();
+                    
                     try {
                         resultado.setId(rs.getLong("id"));
                         resultado.setNome(rs.getString("nome"));

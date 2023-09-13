@@ -9,7 +9,7 @@ public class Cliente{
     private String endereco;
 
     public Cliente(){
-        setId(0L);
+        id = 0L;
     }
 
     public Cliente(String nome, String cpf, String endereco) {
@@ -19,7 +19,7 @@ public class Cliente{
     }
 
     public Long getId() { return this.id; }
-    public void setId(Long id) {
+    public void setId(Long id) throws IdInvalido {
         if (id >= 1) {
             this.id = id;
         } else {

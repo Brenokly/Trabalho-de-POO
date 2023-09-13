@@ -4,12 +4,26 @@ import java.util.ArrayList;
 import java.util.List;
 import Exceptions.*;
 
-public class Pizza extends Produto {
+public class ItensPedidos extends Produto {
   private TiposPizzas pizza;
   private Tamanho tamanho;
   private List<Adicional> adicionais;
 
-  public Pizza(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao) throws Exception {
+  public ItensPedidos() {
+    super();
+    pizza = new TiposPizzas();
+    this.adicionais = new ArrayList<>();
+  }
+
+  public ItensPedidos(Long id) throws IdInvalido {
+    super();
+    pizza = new TiposPizzas();
+    pizza.setId(id);
+    this.adicionais = new ArrayList<>();
+  }
+
+  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao)
+      throws Exception {
     super(descricao, idProduto);
     pizza = new TiposPizzas();
 
@@ -17,35 +31,14 @@ public class Pizza extends Produto {
       super.setValor(Tpizza.getValorGrande());
     } else if (("pequena".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorPequena());
-    } 
-    
+    }
+
     this.pizza.setNome(Tpizza.getNome());
     this.pizza.setId(Tpizza.getId());
     this.adicionais = new ArrayList<>(adicionais);
     setPizza(pizza);
     setTamanho(tamanho);
-  }
-  
-  public Pizza(){
-    super();
-    pizza = new TiposPizzas();
-    this.adicionais = new ArrayList<>();
-  }
-
-  public void addAdicional(Adicional adicional) {
-    if (adicional != null) {
-      adicionais.add(adicional);
-    } else {
-      throw new IllegalArgumentException("Adicional inválido");
-    }
-  }
-
-  public void removeAdicional(Adicional adicional) {
-    if (adicional != null) {
-      adicionais.remove(adicional);
-    } else {
-      throw new IllegalArgumentException("Adicional inválido");
-    }
+    calcValor(getValor(), adicionais);
   }
 
   public void setPizza(TiposPizzas pizza) throws PizzaInvalida {
@@ -88,5 +81,20 @@ public class Pizza extends Produto {
 
   public List<Adicional> getAdicionais() {
     return adicionais;
+  }
+
+  public void setAdicionais(List<Adicional> adicionais) {
+    this.adicionais = adicionais;
+  }
+
+  public void calcValor(double valor, List<Adicional> adicionais) throws ValorInvalido {
+    if (valor >= 0.0) {
+      for (Adicional adicional : adicionais) {
+        valor += adicional.getValor();
+      }
+      super.setValor(valor);
+    } else {
+      throw new ValorInvalido("Valor inválido");
+    }
   }
 }

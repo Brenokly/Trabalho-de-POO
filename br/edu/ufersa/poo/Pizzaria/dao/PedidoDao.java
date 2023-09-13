@@ -13,9 +13,7 @@ import br.edu.ufersa.poo.Pizzaria.classes.EnumEstado;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Estado;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Pizza;
-
-import java.sql.Statement;
+import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -58,7 +56,11 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
-                resultado.setId(rs.getLong("id"));
+                try {
+                    resultado.setId(rs.getLong("id"));
+                } catch (IdInvalido e) {
+                    e.printStackTrace();
+                }
                 // Precisa ser verificado como será feita a conexão por chave estrangeira entre pedidos e pizzas
             }
             
@@ -246,7 +248,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
         return resultados;
     }
 
-    public List<Pedido> gerarRelatorio(Pizza pizza) {
+    public List<Pedido> gerarRelatorio(ItensPedidos pizza) {
         // Precisa ser verificado como será feita a conexão por chave estrangeira entre pedidos e pizzas
         return null;
     }

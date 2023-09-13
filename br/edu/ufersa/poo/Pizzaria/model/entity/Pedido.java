@@ -8,7 +8,7 @@ import Exceptions.*;
 
 public class Pedido {
     private Long id;
-    private ArrayList<Pizza> pizzas;
+    private ArrayList<ItensPedidos> pizzas;
     private Cliente cliente;
     private Estado estado;
     private LocalDate data;
@@ -17,7 +17,7 @@ public class Pedido {
     public Pedido() {
     }
 
-    public Pedido(ArrayList<Pizza> pizzas, Cliente cliente, Estado estado) {
+    public Pedido(ArrayList<ItensPedidos> pizzas, Cliente cliente, Estado estado) throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
         LocalDate data = LocalDate.now();
         formatter.format(data);
@@ -29,9 +29,9 @@ public class Pedido {
         setValor(calcValor());
     }
 
-    public Pedido(Pizza pizza, Cliente cliente, Estado estado) {
+    public Pedido(ItensPedidos pizza, Cliente cliente, Estado estado) throws Exception {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/YYYY");
-        ArrayList<Pizza> pizzaArray = new ArrayList<>();
+        ArrayList<ItensPedidos> pizzaArray = new ArrayList<>();
         pizzaArray.add(pizza);
         LocalDate data = LocalDate.now();
         formatter.format(data);
@@ -43,7 +43,7 @@ public class Pedido {
         setValor(calcValor());
     }
 
-    public Pedido(ArrayList<Pizza> pizzas, Cliente cliente, Estado estado, LocalDate data) {
+    public Pedido(ArrayList<ItensPedidos> pizzas, Cliente cliente, Estado estado, LocalDate data) throws Exception {
         setPizzas(pizzas);
         setCliente(cliente);
         setEstado(estado);
@@ -51,8 +51,8 @@ public class Pedido {
         setValor(calcValor());
     }
 
-    public Pedido(Pizza pizza, Cliente cliente, Estado estado, LocalDate data) {
-        ArrayList<Pizza> pizzaArray = new ArrayList<>();
+    public Pedido(ItensPedidos pizza, Cliente cliente, Estado estado, LocalDate data) throws Exception {
+        ArrayList<ItensPedidos> pizzaArray = new ArrayList<>();
         pizzaArray.add(pizza);
         setPizzas(pizzaArray);
         setCliente(cliente);
@@ -62,7 +62,8 @@ public class Pedido {
     }
 
     public Long getId() { return this.id; }
-    public void setId(Long id) {
+
+    public void setId(Long id) throws IdInvalido {
         if (id >= 1) {
             this.id = id;
         } else {
@@ -70,21 +71,23 @@ public class Pedido {
         }
     }
     public LocalDate getData() { return this.data; }
-    public void setData(LocalDate data) {
+
+    public void setData(LocalDate data) throws DataInvalida {
         LocalDate now = LocalDate.now();
         if (data.isBefore(now)) {
             this.data = data;
         } else {
-            throw new IllegalArgumentException("Data inválida");
+            throw new DataInvalida("Data inválida");
         }
     }
 
-    public ArrayList<Pizza> getPizzas(){ return this.pizzas; }
-    public void setPizzas(ArrayList<Pizza> pizzas) {
+    public ArrayList<ItensPedidos> getPizzas(){ return this.pizzas; }
+
+    public void setPizzas(ArrayList<ItensPedidos> pizzas) throws PizzaInvalida {
         if (pizzas.size() >= 1) {
             this.pizzas = pizzas;
         } else {
-            throw new IllegalArgumentException("Sem pizzas");            
+            throw new PizzaInvalida("O campo Pizzas deve conter ao menos uma pizza");            
         }
     }
 
@@ -98,16 +101,18 @@ public class Pedido {
     }
 
     public Estado getEstado() { return this.estado; }
-    public void setEstado(Estado estado) {
+
+    public void setEstado(Estado estado) throws EstadoInvalido {
         if ("pendente".equals(estado.getDescricao()) || "preparando".equals(estado.getDescricao()) || "entregue".equals(estado.getDescricao())) {
             this.estado = estado;
         } else {
-            throw new IllegalArgumentException("Estado inválido");
+            throw new EstadoInvalido("Estado inválido");
         }
     }
 
     public double getValor() { return this.valor; }
-    public void setValor(double valor) {
+    
+    public void setValor(double valor) throws ValorInvalido {
         if (valor >= 0.0) {
             this.valor = valor;
         } else {
@@ -117,7 +122,7 @@ public class Pedido {
 
     public double calcValor() {
         double valor = 0.0;
-        for (Pizza pizza : this.pizzas) {
+        for (ItensPedidos pizza : this.pizzas) {
             valor += pizza.getValor();
         }
         return valor;
