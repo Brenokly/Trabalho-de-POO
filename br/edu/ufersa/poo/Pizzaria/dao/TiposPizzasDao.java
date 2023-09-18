@@ -15,7 +15,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     Long pizzaId = null;
 
-    String insertPizzaSql = "INSERT INTO tb_tipos_pizzas (nome, valor_grande, valor_pequena) VALUES (?, ?, ?)";
+    String insertPizzaSql = "INSERT INTO tb_tiposPizzas (nome, valor_grande, valor_pequena) VALUES (?, ?, ?)";
     try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
       ps.setString(1, entity.getNome());
       ps.setDouble(2, entity.getValorGrande());
@@ -38,7 +38,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public void deletar(TiposPizzas entity) {
     Connection con = getConnection();
-    String sql = "DELETE FROM tb_tipos_pizzas WHERE id = ?";
+    String sql = "DELETE FROM tb_tiposPizzas WHERE id = ?";
     try (PreparedStatement ps = con.prepareStatement(sql)) {
 
       ps.setLong(1, entity.getId());
@@ -53,7 +53,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public void alterar(TiposPizzas entity) {
     Connection con = getConnection();
-    String sql = "UPDATE tb_tipos_pizzas SET nome = ?, valor_grande = ?, valor_pequena = ? WHERE id = ?";
+    String sql = "UPDATE tb_tiposPizzas SET nome = ?, valor_grande = ?, valor_pequena = ? WHERE id = ?";
     try (PreparedStatement ps = con.prepareStatement(sql)) {
 
       ps.setString(1, entity.getNome());
@@ -73,7 +73,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     TiposPizzas resultado = null;
 
-    String sql = "SELECT * FROM tb_tipos_pizzas as e WHERE e.nome = ?";
+    String sql = "SELECT * FROM tb_tiposPizzas as e WHERE e.nome = ?";
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
@@ -110,7 +110,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     List<TiposPizzas> resultados = new ArrayList<>(null);
 
-    String sql = "SELECT * FROM tb_tipos_pizzas";
+    String sql = "SELECT * FROM tb_tiposPizzas";
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);

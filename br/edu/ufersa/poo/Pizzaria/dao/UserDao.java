@@ -7,7 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import java.sql.Statement;
 

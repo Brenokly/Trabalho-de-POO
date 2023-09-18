@@ -21,7 +21,6 @@ public abstract class BaseDaoImpl<E> implements BaseDao<E>{
 			return con;
 		}
 		else return con;
-			
 	}
 	
 	public static void closeConnection() {

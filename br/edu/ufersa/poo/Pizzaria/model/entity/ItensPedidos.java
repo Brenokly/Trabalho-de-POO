@@ -5,6 +5,7 @@ import java.util.List;
 import Exceptions.*;
 
 public class ItensPedidos extends Produto {
+  private Long IdPedido;
   private TiposPizzas pizza;
   private Tamanho tamanho;
   private List<Adicional> adicionais;
@@ -25,7 +26,7 @@ public class ItensPedidos extends Produto {
   public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao)
       throws Exception {
     super(descricao, idProduto);
-    pizza = new TiposPizzas();
+    pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
 
     if (("grande".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorGrande());
@@ -33,12 +34,58 @@ public class ItensPedidos extends Produto {
       super.setValor(Tpizza.getValorPequena());
     }
 
-    this.pizza.setNome(Tpizza.getNome());
-    this.pizza.setId(Tpizza.getId());
     this.adicionais = new ArrayList<>(adicionais);
     setPizza(pizza);
     setTamanho(tamanho);
     calcValor(getValor(), adicionais);
+  }
+
+  public ItensPedidos(TiposPizzas Tpizza, Long IdPedido, Tamanho tamanho, Long idProduto, List<Adicional> adicionais,
+      String descricao)
+      throws Exception {
+    super(descricao, idProduto);
+    pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
+
+    if (("grande".equals(tamanho.getDescricao()))) {
+      super.setValor(Tpizza.getValorGrande());
+    } else if (("pequena".equals(tamanho.getDescricao()))) {
+      super.setValor(Tpizza.getValorPequena());
+    }
+
+    this.adicionais = new ArrayList<>(adicionais);
+    setIdPedido(IdPedido);
+    setPizza(pizza);
+    setTamanho(tamanho);
+    calcValor(getValor(), adicionais);
+  }
+
+  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais)
+      throws Exception {
+    super();
+    pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
+
+    if (("grande".equals(tamanho.getDescricao()))) {
+      super.setValor(Tpizza.getValorGrande());
+    } else if (("pequena".equals(tamanho.getDescricao()))) {
+      super.setValor(Tpizza.getValorPequena());
+    }
+
+    this.adicionais = new ArrayList<>(adicionais);
+    setPizza(pizza);
+    setTamanho(tamanho);
+    calcValor(getValor(), adicionais);
+  }
+
+  public void setIdPedido(Long idPedido) throws IdInvalido {
+    if (idPedido != null) {
+      IdPedido = idPedido;
+    } else {
+      throw new IdInvalido("Id inválido");
+    }
+  }
+
+  public Long getIdPedido() {
+    return IdPedido;
   }
 
   public void setPizza(TiposPizzas pizza) throws PizzaInvalida {

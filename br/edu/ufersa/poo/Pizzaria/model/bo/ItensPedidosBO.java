@@ -1,8 +1,6 @@
 package br.edu.ufersa.poo.Pizzaria.model.bo;
 
-import java.sql.SQLException;
 import java.util.List;
-
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
 import br.edu.ufersa.poo.Pizzaria.dao.ItensPedidosDao;
@@ -14,16 +12,15 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 public class ItensPedidosBO implements BaseBO<ItensPedidos> {
 
   @Override
-  public void create(ItensPedidos pizza) throws Exception {
+  public void create(ItensPedidos pizza) {
     try {
-      // Verificar se o tipo de pizza existe no banco de dados
       TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
       TiposPizzas tiposPizzasExistente = tiposPizzasDao.buscar(pizza.getPizza());
 
       if (tiposPizzasExistente == null) {
-        throw new TipoPizzaInvalido("Tipo de pizza inválido");
-      }else {
-        pizza.setId(tiposPizzasExistente.getId());
+        throw new TipoPizzaInvalido("Erro ao tentar inserir pizza: tipo de pizza inválido");
+      } else {
+        pizza.getPizza().setId(tiposPizzasExistente.getId());
       }
 
       // Verificar se os adicionais existem no banco de dados
@@ -49,7 +46,6 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
         }
       }
 
-      // Calcular o valor e inserir no banco de dados
       try {
         pizza.calcValor(pizza.getValor(), adicionais);
         ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
@@ -60,30 +56,29 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
     } catch (Exception e) {
       // Lidar com exceções de banco de dados aqui, se necessário
       e.printStackTrace();
-      throw new TipoPizzaInvalido("Erro de banco de dados");
     }
   }
 
   @Override
-  public void update(ItensPedidos bo) throws Exception {
+  public void update(ItensPedidos bo) {
 
     throw new UnsupportedOperationException("Unimplemented method 'update'");
   }
 
   @Override
-  public void deletar(ItensPedidos bo) throws Exception {
+  public void deletar(ItensPedidos bo) {
 
     throw new UnsupportedOperationException("Unimplemented method 'deletar'");
   }
 
   @Override
-  public ItensPedidos buscar(ItensPedidos bo) throws Exception {
+  public ItensPedidos buscar(ItensPedidos bo) {
 
     throw new UnsupportedOperationException("Unimplemented method 'buscar'");
   }
 
   @Override
-  public List<ItensPedidos> buscarTodos() throws Exception {
+  public List<ItensPedidos> buscarTodos() {
 
     throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
   }
