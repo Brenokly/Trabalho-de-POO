@@ -50,6 +50,11 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
         pizza.calcValor(pizza.getValor(), adicionais);
         ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
         itensPedidosDao.inserir(pizza);
+
+        // Agora, vamos chamar o método para alterar a quantidade de adicionais
+        for (Adicional adicional : pizza.getAdicionais()) {
+          adicionalDao.alterarQuant(adicional);
+        }
       } catch (ValorInvalido e) {
         e.printStackTrace();
       }
