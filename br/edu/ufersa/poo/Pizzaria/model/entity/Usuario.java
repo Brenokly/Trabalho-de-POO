@@ -4,7 +4,6 @@ public class Usuario {
     private Long id;
     private String nome;
     private String cpf;
-    private String endereco;
     private String email;
     private String senha;
     private boolean isAdmin;
@@ -15,7 +14,6 @@ public class Usuario {
         setId(id);
         setNome(nome);
         setCpf(cpf);
-        setEndereco(endereco);
         setEmail(email);
         setSenha(senha);
         setAdmin(isAdmin);
@@ -46,16 +44,7 @@ public class Usuario {
         validateStringInput(cpf, "CPF inválido");
         this.cpf = cpf;
     }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        validateStringInput(endereco, "Endereço inválido");
-        this.endereco = endereco;
-    }
-
+    
     public String getEmail() {
         return email;
     }

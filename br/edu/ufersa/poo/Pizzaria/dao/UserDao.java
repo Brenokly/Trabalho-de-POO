@@ -12,17 +12,16 @@ import java.util.List;
 public class UserDao extends BaseDaoImpl<Usuario> {
 
     public Long inserir(Usuario usuario) {
-        String insertUserSql = "INSERT INTO tb_user (nome, cpf, endereco, email, senha, isAdmin) VALUES (?, ?, ?, ?, ?, ?)";
+        String insertUserSql = "INSERT INTO tb_user (nome, cpf, email, senha, isAdmin) VALUES (?, ?, ?, ?, ?)";
         Long userId = null;
 
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(insertUserSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getCpf());
-            ps.setString(3, usuario.getEndereco());
-            ps.setString(4, usuario.getEmail());
-            ps.setString(5, usuario.getSenha());
-            ps.setBoolean(6, usuario.isAdmin());
+            ps.setString(3, usuario.getEmail());
+            ps.setString(4, usuario.getSenha());
+            ps.setBoolean(5, usuario.isAdmin());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -54,17 +53,16 @@ public class UserDao extends BaseDaoImpl<Usuario> {
     }
 
     public void alterar(Usuario entity) {
-        String sql = "UPDATE tb_user SET nome = ?, cpf = ?, endereco = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
+        String sql = "UPDATE tb_user SET nome = ?, cpf = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
 
         try (Connection con = getConnection();
              PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
             ps.setString(2, entity.getCpf());
-            ps.setString(3, entity.getEndereco());
-            ps.setString(4, entity.getEmail());
-            ps.setString(5, entity.getSenha());
-            ps.setBoolean(6, entity.isAdmin());
-            ps.setLong(7, entity.getId());
+            ps.setString(3, entity.getEmail());
+            ps.setString(4, entity.getSenha());
+            ps.setBoolean(5, entity.isAdmin());
+            ps.setLong(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -86,7 +84,6 @@ public class UserDao extends BaseDaoImpl<Usuario> {
                 user.setId(rs.getLong("id"));
                 user.setNome(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
-                user.setEndereco(rs.getString("endereco"));
                 user.setEmail(rs.getString("email"));
                 user.setSenha(rs.getString("senha"));
                 user.setAdmin(rs.getBoolean("isAdmin"));
@@ -112,7 +109,6 @@ public class UserDao extends BaseDaoImpl<Usuario> {
                 user.setId(rs.getLong("id"));
                 user.setNome(rs.getString("nome"));
                 user.setCpf(rs.getString("cpf"));
-                user.setEndereco(rs.getString("endereco"));
                 user.setEmail(rs.getString("email"));
                 user.setSenha(rs.getString("senha"));
                 user.setAdmin(rs.getBoolean("isAdmin"));
