@@ -9,14 +9,17 @@ public class Usuario {
     private String senha;
     private boolean isAdmin;
 
-    // public Usuario(String nome, String cpf, String endereco, String email, String password, boolean isAdmin) {
-    //     setNome(nome);
-    //     setEndereco(endereco);
-    //     setEmail(email);
-    //     setSenha(password);
-    //     setAdmin(isAdmin);
+    public Usuario() {}
 
-    // }
+    public Usuario(Long id, String nome, String cpf, String endereco, String email, String senha, boolean isAdmin) {
+        setId(id);
+        setNome(nome);
+        setCpf(cpf);
+        setEndereco(endereco);
+        setEmail(email);
+        setSenha(senha);
+        setAdmin(isAdmin);
+    }
 
     public Long getId() {
         return id;
@@ -25,17 +28,14 @@ public class Usuario {
     public void setId(Long id) {
         this.id = id;
     }
-    
+
     public String getNome() {
         return nome;
     }
 
     public void setNome(String nome) {
-        if (nome != null && !nome.isEmpty())
-            this.nome = nome;
-        else {
-            throw new IllegalArgumentException("Nome inválido");
-        }
+        validateStringInput(nome, "Nome inválido");
+        this.nome = nome;
     }
 
     public String getCpf() {
@@ -43,11 +43,8 @@ public class Usuario {
     }
 
     public void setCpf(String cpf) {
-        if (cpf != null && !cpf.isEmpty())
-            this.cpf = cpf;
-        else {
-            throw new IllegalArgumentException("CPF inválido");
-        }
+        validateStringInput(cpf, "CPF inválido");
+        this.cpf = cpf;
     }
 
     public String getEndereco() {
@@ -55,11 +52,8 @@ public class Usuario {
     }
 
     public void setEndereco(String endereco) {
-        if (endereco != null && !endereco.isEmpty())
-            this.endereco = endereco;
-        else {
-            throw new IllegalArgumentException("Endereço inválido");
-        }
+        validateStringInput(endereco, "Endereço inválido");
+        this.endereco = endereco;
     }
 
     public String getEmail() {
@@ -67,11 +61,8 @@ public class Usuario {
     }
 
     public void setEmail(String email) {
-        if (email != null && !email.isEmpty())
-            this.email = email;
-        else {
-            throw new IllegalArgumentException("E-mail inválido");
-        }
+        validateStringInput(email, "E-mail inválido");
+        this.email = email;
     }
 
     public String getSenha() {
@@ -79,11 +70,8 @@ public class Usuario {
     }
 
     public void setSenha(String senha) {
-        if (senha != null && !senha.isEmpty())
-            this.senha = senha;
-        else {
-            throw new IllegalArgumentException("Senha inválido");
-        }
+        validateStringInput(senha, "Senha inválida");
+        this.senha = senha;
     }
 
     public boolean isAdmin() {
@@ -92,5 +80,11 @@ public class Usuario {
 
     public void setAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
+    }
+
+    private void validateStringInput(String value, String errorMessage) {
+        if (value == null || value.isEmpty()) {
+            throw new IllegalArgumentException(errorMessage);
+        }
     }
 }
