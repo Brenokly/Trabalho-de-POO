@@ -3,7 +3,7 @@ import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
 
 public class teste {
-    public static void main(String[] args) {
+    public static void main(String[] args)  {
     UserDao UserDao = new UserDao();
     Usuario usuario = new Usuario();
     try {
