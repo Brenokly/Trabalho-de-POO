@@ -9,7 +9,6 @@ public class teste {
     try {
         usuario.setCpf("200");
         usuario.setEmail("teste23");
-        usuario.setEndereco("teste23");
         usuario.setNome("teste23");
         usuario.setSenha("teste23");
         usuario.setAdmin(true);
