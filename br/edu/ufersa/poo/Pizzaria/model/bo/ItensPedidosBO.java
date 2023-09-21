@@ -12,7 +12,7 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 public class ItensPedidosBO implements BaseBO<ItensPedidos> {
 
   @Override
-  public void create(ItensPedidos pizza) {
+  public void create(ItensPedidos pizza) throws Exception{
     try {
       TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
       TiposPizzas tiposPizzasExistente = tiposPizzasDao.buscar(pizza.getPizza());
@@ -65,25 +65,25 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
   }
 
   @Override
-  public void update(ItensPedidos bo) {
+  public void update(ItensPedidos bo) throws Exception {
 
     throw new UnsupportedOperationException("Unimplemented method 'update'");
   }
 
   @Override
-  public void deletar(ItensPedidos bo) {
+  public void deletar(ItensPedidos bo) throws Exception {
 
     throw new UnsupportedOperationException("Unimplemented method 'deletar'");
   }
 
   @Override
-  public ItensPedidos buscar(ItensPedidos bo) {
+  public ItensPedidos buscar(ItensPedidos bo) throws Exception {
 
     throw new UnsupportedOperationException("Unimplemented method 'buscar'");
   }
 
   @Override
-  public List<ItensPedidos> buscarTodos() {
+  public List<ItensPedidos> buscarTodos() throws Exception {
 
     throw new UnsupportedOperationException("Unimplemented method 'buscarTodos'");
   }
