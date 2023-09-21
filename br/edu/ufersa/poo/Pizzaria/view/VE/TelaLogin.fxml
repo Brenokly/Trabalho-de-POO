@@ -59,11 +59,11 @@
             <Image url="@Component%203.0.png" />
          </image>
       </ImageView>
-      <Button layoutX="451.0" layoutY="302.0" mnemonicParsing="false" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
+      <Button layoutX="451.0" layoutY="302.0" mnemonicParsing="false" onAction="#Autenticar" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <PasswordField layoutX="339.0" layoutY="212.0" prefHeight="25.0" prefWidth="225.0" />
+      <PasswordField fx:id="senha" layoutX="339.0" layoutY="212.0" prefHeight="25.0" prefWidth="225.0" />
    </children>
 </Pane>
