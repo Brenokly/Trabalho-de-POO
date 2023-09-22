@@ -1,16 +1,35 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
+import Exceptions.UsuarioInvalido;
+import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaLogin {
 
-  @FXML private TextField Login;
-  @FXML private PasswordField Senha;
-  @FXML private Button Entrar;
-  public void Autenticar(){
-  
+  @FXML private TextField login;
+  @FXML private PasswordField senha;
+  @FXML private Button entrar;
+  @FXML private Label erroaut;
+
+  UserBO userbo = new UserBO();
+  public void Autenticar(ActionEvent event){
+    Usuario usuario = new Usuario();
+    usuario.setEmail(login.getText());
+    usuario.setSenha(senha.getText());
+
+    try {
+      Usuario usuarioAutenticado = userbo.Autenticar(usuario);
+      erroaut.setVisible(false);
+      System.out.println("Usuário autenticado com sucesso " + usuarioAutenticado.getNome());
+    } catch (UsuarioInvalido e) {
+      erroaut.setText("Email ou senha inválidos");
+      erroaut.setVisible(true);
+    } 
   }
 }

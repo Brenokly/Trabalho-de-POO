@@ -16,8 +16,8 @@ public class TelaLogin extends Application {
     Parent root = FXMLLoader.load(getClass().getResource("VE/TelaLogin.fxml"));
 
     Scene scene = new Scene(root);
-    
-    arg0.setTitle("Pizzaria Michelangelo");
+
+    arg0.setTitle("Pizzaria Michelangeclo");
     arg0.setScene(scene);
     arg0.show();
   }

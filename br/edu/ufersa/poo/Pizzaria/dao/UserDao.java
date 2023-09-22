@@ -16,7 +16,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         Long userId = null;
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(insertUserSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+                PreparedStatement ps = con.prepareStatement(insertUserSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, usuario.getNome());
             ps.setString(2, usuario.getCpf());
             ps.setString(3, usuario.getEmail());
@@ -42,7 +42,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         String deleteUserSql = "DELETE FROM tb_user WHERE id = ?";
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(deleteUserSql)) {
+                PreparedStatement ps = con.prepareStatement(deleteUserSql)) {
             ps.setLong(1, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -56,7 +56,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         String sql = "UPDATE tb_user SET nome = ?, cpf = ?, email = ?, senha = ?, isAdmin = ? WHERE id = ?";
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+                PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, entity.getNome());
             ps.setString(2, entity.getCpf());
             ps.setString(3, entity.getEmail());
@@ -71,12 +71,38 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         }
     }
 
+    public Usuario buscarPorEmail(Usuario bo) {
+        String sql = "SELECT * FROM tb_user WHERE email = ?";
+        Usuario user = null;
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setString(1, bo.getEmail());
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                user = new Usuario();
+                user.setId(rs.getLong("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+                user.setAdmin(rs.getBoolean("isAdmin"));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return user;
+    }
+
     public Usuario buscar(Usuario entity) {
         String sql = "SELECT * FROM tb_user WHERE id = ?";
         Usuario user = null;
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(sql)) {
+                PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setLong(1, entity.getId());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
@@ -102,8 +128,8 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         String sql = "SELECT * FROM tb_user";
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(sql);
-             ResultSet rs = ps.executeQuery()) {
+                PreparedStatement ps = con.prepareStatement(sql);
+                ResultSet rs = ps.executeQuery()) {
             while (rs.next()) {
                 Usuario user = new Usuario();
                 user.setId(rs.getLong("id"));
