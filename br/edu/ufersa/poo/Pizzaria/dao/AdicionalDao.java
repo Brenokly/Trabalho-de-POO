@@ -180,7 +180,7 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
         Adicional adicional = new Adicional();
         adicional.setId(rs.getLong("id"));
         adicional.setNome(rs.getString("nome"));
-        adicional.setValor(rs.getLong("valor"));
+        adicional.setValor(rs.getDouble("valor"));
         adicional.setQuantidade(rs.getInt("quantidade"));
 
         lista.add(adicional);

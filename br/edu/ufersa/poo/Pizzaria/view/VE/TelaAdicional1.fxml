@@ -22,7 +22,7 @@
             <Image url="@Group%2015.png" />
          </image>
       </ImageView>
-      <ImageView fx:id="quad1" fitHeight="101.0" fitWidth="81.0" layoutX="280.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" visible="false">
+      <ImageView fx:id="quad1" fitHeight="101.0" fitWidth="81.0" focusTraversable="true" layoutX="280.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Group%2048.png" />
          </image>
@@ -69,7 +69,7 @@
       </ImageView>
       <Label fx:id="nome6" layoutX="408.0" layoutY="178.0" text="Label" visible="false" />
       <Label fx:id="preco6" layoutX="408.0" layoutY="209.0" text="Label" visible="false" />
-      <Label fx:id="quantidade5" layoutX="408.0" layoutY="243.0" text="Label" visible="false" />
+      <Label fx:id="quantidade6" layoutX="408.0" layoutY="243.0" text="Label" visible="false" />
       <ImageView fx:id="quad7" fitHeight="101.0" fitWidth="81.0" layoutX="487.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Group%2048.png" />
@@ -77,7 +77,7 @@
       </ImageView>
       <Label fx:id="nome7" layoutX="511.0" layoutY="177.0" text="Label" visible="false" />
       <Label fx:id="preco7" layoutX="511.0" layoutY="208.0" text="Label" visible="false" />
-      <Label fx:id="quantidade6" layoutX="511.0" layoutY="242.0" text="Label" visible="false" />
+      <Label fx:id="quantidade7" layoutX="511.0" layoutY="242.0" text="Label" visible="false" />
       <ImageView fx:id="quad8" fitHeight="101.0" fitWidth="81.0" layoutX="171.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Group%2048.png" />
@@ -85,7 +85,7 @@
       </ImageView>
       <Label fx:id="nome8" layoutX="195.0" layoutY="291.0" text="Label" visible="false" />
       <Label fx:id="preco8" layoutX="195.0" layoutY="322.0" text="Label" visible="false" />
-      <Label fx:id="quantidade7" layoutX="195.0" layoutY="356.0" text="Label" visible="false" />
+      <Label fx:id="quantidade8" layoutX="195.0" layoutY="356.0" text="Label" visible="false" />
       <ImageView fx:id="quad9" fitHeight="101.0" fitWidth="81.0" layoutX="280.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true" visible="false">
          <image>
             <Image url="@Group%2048.png" />

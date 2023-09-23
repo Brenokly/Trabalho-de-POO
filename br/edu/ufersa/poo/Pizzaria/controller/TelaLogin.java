@@ -12,19 +12,13 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaLogin {
-  Telas telas = new Telas();
+  private Telas telas = new Telas();
+  private UserBO userbo = new UserBO();
 
-  @FXML
-  private TextField login;
-  @FXML
-  private PasswordField senha;
-  @FXML
-  private Button entrar;
-  @FXML
-  private Label erroaut;
-
-  UserBO userbo = new UserBO();
-
+  @FXML private TextField login;
+  @FXML private PasswordField senha;
+  @FXML private Label erroaut;
+  
   public void Autenticar(ActionEvent event) {
     Usuario usuario = new Usuario();
     usuario.setEmail(login.getText());
