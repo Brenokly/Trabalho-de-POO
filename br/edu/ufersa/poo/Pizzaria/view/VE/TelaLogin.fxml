@@ -41,10 +41,9 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaLogin">
    <children>
-      <ImageView fitHeight="403.0" fitWidth="254.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="406.0" fitWidth="254.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Barra%20Lateral.png" />
          </image>
@@ -60,12 +59,17 @@
             <Image url="@Component%203.0.png" />
          </image>
       </ImageView>
-      <Button fx:id="entrar" layoutX="451.0" layoutY="302.0" mnemonicParsing="false" onAction="#Autenticar" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
+      <PasswordField fx:id="senha" layoutX="339.0" layoutY="212.0" prefHeight="25.0" prefWidth="225.0" />
+      <Label fx:id="erroaut" layoutX="350.0" layoutY="121.0" text="Label" textFill="#ff0101" visible="false" />
+      <ImageView fitHeight="55.0" fitWidth="116.0" layoutX="422.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@ENTRAR.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="entrar" layoutX="422.0" layoutY="286.0" mnemonicParsing="false" onAction="#Autenticar" opacity="0.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
          <font>
             <Font name="System Bold" size="16.0" />
          </font>
       </Button>
-      <PasswordField fx:id="senha" layoutX="339.0" layoutY="212.0" prefHeight="25.0" prefWidth="225.0" />
-      <Label fx:id="erroaut" layoutX="350.0" layoutY="121.0" text="Label" textFill="#ff0101" visible="false" />
    </children>
 </Pane>
