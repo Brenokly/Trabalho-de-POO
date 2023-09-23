@@ -1,6 +1,5 @@
 package br.edu.ufersa.poo.Pizzaria.view;
 
-import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional1;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -39,7 +38,6 @@ public class Telas extends Application {
   }
 
   public static void TelaAdicional1() throws Exception {
-    TelaAdicional1 tela = new TelaAdicional1();
     Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaAdicional1.fxml"));
 
     Scene scene = new Scene(root);
