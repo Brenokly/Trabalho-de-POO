@@ -44,4 +44,12 @@ public class Telas extends Application {
     
     primaryStage.setScene(scene);
   }
+
+  public static void TelaInicial() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaInicial.fxml"));
+
+    Scene scene = new Scene(root);
+    
+    primaryStage.setScene(scene);
+  }
 }
