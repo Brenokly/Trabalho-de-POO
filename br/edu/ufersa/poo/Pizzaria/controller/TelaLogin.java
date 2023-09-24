@@ -29,10 +29,10 @@ public class TelaLogin {
       erroaut.setVisible(false);
       telas.TelaAdicional1();
     } catch (UsuarioInvalido e) {
-      erroaut.setText("Email ou senha inválidos");
+      erroaut.setText("Email ou senha inválido");
       erroaut.setVisible(true);
     } catch (Exception e) {
-      erroaut.setText("Email ou senha inválidos");
+      erroaut.setText("Email ou senha inválido");
       erroaut.setVisible(true);
     }
   }

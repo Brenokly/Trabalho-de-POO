@@ -27,7 +27,7 @@ public class Telas extends Application {
     primaryStage.setTitle("Pizzaria Michelangeclo");
     primaryStage.show();
     TelaLogin();
-  }
+  } 
 
   public static void TelaLogin() throws Exception {
     Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaLogin.fxml"));
