@@ -107,12 +107,12 @@
       <Label fx:id="nome11" layoutX="511.0" layoutY="294.0" text="Label" visible="false" />
       <Label fx:id="preco11" layoutX="511.0" layoutY="325.0" text="Label" visible="false" />
       <Label fx:id="quantidade11" layoutX="511.0" layoutY="359.0" text="Label" visible="false" />
-      <TableView fx:id="table" layoutX="159.0" layoutY="43.0" prefHeight="357.0" prefWidth="439.0">
+      <TableView fx:id="table" layoutX="159.0" layoutY="43.0" prefHeight="357.0" prefWidth="440.0">
         <columns>
           <TableColumn fx:id="id" prefWidth="65.0" text="     ID" />
-          <TableColumn fx:id="nome" minWidth="15.0" prefWidth="180.0" text="                      NOME" />
-            <TableColumn fx:id="valor" prefWidth="77.0" text="    VALOR" />
-            <TableColumn fx:id="quantidade" prefWidth="117.0" text="        QUANTIDADE" />
+          <TableColumn fx:id="nome" minWidth="15.0" prefWidth="180.0" text="                    NOME" />
+            <TableColumn fx:id="valor" prefWidth="77.0" text=" VALOR (R$)" />
+            <TableColumn fx:id="quantidade" prefWidth="117.0" text="  QUANTIDADE (KG)" />
         </columns>
       </TableView>
    </children>
