@@ -10,7 +10,15 @@ public class Usuario {
 
     public Usuario() {}
 
-    public Usuario(Long id, String nome, String cpf, String endereco, String email, String senha, boolean isAdmin) {
+    public Usuario(String nome, String cpf, String email, String senha, boolean isAdmin) {
+        setNome(nome);
+        setCpf(cpf);
+        setEmail(email);
+        setSenha(senha);
+        setAdmin(isAdmin);
+    }
+
+    public Usuario(Long id, String nome, String cpf, String email, String senha, boolean isAdmin) {
         setId(id);
         setNome(nome);
         setCpf(cpf);
@@ -63,7 +71,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public boolean isAdmin() {
+    public boolean getIsAdmin() {
         return isAdmin;
     }
 

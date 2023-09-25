@@ -10,7 +10,7 @@ public class UserBO implements BaseBO<Usuario> {
 
   public Usuario Autenticar(Usuario bo) throws UsuarioInvalido {
     UserDao UserDao = new UserDao();
-    Usuario usuarioAutenticado = UserDao.buscarPorEmail(bo);
+    Usuario usuarioAutenticado = UserDao.buscarPorECpf(bo);
     if (usuarioAutenticado != null && usuarioAutenticado.getSenha().equals(bo.getSenha())) {
       // Usuário autenticado com sucesso
       return usuarioAutenticado;
@@ -24,7 +24,7 @@ public class UserBO implements BaseBO<Usuario> {
     // Método para criar usuário verificando se já não existe um funcionario no
     // banco de dados com o mesmo nome
     UserDao UserDao = new UserDao();
-    Usuario usuario = UserDao.buscarPorEmail(bo);
+    Usuario usuario = UserDao.buscarPorECpf(bo);
 
     if (usuario == null) {
       UserDao.inserir(bo);
@@ -36,7 +36,7 @@ public class UserBO implements BaseBO<Usuario> {
   @Override
   public void update(Usuario bo) throws Exception {
     UserDao UserDao = new UserDao();
-    Usuario usuario = UserDao.buscarPorEmail(bo);
+    Usuario usuario = UserDao.buscarPorECpf(bo);
 
     if (usuario != null) {
       UserDao.alterar(bo);
@@ -48,7 +48,7 @@ public class UserBO implements BaseBO<Usuario> {
   @Override
   public void deletar(Usuario bo) throws Exception {
     UserDao UserDao = new UserDao();
-    Usuario usuarioAutenticado = UserDao.buscarPorEmail(bo);
+    Usuario usuarioAutenticado = UserDao.buscarPorECpf(bo);
 
     if (usuarioAutenticado != null) {
       UserDao.deletar(bo);
@@ -60,7 +60,7 @@ public class UserBO implements BaseBO<Usuario> {
   @Override
   public Usuario buscar(Usuario bo) throws Exception {
     UserDao UserDao = new UserDao();
-    Usuario usuario = UserDao.buscarPorEmail(bo);
+    Usuario usuario = UserDao.buscar(bo);
 
     if (usuario != null) {
       return usuario;
@@ -69,14 +69,14 @@ public class UserBO implements BaseBO<Usuario> {
     }
   }
 
-  public Usuario buscarID(Usuario bo) throws Exception { // Implementei esse método para buscar o usuário pelo ID
+  public List<Usuario> buscarINE(Usuario bo) throws Exception {
     UserDao UserDao = new UserDao();
-    Usuario usuario = UserDao.buscar(bo);
+    List<Usuario> usuario = UserDao.buscarINE(bo);
 
     if (usuario != null) {
       return usuario;
     } else {
-      throw new UsuarioInvalido("Usuário não encontrado");
+      throw new UsuarioInvalido("Nenhum usuário encontrado");
     }
   }
 

@@ -21,7 +21,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
             ps.setString(2, usuario.getCpf());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getSenha());
-            ps.setBoolean(5, usuario.isAdmin());
+            ps.setBoolean(5, usuario.getIsAdmin());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -61,7 +61,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
             ps.setString(2, entity.getCpf());
             ps.setString(3, entity.getEmail());
             ps.setString(4, entity.getSenha());
-            ps.setBoolean(5, entity.isAdmin());
+            ps.setBoolean(5, entity.getIsAdmin());
             ps.setLong(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {
@@ -71,13 +71,14 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         }
     }
 
-    public Usuario buscarPorEmail(Usuario bo) {
-        String sql = "SELECT * FROM tb_user WHERE email = ?";
+    public Usuario buscarPorECpf(Usuario bo) {
+        String sql = "SELECT * FROM tb_user WHERE email = ? OR cpf = ?";
         Usuario user = null;
 
         try (Connection con = getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setString(1, bo.getEmail());
+            ps.setString(2, bo.getCpf());
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 user = new Usuario();
@@ -121,6 +122,59 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         }
 
         return user;
+    }
+
+    public List<Usuario> buscarINE(Usuario entity) {
+        String sql = "SELECT * FROM tb_user WHERE ";
+        List<String> conditions = new ArrayList<>();
+        List<Object> parameters = new ArrayList<>();
+
+        if (entity.getId() != null) {
+            conditions.add("id = ?");
+            parameters.add(entity.getId());
+        }
+        if (entity.getNome() != null && !entity.getNome().isEmpty()) {
+            conditions.add("nome = ?");
+            parameters.add(entity.getNome());
+        }
+        if (entity.getEmail() != null && !entity.getEmail().isEmpty()) {
+            conditions.add("email = ?");
+            parameters.add(entity.getEmail());
+        }
+
+        if (conditions.isEmpty()) {
+            // Se nenhum campo válido foi fornecido, não execute a consulta.
+            return new ArrayList<>(); // Retorna uma lista vazia.
+        }
+
+        sql += String.join(" OR ", conditions);
+
+        List<Usuario> usuarios = new ArrayList<>();
+
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
+            for (int i = 0; i < parameters.size(); i++) {
+                ps.setObject(i + 1, parameters.get(i));
+            }
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Usuario user = new Usuario();
+                user.setId(rs.getLong("id"));
+                user.setNome(rs.getString("nome"));
+                user.setCpf(rs.getString("cpf"));
+                user.setEmail(rs.getString("email"));
+                user.setSenha(rs.getString("senha"));
+                user.setAdmin(rs.getBoolean("isAdmin"));
+                usuarios.add(user);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return usuarios;
     }
 
     public List<Usuario> listar() {

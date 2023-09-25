@@ -8,8 +8,7 @@ public class TiposPizzas {
   private double valorGrande;
   private double valorPequena;
 
-  public TiposPizzas() {
-  }
+  public TiposPizzas() {}
 
   public TiposPizzas(TiposPizzas pizza) throws Exception {
     setId(pizza.getId());

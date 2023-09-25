@@ -12,7 +12,6 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaLogin {
-  private Telas telas = new Telas();
   private UserBO userbo = new UserBO();
 
   @FXML private TextField login;
@@ -25,9 +24,9 @@ public class TelaLogin {
     usuario.setSenha(senha.getText());
 
     try {
-      Usuario usuarioAutenticado = userbo.Autenticar(usuario);
+      userbo.Autenticar(usuario);
       erroaut.setVisible(false);
-      telas.TelaInicial();
+      Telas.TelaAdicional1();
     } catch (UsuarioInvalido e) {
       erroaut.setText("Email ou senha inválido");
       erroaut.setVisible(true);
