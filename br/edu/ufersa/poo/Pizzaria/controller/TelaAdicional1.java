@@ -1,6 +1,7 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
@@ -61,49 +62,50 @@ public class TelaAdicional1 implements Initializable {
 
   @FXML
   private void onSearchKeyReleased(KeyEvent event) {
-    String searchTerm = searchTextField.getText();
+    String searchTerm = searchTextField.getText().toLowerCase();
 
     if (searchTerm.isEmpty()) {
       // Campo de pesquisa vazio, exiba todos os dados originais
       table.setItems(allAdicionais);
     } else {
       // Realize a pesquisa e atualize a TableView com os resultados
-      Adicional criteria = new Adicional();
+      List<Adicional> resultados = new ArrayList<>();
 
-      try {
-        criteria.setNome(searchTerm);
-        criteria.setValor(Double.parseDouble(searchTerm));
-        criteria.setQuantidade(Integer.parseInt(searchTerm));
-        criteria.setId(Long.parseLong(searchTerm));
-      } catch (Exception e) {
-        // Não é um nome válido, pode ignorar essa exceção
+      for (Adicional adicional : allAdicionais) {
+        if (adicional.getNome().toLowerCase().contains(searchTerm) ||
+            String.valueOf(adicional.getValor()).toLowerCase().contains(searchTerm) ||
+            String.valueOf(adicional.getQuantidade()).toLowerCase().contains(searchTerm) ||
+            String.valueOf(adicional.getId()).toLowerCase().contains(searchTerm)) {
+          resultados.add(adicional);
+        }
       }
 
-      List<Adicional> resultados = adicionalDao.buscarGeral(criteria);
       ObservableList<Adicional> resultadosObservable = FXCollections.observableArrayList();
-
-      if (resultados != null && !resultados.isEmpty()) {
-        resultadosObservable.addAll(resultados);
-      }
+      resultadosObservable.addAll(resultados);
 
       table.setItems(resultadosObservable);
     }
   }
 
-  @FXML private Button funcionarios;
+  @FXML
+  private Button funcionarios;
+
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
     Telas.TelaFuncionarios();
   }
 
-  
-  @FXML private Button inicio;
+  @FXML
+  private Button inicio;
+
   @FXML
   void carregarInicio(ActionEvent event) throws Exception {
     Telas.TelaInicial();
   }
 
-  @FXML private Button sair;
+  @FXML
+  private Button sair;
+
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
     Telas.TelaLogin();
