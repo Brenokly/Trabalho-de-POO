@@ -57,9 +57,7 @@ public class TelaAdicional1 implements Initializable {
     allAdicionais.addAll(adicionais);
   }
 
-  @FXML
-  private TextField searchTextField;
-
+  @FXML private TextField searchTextField;
   @FXML
   private void onSearchKeyReleased(KeyEvent event) {
     String searchTerm = searchTextField.getText().toLowerCase();

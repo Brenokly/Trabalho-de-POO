@@ -63,9 +63,7 @@ public class TelaFuncionarios implements Initializable {
         allUsuarios.addAll(funcionarios);
     }
 
-    @FXML
-    private TextField searchTextField;
-
+    @FXML private TextField searchTextField;
     @FXML
     private void onSearchKeyReleased(KeyEvent event) {
         String searchTerm = searchTextField.getText().toLowerCase();
@@ -79,7 +77,8 @@ public class TelaFuncionarios implements Initializable {
 
             for (Usuario usuario : allUsuarios) {
                 if (usuario.getNome().toLowerCase().contains(searchTerm)
-                        || usuario.getEmail().toLowerCase().contains(searchTerm)) {
+                        || usuario.getCpf().toLowerCase().contains(searchTerm)
+                        || String.valueOf(usuario.getId()).toLowerCase().contains(searchTerm)) {
                     resultados.add(usuario);
                 }
             }
