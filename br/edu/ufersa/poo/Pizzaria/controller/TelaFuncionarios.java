@@ -78,7 +78,8 @@ public class TelaFuncionarios implements Initializable {
             List<Usuario> resultados = new ArrayList<>();
 
             for (Usuario usuario : allUsuarios) {
-                if (usuario.getNome().toLowerCase().contains(searchTerm)
+                if (String.valueOf(usuario.getId()).contains(searchTerm)
+                        || usuario.getNome().toLowerCase().contains(searchTerm)
                         || usuario.getEmail().toLowerCase().contains(searchTerm)) {
                     resultados.add(usuario);
                 }
