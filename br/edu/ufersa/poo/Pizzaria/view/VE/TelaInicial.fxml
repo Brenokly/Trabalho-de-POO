@@ -1,130 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.Pane?>
-<?import javafx.scene.layout.VBox?>
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaInicial">
    <children>
-      <TextField layoutX="225.0" layoutY="69.0" prefHeight="25.0" prefWidth="317.0" style="-fx-background-color: transparents;" text="Localizar por cliente ou por Pizza" />
-      <ImageView fitHeight="69.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="62.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@inicioAdmin/Rectangle%2038.png" />
+            <Image url="@inicioAdmin/Group%2068.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="406.0" fitWidth="168.0" layoutY="-5.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Admin%20Adicionais.png" />
-         </image>
-      </ImageView>
-      <ImageView fx:id="quad1" fitHeight="101.0" fitWidth="81.0" focusTraversable="true" layoutX="280.0" layoutY="50.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome1" layoutX="304.0" layoutY="61.0" text="Label" visible="false" />
-      <Label fx:id="preco1" layoutX="304.0" layoutY="92.0" text="Label" visible="false" />
-      <Label fx:id="quantidade1" layoutX="304.0" layoutY="126.0" text="Label" visible="false" />
-      <ImageView fx:id="quad2" fitHeight="101.0" fitWidth="81.0" layoutX="384.0" layoutY="51.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome2" layoutX="407.0" layoutY="62.0" text="Label" visible="false" />
-      <Label fx:id="preco2" layoutX="407.0" layoutY="93.0" text="Label" visible="false" />
-      <Label fx:id="quantidade2" layoutX="407.0" layoutY="127.0" text="Label" visible="false" />
-      <ImageView fx:id="quad3" fitHeight="101.0" fitWidth="81.0" layoutX="487.0" layoutY="52.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome3" layoutX="511.0" layoutY="63.0" text="Label" visible="false" />
-      <Label fx:id="preco3" layoutX="511.0" layoutY="94.0" text="Label" visible="false" />
-      <Label fx:id="quantidade3" layoutX="511.0" layoutY="128.0" text="Label" visible="false" />
-      <ImageView fx:id="quad4" fitHeight="101.0" fitWidth="81.0" layoutX="171.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome4" layoutX="195.0" layoutY="176.0" text="Label" visible="false" />
-      <Label fx:id="preco4" layoutX="195.0" layoutY="207.0" text="Label" visible="false" />
-      <Label fx:id="quantidade4" layoutX="195.0" layoutY="241.0" text="Label" visible="false" />
-      <ImageView fx:id="quad5" fitHeight="101.0" fitWidth="81.0" layoutX="280.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome5" layoutX="304.0" layoutY="177.0" text="Label" visible="false" />
-      <Label fx:id="preco5" layoutX="304.0" layoutY="208.0" text="Label" visible="false" />
-      <Label fx:id="quantidade5" layoutX="304.0" layoutY="242.0" text="Label" visible="false" />
-      <ImageView fx:id="quad6" fitHeight="101.0" fitWidth="81.0" layoutX="384.0" layoutY="167.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome6" layoutX="408.0" layoutY="178.0" text="Label" visible="false" />
-      <Label fx:id="preco6" layoutX="408.0" layoutY="209.0" text="Label" visible="false" />
-      <Label fx:id="quantidade6" layoutX="408.0" layoutY="243.0" text="Label" visible="false" />
-      <ImageView fx:id="quad7" fitHeight="101.0" fitWidth="81.0" layoutX="487.0" layoutY="166.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome7" layoutX="511.0" layoutY="177.0" text="Label" visible="false" />
-      <Label fx:id="preco7" layoutX="511.0" layoutY="208.0" text="Label" visible="false" />
-      <Label fx:id="quantidade7" layoutX="511.0" layoutY="242.0" text="Label" visible="false" />
-      <ImageView fx:id="quad8" fitHeight="101.0" fitWidth="81.0" layoutX="171.0" layoutY="280.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome8" layoutX="195.0" layoutY="291.0" text="Label" visible="false" />
-      <Label fx:id="preco8" layoutX="195.0" layoutY="322.0" text="Label" visible="false" />
-      <Label fx:id="quantidade8" layoutX="195.0" layoutY="356.0" text="Label" visible="false" />
-      <ImageView fx:id="quad9" fitHeight="101.0" fitWidth="81.0" layoutX="280.0" layoutY="281.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome9" layoutX="304.0" layoutY="292.0" text="Label" visible="false" />
-      <Label fx:id="preco9" layoutX="304.0" layoutY="323.0" text="Label" visible="false" />
-      <Label fx:id="quantidade9" layoutX="304.0" layoutY="357.0" text="Label" visible="false" />
-      <ImageView fx:id="quad10" fitHeight="101.0" fitWidth="81.0" layoutX="384.0" layoutY="282.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome10" layoutX="408.0" layoutY="293.0" text="Label" visible="false" />
-      <Label fx:id="preco10" layoutX="408.0" layoutY="324.0" text="Label" visible="false" />
-      <Label fx:id="quantidade10" layoutX="408.0" layoutY="358.0" text="Label" visible="false" />
-      <ImageView fx:id="quad11" fitHeight="101.0" fitWidth="81.0" layoutX="487.0" layoutY="283.0" pickOnBounds="true" preserveRatio="true" visible="false">
-         <image>
-            <Image url="@Group%2048.png" />
-         </image>
-      </ImageView>
-      <Label fx:id="nome11" layoutX="511.0" layoutY="294.0" text="Label" visible="false" />
-      <Label fx:id="preco11" layoutX="511.0" layoutY="325.0" text="Label" visible="false" />
-      <Label fx:id="quantidade11" layoutX="511.0" layoutY="359.0" text="Label" visible="false" />
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="171.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@inicioAdmin/Pedidos%20em%20aberto.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="2.0" fitWidth="352.0" layoutX="192.0" layoutY="102.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="2.0" fitWidth="352.0" layoutX="196.0" layoutY="103.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@inicioAdmin/Rectangle%2024.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="18.0" layoutX="185.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="25.0" fitWidth="18.0" layoutX="195.0" layoutY="72.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@inicioAdmin/Subtract.png" />
+            <Image url="@Funcionarios/Subtract.png" />
          </image>
       </ImageView>
-      <Button fx:id="pesquisar" layoutX="173.0" layoutY="67.0" mnemonicParsing="false" onAction="#Pesquisar" style="-fx-background-color: transparents;" text="Text" visible="false" />
-      <VBox fx:id="root" layoutX="281.0" layoutY="145.0" prefHeight="200.0" prefWidth="100.0" />
+      <ImageView fitHeight="425.0" fitWidth="158.0" layoutX="-2.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@inicioAdmin/sidebar.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="funcionarios" layoutX="27.0" layoutY="320.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="107.0" text="Button" />
+      <Button fx:id="sair" layoutX="60.0" layoutY="353.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="10.0" prefWidth="36.0" text="Button" />
+      <Button fx:id="adicionais" layoutX="35.0" layoutY="282.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="84.0" text="Button">
+         <opaqueInsets>
+            <Insets top="-9.0" />
+         </opaqueInsets>
+      </Button>
    </children>
 </Pane>

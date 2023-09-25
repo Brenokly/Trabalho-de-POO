@@ -104,6 +104,61 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
     }
   }
 
+  public List<Adicional> buscarGeral(Adicional entity) {
+    String sql = "SELECT * FROM tb_adicional WHERE ";
+    List<String> conditions = new ArrayList<>();
+    List<Object> parameters = new ArrayList<>();
+
+    if (entity.getId() != null) {
+      conditions.add("id = ?");
+      parameters.add(entity.getId());
+    }
+    if (entity.getNome() != null && !entity.getNome().isEmpty()) {
+      conditions.add("nome = ?");
+      parameters.add(entity.getNome());
+    }
+    if (entity.getValor() != 0.0) {
+      conditions.add("valor = ?");
+      parameters.add(entity.getValor());
+    }
+    if (entity.getQuantidade() != 0) {
+      conditions.add("quantidade = ?");
+      parameters.add(entity.getQuantidade());
+    }
+
+    if (conditions.isEmpty()) {
+      // Se nenhum campo válido foi fornecido, não execute a consulta.
+      return new ArrayList<>(); // Retorna uma lista vazia.
+    }
+
+    sql += String.join(" OR ", conditions);
+
+    List<Adicional> adicionais = new ArrayList<>();
+
+    try (Connection con = getConnection();
+        PreparedStatement ps = con.prepareStatement(sql)) {
+      for (int i = 0; i < parameters.size(); i++) {
+        ps.setObject(i + 1, parameters.get(i));
+      }
+
+      ResultSet rs = ps.executeQuery();
+      while (rs.next()) {
+        Adicional adicional = new Adicional();
+        adicional.setId(rs.getLong("id"));
+        adicional.setNome(rs.getString("nome"));
+        adicional.setValor(rs.getDouble("valor"));
+        adicional.setQuantidade(rs.getInt("quantidade"));
+        adicionais.add(adicional);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      closeConnection();
+    }
+
+    return adicionais;
+  }
+
   public Adicional buscar(Adicional entity) {
     Connection con = getConnection();
 

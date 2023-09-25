@@ -2,8 +2,10 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -11,6 +13,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
+import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 import java.net.URL;
 import java.util.List;
@@ -34,13 +37,12 @@ public class TelaFuncionarios implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Configurar as colunas da tabela
-        id.setCellValueFactory(new PropertyValueFactory<>("id")); // Se houver uma coluna de ID
+        id.setCellValueFactory(new PropertyValueFactory<>("id")); 
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colAdministrator.setCellValueFactory(new PropertyValueFactory<>("admin"));
-        // Configurar outras colunas, se necessário
-
+        
         // Obter os dados dos funcionários do banco de dados
         UserDao userDao = new UserDao();
         List<Usuario> funcionarios = userDao.listar();
@@ -70,8 +72,7 @@ public class TelaFuncionarios implements Initializable {
             criteria.setEmail(searchTerm);
             
             try {
-                Long idLong = Long.parseLong(searchTerm);
-                criteria.setId(idLong);
+                criteria.setId(Long.parseLong(searchTerm));
             } catch (NumberFormatException e) {
                 // Não é um número de ID válido, pode ignorar essa exceção
             }
@@ -86,4 +87,22 @@ public class TelaFuncionarios implements Initializable {
             tableFuncionarios.setItems(resultadosObservable);
         }
     }
+
+    @FXML private Button adicionais;
+    @FXML
+    void carregarAdicionais(ActionEvent event) throws Exception {
+        Telas.TelaAdicional();
+    }
+
+    @FXML private Button inicio;
+    @FXML
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
+    }
+
+    @FXML private Button sair;
+    @FXML
+    void carregarLogin(ActionEvent event) throws Exception {
+        Telas.TelaLogin();
+    }   
 }

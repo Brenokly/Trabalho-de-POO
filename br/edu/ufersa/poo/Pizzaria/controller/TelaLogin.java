@@ -26,7 +26,7 @@ public class TelaLogin {
     try {
       userbo.Autenticar(usuario);
       erroaut.setVisible(false);
-      Telas.TelaAdicional1();
+      Telas.TelaInicial();
     } catch (UsuarioInvalido e) {
       erroaut.setText("Email ou senha inválido");
       erroaut.setVisible(true);

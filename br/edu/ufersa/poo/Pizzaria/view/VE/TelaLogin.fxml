@@ -46,12 +46,12 @@
    <children>
       <ImageView fitHeight="406.0" fitWidth="254.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Barra%20Lateral.png" />
+            <Image url="@adicionaisElogin/Barra%20Lateral.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="39.0" fitWidth="295.0" layoutX="278.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Component%202.0.png" />
+            <Image url="@adicionaisElogin/Component%202.0.png" />
          </image>
       </ImageView>
       <TextField fx:id="login" layoutX="344.0" layoutY="143.0" prefHeight="26.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-background-insets: 0;">
@@ -63,7 +63,7 @@
          </font></TextField>
       <ImageView fitHeight="39.0" fitWidth="287.0" layoutX="278.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@Component%203.0.png" />
+            <Image url="@adicionaisElogin/Component%203.0.png" />
          </image>
       </ImageView>
       <PasswordField fx:id="senha" layoutX="333.0" layoutY="212.0" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-background-insets: 0;">
@@ -76,7 +76,7 @@
       <Label fx:id="erroaut" layoutX="278.0" layoutY="121.0" text="Label" textFill="#ff0101" visible="false" />
       <ImageView fitHeight="55.0" fitWidth="116.0" layoutX="422.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@ENTRAR.png" />
+            <Image url="@adicionaisElogin/ENTRAR.png" />
          </image>
       </ImageView>
       <Button fx:id="entrar" layoutX="422.0" layoutY="286.0" mnemonicParsing="false" onAction="#Autenticar" opacity="0.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
