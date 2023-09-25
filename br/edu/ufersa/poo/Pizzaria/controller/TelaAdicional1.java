@@ -3,11 +3,8 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
-
-import Exceptions.NomeInvalido;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
