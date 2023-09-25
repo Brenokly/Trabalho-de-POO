@@ -16,19 +16,26 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class TelaFuncionarios implements Initializable {
     private UserDao userDao = new UserDao();
 
-    @FXML private TableView<Usuario> tableFuncionarios;
+    @FXML
+    private TableView<Usuario> tableFuncionarios;
 
-    @FXML private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
-    @FXML private TableColumn<Usuario, String> colNome;
-    @FXML private TableColumn<Usuario, String> colCpf;
-    @FXML private TableColumn<Usuario, String> colEmail;
-    @FXML private TableColumn<Usuario, Boolean> colAdministrator;
+    @FXML
+    private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
+    @FXML
+    private TableColumn<Usuario, String> colNome;
+    @FXML
+    private TableColumn<Usuario, String> colCpf;
+    @FXML
+    private TableColumn<Usuario, String> colEmail;
+    @FXML
+    private TableColumn<Usuario, Boolean> colAdministrator;
     // Outras colunas, se necessário
 
     ObservableList<Usuario> list = FXCollections.observableArrayList();
@@ -37,12 +44,12 @@ public class TelaFuncionarios implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Configurar as colunas da tabela
-        id.setCellValueFactory(new PropertyValueFactory<>("id")); 
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
         colNome.setCellValueFactory(new PropertyValueFactory<>("nome"));
         colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         colEmail.setCellValueFactory(new PropertyValueFactory<>("email"));
         colAdministrator.setCellValueFactory(new PropertyValueFactory<>("admin"));
-        
+
         // Obter os dados dos funcionários do banco de dados
         UserDao userDao = new UserDao();
         List<Usuario> funcionarios = userDao.listar();
@@ -56,53 +63,55 @@ public class TelaFuncionarios implements Initializable {
         allUsuarios.addAll(funcionarios);
     }
 
-    @FXML private TextField searchTextField;
+    @FXML
+    private TextField searchTextField;
 
     @FXML
     private void onSearchKeyReleased(KeyEvent event) {
-        String searchTerm = searchTextField.getText();
+        String searchTerm = searchTextField.getText().toLowerCase();
 
         if (searchTerm.isEmpty()) {
             // Campo de pesquisa vazio, exiba todos os dados originais
             tableFuncionarios.setItems(allUsuarios);
         } else {
             // Realize a pesquisa e atualize a TableView com os resultados
-            Usuario criteria = new Usuario();
-            criteria.setNome(searchTerm);
-            criteria.setEmail(searchTerm);
-            
-            try {
-                criteria.setId(Long.parseLong(searchTerm));
-            } catch (NumberFormatException e) {
-                // Não é um número de ID válido, pode ignorar essa exceção
+            List<Usuario> resultados = new ArrayList<>();
+
+            for (Usuario usuario : allUsuarios) {
+                if (usuario.getNome().toLowerCase().contains(searchTerm)
+                        || usuario.getEmail().toLowerCase().contains(searchTerm)) {
+                    resultados.add(usuario);
+                }
             }
 
-            List<Usuario> resultados = userDao.buscarINE(criteria);
             ObservableList<Usuario> resultadosObservable = FXCollections.observableArrayList();
-
-            if (resultados != null && !resultados.isEmpty()) {
-                resultadosObservable.addAll(resultados);
-            }
+            resultadosObservable.addAll(resultados);
 
             tableFuncionarios.setItems(resultadosObservable);
         }
     }
 
-    @FXML private Button adicionais;
+    @FXML
+    private Button adicionais;
+
     @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
         Telas.TelaAdicional();
     }
 
-    @FXML private Button inicio;
+    @FXML
+    private Button inicio;
+
     @FXML
     void carregarInicio(ActionEvent event) throws Exception {
         Telas.TelaInicial();
     }
 
-    @FXML private Button sair;
+    @FXML
+    private Button sair;
+
     @FXML
     void carregarLogin(ActionEvent event) throws Exception {
         Telas.TelaLogin();
-    }   
+    }
 }
