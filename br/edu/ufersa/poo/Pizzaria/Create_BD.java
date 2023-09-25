@@ -8,7 +8,7 @@ import java.sql.Statement;
 public class Create_BD {
     public static void main(String[] args) {
         // Configuração da conexão com o banco de dados
-        final String URL = "jdbc:postgresql://localhost/Teste";
+        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
         final String PASS = "admin";
 

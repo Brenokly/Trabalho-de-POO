@@ -17,7 +17,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         Connection con = getConnection();
         Long pizzaId = null;
 
-        String insertPizzaSql = "INSERT INTO tb_itenspedido (id_tipopizza, id_pedido, tamanho, valor, descricao) VALUES (?, ?, ?, ?)";
+        String insertPizzaSql = "INSERT INTO tb_itenspedido (id_tipopizza, id_pedido, tamanho, valor, descricao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, entity.getPizza().getId()); // Supondo que getPizza() retorna a pizza relacionada
             ps.setLong( 2, entity.getIdPedido()); // Supondo que getPedido() retorna o pedido relacionado
@@ -32,7 +32,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     pizzaId = rs.getLong(1);
 
                     // Insira as informações dos adicionais na tabela tb_pizza_adicional
-                    String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade_pedida) VALUES (?, ?, ?)";
+                    String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
                     try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql)) {
                         for (Adicional adicional : entity.getAdicionais()) {
                             psAdicional.setLong(1, pizzaId);
@@ -165,6 +165,43 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, tipoPizza.getId());
+            ResultSet rs = ps.executeQuery();
+    
+            while (rs.next()) {
+                ItensPedidos pizza = new ItensPedidos();
+                try {
+                    pizza.setId(rs.getLong("id"));
+                    pizza.setIdPedido(rs.getLong("id_pedido"));
+                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
+                    pizza.setTamanho(rs.getString("tamanho"));
+                    pizza.setValor(rs.getDouble("valor"));
+                    pizza.setDescricao(rs.getString("descricao"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                pizzas.add(pizza);
+            }
+            
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        
+        return pizzas;
+    }
+
+    public List<ItensPedidos> buscar(Pedido pedido) {
+        Connection con = getConnection();
+        List<ItensPedidos> pizzas = new ArrayList<>();
+    
+        String sql = "SELECT * FROM tb_itenspedido WHERE id_pedido = ?";
+            
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, pedido.getId());
             ResultSet rs = ps.executeQuery();
     
             while (rs.next()) {

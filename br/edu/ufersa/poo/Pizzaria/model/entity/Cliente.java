@@ -9,10 +9,9 @@ public class Cliente{
     private String endereco;
 
     public Cliente(){
-        id = 0L;
     }
 
-    public Cliente(String nome, String cpf, String endereco) {
+    public Cliente(String nome, String cpf, String endereco) throws Exception {
         setNome(nome);
         setCpf(cpf);
         setEndereco(endereco);
@@ -28,29 +27,29 @@ public class Cliente{
     }
 
     public String getNome() { return this.nome; }
-    public void setNome(String nome) {
+    public void setNome(String nome) throws NomeInvalido {
         if (nome != null) {
             this.nome = nome;
         } else {
-            throw new IllegalArgumentException("Nome inválido");
+            throw new NomeInvalido("Nome inválido");
         }
     }
 
     public String getCpf() { return this.cpf; }
-    public void setCpf(String cpf) {
+    public void setCpf(String cpf) throws CPFInvalido {
         if (cpf != null) {
             this.cpf = cpf;
         } else {
-            throw new IllegalArgumentException("CPF inválido");
+            throw new CPFInvalido("CPF inválido");
         }
     }
 
     public String getEndereco() { return this.endereco; }
-    public void setEndereco(String endereco) {
+    public void setEndereco(String endereco) throws EnderecoInvalido {
         if (endereco != null) {
             this.endereco = endereco;
         } else {
-            throw new IllegalArgumentException("Endereço inválido");
+            throw new EnderecoInvalido("Endereço inválido");
         }
     }
 }
