@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaSabores">
    <children>
       <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="329.0" style="-fx-background-color: transparents;" text="Localizar por nome, email ou id">
          <font>
@@ -47,7 +47,7 @@
       <Button fx:id="inicio" layoutX="51.0" layoutY="129.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" text="Início" />
       <Button fx:id="sair" layoutX="60.0" layoutY="352.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="25.0" prefWidth="37.0" text="Sair" />
       <Button fx:id="funcionarios" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="107.0" text="Funcionarios" />
-      <Button fx:id="adicionais" layoutX="32.0" layoutY="283.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" prefHeight="25.0" prefWidth="92.0" text="Adicionais" />
+      <Button fx:id="adicionais" layoutX="32.0" layoutY="283.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="92.0" text="Adicionais" />
       <ImageView fitHeight="18.0" fitWidth="115.0" layoutX="178.0" layoutY="12.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Sabores/Sabores.png" />

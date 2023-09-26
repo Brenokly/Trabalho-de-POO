@@ -108,7 +108,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public List<TiposPizzas> listar() {
     Connection con = getConnection();
-    List<TiposPizzas> resultados = new ArrayList<>(null);
+    List<TiposPizzas> resultados = new ArrayList<>();
 
     String sql = "SELECT * FROM tb_tiposPizzas";
 
@@ -116,7 +116,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
       PreparedStatement ps = con.prepareStatement(sql);
       ResultSet rs = ps.executeQuery();
 
-      if (rs.next()) {
+      while (rs.next()) {
         TiposPizzas resultado = new TiposPizzas();
         try {
           resultado.setId(rs.getLong("id"));
@@ -136,6 +136,6 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
       closeConnection();
     }
     return resultados;
-  };
+  }
 
 }

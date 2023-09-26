@@ -110,4 +110,12 @@ public class TelaSabores implements Initializable {
   void carregarLogin(ActionEvent event) throws Exception {
     Telas.TelaLogin();
   }
+
+  @FXML
+  private Button adicionais;
+
+  @FXML
+  void carregarAdicionais(ActionEvent event) throws Exception {
+    Telas.TelaAdicional();
+  }
 }
