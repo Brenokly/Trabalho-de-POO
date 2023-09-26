@@ -18,8 +18,8 @@ public class Adicional {
     setQuantidade(quantidade_pedida);
   }
 
-  public Adicional( String nome, Long id, int quantidade_pedida) throws Exception {
-    setId(id);
+  public Adicional( String nome, double valor, int quantidade_pedida) throws NomeInvalido,QuantidadeInvalida,ValorInvalido {
+    setValor(valor);
     setNome(nome);
     setQuantidade(quantidade_pedida);
   }

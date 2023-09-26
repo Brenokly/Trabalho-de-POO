@@ -51,7 +51,6 @@ public class TelaFuncionarios implements Initializable {
         colAdministrator.setCellValueFactory(new PropertyValueFactory<>("admin"));
 
         // Obter os dados dos funcionários do banco de dados
-        UserDao userDao = new UserDao();
         List<Usuario> funcionarios = userDao.listar();
 
         list.addAll(funcionarios);

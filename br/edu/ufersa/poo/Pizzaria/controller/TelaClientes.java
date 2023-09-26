@@ -125,6 +125,6 @@ public class TelaClientes implements Initializable {
 
   @FXML
   void carregarSabores(ActionEvent event) throws Exception {
-    Telas.TelaSabores();
+    //Telas.TelaSabores();
   }
 }

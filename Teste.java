@@ -23,7 +23,7 @@ public class Teste {
 
     for (Usuario usuario : user) {
       System.out.println(usuario.getNome() + " " + usuario.getId() + " " + usuario.getCpf() + " " + usuario.getEmail()
-          + " " + usuario.getSenha() + " " + usuario.getIsAdmin());
+          + " " + usuario.getSenha() + " " + usuario.isAdmin());
     }
   }
 }

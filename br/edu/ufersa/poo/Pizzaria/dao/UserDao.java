@@ -21,7 +21,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
             ps.setString(2, usuario.getCpf());
             ps.setString(3, usuario.getEmail());
             ps.setString(4, usuario.getSenha());
-            ps.setBoolean(5, usuario.getIsAdmin());
+            ps.setBoolean(5, usuario.isAdmin());
             ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
@@ -61,7 +61,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
             ps.setString(2, entity.getCpf());
             ps.setString(3, entity.getEmail());
             ps.setString(4, entity.getSenha());
-            ps.setBoolean(5, entity.getIsAdmin());
+            ps.setBoolean(5, entity.isAdmin());
             ps.setLong(6, entity.getId());
             ps.executeUpdate();
         } catch (SQLException e) {

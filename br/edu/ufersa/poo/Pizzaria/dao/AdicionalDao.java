@@ -104,7 +104,7 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
     }
   }
 
-  public List<Adicional> buscarGeral(Adicional entity) {
+  public Adicional buscarGeral(Adicional entity) {
     String sql = "SELECT * FROM tb_adicional WHERE ";
     List<String> conditions = new ArrayList<>();
     List<Object> parameters = new ArrayList<>();
@@ -117,23 +117,14 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
       conditions.add("nome = ?");
       parameters.add(entity.getNome());
     }
-    if (entity.getValor() != 0.0) {
-      conditions.add("valor = ?");
-      parameters.add(entity.getValor());
-    }
-    if (entity.getQuantidade() != 0) {
-      conditions.add("quantidade = ?");
-      parameters.add(entity.getQuantidade());
-    }
 
     if (conditions.isEmpty()) {
       // Se nenhum campo válido foi fornecido, não execute a consulta.
-      return new ArrayList<>(); // Retorna uma lista vazia.
+      return null; // Retorna null, já que nenhum registro válido foi encontrado.
     }
 
     sql += String.join(" OR ", conditions);
-
-    List<Adicional> adicionais = new ArrayList<>();
+    Adicional adicional = null;
 
     try (Connection con = getConnection();
         PreparedStatement ps = con.prepareStatement(sql)) {
@@ -142,13 +133,12 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
       }
 
       ResultSet rs = ps.executeQuery();
-      while (rs.next()) {
-        Adicional adicional = new Adicional();
+      if (rs.next()) {
+        adicional = new Adicional();
         adicional.setId(rs.getLong("id"));
         adicional.setNome(rs.getString("nome"));
         adicional.setValor(rs.getDouble("valor"));
         adicional.setQuantidade(rs.getInt("quantidade"));
-        adicionais.add(adicional);
       }
     } catch (Exception e) {
       e.printStackTrace();
@@ -156,7 +146,7 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
       closeConnection();
     }
 
-    return adicionais;
+    return adicional;
   }
 
   public Adicional buscar(Adicional entity) {

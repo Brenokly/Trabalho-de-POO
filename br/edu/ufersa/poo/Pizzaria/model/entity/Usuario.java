@@ -71,7 +71,7 @@ public class Usuario {
         this.senha = senha;
     }
 
-    public boolean getIsAdmin() {
+    public boolean isAdmin() {
         return isAdmin;
     }
 

@@ -18,21 +18,44 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 
 public class TelaAdicional1 implements Initializable {
   AdicionalDao adicionalDao = new AdicionalDao();
   public static Telas telas = new Telas();
 
   @FXML
-  private TableView<Adicional> table;
+  private Button adicionar;
+
+  @FXML
+  private Button editar;
+
+  @FXML
+  private Button funcionarios;
+
   @FXML
   private TableColumn<Adicional, Long> id;
+
+  @FXML
+  private Button inicio;
+
   @FXML
   private TableColumn<Adicional, String> nome;
-  @FXML
-  private TableColumn<Adicional, Double> valor;
+
   @FXML
   private TableColumn<Adicional, Integer> quantidade;
+
+  @FXML
+  private Button sair;
+
+  @FXML
+  private TextField searchTextField;
+
+  @FXML
+  private TableView<Adicional> table;
+
+  @FXML
+  private TableColumn<Adicional, Double> valor;
 
   ObservableList<Adicional> list = FXCollections.observableArrayList();
   ObservableList<Adicional> allAdicionais = FXCollections.observableArrayList();
@@ -56,10 +79,7 @@ public class TelaAdicional1 implements Initializable {
     // Adicionar os dados originais à lista allAdicionais
     allAdicionais.addAll(adicionais);
   }
-
-  @FXML
-  private TextField searchTextField;
-
+  
   @FXML
   private void onSearchKeyReleased(KeyEvent event) {
     String searchTerm = searchTextField.getText().toLowerCase();
@@ -73,8 +93,6 @@ public class TelaAdicional1 implements Initializable {
 
       for (Adicional adicional : allAdicionais) {
         if (adicional.getNome().toLowerCase().contains(searchTerm) ||
-            String.valueOf(adicional.getValor()).toLowerCase().contains(searchTerm) ||
-            String.valueOf(adicional.getQuantidade()).toLowerCase().contains(searchTerm) ||
             String.valueOf(adicional.getId()).toLowerCase().contains(searchTerm)) {
           resultados.add(adicional);
         }
@@ -88,7 +106,37 @@ public class TelaAdicional1 implements Initializable {
   }
 
   @FXML
-  private Button funcionarios;
+  void AddAdicional(ActionEvent event) {
+    try {
+      Telas.TelaAdicional2();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  @FXML
+  void AdicionalClicked(MouseEvent event) {
+
+  }
+
+  @FXML
+  void EditarAdicional(ActionEvent event) {
+    Adicional adicional = table.getSelectionModel().getSelectedItem();
+
+    if (adicional != null) {
+      try {
+        // Chame o método TelaAdicional3 e passe o Adicional selecionado
+        Telas.TelaAdicional3(adicional);
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+  }
+
+  @FXML
+  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
+    Telas.TelaAdicional2();
+  }
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
@@ -96,15 +144,9 @@ public class TelaAdicional1 implements Initializable {
   }
 
   @FXML
-  private Button inicio;
-
-  @FXML
   void carregarInicio(ActionEvent event) throws Exception {
     Telas.TelaInicial();
   }
-
-  @FXML
-  private Button sair;
 
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
