@@ -26,7 +26,7 @@ public class Telas extends Application {
     setPrimaryStage(arg0);
     primaryStage.setTitle("Pizzaria Michelangeclo");
     primaryStage.show();
-    TelaSabores();
+    TelaClientes();
   } 
 
   public static void TelaLogin() throws Exception {
@@ -68,4 +68,13 @@ public class Telas extends Application {
     
     primaryStage.setScene(scene);
   }
+
+  public static void TelaClientes() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientes.fxml"));
+
+    Scene scene = new Scene(root);
+    
+    primaryStage.setScene(scene);
+  }
+
 }
