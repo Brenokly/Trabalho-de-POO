@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
-import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
 import br.edu.ufersa.poo.Pizzaria.dao.TiposPizzasDao;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.collections.FXCollections;
@@ -37,7 +36,7 @@ public class TelaSabores implements Initializable {
   private TableColumn<TiposPizzas, Integer> quantidade;
 
   ObservableList<TiposPizzas> list = FXCollections.observableArrayList();
-  ObservableList<TiposPizzas> allAdicionais = FXCollections.observableArrayList();
+  ObservableList<TiposPizzas> allSabores = FXCollections.observableArrayList();
 
   @Override
   public void initialize(URL location, ResourceBundle resources) {
@@ -55,8 +54,8 @@ public class TelaSabores implements Initializable {
     // Adicionar os dados à TableView
     table.setItems(list);
 
-    // Adicionar os dados originais à lista allAdicionais
-    allAdicionais.addAll(sabores);
+    // Adicionar os dados originais à lista allSabores
+    allSabores.addAll(sabores);
   }
 
   @FXML
@@ -68,12 +67,12 @@ public class TelaSabores implements Initializable {
 
     if (searchTerm.isEmpty()) {
       // Campo de pesquisa vazio, exiba todos os dados originais
-      table.setItems(allAdicionais);
+      table.setItems(allSabores);
     } else {
       // Realize a pesquisa e atualize a TableView com os resultados
       List<TiposPizzas> resultados = new ArrayList<>();
 
-      for (TiposPizzas tiposPizzas : allAdicionais) {
+      for (TiposPizzas tiposPizzas : allSabores) {
         if (tiposPizzas.getNome().toLowerCase().contains(searchTerm) ||
             String.valueOf(tiposPizzas.getId()).toLowerCase().contains(searchTerm)) {
           resultados.add(tiposPizzas);
