@@ -11,20 +11,22 @@ public class Adicional {
   private double valor;
   private int quantidade;
 
-  public Adicional(){}
+  public Adicional() {
+  }
 
   public Adicional(String nome, int quantidade_pedida) throws Exception {
     setNome(nome);
     setQuantidade(quantidade_pedida);
   }
 
-  public Adicional( String nome, double valor, int quantidade_pedida) throws NomeInvalido,QuantidadeInvalida,ValorInvalido {
+  public Adicional(String nome, double valor, int quantidade_pedida)
+      throws NomeInvalido, QuantidadeInvalida, ValorInvalido {
     setValor(valor);
     setNome(nome);
     setQuantidade(quantidade_pedida);
   }
 
-  public Adicional(Long id,String nome, double valor, int quantidade) throws Exception {
+  public Adicional(Long id, String nome, double valor, int quantidade) throws Exception {
     setNome(nome);
     setValor(valor);
     setQuantidade(quantidade);
@@ -41,7 +43,7 @@ public class Adicional {
   public Long getId() {
     return id;
   }
-  
+
   public void setNome(String nome) throws NomeInvalido {
     if (nome != null && !nome.isEmpty()) {
       this.nome = nome;
@@ -55,10 +57,10 @@ public class Adicional {
   }
 
   public void setValor(double valor) throws ValorInvalido {
-    if (valor > 0) {
-        this.valor = valor;
+    if (valor > 0.0) {
+      this.valor = valor;
     } else {
-        throw new ValorInvalido("O valor do adicional deve ser maior que zero.");
+      throw new ValorInvalido("O valor do adicional deve ser maior que zero.");
     }
   }
 
@@ -67,10 +69,10 @@ public class Adicional {
   }
 
   public void setQuantidade(int quantidade) throws QuantidadeInvalida {
-    if (quantidade > 0) {
-        this.quantidade = quantidade;
+    if (quantidade >= 0) {
+      this.quantidade = quantidade;
     } else {
-        throw new QuantidadeInvalida("A quantidade inválida!");
+      throw new QuantidadeInvalida("A quantidade inválida!");
     }
   }
 

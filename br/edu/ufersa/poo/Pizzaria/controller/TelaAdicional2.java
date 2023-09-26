@@ -47,47 +47,88 @@ public class TelaAdicional2 {
     AdicionalBO adicionalBo = new AdicionalBO();
 
     String nomeTexto = nome.getText();
-    double precoDouble;
-    int quantidadeInt;
+    String precoTexto = preco.getText();
+    String quantidadeTexto = quantidade.getText();
 
-    try {
-      if (nomeTexto.isEmpty()) {
-        nome.setStyle("-fx-text-fill: red;");
-      } else {
-        nome.setStyle("-fx-text-fill: black;");
-      }
+    boolean nomeValido = !nomeTexto.isEmpty();
+    boolean nomeApenasLetras = nomeTexto.matches("^[\\p{L}\\s]*$");
+    boolean precoValido = isValidDouble(precoTexto);
+    boolean quantidadeValida = isValidInteger(quantidadeTexto);
 
-      precoDouble = Double.parseDouble(preco.getText());
-      preco.setStyle("-fx-text-fill: black;");
-
-      quantidadeInt = Integer.parseInt(quantidade.getText());
-      quantidade.setStyle("-fx-text-fill: black;");
+    if (nomeValido && nomeApenasLetras && precoValido && quantidadeValida) {
+      // Todas as entradas são válidas, continue com a criação do Adicional
+      double precoDouble = Double.parseDouble(precoTexto);
+      int quantidadeInt = Integer.parseInt(quantidadeTexto);
 
       Adicional adicional = new Adicional(nomeTexto, precoDouble, quantidadeInt);
-      adicionalBo.create(adicional);
-      Alert alert = new Alert(AlertType.INFORMATION);
-      alert.setTitle("Sucesso");
-      alert.setHeaderText("Inserção Bem-sucedida");
-      alert.setContentText("O adicional foi inserido com sucesso!");
 
-      // Crie um botão "OK" no alerta
-      ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);
-      alert.getButtonTypes().setAll(okButton);
+      try {
+        adicionalBo.create(adicional);
+        Alert alert = new Alert(AlertType.INFORMATION);
+        alert.setTitle("Sucesso");
+        alert.setHeaderText("Inserção Bem-sucedida");
+        alert.setContentText("O adicional foi inserido com sucesso!");
 
-      // Exiba o alerta e aguarde o clique no botão "OK"
-      alert.showAndWait();
+        // Crie um botão "OK" no alerta
+        ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);
+        alert.getButtonTypes().setAll(okButton);
 
-      // Retorne para a TelaAdicional1 após o sucesso
-      Telas.TelaAdicional();
-    } catch (NomeInvalido e) {
-      quantidade.setStyle("-fx-text-fill: red;");
-    } catch (ValorInvalido e) {
-      preco.setStyle("-fx-text-fill: red;");
-    } catch (QuantidadeInvalida e) {
-      quantidade.setStyle("-fx-text-fill: red;");
-    } catch (Exception e) {
-      AdicionalExistente.setVisible(true);
+        // Exiba o alerta e aguarde o clique no botão "OK"
+        alert.showAndWait();
+
+        // Retorne para a TelaAdicional1 após o sucesso
+        Telas.TelaAdicional();
+      } catch (AdicionaJaExiste e) {
+        AdicionalExistente.setVisible(true);
+      } catch (QuantidadeInvalida e) {
+        e.printStackTrace();
+      } catch (ValorInvalido e) {
+        e.printStackTrace();
+      } catch (NomeInvalido e) {
+        e.printStackTrace();
+      }
+    } else {
+      // Alguma entrada é inválida, exiba alertas de erro
+      if (!nomeValido) {
+        displayAlert("Nome inválido", "O nome não pode estar vazio.");
+      } else if (!nomeApenasLetras) {
+        displayAlert("Nome inválido", "O nome deve conter apenas letras.");
+      }
+
+      if (!precoValido) {
+        displayAlert("Preço inválido", "O preço deve ser um número decimal maior que 0.0.");
+      }
+
+      if (!quantidadeValida) {
+        displayAlert("Quantidade inválida", "A quantidade deve ser um número inteiro maior ou igual a 0.");
+      }
     }
+  }
+
+  private boolean isValidDouble(String value) {
+    try {
+      double parsedValue = Double.parseDouble(value);
+      return parsedValue > 0.0;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  private boolean isValidInteger(String value) {
+    try {
+      int parsedValue = Integer.parseInt(value);
+      return parsedValue >= 0;
+    } catch (NumberFormatException e) {
+      return false;
+    }
+  }
+
+  private void displayAlert(String title, String message) {
+    Alert alert = new Alert(AlertType.ERROR);
+    alert.setTitle("Erro");
+    alert.setHeaderText(title);
+    alert.setContentText(message);
+    alert.showAndWait();
   }
 
   @FXML

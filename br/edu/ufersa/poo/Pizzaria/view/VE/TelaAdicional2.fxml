@@ -90,12 +90,12 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="preco" layoutX="279.0" layoutY="169.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="preco" layoutX="284.0" layoutY="169.0" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="quantidade" layoutX="382.0" layoutY="242.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="quantidade" layoutX="387.0" layoutY="241.0" prefHeight="30.0" prefWidth="48.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>

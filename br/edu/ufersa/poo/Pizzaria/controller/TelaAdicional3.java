@@ -60,16 +60,15 @@ public class TelaAdicional3 extends Dialog<Adicional> {
   void SalvarAdicional(ActionEvent event) {
     if (adicional != null) {
       String novoNome = nome.getText();
-      double novoPreco = 0.0; 
-      int novaQuantidade = 0; 
+      double novoPreco = 0.0;
+      int novaQuantidade = 0;
 
       try {
         novoPreco = Double.parseDouble(preco.getText());
         novaQuantidade = Integer.parseInt(quantidade.getText());
       } catch (NumberFormatException e) {
-        // Exiba uma mensagem de erro para o usuário
         exibirMensagemDeErro("Valores inválidos", "Os valores devem ser números válidos.");
-        return; // Saia do método para manter a tela aberta
+        return; // Não tente salvar o adicional se os valores forem inválidos
       }
 
       // Modifique o objeto Adicional com os novos valores
@@ -82,14 +81,14 @@ public class TelaAdicional3 extends Dialog<Adicional> {
         AdicionalBO adicionalBo = new AdicionalBO();
         adicionalBo.update(adicional);
 
-        // Redirecione para a tela desejada após o salvamento bem-sucedido
+        // Redireciona para a tela desejada após o salvamento bem-sucedido
         Telas.TelaAdicional();
       } catch (NomeInvalido e) {
         exibirMensagemDeErro("Nome inválido", e.getMessage());
       } catch (ValorInvalido e) {
-        exibirMensagemDeErro("Valor inválido", "O valor deve ser um número decimal maior que 0.0");
+        exibirMensagemDeErro("Preço inválido", "O valor deve ser um número decimal maior que 0.0");
       } catch (QuantidadeInvalida e) {
-        exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número inteiro maior que 0");
+        exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número inteiro maior ou igual a 0");
       } catch (Exception e) {
         exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());
       }

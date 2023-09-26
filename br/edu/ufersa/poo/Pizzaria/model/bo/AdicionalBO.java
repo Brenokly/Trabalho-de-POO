@@ -2,6 +2,7 @@ package br.edu.ufersa.poo.Pizzaria.model.bo;
 
 import java.util.List;
 
+import Exceptions.AdicionaJaExiste;
 import Exceptions.NomeInvalido;
 import Exceptions.QuantidadeInvalida;
 import Exceptions.ValorInvalido;
@@ -24,7 +25,7 @@ public class AdicionalBO implements BaseBO<Adicional> {
     }
 
     // Verificar se a quantidade é maior que 0
-    if (adicional.getQuantidade() <= 0) {
+    if (adicional.getQuantidade() < 0) {
       throw new QuantidadeInvalida("Quantidade inválida");
     }
 
@@ -32,7 +33,7 @@ public class AdicionalBO implements BaseBO<Adicional> {
     Adicional existingAdicional = adicionalDao.buscar(adicional);
 
     if (existingAdicional != null) {
-      throw new Exception("Adicional com o mesmo nome já existe.");
+      throw new AdicionaJaExiste("Adicional com o mesmo nome já existe.");
     }
 
     // Agora você pode chamar o método de inserção do AdicionalDao
@@ -53,7 +54,7 @@ public class AdicionalBO implements BaseBO<Adicional> {
     }
 
     // Verificar se a quantidade é maior que 0
-    if (adicional.getQuantidade() <= 0) {
+    if (adicional.getQuantidade() < 0) {
       throw new QuantidadeInvalida("Quantidade inválida");
     }
 
@@ -85,7 +86,7 @@ public class AdicionalBO implements BaseBO<Adicional> {
     }
 
     // Verificar se a quantidade é maior que 0
-    if (bo.getQuantidade() <= 0) {
+    if (bo.getQuantidade() < 0) {
       throw new QuantidadeInvalida("Quantidade inválida");
     }
 

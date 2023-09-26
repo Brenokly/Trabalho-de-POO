@@ -105,7 +105,7 @@
             <Font size="14.0" />
          </font>
       </Label>
-      <ImageView fitHeight="1.0" fitWidth="137.0" layoutX="279.0" layoutY="194.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="1.0" fitWidth="137.0" layoutX="279.0" layoutY="196.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2090.png" />
          </image>
@@ -115,17 +115,17 @@
             <Image url="@adicionaisElogin/Rectangle%2090.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nome" layoutX="245.0" layoutY="74.0" prefHeight="25.0" prefWidth="275.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="nome" layoutX="237.0" layoutY="74.0" prefHeight="25.0" prefWidth="275.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="preco" layoutX="280.0" layoutY="166.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="preco" layoutX="279.0" layoutY="172.0" prefHeight="25.0" prefWidth="60.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="quantidade" layoutX="383.0" layoutY="238.0" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="quantidade" layoutX="384.0" layoutY="240.0" prefHeight="30.0" prefWidth="60.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
