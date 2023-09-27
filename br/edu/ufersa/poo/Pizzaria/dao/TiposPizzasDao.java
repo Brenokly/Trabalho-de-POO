@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+
+import Exceptions.IdInvalido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 
 public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
@@ -15,7 +17,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     Long pizzaId = null;
 
-    String insertPizzaSql = "INSERT INTO tb_tiposPizzas (nome, valor_grande, valor_pequena) VALUES (?, ?, ?)";
+    String insertPizzaSql = "INSERT INTO tb_tiposPizzas (nome, valorgrande, valorpequena) VALUES (?, ?, ?)";
     try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
       ps.setString(1, entity.getNome());
       ps.setDouble(2, entity.getValorGrande());
@@ -26,8 +28,14 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
       try (ResultSet rs = ps.getGeneratedKeys()) {
         if (rs.next()) {
           pizzaId = rs.getLong(1);
+          try {
+              entity.setId(pizzaId);
+          } catch(IdInvalido ii) {
+              ii.printStackTrace();
+          }
         }
       }
+
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
@@ -53,7 +61,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public void alterar(TiposPizzas entity) {
     Connection con = getConnection();
-    String sql = "UPDATE tb_tiposPizzas SET nome = ?, valor_grande = ?, valor_pequena = ? WHERE id = ?";
+    String sql = "UPDATE tb_tiposPizzas SET nome = ?, valorgrande = ?, valorpequena = ? WHERE id = ?";
     try (PreparedStatement ps = con.prepareStatement(sql)) {
 
       ps.setString(1, entity.getNome());
@@ -88,8 +96,8 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
         try {
           resultado.setId(rs.getLong("id"));
           resultado.setNome(rs.getString("nome"));
-          resultado.setValorGrande(rs.getDouble("valor_grande"));
-          resultado.setValorPequena(rs.getDouble("valor_pequena"));
+          resultado.setValorGrande(rs.getDouble("valorgrande"));
+          resultado.setValorPequena(rs.getDouble("valorpequena"));
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -108,7 +116,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public List<TiposPizzas> listar() {
     Connection con = getConnection();
-    List<TiposPizzas> resultados = new ArrayList<>();
+    List<TiposPizzas> resultados = new ArrayList<>(null);
 
     String sql = "SELECT * FROM tb_tiposPizzas";
 
@@ -116,13 +124,13 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
       PreparedStatement ps = con.prepareStatement(sql);
       ResultSet rs = ps.executeQuery();
 
-      while (rs.next()) {
+      if (rs.next()) {
         TiposPizzas resultado = new TiposPizzas();
         try {
           resultado.setId(rs.getLong("id"));
           resultado.setNome(rs.getString("nome"));
-          resultado.setValorGrande(rs.getDouble("valor_grande"));
-          resultado.setValorPequena(rs.getDouble("valor_pequena"));
+          resultado.setValorGrande(rs.getDouble("valorgrande"));
+          resultado.setValorPequena(rs.getDouble("valorpequena"));
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -136,6 +144,6 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
       closeConnection();
     }
     return resultados;
-  }
+  };
 
 }

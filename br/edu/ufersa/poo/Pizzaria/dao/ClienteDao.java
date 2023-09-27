@@ -9,7 +9,6 @@ import java.util.List;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
-import java.sql.Statement;
 
 public class ClienteDao extends BaseDaoImpl<Cliente> {
     public Long inserir(Cliente cliente) {
@@ -17,16 +16,25 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         String insertClienteSql = "INSERT INTO tb_cliente (nome, cpf, endereco) VALUES (?, ?, ?)";
 
         try (Connection con = getConnection();
-             PreparedStatement ps = con.prepareStatement(insertClienteSql, Statement.RETURN_GENERATED_KEYS)) {
+        PreparedStatement ps = con.prepareStatement(insertClienteSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getEndereco());
-            ps.executeQuery();
+            ps.executeUpdate();
 
             ResultSet rs = ps.getGeneratedKeys();
-            clienteId = rs.getLong("id");   
+            if (rs.next()) {
+                clienteId = rs.getLong(1);
+                try {
+                    cliente.setId(clienteId);
+                } catch(IdInvalido ii) {
+                    ii.printStackTrace();
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
+        } finally {
+            closeConnection();
         }
         return clienteId;
     }
@@ -70,14 +78,13 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         Cliente resultado;
         resultado = new Cliente();
        
-
         String sql = "SELECT * FROM tb_cliente WHERE id = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, entity.getId());
 
-            ps.executeUpdate();
+            ps.executeQuery();
 
             ResultSet rs = ps.getGeneratedKeys();
             if (rs.next()) {
@@ -86,7 +93,7 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
                     resultado.setNome(rs.getString("nome"));
                     resultado.setCpf(rs.getString("cpf"));
                     resultado.setEndereco(rs.getString("endereco"));
-                } catch (IdInvalido e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
@@ -99,10 +106,37 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         return resultado;
     }
 
-    /**
-     * @param entities
-     * @return
-     */
+    public Cliente buscar(Long id) {
+        Connection con = getConnection();
+        Cliente resultado;
+        resultado = new Cliente();
+       
+        String sql = "SELECT * FROM tb_cliente WHERE id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                try {
+                    resultado.setId(rs.getLong("id"));
+                    resultado.setNome(rs.getString("nome"));
+                    resultado.setCpf(rs.getString("cpf"));
+                    resultado.setEndereco(rs.getString("endereco"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+        return resultado;
+    }
+
     public List<Cliente> buscar(List<Cliente> entities) {
         Connection con = getConnection();
         List<Cliente> resultados = new ArrayList<>(null);
@@ -144,14 +178,15 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
     }
 
     public List<Cliente> listar() {
-        Connection con = getConnection();
         List<Cliente> resultados = new ArrayList<>();
-
+        
         String sql = "SELECT * from tb_cliente";
         
-        try {
+        
+        try (Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+        ) {
 
             while (rs.next()) {
                 Cliente resultado = new Cliente();

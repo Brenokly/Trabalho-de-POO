@@ -1,0 +1,10 @@
+.textfield_user {
+    -fx-background-color: transparent, #0D0106;
+    -fx-background-insets: 0, 28 0 0 0;
+    -fx-background-radius: 0;
+}
+.textfield_user:focused .label_user {
+    -fx-background-color: red, #0D0106;
+    -fx-background-insets: 0, 28 0 0 0;
+    -fx-translate-y: -30;
+}

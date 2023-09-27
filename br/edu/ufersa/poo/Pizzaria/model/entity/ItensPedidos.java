@@ -133,6 +133,11 @@ public class ItensPedidos extends Produto {
   public void setAdicionais(List<Adicional> adicionais) {
     this.adicionais = adicionais;
   }
+  public void setAdicionais(Adicional adicionais) {
+    List<Adicional> adicionaisArray = new ArrayList<>();
+    adicionaisArray.add(adicionais);
+    this.adicionais = adicionaisArray;
+  }
 
   public void calcValor(double valor, List<Adicional> adicionais) throws ValorInvalido {
     if (valor >= 0.0) {
