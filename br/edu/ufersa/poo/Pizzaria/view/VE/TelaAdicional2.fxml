@@ -100,7 +100,7 @@
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label fx:id="AdicionalExistente" layoutX="185.0" layoutY="53.0" text="Adicional já existe!" textFill="RED" visible="false">
+      <Label fx:id="AdicionalExistente" layoutX="185.0" layoutY="53.0" text="Adicional já existe!" textFill="RED">
          <font>
             <Font size="14.0" />
          </font>
