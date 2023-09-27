@@ -11,7 +11,9 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import br.edu.ufersa.poo.Pizzaria.classes.Funcionarios;
 import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
@@ -88,6 +90,36 @@ public class TelaFuncionarios implements Initializable {
             resultadosObservable.addAll(resultados);
 
             tableFuncionarios.setItems(resultadosObservable);
+        }
+    }
+
+    @FXML
+    private Button adicionar;
+
+    @FXML
+    void CarregarTelaFuncionarios2(ActionEvent event) {
+      try {
+        Telas.TelaFuncionarios2();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+    }
+
+    @FXML
+    private Button editar;
+
+    @FXML
+    void CarregarTelaFuncionarios3(ActionEvent event) {
+        Usuario funcionario = tableFuncionarios.getSelectionModel().getSelectedItem();
+
+        if (funcionario != null) {
+        try {
+            // Chame o método TelaFuncionario3 e passe o Funcionario selecionado
+            Telas.TelaFuncionarios3(funcionario);
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         }
     }
 

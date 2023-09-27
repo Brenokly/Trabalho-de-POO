@@ -59,50 +59,49 @@ public class TelaAdicional3 extends Dialog<Adicional> {
   @FXML
   void SalvarAdicional(ActionEvent event) {
     if (adicional != null) {
-      // Obtenha os valores dos campos de texto
       String novoNome = nome.getText();
-      double novoPreco = Double.parseDouble(preco.getText());
-      int novaQuantidade = Integer.parseInt(quantidade.getText());
+      double novoPreco = 0.0;
+      int novaQuantidade = 0;
+
+      try {
+        novoPreco = Double.parseDouble(preco.getText());
+        novaQuantidade = Integer.parseInt(quantidade.getText());
+      } catch (NumberFormatException e) {
+        exibirMensagemDeErro("Valores inválidos", "Os valores devem ser números válidos.");
+        return; // Não tente salvar o adicional se os valores forem inválidos
+      }
 
       // Modifique o objeto Adicional com os novos valores
       try {
         adicional.setNome(novoNome);
         adicional.setValor(novoPreco);
         adicional.setQuantidade(novaQuantidade);
-      } catch (NomeInvalido e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Nome inválido");
-        alert.setContentText(e.getMessage());
-        alert.showAndWait();
-      } catch (ValorInvalido e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Valor inválido");
-        alert.setContentText("O valor deve ser um número decimal maior que 0.0");
-        alert.showAndWait();
-      } catch (QuantidadeInvalida e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Quantidade inválida");
-        alert.setContentText("A quantidade deve ser um número inteiro maior que 0");
-        alert.showAndWait();
-      } catch (Exception e) {
-        Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle("Erro");
-        alert.setHeaderText("Erro ao carregar adicional");
-        alert.setContentText(e.getMessage());
-        alert.showAndWait();
-      }
 
-      AdicionalBO adicionalBo = new AdicionalBO();
-      try {
+        // Atualize o objeto no banco de dados
+        AdicionalBO adicionalBo = new AdicionalBO();
         adicionalBo.update(adicional);
+
+        // Redireciona para a tela desejada após o salvamento bem-sucedido
         Telas.TelaAdicional();
+      } catch (NomeInvalido e) {
+        exibirMensagemDeErro("Nome inválido", e.getMessage());
+      } catch (ValorInvalido e) {
+        exibirMensagemDeErro("Preço inválido", "O valor deve ser um número decimal maior que 0.0");
+      } catch (QuantidadeInvalida e) {
+        exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número inteiro maior ou igual a 0");
       } catch (Exception e) {
-        e.printStackTrace();
+        exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());
       }
     }
+  }
+
+  // Método para exibir uma mensagem de erro personalizada
+  private void exibirMensagemDeErro(String titulo, String mensagem) {
+    Alert alert = new Alert(Alert.AlertType.ERROR);
+    alert.setTitle("Erro");
+    alert.setHeaderText(titulo);
+    alert.setContentText(mensagem);
+    alert.showAndWait();
   }
 
   @FXML
