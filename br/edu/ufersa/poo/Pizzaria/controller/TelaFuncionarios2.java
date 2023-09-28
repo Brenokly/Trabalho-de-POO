@@ -98,7 +98,7 @@ public class TelaFuncionarios2 {
         alert.showAndWait();
 
         // Retorne para a TelaFuncionario1 após o sucesso
-        Telas.TelaFuncionarios2();
+        Telas.TelaFuncionarios();
       } catch (UsuarioInvalido e) {
         displayAlert("Erro", e.getMessage());
       }

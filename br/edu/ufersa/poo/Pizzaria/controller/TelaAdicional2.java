@@ -45,6 +45,7 @@ public class TelaAdicional2 {
   @FXML
   void SalvarAdicional(ActionEvent event) throws Exception {
     AdicionalBO adicionalBo = new AdicionalBO();
+    AdicionalExistente.setVisible(false);
 
     String nomeTexto = nome.getText();
     String precoTexto = preco.getText();
