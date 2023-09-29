@@ -80,17 +80,17 @@
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="3.0" fitWidth="275.0" layoutX="244.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="3.0" fitWidth="275.0" layoutX="246.0" layoutY="101.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2089.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nome" layoutX="237.0" layoutY="74.0" prefHeight="25.0" prefWidth="275.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="nome" layoutX="238.0" layoutY="74.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="cpf" layoutX="238.0" layoutY="114.0" prefHeight="30.0" prefWidth="284.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="cpf" layoutX="231.0" layoutY="112.0" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
@@ -108,17 +108,17 @@
          </image>
       </ImageView>
       <Button fx:id="cancelar" layoutX="268.0" layoutY="345.0" mnemonicParsing="false" onAction="#Cancelar" opacity="0.0" prefHeight="33.0" prefWidth="98.0" text="Button" />
-      <TextField fx:id="email" layoutX="246.0" layoutY="158.0" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="email" layoutX="240.0" layoutY="153.0" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="senha" layoutX="250.0" layoutY="207.0" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="senha" layoutX="240.0" layoutY="196.0" prefHeight="30.0" prefWidth="275.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <Label layoutX="187.0" layoutY="115.0" text="Cpf:">
+      <Label layoutX="192.0" layoutY="117.0" text="Cpf:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>

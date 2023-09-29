@@ -1,29 +1,29 @@
-import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
-import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
+import br.edu.ufersa.poo.Pizzaria.dao.TiposPizzasDao;
+import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
-import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
-import br.edu.ufersa.poo.Pizzaria.dao.ItensPedidosDao;
 
-import java.util.ArrayList;
-import java.util.List;
+import Exceptions.IdInvalido;
 
 public class Teste {
   public static void main(String[] args) {
-    UserBO userBO = new UserBO();
+    PedidoBO pedidoBO = new PedidoBO();
+    Pedido pedido2 = new Pedido();
+    try {
+      pedido2.setId(2L);
+    } catch (IdInvalido e) {
+      e.printStackTrace();
+    }
 
-    List<Usuario> user = new ArrayList<Usuario>();
-    Usuario user2 = new Usuario();
-    user2.setNome("cleitin");
+    Pedido pedido = null;
 
     try {
-      user = userBO.buscarINE(user2);
+      pedido = pedidoBO.buscar(pedido2);
     } catch (Exception e) {
       e.printStackTrace();
     }
 
-    for (Usuario usuario : user) {
-      System.out.println(usuario.getNome() + " " + usuario.getId() + " " + usuario.getCpf() + " " + usuario.getEmail()
-          + " " + usuario.getSenha() + " " + usuario.isAdmin());
+    for (ItensPedidos item : pedido.getItensPedido()) {
+      System.out.println(item.getAdicionais().get(0).getNome() + " " + item.getAdicionais().get(0).getValor() + " " + item.getAdicionais().get(0).getQuantidade() + " " + item.getAdicionais().get(0).getId());
     }
   }
 }

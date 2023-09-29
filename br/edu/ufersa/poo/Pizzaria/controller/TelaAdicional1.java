@@ -4,7 +4,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
+import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.collections.FXCollections;
@@ -21,8 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
 public class TelaAdicional1 implements Initializable {
-  AdicionalDao adicionalDao = new AdicionalDao();
-  public static Telas telas = new Telas();
+  AdicionalBO adicionalBO = new AdicionalBO();
 
   @FXML
   private Button adicionar;
@@ -63,9 +62,13 @@ public class TelaAdicional1 implements Initializable {
   @Override
   public void initialize(URL location, ResourceBundle resources) {
 
-    List<Adicional> adicionais = adicionalDao.listar();
-
-    list.addAll(adicionais);
+    List<Adicional> adicionais = null;
+    try {
+      adicionais = adicionalBO.buscarTodos();
+      list.addAll(adicionais);
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
 
     // Configurar as colunas da TableView
     id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -79,7 +82,7 @@ public class TelaAdicional1 implements Initializable {
     // Adicionar os dados originais à lista allAdicionais
     allAdicionais.addAll(adicionais);
   }
-  
+
   @FXML
   private void onSearchKeyReleased(KeyEvent event) {
     String searchTerm = searchTextField.getText().toLowerCase();
@@ -116,7 +119,6 @@ public class TelaAdicional1 implements Initializable {
 
   @FXML
   void AdicionalClicked(MouseEvent event) {
-
   }
 
   @FXML

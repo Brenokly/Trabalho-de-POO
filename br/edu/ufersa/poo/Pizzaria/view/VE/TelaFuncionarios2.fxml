@@ -70,17 +70,17 @@
             <Image url="@adicionaisElogin/Rectangle%2090.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nome" layoutX="243.0" layoutY="96.0" prefHeight="10.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="nome" layoutX="230.0" layoutY="93.0" prefHeight="30.0" prefWidth="319.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="cpf" layoutX="218.0" layoutY="125.0" prefHeight="30.0" prefWidth="298.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="cpf" layoutX="219.0" layoutY="121.0" prefHeight="30.0" prefWidth="295.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="email" layoutX="224.0" layoutY="235.0" prefHeight="30.0" prefWidth="313.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="email" layoutX="223.0" layoutY="235.0" prefHeight="30.0" prefWidth="313.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
@@ -100,7 +100,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Label>
-      <TextField fx:id="senha" accessibleRole="PASSWORD_FIELD" layoutX="227.0" layoutY="271.0" prefHeight="30.0" prefWidth="313.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="senha" accessibleRole="PASSWORD_FIELD" layoutX="224.0" layoutY="270.0" prefHeight="30.0" prefWidth="313.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>

@@ -8,6 +8,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.IdInvalido;
+import Exceptions.PizzaInvalida;
+import Exceptions.QuantidadeInvalida;
 
 import java.sql.Statement;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
@@ -20,7 +22,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         String insertPizzaSql = "INSERT INTO tb_itenspedido (id_tipopizza, id_pedido, tamanho, valor, descricao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, entity.getPizza().getId()); // Supondo que getPizza() retorna a pizza relacionada
-            ps.setLong( 2, entity.getIdPedido()); // Supondo que getPedido() retorna o pedido relacionado
+            ps.setLong(2, entity.getIdPedido()); // Supondo que getPedido() retorna o pedido relacionado
             ps.setString(3, entity.getTamanho().getDescricao());
             ps.setDouble(4, entity.getValor());
             ps.setString(5, entity.getDescricao());
@@ -159,14 +161,14 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
     public List<ItensPedidos> buscar(TiposPizzas tipoPizza) {
         Connection con = getConnection();
         List<ItensPedidos> pizzas = new ArrayList<>();
-    
+
         String sql = "SELECT * FROM tb_itenspedido WHERE id_tipopizza = ?";
-            
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, tipoPizza.getId());
             ResultSet rs = ps.executeQuery();
-    
+
             while (rs.next()) {
                 ItensPedidos pizza = new ItensPedidos();
                 try {
@@ -181,7 +183,44 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                 }
                 pizzas.add(pizza);
             }
-            
+
+            rs.close();
+            ps.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+
+        return pizzas;
+    }
+
+    public List<ItensPedidos> buscar(Pedido pedido) {
+        Connection con = getConnection();
+        List<ItensPedidos> pizzas = new ArrayList<>();
+
+        String sql = "SELECT * FROM tb_itenspedido WHERE id_pedido = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, pedido.getId());
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                ItensPedidos pizza = new ItensPedidos();
+                try {
+                    pizza.setId(rs.getLong("id"));
+                    pizza.setIdPedido(rs.getLong("id_pedido"));
+                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
+                    pizza.setTamanho(rs.getString("tamanho"));
+                    pizza.setValor(rs.getDouble("valor"));
+                    pizza.setDescricao(rs.getString("descricao"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                pizzas.add(pizza);
+            }
+
             rs.close();
             ps.close();
         } catch (SQLException e) {
@@ -193,43 +232,6 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         return pizzas;
     }
 
-    public List<ItensPedidos> buscar(Pedido pedido) {
-        Connection con = getConnection();
-        List<ItensPedidos> pizzas = new ArrayList<>();
-    
-        String sql = "SELECT * FROM tb_itenspedido WHERE id_pedido = ?";
-            
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setLong(1, pedido.getId());
-            ResultSet rs = ps.executeQuery();
-    
-            while (rs.next()) {
-                ItensPedidos pizza = new ItensPedidos();
-                try {
-                    pizza.setId(rs.getLong("id"));
-                    pizza.setIdPedido(rs.getLong("id_pedido"));
-                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
-                    pizza.setTamanho(rs.getString("tamanho"));
-                    pizza.setValor(rs.getDouble("valor"));
-                    pizza.setDescricao(rs.getString("descricao"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pizzas.add(pizza);
-            }
-            
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-        
-        return pizzas;
-    }
-    
     public List<ItensPedidos> listar() {
         Connection con = getConnection();
         List<ItensPedidos> resultados = new ArrayList<>();

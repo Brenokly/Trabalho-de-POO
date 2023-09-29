@@ -107,7 +107,12 @@ public class AdicionalBO implements BaseBO<Adicional> {
 
   @Override
   public List<Adicional> buscarTodos() throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    AdicionalDao adicionalDao = new AdicionalDao();
+
+    if (adicionalDao.listar().size() <= 0) {
+      throw new Exception("Erro no banco de dados, nenhum adicional encontrado.");
+    }
+
+    return adicionalDao.listar();
   }
 }

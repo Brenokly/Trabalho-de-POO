@@ -100,6 +100,7 @@ public class ItensPedidos extends Produto {
     return this.pizza;
   }
 
+
   public void setTamanho(String tamanho) throws TamanhoInvalido {
     if ("grande".equals(tamanho)) {
       this.tamanho = Tamanho.GRANDE;
@@ -137,6 +138,10 @@ public class ItensPedidos extends Produto {
     List<Adicional> adicionaisArray = new ArrayList<>();
     adicionaisArray.add(adicionais);
     this.adicionais = adicionaisArray;
+  }
+
+  public TiposPizzas getTipoPizza() {
+    return pizza;
   }
 
   public void calcValor(double valor, List<Adicional> adicionais) throws ValorInvalido {

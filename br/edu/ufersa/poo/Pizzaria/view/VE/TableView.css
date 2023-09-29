@@ -1,0 +1,31 @@
+.table-view {
+  -fx-background-color: #f0f0f0; /* Define a cor de fundo da TableView */
+  -fx-border-color: #ccc; /* Define a cor da borda da TableView */
+  -fx-border-width: 1px; /* Define a largura da borda da TableView */
+}
+
+.column-header {
+  -fx-background-color: #2E382E; /* Define a cor de fundo do cabeçalho da coluna */
+  -fx-text-fill: #F3F3F3; /* Define a cor do texto no cabeçalho da coluna */
+}
+
+.table-row-cell:selected {
+  -fx-selection-bar: #0078d4; /* Define a cor de fundo da linha selecionada */
+  -fx-selection-bar-non-focused: #0078d4; /* Define a cor de fundo da linha selecionada quando a TableView não está focada */
+}
+
+.table-cell {
+  -fx-border-color: #ccc; /* Define a cor da borda das células da TableView */
+  -fx-border-width: 1px; /* Define a largura da borda das células da TableView */
+}
+
+.text-field {
+  -fx-background-color: transparent; /* Define o campo de texto como transparente */
+}
+
+.column-header .label {
+  -fx-text-fill: #ccc; /* Cor do texto do cabeçalho da coluna */
+  -fx-font-weight: bold; /* Define a espessura da fonte como negrito */
+  -fx-font-size: 12px; /* Define o tamanho da fonte */
+}
+

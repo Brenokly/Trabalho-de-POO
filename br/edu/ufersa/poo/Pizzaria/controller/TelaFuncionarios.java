@@ -11,9 +11,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import br.edu.ufersa.poo.Pizzaria.classes.Funcionarios;
-import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
+import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
@@ -23,7 +21,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class TelaFuncionarios implements Initializable {
-    private UserDao userDao = new UserDao();
+    private UserBO userBO = new UserBO();
 
     @FXML
     private TableView<Usuario> tableFuncionarios;
@@ -53,9 +51,13 @@ public class TelaFuncionarios implements Initializable {
         colAdministrator.setCellValueFactory(new PropertyValueFactory<>("admin"));
 
         // Obter os dados dos funcionários do banco de dados
-        List<Usuario> funcionarios = userDao.listar();
-
-        list.addAll(funcionarios);
+        List<Usuario> funcionarios = null;
+        try {
+            funcionarios = userBO.buscarTodos();
+            list.addAll(funcionarios);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         // Preencher a tabela com os dados
         tableFuncionarios.setItems(list);
@@ -98,11 +100,11 @@ public class TelaFuncionarios implements Initializable {
 
     @FXML
     void CarregarTelaFuncionarios2(ActionEvent event) {
-      try {
-        Telas.TelaFuncionarios2();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+        try {
+            Telas.TelaFuncionarios2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
@@ -113,13 +115,13 @@ public class TelaFuncionarios implements Initializable {
         Usuario funcionario = tableFuncionarios.getSelectionModel().getSelectedItem();
 
         if (funcionario != null) {
-        try {
-            // Chame o método TelaFuncionario3 e passe o Funcionario selecionado
-            Telas.TelaFuncionarios3(funcionario);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            try {
+                // Chame o método TelaFuncionario3 e passe o Funcionario selecionado
+                Telas.TelaFuncionarios3(funcionario);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 

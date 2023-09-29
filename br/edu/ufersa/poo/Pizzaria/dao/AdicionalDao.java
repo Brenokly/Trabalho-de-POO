@@ -9,6 +9,7 @@ import java.util.List;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
+import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 
 import java.sql.Statement;
 
@@ -161,6 +162,38 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
       if (rs.next())
         return entity;
 
+    } catch (Exception e) {
+
+    } finally {
+      closeConnection();
+    }
+    return null;
+  }
+
+  public Adicional buscarAdPedido(ItensPedidos pizza) {
+    Connection con = getConnection();
+    Adicional entity = new Adicional();
+
+    String sql = "SELECT * FROM tb_pizza_adicional where id_pizza = ?";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      ps.setLong(1, pizza.getId());
+      ResultSet rs = ps.executeQuery();
+      if (rs.next())
+        entity.setId(rs.getLong("id_adicional"));
+        entity.setQuantidade(rs.getInt("quantidade"));
+
+        sql = "SELECT * FROM tb_adicional where id = ?";
+        ps = con.prepareStatement(sql);
+        ps.setLong(1, entity.getId());
+        rs = ps.executeQuery();
+        if (rs.next()) {
+          entity.setNome(rs.getString("nome"));
+          entity.setValor(rs.getDouble("valor"));
+        }
+
+        return entity;
     } catch (Exception e) {
 
     } finally {

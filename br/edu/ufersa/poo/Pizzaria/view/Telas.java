@@ -2,7 +2,9 @@ package br.edu.ufersa.poo.Pizzaria.view;
 
 import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional3;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionarios3;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaInicial3;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -49,6 +51,27 @@ public class Telas extends Application {
     primaryStage.setScene(scene);
   }
 
+  public static void TelaInicial2() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaInicial2.fxml"));
+
+    Scene scene = new Scene(root);
+
+    primaryStage.setScene(scene);
+  }
+
+  public static void TelaInicial3(Pedido pedido) throws Exception {
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaInicial3.fxml"));
+    Parent root = loader.load();
+
+    // Obtenha o controlador da TelaFuncionarios3
+    TelaInicial3 controller = loader.getController();
+
+    controller.setPedido(pedido);
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+
   public static void TelaFuncionarios() throws Exception {
     Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaFuncionarios.fxml"));
 
@@ -74,11 +97,10 @@ public class Telas extends Application {
 
     controller.setFuncionario(usuario);
 
-
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
   }
-  
+
   public static void TelaAdicional() throws Exception {
     Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaAdicional.fxml"));
 

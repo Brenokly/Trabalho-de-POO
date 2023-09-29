@@ -81,11 +81,11 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     TiposPizzas resultado = null;
 
-    String sql = "SELECT * FROM tb_tiposPizzas as e WHERE e.nome = ?";
+    String sql = "SELECT * FROM tb_tiposPizzas as e WHERE e.id = ?";
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
-      ps.setString(1, entity.getNome());
+      ps.setLong(1, entity.getId());
 
       ResultSet rs = ps.executeQuery();
 
@@ -96,8 +96,8 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
         try {
           resultado.setId(rs.getLong("id"));
           resultado.setNome(rs.getString("nome"));
-          resultado.setValorGrande(rs.getDouble("valorgrande"));
-          resultado.setValorPequena(rs.getDouble("valorpequena"));
+          resultado.setValorGrande(rs.getDouble("valor_grande"));
+          resultado.setValorPequena(rs.getDouble("valor_pequena"));
         } catch (Exception e) {
           e.printStackTrace();
         }

@@ -18,7 +18,8 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getCliente().getId() <= 0) {
             throw new ClienteInvalido("Cliente Inválido");
         }
-        if (pedido.getEstado() == null || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+        if (pedido.getEstado() == null
+                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -41,7 +42,8 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getCliente().getId() <= 0) {
             throw new ClienteInvalido("Cliente Inválido");
         }
-        if (pedido.getEstado() == null || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+        if (pedido.getEstado() == null
+                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -70,7 +72,8 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getCliente().getId() <= 0) {
             throw new ClienteInvalido("Cliente Inválido");
         }
-        if (pedido.getEstado() == null || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+        if (pedido.getEstado() == null
+                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -99,7 +102,8 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getCliente().getId() <= 0) {
             throw new ClienteInvalido("Cliente Inválido");
         }
-        if (pedido.getEstado() == null || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+        if (pedido.getEstado() == null
+                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -134,5 +138,5 @@ public class PedidoBO implements BaseBO<Pedido> {
 
         return arrayExistingPedidos;
     }
-    
+
 }
