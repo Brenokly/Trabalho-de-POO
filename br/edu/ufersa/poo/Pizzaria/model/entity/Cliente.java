@@ -19,7 +19,7 @@ public class Cliente{
 
     public Long getId() { return this.id; }
     public void setId(Long id) throws IdInvalido {
-        if (id >= 1) {
+        if (id >= 0) {
             this.id = id;
         } else {
             throw new IdInvalido("ID inválido");
@@ -36,11 +36,11 @@ public class Cliente{
     }
 
     public String getCpf() { return this.cpf; }
-    public void setCpf(String cpf) throws CpfInvalido {
+    public void setCpf(String cpf) throws CPFInvalido {
         if (cpf != null) {
             this.cpf = cpf;
         } else {
-            throw new CpfInvalido("CPF inválido");
+            throw new CPFInvalido("CPF inválido");
         }
     }
 

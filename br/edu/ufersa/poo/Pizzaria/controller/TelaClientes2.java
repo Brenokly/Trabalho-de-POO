@@ -1,8 +1,8 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
 import Exceptions.*;
-import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
+import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,7 +14,7 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-public class TelaFuncionarios2 {
+public class TelaClientes2 {
 
   @FXML
   private Button inicio;
@@ -38,7 +38,7 @@ public class TelaFuncionarios2 {
   private TextField cpf;
 
   @FXML
-  private TextField email;
+  private TextField endereco;
 
   @FXML
   private TextField senha;
@@ -47,19 +47,18 @@ public class TelaFuncionarios2 {
   private Button clientes;
 
   @FXML
-  private Label funcionariosExistente;
+  private Label clientesExistente;
 
   @FXML
   private Button sabores;
 
   @FXML
-  void salvarFuncionario(ActionEvent event) throws Exception {
-    UserBO UserBO = new UserBO();
+  void salvarCliente(ActionEvent event) throws Exception {
+    ClienteBO ClienteBO = new ClienteBO();
 
     String nomeTexto = nome.getText();
     String cpfTexto = cpf.getText();
-    String emailTexto = email.getText();
-    String senhaTexto = senha.getText();
+    String enderecoTexto = endereco.getText();
 
     boolean nomeValido = !nomeTexto.isEmpty();
     boolean nomeApenasLetras = nomeTexto.matches("^[\\p{L}\\s]*$");
@@ -68,26 +67,23 @@ public class TelaFuncionarios2 {
     boolean cpfApenasNumeros = cpfTexto.matches("^[0-9]*$");
     boolean cpfTamanhoValido = cpfTexto.length() == 11 || cpfTexto.length() == 14;
 
-    boolean emailValido = !emailTexto.isEmpty() && emailTexto.contains("@") && emailTexto.contains(".");
-    boolean senhaValida = !senhaTexto.isEmpty() && senhaTexto.length() >= 8;
 
-    if (nomeValido && nomeApenasLetras && cpfValido && cpfApenasNumeros && cpfTamanhoValido && emailValido
-        && senhaValida) {
+    if (nomeValido && nomeApenasLetras && cpfValido && cpfApenasNumeros && cpfTamanhoValido) {
       // Todas as entradas são válidas, continue com a criação do Funcionario
 
-      Usuario usuario = new Usuario();
-      usuario.setNome(nomeTexto);
-      usuario.setCpf(cpfTexto);
-      usuario.setEmail(emailTexto);
-      usuario.setSenha(senhaTexto);
-      usuario.setAdmin(false);
+      Cliente cliente = new Cliente();
+      cliente.setId(Long.valueOf(ClienteBO.buscarTodos().size() + 1));
+      cliente.setNome(nomeTexto);
+
+      cliente.setCpf(cpfTexto);
+      cliente.setEndereco(enderecoTexto);
 
       try {
-        UserBO.create(usuario);
+        ClienteBO.create(cliente);
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Sucesso");
         alert.setHeaderText("Inserção Bem-sucedida");
-        alert.setContentText("O funcionario foi inserido com sucesso!");
+        alert.setContentText("O cliente foi inserido com sucesso!");
 
         // Crie um botão "OK" no alerta
         ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);
@@ -97,7 +93,7 @@ public class TelaFuncionarios2 {
         alert.showAndWait();
 
         // Retorne para a TelaFuncionario1 após o sucesso
-        Telas.TelaFuncionarios();
+        Telas.TelaClientes();
       } catch (UsuarioInvalido e) {
         displayAlert("Erro", e.getMessage());
       }
@@ -116,14 +112,6 @@ public class TelaFuncionarios2 {
       if (!cpfApenasNumeros) {
         displayAlert("Cpf inválido", "O cpf deve conter apenas números.");
       }
-
-      if (!emailValido) {
-        displayAlert("Email inválido", "O email não pode estar vazio e deve conter um @ e um .");
-      }
-
-      if (!senhaValida) {
-        displayAlert("Senha inválida", "A senha não pode estar vazia e deve conter pelo menos 8 caracteres.");
-      }
     }
   }
 
@@ -136,8 +124,8 @@ public class TelaFuncionarios2 {
   }
 
   @FXML
-  void cancelarFuncionario(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+  void cancelarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
   }
 
   @FXML

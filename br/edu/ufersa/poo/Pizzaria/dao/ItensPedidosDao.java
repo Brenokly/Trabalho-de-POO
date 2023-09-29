@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import Exceptions.IdInvalido;
-import Exceptions.PizzaInvalida;
-import Exceptions.QuantidadeInvalida;
 
 import java.sql.Statement;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;

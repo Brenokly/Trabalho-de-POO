@@ -1,4 +1,3 @@
-import br.edu.ufersa.poo.Pizzaria.dao.TiposPizzasDao;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
 

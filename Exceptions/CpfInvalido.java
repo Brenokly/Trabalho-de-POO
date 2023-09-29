@@ -1,7 +1,7 @@
 package Exceptions;
 
-public class CpfInvalido extends Exception {
-  public CpfInvalido(String msg) {
+public class CPFInvalido extends Exception {
+  public CPFInvalido(String msg) {
     super(msg);
-  }
+  }  
 }

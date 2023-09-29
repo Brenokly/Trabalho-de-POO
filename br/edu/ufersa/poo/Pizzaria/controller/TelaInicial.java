@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.collections.FXCollections;

@@ -15,8 +15,10 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         Long clienteId = null;
         String insertClienteSql = "INSERT INTO tb_cliente (nome, cpf, endereco) VALUES (?, ?, ?)";
 
+        System.out.println("Cliente inserido com sucesso!");
         try (Connection con = getConnection();
-        PreparedStatement ps = con.prepareStatement(insertClienteSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+            PreparedStatement ps = con.prepareStatement(insertClienteSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
+
             ps.setString(1, cliente.getNome());
             ps.setString(2, cliente.getCpf());
             ps.setString(3, cliente.getEndereco());
@@ -74,36 +76,32 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
     }
 
     public Cliente buscar(Cliente entity) {
-        Connection con = getConnection();
-        Cliente resultado;
-        resultado = new Cliente();
-       
         String sql = "SELECT * FROM tb_cliente WHERE id = ?";
-
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
+        Cliente cliente = null;
+        System.out.println("Buscando cliente...");
+        try (Connection con = getConnection();
+                PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setLong(1, entity.getId());
-
-            ps.executeQuery();
-
-            ResultSet rs = ps.getGeneratedKeys();
+            ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                try {
-                    resultado.setId(rs.getLong("id"));
-                    resultado.setNome(rs.getString("nome"));
-                    resultado.setCpf(rs.getString("cpf"));
-                    resultado.setEndereco(rs.getString("endereco"));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                cliente = new Cliente();
+                cliente.setId(rs.getLong("id"));
+                cliente.setNome(rs.getString("nome"));
+                cliente.setCpf(rs.getString("cpf"));
+                cliente.setEndereco(rs.getString("email"));
             }
-            
-        } catch (SQLException e) {
+        } catch (IdInvalido e){
             e.printStackTrace();
+        } 
+        catch (SQLException e) {
+            e.printStackTrace();
+        } catch (Exception e) {
+            System.out.println("Erro ao buscar cliente");
         } finally {
             closeConnection();
         }
-        return resultado;
+
+        return cliente;
     }
 
     public Cliente buscar(Long id) {
