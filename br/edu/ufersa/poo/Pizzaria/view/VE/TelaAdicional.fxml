@@ -14,12 +14,12 @@
       <TableView fx:id="table" layoutX="176.0" layoutY="116.0" onMouseClicked="#AdicionalClicked" prefHeight="227.0" prefWidth="395.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="46.0" text="Id" />
-            <TableColumn fx:id="nome" minWidth="15.0" prefWidth="145.0" text="Nome" />
-            <TableColumn fx:id="valor" text="Valor (R$)" />
-            <TableColumn fx:id="quantidade" prefWidth="123.0" text="Quantidade (KG)" />
+            <TableColumn fx:id="nome" minWidth="15.0" prefWidth="153.0" text="Nome" />
+            <TableColumn fx:id="valor" prefWidth="81.0" text="Valor (R$)" />
+            <TableColumn fx:id="quantidade" prefWidth="114.0" text="Quantidade (KG)" />
          </columns>
       </TableView>
-      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="285.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparents;">
+      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="282.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparents;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -53,11 +53,11 @@
          </image>
       </ImageView>
       <Button fx:id="editar" layoutX="482.0" layoutY="352.0" mnemonicParsing="false" onAction="#EditarAdicional" opacity="0.0" prefHeight="35.0" prefWidth="94.0" text="Editar Adicional" />
-      <ImageView fitHeight="42.0" fitWidth="58.0" layoutX="508.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="80.0" fitWidth="42.0" layoutX="506.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/adicionar.png" />
          </image>
       </ImageView>
-      <Button fx:id="adicionar" layoutX="511.0" layoutY="64.0" mnemonicParsing="false" onAction="#CarregaTelaAdicional2" opacity="0.0" prefHeight="35.0" prefWidth="37.0" text="Button" />
+      <Button fx:id="adicionar" layoutX="508.0" layoutY="63.0" mnemonicParsing="false" onAction="#CarregaTelaAdicional2" opacity="0.0" prefHeight="35.0" prefWidth="37.0" text="Button" />
    </children>
 </Pane>

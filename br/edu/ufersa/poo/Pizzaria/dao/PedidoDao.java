@@ -126,7 +126,8 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
                     TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
                     for (int i = 0; i < resultado.getItensPedido().size(); i++) {
                         entity.getItensPedido().get(i).setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
-                        resultado.getItensPedido().get(i).setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
+                        resultado.getItensPedido().get(i)
+                                .setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
                         adicionais.add(adicionalDao.buscarAdPedido(itensPedido.get(i)));
                     }
 
@@ -226,7 +227,6 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
                     resultado.setItensPedido(itensPedido);
                     resultado.setValor(rs.getDouble("valor"));
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

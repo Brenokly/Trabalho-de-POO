@@ -2,7 +2,6 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.event.ActionEvent;

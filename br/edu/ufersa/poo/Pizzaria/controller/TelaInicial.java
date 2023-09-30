@@ -4,11 +4,11 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
-
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -29,9 +29,6 @@ public class TelaInicial implements Initializable {
     private Button adicionais;
 
     @FXML
-    private Button adicionar;
-
-    @FXML
     private TableColumn<Pedido, String> cliente;
 
     @FXML
@@ -50,7 +47,7 @@ public class TelaInicial implements Initializable {
     private TableColumn<Pedido, Long> id;
 
     @FXML
-    private TableColumn<Pedido, Integer> quantidade;
+    private TableColumn<Pedido, Double> valor;
 
     @FXML
     private Button sair;
@@ -78,8 +75,14 @@ public class TelaInicial implements Initializable {
         // Configurar as colunas da TableView
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
-        cliente.setCellValueFactory(new PropertyValueFactory<>("valor"));
-        quantidade.setCellValueFactory(new PropertyValueFactory<>("quantidade"));
+        cliente.setCellValueFactory(cellData -> {
+            // cellData.getValue() retorna um objeto Pedido
+            // A partir do objeto Pedido, você pode acessar o cliente e, em seguida, o nome
+            Cliente clienteDoPedido = cellData.getValue().getCliente();
+            String nomeDoCliente = clienteDoPedido != null ? clienteDoPedido.getNome() : "";
+            return new SimpleStringProperty(nomeDoCliente);
+        });
+        valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         data.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         // Adicionar os dados à TableView
@@ -95,18 +98,17 @@ public class TelaInicial implements Initializable {
     }
 
     @FXML
-    void CarregaTelaInicial2(ActionEvent event) throws Exception {
-        Telas.TelaInicial2();
-    }
-
-    @FXML
     void EditarPedido(ActionEvent event) {
         Pedido pedido = table.getSelectionModel().getSelectedItem();
 
         if (pedido != null) {
             try {
-                // Chame o método TelaPedido3 e passe o Adicional selecionado
-                Telas.TelaInicial3(pedido);
+                for (Pedido p : allPedidos) {
+                    if (p.getId() == pedido.getId()) {
+                        // Chame o método TelaPedido2 e passe o pedido selecionado
+                        Telas.TelaInicial2(p);
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -139,7 +141,7 @@ public class TelaInicial implements Initializable {
             // Realize a pesquisa e atualize a TableView com os resultados
             List<Pedido> resultados = new ArrayList<>();
 
-            for (Pedido pedido : allPedidos) {
+            for (Pedido pedido : allPedidos) { // buscar por cliente, por pizza (nome do sabor) e por estado
                 if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm) ||
                         pedido.getEstado().getDescricao().toLowerCase().contains(searchTerm) ||
                         pedido.getItensPedido().get(0).getPizza().getNome().toLowerCase().contains(searchTerm)) {

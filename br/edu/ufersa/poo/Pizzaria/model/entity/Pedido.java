@@ -155,4 +155,20 @@ public class Pedido {
         }
         return valor;
     }
+
+    //metodo tostring para imprimir todos os atributos de pedidos para fins de testes
+    public void tostring() {
+        System.out.println("ID: " + this.id);
+        System.out.println("Data: " + this.data);
+        System.out.println("Cliente: " + this.cliente.getNome() + " " + this.cliente.getCpf() + " " + this.cliente.getId() + " " + this.cliente.getEndereco()); 
+        System.out.println("Estado: " + this.estado.getDescricao());
+        System.out.println("Valor: " + this.valor);
+        System.out.println("Itens do pedido: ");
+        for (ItensPedidos itemPedido : this.itensPedido) {
+            System.out.println("Pizza: " + itemPedido.getIdPedido() + " " + itemPedido.getPizza().getNome() + " " + itemPedido.getTamanho() + " " + itemPedido.getValor());
+            for (Adicional adicional : itemPedido.getAdicionais()) {
+                System.out.println("Ingredientes: " + adicional.getNome() + " " + adicional.getValor() + " " + adicional.getId());
+            }
+        }
+    }
 }

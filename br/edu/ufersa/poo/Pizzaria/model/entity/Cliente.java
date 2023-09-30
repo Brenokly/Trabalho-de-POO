@@ -17,6 +17,13 @@ public class Cliente{
         setEndereco(endereco);
     }
 
+    public Cliente(Long id, String nome, String cpf, String endereco) throws Exception {
+        setId(id);
+        setNome(nome);
+        setCpf(cpf);
+        setEndereco(endereco);
+    }
+
     public Long getId() { return this.id; }
     public void setId(Long id) throws IdInvalido {
         if (id >= 1) {

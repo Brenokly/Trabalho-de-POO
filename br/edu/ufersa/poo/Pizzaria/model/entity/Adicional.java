@@ -27,6 +27,7 @@ public class Adicional {
   }
 
   public Adicional(Long id, String nome, double valor, int quantidade) throws Exception {
+    setId(id);
     setNome(nome);
     setValor(valor);
     setQuantidade(quantidade);

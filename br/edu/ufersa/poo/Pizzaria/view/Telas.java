@@ -1,8 +1,6 @@
 package br.edu.ufersa.poo.Pizzaria.view;
 
-import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional3;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionarios3;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaInicial3;
+import br.edu.ufersa.poo.Pizzaria.controller.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
@@ -51,20 +49,12 @@ public class Telas extends Application {
     primaryStage.setScene(scene);
   }
 
-  public static void TelaInicial2() throws Exception {
-    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaInicial2.fxml"));
-
-    Scene scene = new Scene(root);
-
-    primaryStage.setScene(scene);
-  }
-
-  public static void TelaInicial3(Pedido pedido) throws Exception {
-    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaInicial3.fxml"));
+  public static void TelaInicial2(Pedido pedido) throws Exception {
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaInicial2.fxml"));
     Parent root = loader.load();
 
-    // Obtenha o controlador da TelaFuncionarios3
-    TelaInicial3 controller = loader.getController();
+    // Obtenha o controlador da TelaFuncionarios2
+    TelaInicial2 controller = loader.getController();
 
     controller.setPedido(pedido);
 

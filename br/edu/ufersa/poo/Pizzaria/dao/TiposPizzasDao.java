@@ -17,7 +17,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
     Connection con = getConnection();
     Long pizzaId = null;
 
-    String insertPizzaSql = "INSERT INTO tb_tiposPizzas (nome, valorgrande, valorpequena) VALUES (?, ?, ?)";
+    String insertPizzaSql = "INSERT INTO tb_tiposPizzas (nome, valor_grande, valor_pequena) VALUES (?, ?, ?)";
     try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
       ps.setString(1, entity.getNome());
       ps.setDouble(2, entity.getValorGrande());
@@ -61,7 +61,7 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public void alterar(TiposPizzas entity) {
     Connection con = getConnection();
-    String sql = "UPDATE tb_tiposPizzas SET nome = ?, valorgrande = ?, valorpequena = ? WHERE id = ?";
+    String sql = "UPDATE tb_tiposPizzas SET nome = ?, valor_grande = ?, valor_pequena = ? WHERE id = ?";
     try (PreparedStatement ps = con.prepareStatement(sql)) {
 
       ps.setString(1, entity.getNome());
@@ -116,21 +116,21 @@ public class TiposPizzasDao extends BaseDaoImpl<TiposPizzas> {
 
   public List<TiposPizzas> listar() {
     Connection con = getConnection();
-    List<TiposPizzas> resultados = new ArrayList<>(null);
+    List<TiposPizzas> resultados = new ArrayList<>();
 
-    String sql = "SELECT * FROM tb_tiposPizzas";
+    String sql = "SELECT * FROM tb_tipospizzas";
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
       ResultSet rs = ps.executeQuery();
 
-      if (rs.next()) {
+     while (rs.next()) {
         TiposPizzas resultado = new TiposPizzas();
         try {
           resultado.setId(rs.getLong("id"));
           resultado.setNome(rs.getString("nome"));
-          resultado.setValorGrande(rs.getDouble("valorgrande"));
-          resultado.setValorPequena(rs.getDouble("valorpequena"));
+          resultado.setValorGrande(rs.getDouble("valor_grande"));
+          resultado.setValorPequena(rs.getDouble("valor_pequena"));
         } catch (Exception e) {
           e.printStackTrace();
         }

@@ -132,8 +132,13 @@ public class ItensPedidos extends Produto {
   }
 
   public void setAdicionais(List<Adicional> adicionais) {
-    this.adicionais = adicionais;
+    if (adicionais != null) {
+      this.adicionais = adicionais;
+    } else {
+      throw new NullPointerException("Adicionais inválidos");
+    }
   }
+  
   public void setAdicionais(Adicional adicionais) {
     List<Adicional> adicionaisArray = new ArrayList<>();
     adicionaisArray.add(adicionais);
