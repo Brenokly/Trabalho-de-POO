@@ -32,8 +32,8 @@
       <TableView fx:id="table" layoutX="176.0" layoutY="116.0" onMouseClicked="#AdicionalClicked" prefHeight="227.0" prefWidth="395.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="40.0" text="Id" />
-            <TableColumn fx:id="cliente" prefWidth="113.0" text="Cliente" />
-            <TableColumn fx:id="estado" minWidth="15.0" prefWidth="71.0" text="Estado" />
+            <TableColumn fx:id="cliente" prefWidth="85.0" text="Cliente" />
+            <TableColumn fx:id="estado" minWidth="15.0" prefWidth="99.0" text="Estado" />
             <TableColumn fx:id="data" prefWidth="86.0" text="Data" />
             <TableColumn fx:id="valor" prefWidth="84.0" text="Valor" />
          </columns>

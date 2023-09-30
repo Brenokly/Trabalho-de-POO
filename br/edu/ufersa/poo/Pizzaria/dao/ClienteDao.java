@@ -15,7 +15,6 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
         Long clienteId = null;
         String insertClienteSql = "INSERT INTO tb_cliente (nome, cpf, endereco) VALUES (?, ?, ?)";
 
-        System.out.println("Cliente inserido com sucesso!");
         try (Connection con = getConnection();
             PreparedStatement ps = con.prepareStatement(insertClienteSql, PreparedStatement.RETURN_GENERATED_KEYS)) {
 
@@ -78,7 +77,6 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
     public Cliente buscar(Cliente entity) {
         String sql = "SELECT * FROM tb_cliente WHERE id = ?";
         Cliente cliente = null;
-        System.out.println("Buscando cliente...");
         try (Connection con = getConnection();
                 PreparedStatement ps = con.prepareStatement(sql)) {
             ps.setLong(1, entity.getId());

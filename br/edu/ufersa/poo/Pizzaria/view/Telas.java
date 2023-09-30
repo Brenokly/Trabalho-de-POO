@@ -37,7 +37,7 @@ public class Telas extends Application {
     primaryStage.getIcons().add(new Image(Telas.class.getResourceAsStream("VE/Assets/Logo.png")));
     primaryStage.setResizable(false);
     primaryStage.show();
-    TelaLogin();
+    TelaInicial();
   }
 
   public static void TelaLogin() throws Exception {

@@ -103,12 +103,7 @@ public class TelaInicial implements Initializable {
 
         if (pedido != null) {
             try {
-                for (Pedido p : allPedidos) {
-                    if (p.getId() == pedido.getId()) {
-                        // Chame o método TelaPedido2 e passe o pedido selecionado
-                        Telas.TelaInicial2(p);
-                    }
-                }
+                Telas.TelaInicial2(pedido);  
             } catch (Exception e) {
                 e.printStackTrace();
             }

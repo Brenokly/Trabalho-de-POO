@@ -55,12 +55,8 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getItensPedido().size() <= 0) {
             throw new PizzaInvalida("Pedido Inválido");
         }
-
-        Pedido existingPedido = PedidoDao.buscar(pedido);
-
-        if (existingPedido == null) {
-            throw new Exception("Erro no banco de dados, pedido não encontrado.");
-        }
+        
+        
 
         PedidoDao.alterar(pedido);
     }

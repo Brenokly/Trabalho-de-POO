@@ -100,7 +100,6 @@ public class ItensPedidos extends Produto {
     return this.pizza;
   }
 
-
   public void setTamanho(String tamanho) throws TamanhoInvalido {
     if ("grande".equals(tamanho)) {
       this.tamanho = Tamanho.GRANDE;
@@ -124,7 +123,7 @@ public class ItensPedidos extends Produto {
   }
 
   public String getDescricao() {
-    return super.getDescricao() + " | " + tamanho.getDescricao();
+    return super.getDescricao();
   }
 
   public List<Adicional> getAdicionais() {
@@ -138,7 +137,7 @@ public class ItensPedidos extends Produto {
       throw new NullPointerException("Adicionais inválidos");
     }
   }
-  
+
   public void setAdicionais(Adicional adicionais) {
     List<Adicional> adicionaisArray = new ArrayList<>();
     adicionaisArray.add(adicionais);
@@ -157,6 +156,16 @@ public class ItensPedidos extends Produto {
       super.setValor(valor);
     } else {
       throw new ValorInvalido("Valor inválido");
+    }
+  }
+
+  // metodo tostring que exibe todos os atributos dessa classe formatados:
+  public void tostring() {
+    System.out.println("Id do pedido: " + getIdPedido() + "\n" + "Pizza: " + getPizza().getNome() + "\n" + "Tamanho: "
+        + getTamanho().getDescricao() + "\n" + "\n" + "Valor: " + getValor() + "\n"
+        + "Descrição: " + getDescricao() + "\n");
+    for (Adicional adicional : adicionais) {
+      System.out.println("Adicional: " + adicional.getNome() + "\n" + "Valor: " + adicional.getValor() + "\n");
     }
   }
 }

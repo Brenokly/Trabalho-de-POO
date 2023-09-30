@@ -196,28 +196,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         Connection con = getConnection();
         List<ItensPedidos> pizzas = new ArrayList<>();
 
-        String sql = "SELECT " +
-                "IP.id AS id_itenspedido, " +
-                "IP.id_pedido, " +
-                "IP.id_tipopizza, " +
-                "TP.nome AS nome_tipopizza, " +
-                "IP.tamanho, " +
-                "IP.valor, " +
-                "IP.descricao, " +
-                "A.id AS id_adicional, " +
-                "A.nome AS nome_adicional, " +
-                "A.valor AS valor_adicional, " +
-                "A.quantidade AS quantidade_adicional " +
-                "FROM " +
-                "tb_itenspedido IP " +
-                "INNER JOIN " +
-                "tb_tipospizzas TP ON IP.id_tipopizza = TP.id " +
-                "LEFT JOIN " +
-                "tb_pizza_adicional PA ON IP.id = PA.id_pizza " +
-                "LEFT JOIN " +
-                "tb_adicional A ON PA.id_adicional = A.id " +
-                "WHERE " +
-                "IP.id_pedido = ?";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -261,7 +240,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         Connection con = getConnection();
         List<ItensPedidos> resultados = new ArrayList<>();
 
-        String sql = "SELECT * FROM tb_itenspedido";
+        String sql = "SELECT * FROM vw_itenspedido";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -272,16 +251,19 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                 // Se encontrou um registro, crie um objeto Pizza
                 ItensPedidos resultado = new ItensPedidos();
                 try {
-                    resultado.setId(rs.getLong("id"));
+                    resultado.setId(rs.getLong("id_itenspedido"));
                     resultado.setIdPedido(rs.getLong("id_pedido"));
                     resultado.getPizza().setId(rs.getLong("id_tipopizza"));
                     resultado.setTamanho(rs.getString("tamanho"));
                     resultado.setValor(rs.getDouble("valor"));
+                    resultado.getPizza().setNome(rs.getString("nome_tipopizza"));
                     resultado.setDescricao(rs.getString("descricao"));
+                    resultado.getAdicionais()
+                            .add(new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                    rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional")));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
                 resultados.add(resultado);
             }
 

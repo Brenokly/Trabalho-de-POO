@@ -66,8 +66,19 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
 
   @Override
   public void update(ItensPedidos bo) throws Exception {
+    ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
 
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+    if (bo.getPizza().getId() <= 0) {
+      throw new TipoPizzaInvalido("Tipo de pizza inválido");
+    }
+    if (bo.getValor() <= 0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+    if (bo.getDescricao().isEmpty()) {
+      throw new DescricaoInvalida("Descrição inválida");
+    }
+
+    itensPedidosDao.alterar(bo);
   }
 
   @Override

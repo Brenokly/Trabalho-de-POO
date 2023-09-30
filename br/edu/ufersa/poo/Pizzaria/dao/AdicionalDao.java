@@ -77,6 +77,30 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
     }
   }
 
+  public void alterar(ItensPedidos entity) {
+    Connection con = getConnection();
+
+    String sql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? WHERE id_pizza = ?";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+
+      List<Adicional> adicionais = entity.getAdicionais();
+
+      for (int i = 0; i < adicionais.size(); i++) {
+        Adicional adicional = adicionais.get(i);
+        ps.setLong(1, adicional.getId());
+        ps.setInt(2, adicional.getQuantidade());
+        ps.setLong(3, entity.getId());
+        ps.executeUpdate();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    } finally {
+      closeConnection();
+    }
+  }
+
   public void alterarQuant(Adicional entity) {
     Connection con = getConnection();
     PreparedStatement ps = null;
@@ -182,18 +206,18 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
       ResultSet rs = ps.executeQuery();
       if (rs.next())
         entity.setId(rs.getLong("id_adicional"));
-        entity.setQuantidade(rs.getInt("quantidade"));
+      entity.setQuantidade(rs.getInt("quantidade"));
 
-        sql = "SELECT * FROM tb_adicional where id = ?";
-        ps = con.prepareStatement(sql);
-        ps.setLong(1, entity.getId());
-        rs = ps.executeQuery();
-        if (rs.next()) {
-          entity.setNome(rs.getString("nome"));
-          entity.setValor(rs.getDouble("valor"));
-        }
+      sql = "SELECT * FROM tb_adicional where id = ?";
+      ps = con.prepareStatement(sql);
+      ps.setLong(1, entity.getId());
+      rs = ps.executeQuery();
+      if (rs.next()) {
+        entity.setNome(rs.getString("nome"));
+        entity.setValor(rs.getDouble("valor"));
+      }
 
-        return entity;
+      return entity;
     } catch (Exception e) {
 
     } finally {

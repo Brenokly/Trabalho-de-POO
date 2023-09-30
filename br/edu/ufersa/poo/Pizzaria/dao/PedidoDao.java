@@ -70,13 +70,14 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
     public void alterar(Pedido pedido) {
         Connection con = getConnection();
-        String sql = "UPDATE tb_pedido id_cliente = ?, estado = ?, data = ?, valor = ? WHERE id = ?";
+        String sql = "UPDATE tb_pedido SET id_cliente = ?, estado = ?, data = ?, valor = ? WHERE id = ?";
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, pedido.getCliente().getId());
             ps.setString(2, pedido.getEstado().getDescricao());
             ps.setObject(3, pedido.getData());
             ps.setDouble(4, pedido.getValor());
+            ps.setLong(5, pedido.getId());
             ps.executeUpdate();
         } catch (Exception e) {
             e.printStackTrace();
