@@ -18,13 +18,13 @@
             <Image url="@adicionaisElogin/SALVAR.png" />
          </image>
       </ImageView>
-      <Button fx:id="salvar" layoutX="723.0" layoutY="470.0" mnemonicParsing="false" onAction="#SalvarAdicional" opacity="0.0" prefHeight="33.0" prefWidth="91.0" text="Button" />
+      <Button fx:id="salvar" layoutX="723.0" layoutY="470.0" mnemonicParsing="false" onAction="#SalvarPedido" opacity="0.0" prefHeight="33.0" prefWidth="91.0" text="Button" />
       <ImageView fitHeight="33.0" fitWidth="139.0" layoutX="598.0" layoutY="472.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/CANCELAR.png" />
          </image>
       </ImageView>
-      <Button fx:id="cancelar" layoutX="598.0" layoutY="471.0" mnemonicParsing="false" onAction="#cancelarAdicional" opacity="0.0" prefHeight="33.0" prefWidth="114.0" text="Button" />
+      <Button fx:id="cancelar" layoutX="598.0" layoutY="471.0" mnemonicParsing="false" onAction="#CancelarPedido" opacity="0.0" prefHeight="33.0" prefWidth="114.0" text="Button" />
       <Label layoutX="270.0" layoutY="110.0" text="Cliente">
          <font>
             <Font name="System Bold" size="18.0" />

@@ -26,7 +26,7 @@ public class Cliente{
 
     public Long getId() { return this.id; }
     public void setId(Long id) throws IdInvalido {
-        if (id >= 1) {
+        if (id >= 0) {
             this.id = id;
         } else {
             throw new IdInvalido("ID inválido");

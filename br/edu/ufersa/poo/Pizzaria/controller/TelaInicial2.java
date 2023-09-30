@@ -84,7 +84,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
   @FXML
   void SalvarPedido(ActionEvent event) { // falta implementar, precisa pegar os novos valores que foram selecionados nos
-                                            // choicebox, recalcular o valor do pedido e inserir no banco de dados
+    /*                                     // choicebox, recalcular o valor do pedido e inserir no banco de dados
     if (pedido != null) {
 
       Cliente cliente = new Cliente();
@@ -131,8 +131,8 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       PedidoBO pedidoBO = new PedidoBO();
       Pedido pedido = new Pedido();
         
-
-    }
+      
+    }*/
   }
 
   @FXML

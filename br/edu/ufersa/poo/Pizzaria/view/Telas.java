@@ -1,13 +1,18 @@
 package br.edu.ufersa.poo.Pizzaria.view;
 
-import br.edu.ufersa.poo.Pizzaria.controller.*;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional3;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionarios3;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaClientes3;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaInicial2;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Telas extends Application {
@@ -28,7 +33,9 @@ public class Telas extends Application {
   @Override
   public void start(Stage arg0) throws Exception {
     setPrimaryStage(arg0);
-    primaryStage.setTitle("Pizzaria Michelangeclo");
+    primaryStage.setTitle("Pizzaria Michelangelo");
+    primaryStage.getIcons().add(new Image(Telas.class.getResourceAsStream("VE/Assets/Logo.png")));
+    primaryStage.setResizable(false);
     primaryStage.show();
     TelaLogin();
   }
@@ -116,6 +123,36 @@ public class Telas extends Application {
 
     // Passe o Adicional para o controlador
     controller.setAdicional(adicional);
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+
+  public static void TelaClientes() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientes.fxml"));
+
+    Scene scene = new Scene(root);
+
+    primaryStage.setScene(scene);
+  }
+
+  public static void TelaClientes2() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientes2.fxml"));
+
+    Scene scene = new Scene(root);
+
+    primaryStage.setScene(scene);
+  }
+
+  public static void TelaClientes3(Cliente cliente) throws Exception {
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaClientes3.fxml"));
+    Parent root = loader.load();
+
+    // Obtenha o controlador da TelaAdicional3
+    TelaClientes3 controller = loader.getController();
+
+    // Passe o Adicional para o controlador
+    controller.setCliente(cliente);
 
     Scene scene = new Scene(root);
     primaryStage.setScene(scene);
