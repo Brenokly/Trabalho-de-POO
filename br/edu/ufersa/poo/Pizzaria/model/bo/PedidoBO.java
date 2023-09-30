@@ -7,6 +7,7 @@ import java.util.List;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.PedidoDao;
+import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 
 public class PedidoBO implements BaseBO<Pedido> {
@@ -55,8 +56,13 @@ public class PedidoBO implements BaseBO<Pedido> {
         if (pedido.getItensPedido().size() <= 0) {
             throw new PizzaInvalida("Pedido Inválido");
         }
-        
-        
+
+        pedido.tostring();
+
+        ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
+        for (int i = 0; i < pedido.getItensPedido().size(); i++) {
+            itensPedidosBO.update(pedido.getItensPedido().get(i));
+        }
 
         PedidoDao.alterar(pedido);
     }

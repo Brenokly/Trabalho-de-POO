@@ -68,6 +68,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
     public void alterar(ItensPedidos entity) {
         Connection con = getConnection();
         String sql = "UPDATE tb_itenspedido SET id_tipopizza = ?, tamanho = ?, valor = ?, descricao = ? WHERE id = ?";
+
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, entity.getPizza().getId());
@@ -76,6 +77,17 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             ps.setString(4, entity.getDescricao());
             ps.setLong(5, entity.getId());
             ps.executeUpdate();
+
+            // Atualize os dados da tabela tb_pizza_adicional
+            String updatePizzaAdicionalSql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? WHERE id_pizza = ?";
+            try (PreparedStatement psAdicional = con.prepareStatement(updatePizzaAdicionalSql)) {
+                for (Adicional adicional : entity.getAdicionais()) {
+                    psAdicional.setLong(1, adicional.getId()); 
+                    psAdicional.setInt(2, adicional.getQuantidade()); 
+                    psAdicional.setLong(3, entity.getId()); // Onde id_pizza é igual ao ID do item do pedido
+                    psAdicional.executeUpdate();
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {

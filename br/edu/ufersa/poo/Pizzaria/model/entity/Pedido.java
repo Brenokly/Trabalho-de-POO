@@ -165,7 +165,7 @@ public class Pedido {
         System.out.println("Valor: " + this.valor);
         System.out.println("Itens do pedido: ");
         for (ItensPedidos itemPedido : this.itensPedido) {
-            System.out.println("Pizza: " + itemPedido.getIdPedido() + " " + itemPedido.getPizza().getNome() + " " + itemPedido.getTamanho() + " " + itemPedido.getValor());
+            System.out.println("Pizza: " + itemPedido.getIdPedido() + " " + itemPedido.getPizza().getNome() + " " + itemPedido.getTamanho() + " " + itemPedido.getValor() + " " + itemPedido.getId() + " " + itemPedido.getDescricao());
             for (Adicional adicional : itemPedido.getAdicionais()) {
                 System.out.println("Ingredientes: " + adicional.getNome() + " " + adicional.getValor() + " " + adicional.getId());
             }

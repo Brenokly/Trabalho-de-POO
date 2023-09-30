@@ -65,6 +65,12 @@ public class Adicional {
     }
   }
 
+  @Override
+  public String toString() {
+    return "Nome: " + this.getNome() + 
+        " - Quantidade: " + this.getQuantidade();
+  }
+
   public double getValor() {
     return valor;
   }

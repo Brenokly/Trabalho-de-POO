@@ -8,19 +8,17 @@ public class ItensPedidos extends Produto {
   private Long IdPedido;
   private TiposPizzas pizza;
   private Tamanho tamanho;
-  private List<Adicional> adicionais;
+  private List<Adicional> adicionais = new ArrayList<>(3);
 
   public ItensPedidos() {
     super();
     pizza = new TiposPizzas();
-    this.adicionais = new ArrayList<>();
   }
 
   public ItensPedidos(Long id) throws IdInvalido {
     super();
     pizza = new TiposPizzas();
     pizza.setId(id);
-    this.adicionais = new ArrayList<>();
   }
 
   public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao)
@@ -52,7 +50,7 @@ public class ItensPedidos extends Produto {
       super.setValor(Tpizza.getValorPequena());
     }
 
-    this.adicionais = new ArrayList<>(adicionais);
+    this.setAdicionais(adicionais);
     setIdPedido(IdPedido);
     setPizza(pizza);
     setTamanho(tamanho);
@@ -70,7 +68,7 @@ public class ItensPedidos extends Produto {
       super.setValor(Tpizza.getValorPequena());
     }
 
-    this.adicionais = new ArrayList<>(adicionais);
+    this.setAdicionais(adicionais);
     setPizza(pizza);
     setTamanho(tamanho);
     calcValor(getValor(), adicionais);
@@ -126,6 +124,11 @@ public class ItensPedidos extends Produto {
     return super.getDescricao();
   }
 
+  public void setDescricao() throws DescricaoInvalida {
+    super.setDescricao("Pizza de " + this.pizza.getNome() + " - " + this.tamanho.getDescricao()
+        + " - Adicionais: " + this.adicionais.toString());
+  }
+
   public List<Adicional> getAdicionais() {
     return adicionais;
   }
@@ -142,6 +145,24 @@ public class ItensPedidos extends Produto {
     List<Adicional> adicionaisArray = new ArrayList<>();
     adicionaisArray.add(adicionais);
     this.adicionais = adicionaisArray;
+  }
+
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+
+    sb.append("Id do pedido: ").append(getIdPedido()).append("\n");
+    sb.append("Pizza: ").append(getPizza().getNome()).append("\n");
+    sb.append("Tamanho: ").append(getTamanho().getDescricao()).append("\n");
+    sb.append("Valor: ").append(getValor()).append("\n");
+    sb.append("Descrição: ").append(getDescricao()).append("\n");
+
+    sb.append("Adicionais:\n");
+    for (Adicional adicional : adicionais) {
+      sb.append(" - Nome: ").append(adicional.getNome()).append("\n");
+      sb.append("   Valor: ").append(adicional.getValor()).append("\n");
+    }
+
+    return sb.toString();
   }
 
   public TiposPizzas getTipoPizza() {
