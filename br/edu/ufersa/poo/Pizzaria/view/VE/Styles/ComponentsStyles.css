@@ -1,0 +1,78 @@
+/* Button styling */
+
+.outlined_button {
+    -fx-background-color: #0D0106, #F3F3F3; /* neutral color */
+    -fx-background-radius: 18;
+    -fx-background-insets: 0, 2;
+    -fx-padding: 0;
+    -fx-font-size: 14;
+    -fx-font-weight: 800;
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: #0D0106;
+    -fx-effect: none;
+}
+.outlined_button:hover {
+    -fx-background-color: #0D0106, #F3F3F3, #0d010633; /* 20% neutral color */
+    -fx-background-insets: 0, 2;
+}
+.filled_button {
+    -fx-background-color: #2E382E; /* primary color */
+    -fx-background-radius: 18;
+    -fx-padding: 0;
+    -fx-font-size: 14;
+    -fx-font-weight: 800;
+    -fx-font-family: "Montserrat";
+    -fx-text-fill: #F3F3F3;
+    -fx-effect: none;
+}
+.filled_button:hover {
+    -fx-background-color: #2e382ecc; /* 80% primary color */
+}
+.icon_button {
+    -fx-background-color: transparent;
+    -fx-padding: 0;
+    -fx-font-size: 18;
+    -fx-text-fill: #0D0106;
+    -fx-effect: none;
+}
+.icon_button:hover, .icon_button:selected, .icon_button:drag {
+    -fx-background-color: #2e382e1a; /* 10% primary color */
+}
+
+#back_button {
+    -fx-text-fill: #2E382E;
+}
+
+#cancel_button {
+    -fx-background-color: #F55F51, #F3F3F3; /* error color */
+    -fx-text-fill: #F55F51;
+}
+#cancel_button:hover {
+    -fx-background-color: #F55F51, #F3F3F3, #f55f5133; /* 20% error color */
+    -fx-text-fill: #F55F51;
+}
+
+/* TextField styling */
+
+.textfield, .textfield:empty {
+    -fx-background-color: #0D0106, #F3F3F3;
+    -fx-background-insets: 0, 0 0 2 0;
+    -fx-background-radius: 0;
+    -fx-prompt-text-fill: #0D0106;
+    -fx-text-fill: #0D0106;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 16;
+}
+.textfield:error {
+    -fx-background-color: #F55F51, #F3F3F3;
+    -fx-prompt-text-fill: #F55F51;
+    -fx-text-fill: #F55F51;
+}
+
+/* Dropdown styling */
+
+.dropdown {
+    -fx-background-color: transparent, #0D0106;
+    -fx-background-insets: 0, 29 0 0 0;
+    -fx-background-radius: 0;
+}

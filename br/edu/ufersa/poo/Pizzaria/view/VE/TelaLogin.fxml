@@ -1,88 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<!--
-  Copyright (c) 2015, 2019, Gluon and/or its affiliates.
-  All rights reserved. Use is subject to license terms.
-
-  This file is available and licensed under the following license:
-
-  Redistribution and use in source and binary forms, with or without
-  modification, are permitted provided that the following conditions
-  are met:
-
-  - Redistributions of source code must retain the above copyright
-    notice, this list of conditions and the following disclaimer.
-  - Redistributions in binary form must reproduce the above copyright
-    notice, this list of conditions and the following disclaimer in
-    the documentation and/or other materials provided with the distribution.
-  - Neither the name of Oracle Corporation nor the names of its
-    contributors may be used to endorse or promote products derived
-    from this software without specific prior written permission.
-
-  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
-  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
-  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
-  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
-  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
-  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
-  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
-  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
-  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
--->
-
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaLogin">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaLogin">
    <children>
-      <ImageView fitHeight="406.0" fitWidth="254.0" layoutY="-1.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/Barra%20Lateral.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="39.0" fitWidth="295.0" layoutX="278.0" layoutY="129.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/Component%202.0.png" />
-         </image>
-      </ImageView>
-      <TextField fx:id="login" layoutX="344.0" layoutY="143.0" prefHeight="26.0" prefWidth="220.0" style="-fx-background-color: transparent; -fx-background-insets: 0;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font></TextField>
-      <ImageView fitHeight="39.0" fitWidth="287.0" layoutX="278.0" layoutY="200.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/Component%203.0.png" />
-         </image>
-      </ImageView>
-      <PasswordField fx:id="senha" layoutX="333.0" layoutY="212.0" prefHeight="30.0" prefWidth="230.0" style="-fx-background-color: transparent; -fx-background-insets: 0;">
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <font>
-            <Font size="14.0" />
-         </font></PasswordField>
-      <Label fx:id="erroaut" layoutX="278.0" layoutY="121.0" text="Label" textFill="#ff0101" visible="false" />
-      <ImageView fitHeight="55.0" fitWidth="116.0" layoutX="422.0" layoutY="290.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/ENTRAR.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="entrar" layoutX="422.0" layoutY="286.0" mnemonicParsing="false" onAction="#Autenticar" opacity="0.0" prefHeight="39.0" prefWidth="116.0" style="-fx-background-color: #2E382E;" text="Entrar" textAlignment="CENTER" textFill="WHITE">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Button>
+      <VBox alignment="CENTER" prefHeight="600.0" prefWidth="390.0" spacing="25.0" style="-fx-background-color: #2E382E;">
+         <children>
+            <ImageView fitHeight="250.0" fitWidth="250.0" pickOnBounds="true" preserveRatio="true" styleClass="test">
+               <image>
+                  <Image url="@Assets/Logo.png" />
+               </image>
+            </ImageView>
+            <Label text="Pizzaria&#10;Michelangelo" textAlignment="CENTER" textFill="#f3f3f3">
+               <font>
+                  <Font name="Montserrat Regular" size="26.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
+      <AnchorPane layoutX="390.0" prefHeight="600.0" prefWidth="450.0">
+         <children>
+            <TextField fx:id="login" layoutX="50.0" layoutY="241.0" prefHeight="50.0" prefWidth="350.0" promptText="Usuário" styleClass="textfield" AnchorPane.bottomAnchor="350.0" />
+            <PasswordField fx:id="senha" layoutX="50.0" layoutY="295.0" prefHeight="50.0" prefWidth="350.0" promptText="Senha" styleClass="textfield" AnchorPane.bottomAnchor="270.0" />
+            <Button fx:id="entrar" layoutX="160.0" layoutY="375.0" mnemonicParsing="false" onAction="#Autenticar" prefHeight="35.0" prefWidth="130.0" styleClass="filled_button" text="Entrar" AnchorPane.bottomAnchor="195.0" AnchorPane.rightAnchor="80.0">
+               <font>
+                  <Font name="Montserrat Regular" size="10.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
    </children>
 </Pane>

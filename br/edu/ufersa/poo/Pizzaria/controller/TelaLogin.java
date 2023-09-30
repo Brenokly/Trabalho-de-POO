@@ -4,6 +4,7 @@ import Exceptions.UsuarioInvalido;
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -15,23 +16,35 @@ public class TelaLogin {
 
   @FXML private TextField login;
   @FXML private PasswordField senha;
-  @FXML private Label erroaut;
   
   public void Autenticar(ActionEvent event) {
     Usuario usuario = new Usuario();
-    usuario.setEmail(login.getText());
-    usuario.setSenha(senha.getText());
+    String userLogin = login.getText();
+    String userSenha = senha.getText();
+
+    PseudoClass error = PseudoClass.getPseudoClass("error");
+    PseudoClass starter = PseudoClass.getPseudoClass("empty");
+
+    if (userLogin == null || userLogin.isEmpty()) {
+      login.pseudoClassStateChanged(error, true);
+      return;
+    } else if (userSenha == null || userSenha.isEmpty()) {
+      senha.pseudoClassStateChanged(error, true);
+      return;
+    }
+
+    usuario.setEmail(userLogin);
+    usuario.setSenha(userSenha);
 
     try {
       userbo.Autenticar(usuario);
-      erroaut.setVisible(false);
+      login.pseudoClassStateChanged(starter, true);
+      senha.pseudoClassStateChanged(starter, true);
       Telas.TelaInicial();
     } catch (UsuarioInvalido e) {
-      erroaut.setText("Email ou senha inválido");
-      erroaut.setVisible(true);
+      login.pseudoClassStateChanged(error, true);
+      senha.pseudoClassStateChanged(error, true);
     } catch (Exception e) {
-      erroaut.setText("Email ou senha inválido");
-      erroaut.setVisible(true);
     }
   }
 }

@@ -12,6 +12,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Telas extends Application {
@@ -32,9 +33,11 @@ public class Telas extends Application {
   @Override
   public void start(Stage arg0) throws Exception {
     setPrimaryStage(arg0);
-    primaryStage.setTitle("Pizzaria Michelangeclo");
+    primaryStage.setTitle("Pizzaria Michelangelo");
+    primaryStage.getIcons().add(new Image(Telas.class.getResourceAsStream("VE/Assets/Logo.png")));
+    primaryStage.setResizable(false);
     primaryStage.show();
-    TelaClientes();
+    TelaLogin();
   }
 
   public static void TelaLogin() throws Exception {
