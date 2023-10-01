@@ -142,8 +142,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
   @FXML
   void SalvarPedido(ActionEvent event) throws Exception {
-    System.out.println("currentPageIndex: " + currentPageIndex);
-
     try {
       Estado estado = null;
       if (EstadoBox.getValue().equals("entregue")) {

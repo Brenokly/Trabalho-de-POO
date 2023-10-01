@@ -14,6 +14,15 @@ public class Pedido {
     private LocalDate data;
     private double valor;
 
+    public Pedido(Pedido pedido){
+        this.id = pedido.getId();
+        this.itensPedido = pedido.getItensPedido();
+        this.cliente = pedido.getCliente();
+        this.estado = pedido.getEstado();
+        this.data = pedido.getData();
+        this.valor = pedido.getValor();
+    }
+
     public Pedido() {
         LocalDate data = LocalDate.now();
         try {
@@ -21,6 +30,7 @@ public class Pedido {
         } catch(DataInvalida di) {
             di.printStackTrace();
         }
+        this.itensPedido = new ArrayList<>();
     }
 
     public Pedido(List<ItensPedidos> itensPedido, Cliente cliente, Estado estado) throws Exception {

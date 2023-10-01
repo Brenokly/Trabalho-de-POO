@@ -7,6 +7,7 @@ import java.util.List;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.PedidoDao;
+import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 
@@ -57,14 +58,35 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new PizzaInvalida("Pedido Inválido");
         }
 
-        pedido.tostring();
+        Pedido existingPedido = new Pedido(pedido);
+
+        Pedido pedidoAntigo = PedidoDao.buscar(existingPedido);
+
+        if (pedidoAntigo == null) {
+            throw new Exception("Erro no banco de dados, pedido não encontrado.");
+        }
 
         ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
         for (int i = 0; i < pedido.getItensPedido().size(); i++) {
-            itensPedidosBO.update(pedido.getItensPedido().get(i));
+            if (pedido.getItensPedido().get(i).getAdicionais().size() != pedidoAntigo.getItensPedido().get(i)
+                    .getAdicionais().size()) {
+
+                if (pedido.getItensPedido().get(i).getAdicionais().size() < pedidoAntigo.getItensPedido().get(i)
+                        .getAdicionais().size()) { // significa que o usuário removeu um adicional
+                    
+                    
+                        
+                    
+
+                }
+
+            } else {
+                itensPedidosBO.update(pedido.getItensPedido().get(i));
+            }
         }
 
         PedidoDao.alterar(pedido);
+
     }
 
     @Override

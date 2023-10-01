@@ -71,6 +71,11 @@ public class AdicionalBO implements BaseBO<Adicional> {
     adicionalDao.alterar(adicional);
   }
 
+  public void deletarPizzaAdicional(Adicional adicional) throws Exception {
+    AdicionalDao adicionalDao = new AdicionalDao();
+    
+  }
+
   @Override
   public void deletar(Adicional bo) throws Exception {
     AdicionalDao adicionalDao = new AdicionalDao();
