@@ -17,15 +17,6 @@ import javafx.scene.control.TextField;
 public class TelaFuncionarios2 {
 
   @FXML
-  private Button inicio;
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
   private Button salvar;
 
   @FXML
@@ -44,13 +35,7 @@ public class TelaFuncionarios2 {
   private TextField senha;
 
   @FXML
-  private Button clientes;
-
-  @FXML
   private Label funcionariosExistente;
-
-  @FXML
-  private Button sabores;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
@@ -127,6 +112,10 @@ public class TelaFuncionarios2 {
     }
   }
 
+  @FXML
+  void cancelarFuncionario(ActionEvent event) throws Exception {
+    Telas.TelaFuncionarios();
+  }
   private void displayAlert(String title, String message) {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Erro");
@@ -136,14 +125,7 @@ public class TelaFuncionarios2 {
   }
 
   @FXML
-  void cancelarFuncionario(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
-  }
-
-  @FXML
-  void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
-  }
+  private Button inicio;
 
   @FXML
   void carregarInicio(ActionEvent event) throws Exception {
@@ -151,17 +133,50 @@ public class TelaFuncionarios2 {
   }
 
   @FXML
-  void carregarLogin(ActionEvent event) throws Exception {
-    Telas.TelaLogin();
-  }
+  private Button clientes;
 
   @FXML
   void carregarClientes(ActionEvent event) throws Exception {
-    // Implemente o código para carregar a tela de clientes
+    Telas.TelaClientes();
   }
 
   @FXML
+  private Button pedidos;
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
+  }
+
+  @FXML
+  private Button sabores;
+
+  @FXML
   void carregarSabores(ActionEvent event) throws Exception {
-    // Implemente o código para carregar a tela de sabores
+    Telas.TelaSabores();
+  }
+
+  @FXML
+  private Button adicionais;
+
+  @FXML
+  void carregarAdicionais(ActionEvent event) throws Exception {
+    Telas.TelaAdicional();
+  }
+
+  @FXML
+  private Button funcionarios;
+
+  @FXML
+  void carregarFuncionarios(ActionEvent event) throws Exception {
+    Telas.TelaFuncionarios();
+  }
+
+  @FXML
+  private Button sair;
+
+  @FXML
+  void carregarLogin(ActionEvent event) throws Exception {
+    Telas.TelaLogin();
   }
 }

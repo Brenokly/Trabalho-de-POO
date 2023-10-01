@@ -17,9 +17,6 @@ public class TelaClientes3 extends Dialog<Cliente> {
     private Button excluir;
 
     @FXML
-    private Button clientes;
-
-    @FXML
     private Button inicio;
 
     @FXML
@@ -33,10 +30,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
 
     @FXML
     private TextField senha;
-
-    @FXML
-    private Button sair;
-
+    
     @FXML
     private Button salvar;
 
@@ -57,7 +51,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
     }
 
     @FXML
-    void SalvarCliente(ActionEvent event) {
+    void salvarCliente(ActionEvent event) {
         if (cliente != null) {
             String novoNome = nome.getText();
             String novoCpf = cpf.getText();
@@ -78,7 +72,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
             } catch (Exception e) {
                 exibirMensagemDeErro("Erro ao carregar funcionário", e.getMessage());
             }
-        } 
+        }
     }
 
     // Método para exibir uma mensagem de erro personalizada
@@ -93,21 +87,6 @@ public class TelaClientes3 extends Dialog<Cliente> {
     @FXML
     void Cancelar(ActionEvent event) throws Exception {
         Telas.TelaClientes();
-    }
-
-    @FXML
-    void carregarFuncionarios(ActionEvent event) throws Exception {
-        Telas.TelaFuncionarios();
-    }
-
-    @FXML
-    void carregarInicio(ActionEvent event) throws Exception {
-        Telas.TelaInicial();
-    }
-
-    @FXML
-    void carregarLogin(ActionEvent event) throws Exception {
-        Telas.TelaLogin();
     }
 
     public void setCliente(Cliente cliente) {
@@ -126,5 +105,58 @@ public class TelaClientes3 extends Dialog<Cliente> {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+    }
+
+    @FXML
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
+    }
+
+    @FXML
+    private Button clientes;
+
+    @FXML
+    void carregarClientes(ActionEvent event) throws Exception {
+        Telas.TelaClientes();
+    }
+
+    @FXML
+    private Button pedidos;
+
+    @FXML
+    void carregarPedidos(ActionEvent event) throws Exception {
+        // Telas.TelaPedidos();
+    }
+
+    @FXML
+    private Button sabores;
+
+    @FXML
+    void carregarSabores(ActionEvent event) throws Exception {
+        Telas.TelaSabores();
+    }
+
+    @FXML
+    private Button adicionais;
+
+    @FXML
+    void carregarAdicionais(ActionEvent event) throws Exception {
+        Telas.TelaAdicional();
+    }
+
+    @FXML
+    private Button funcionarios;
+
+    @FXML
+    void carregarFuncionarios(ActionEvent event) throws Exception {
+        Telas.TelaFuncionarios();
+    }
+
+    @FXML
+    private Button sair;
+
+    @FXML
+    void carregarLogin(ActionEvent event) throws Exception {
+        Telas.TelaLogin();
     }
 }

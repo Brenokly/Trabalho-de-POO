@@ -52,9 +52,6 @@
             <Image url="@Funcionarios/sidebar.png" />
          </image>
       </ImageView>
-      <Button fx:id="inicio" layoutX="51.0" layoutY="129.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" text="Button" />
-      <Button fx:id="sair" layoutX="60.0" layoutY="352.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="25.0" prefWidth="37.0" text="Button" />
-      <Button fx:id="funcionarios" layoutX="24.0" layoutY="320.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="107.0" text="Button" />
       <ImageView fitHeight="33.0" fitWidth="99.0" layoutX="494.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/SALVAR.png" />
@@ -143,5 +140,12 @@
             <Image url="@adicionaisElogin/Rectangle%2089.png" />
          </image>
       </ImageView>
+      <Button fx:id="inicio" layoutX="53.0" layoutY="127.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" text="Button" />
+      <Button fx:id="clientes" layoutX="45.0" layoutY="169.0" mnemonicParsing="false" onAction="#carregarClientes" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="Clientes" />
+      <Button fx:id="pedidos" layoutX="45.0" layoutY="205.0" mnemonicParsing="false" onAction="#carregarPedidos" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="pedidos" />
+      <Button fx:id="sabores" layoutX="44.0" layoutY="246.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="sabores" />
+      <Button fx:id="adicionais" layoutX="38.0" layoutY="283.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="83.0" text="Adicionais" />
+      <Button fx:id="funcionarios" layoutX="21.0" layoutY="323.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="114.0" text="funcionarios" />
+      <Button fx:id="sair" layoutX="61.0" layoutY="353.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="10.0" prefWidth="36.0" text="Button" />
    </children>
 </Pane>

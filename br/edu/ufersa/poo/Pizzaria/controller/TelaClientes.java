@@ -34,7 +34,6 @@ public class TelaClientes implements Initializable {
     private TableColumn<Cliente, String> colCpf;
     @FXML
     private TableColumn<Cliente, String> colEndereco;
-    // Outras colunas, se necessário
 
     ObservableList<Cliente> list = FXCollections.observableArrayList();
     ObservableList<Cliente> allClientes = FXCollections.observableArrayList();
@@ -117,6 +116,39 @@ public class TelaClientes implements Initializable {
         }
     }
 
+
+    @FXML
+    private Button inicio;
+
+    @FXML
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
+    }
+
+    @FXML
+    private Button clientes;
+
+    @FXML
+    void carregarClientes(ActionEvent event) throws Exception {
+        Telas.TelaClientes();
+    }
+
+    @FXML
+    private Button pedidos;
+    
+    @FXML
+    void carregarPedidos(ActionEvent event) throws Exception {
+        //Telas.TelaPedidos();
+    }
+
+    @FXML
+    private Button sabores;
+    
+    @FXML
+    void carregarSabores(ActionEvent event) throws Exception {
+        Telas.TelaSabores();
+    }
+
     @FXML
     private Button adicionais;
 
@@ -126,11 +158,11 @@ public class TelaClientes implements Initializable {
     }
 
     @FXML
-    private Button inicio;
+    private Button funcionarios;
 
     @FXML
-    void carregarInicio(ActionEvent event) throws Exception {
-        Telas.TelaInicial();
+    void carregarFuncionarios(ActionEvent event) throws Exception {
+        Telas.TelaFuncionarios();
     }
 
     @FXML

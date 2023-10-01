@@ -37,7 +37,7 @@ public class Telas extends Application {
     primaryStage.getIcons().add(new Image(Telas.class.getResourceAsStream("VE/Assets/Logo.png")));
     primaryStage.setResizable(false);
     primaryStage.show();
-    TelaInicial();
+    TelaFuncionarios();
   }
 
   public static void TelaLogin() throws Exception {
@@ -148,13 +148,19 @@ public class Telas extends Application {
     FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaClientes3.fxml"));
     Parent root = loader.load();
 
-    // Obtenha o controlador da TelaAdicional3
     TelaClientes3 controller = loader.getController();
 
-    // Passe o Adicional para o controlador
     controller.setCliente(cliente);
 
     Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+
+  public static void TelaSabores() throws Exception {
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaSabores.fxml"));
+
+    Scene scene = new Scene(root);
+
     primaryStage.setScene(scene);
   }
 }
