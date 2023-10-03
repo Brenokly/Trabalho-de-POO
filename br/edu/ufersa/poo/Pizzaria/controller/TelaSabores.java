@@ -31,9 +31,9 @@ public class TelaSabores implements Initializable {
   @FXML
   private TableColumn<TiposPizzas, String> nome;
   @FXML
-  private TableColumn<TiposPizzas, Double> valor;
+  private TableColumn<TiposPizzas, Double> valorPequena;
   @FXML
-  private TableColumn<TiposPizzas, Integer> quantidade;
+  private TableColumn<TiposPizzas, Double> valorGrande;
 
   ObservableList<TiposPizzas> list = FXCollections.observableArrayList();
   ObservableList<TiposPizzas> allSabores = FXCollections.observableArrayList();
@@ -48,8 +48,8 @@ public class TelaSabores implements Initializable {
     // Configurar as colunas da TableView
     id.setCellValueFactory(new PropertyValueFactory<>("id"));
     nome.setCellValueFactory(new PropertyValueFactory<>("nome"));
-    valor.setCellValueFactory(new PropertyValueFactory<>("valorgrande"));
-    quantidade.setCellValueFactory(new PropertyValueFactory<>("valorpqeuena"));
+    valorPequena.setCellValueFactory(new PropertyValueFactory<>("valorPequena"));
+    valorGrande.setCellValueFactory(new PropertyValueFactory<>("valorGrande"));
 
     // Adicionar os dados à TableView
     table.setItems(list);

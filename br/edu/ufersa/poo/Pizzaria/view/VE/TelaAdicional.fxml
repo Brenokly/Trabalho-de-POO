@@ -19,7 +19,7 @@
             <TableColumn fx:id="quantidade" prefWidth="114.0" text="Quantidade (KG)" />
          </columns>
       </TableView>
-      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="282.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparents;">
+      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="282.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparent;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>

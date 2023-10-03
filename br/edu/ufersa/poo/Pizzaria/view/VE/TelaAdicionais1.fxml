@@ -11,7 +11,7 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaAdicional1">
    <children>
-      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="329.0" style="-fx-background-color: transparents;" text="Localizar por nome, email ou id">
+      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="329.0" style="-fx-background-color: transparent;" text="Localizar por nome, email ou id">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
