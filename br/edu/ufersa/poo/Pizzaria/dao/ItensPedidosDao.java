@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+
 import Exceptions.IdInvalido;
 
 import java.sql.Statement;
@@ -65,13 +67,47 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         }
     }
 
+    public void deletarAdicionais(ItensPedidos entity) {
+        System.out.println("Deletando adicionais: ");
+        System.out.println(entity.getId());
+        Connection con = getConnection();
+        String sql = "DELETE FROM tb_pizza_adicional WHERE id = ?";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            ps.setLong(1, entity.getId());
+            ps.executeUpdate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
+    public void inserirAdicionais(ItensPedidos entity) {
+        System.out.println("Inserindo adicionais: ");
+        System.out.println(entity.getId());
+        Connection con = getConnection();
+        String sql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
+        try (PreparedStatement ps = con.prepareStatement(sql)) {
+            for (Adicional adicional : entity.getAdicionais()) {
+                ps.setLong(1, entity.getId());
+                ps.setLong(2, adicional.getId());
+                ps.setInt(3, adicional.getQuantidade());
+                ps.executeUpdate();
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     public void alterar(ItensPedidos entity) {
         Connection con = getConnection();
         String sql = "UPDATE tb_itenspedido SET id_tipopizza = ?, tamanho = ?, valor = ?, descricao = ? WHERE id = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setLong(1, entity.getPizza().getId());
+            ps.setLong(1, entity.getId());
             ps.setString(2, entity.getTamanho().getDescricao());
             ps.setDouble(3, entity.getValor());
             ps.setString(4, entity.getDescricao());
@@ -82,8 +118,8 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             String updatePizzaAdicionalSql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? WHERE id_pizza = ?";
             try (PreparedStatement psAdicional = con.prepareStatement(updatePizzaAdicionalSql)) {
                 for (Adicional adicional : entity.getAdicionais()) {
-                    psAdicional.setLong(1, adicional.getId()); 
-                    psAdicional.setInt(2, adicional.getQuantidade()); 
+                    psAdicional.setLong(1, adicional.getId());
+                    psAdicional.setInt(2, adicional.getQuantidade());
                     psAdicional.setLong(3, entity.getId()); // Onde id_pizza é igual ao ID do item do pedido
                     psAdicional.executeUpdate();
                 }
@@ -165,6 +201,15 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         }
 
         return pizzas;
+    }
+
+    public void inserirAdicionais(ItensPedidos entity, Set<Adicional> adicionais) {
+        Connection con = getConnection();
+        String sql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
+    }
+
+    public void deletarAdicionais(ItensPedidos entity, Set<Adicional> adicionais) {
+        throw new UnsupportedOperationException("Unimplemented method 'buscar'");
     }
 
     public List<ItensPedidos> buscar(TiposPizzas tipoPizza) {

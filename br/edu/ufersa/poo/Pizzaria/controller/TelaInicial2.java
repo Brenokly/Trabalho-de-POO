@@ -208,11 +208,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       pedido.getItensPedido().get(currentPageIndex).setAdicionais(adicionais);
 
       pedido.setValor(pedido.calcValor());
-      
-
-      pedido.tostring();
-      System.out.println("-------------------------------------------------------------------------");
-
+    
       PedidoBO pedidoBO = new PedidoBO();
       pedidoBO.update(pedido);
 

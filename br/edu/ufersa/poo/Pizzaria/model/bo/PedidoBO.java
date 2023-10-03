@@ -3,12 +3,13 @@ package br.edu.ufersa.poo.Pizzaria.model.bo;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.PedidoDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
-import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 
 public class PedidoBO implements BaseBO<Pedido> {
@@ -66,21 +67,37 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new Exception("Erro no banco de dados, pedido não encontrado.");
         }
 
+        System.out.println("Pedido antigo ______________________________________");
+        pedidoAntigo.tostring();
+        System.out.println("Pedido novo ______________________________________");
+        pedido.tostring();
+
         ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
         for (int i = 0; i < pedido.getItensPedido().size(); i++) {
-            if (pedido.getItensPedido().get(i).getAdicionais().size() != pedidoAntigo.getItensPedido().get(i)
-                    .getAdicionais().size()) {
+            Set<Adicional> adicionaisAtuais = new HashSet<>(pedido.getItensPedido().get(i).getAdicionais());
+            Set<Adicional> adicionaisAntigos = new HashSet<>(pedidoAntigo.getItensPedido().get(i).getAdicionais());
 
-                if (pedido.getItensPedido().get(i).getAdicionais().size() < pedidoAntigo.getItensPedido().get(i)
-                        .getAdicionais().size()) { // significa que o usuário removeu um adicional
-                    
-                    
-                        
-                    
+            if (!adicionaisAtuais.equals(adicionaisAntigos)) {
+                // Algo foi alterado nos adicionais do item de pedido
+                Set<Adicional> adicionaisRemovidos = new HashSet<>(adicionaisAntigos);
+                adicionaisRemovidos.removeAll(adicionaisAtuais);
 
+                Set<Adicional> adicionaisAdicionados = new HashSet<>(adicionaisAtuais);
+                adicionaisAdicionados.removeAll(adicionaisAntigos);
+
+                if (!adicionaisRemovidos.isEmpty()) {
+                    System.out.println(pedidoAntigo.getItensPedido().get(i).getPizza().getId());
+                    System.out.println("Removendo adicionais: " + adicionaisRemovidos);
+                    itensPedidosBO.deleteAdicionais(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
                 }
 
+                if (!adicionaisAdicionados.isEmpty()) {
+                    System.out.println(pedido.getItensPedido().get(i).getId());
+                    System.out.println("Adicionando adicionais: " + adicionaisAdicionados);
+                    itensPedidosBO.createAdicionais(pedido.getItensPedido().get(i), adicionaisAdicionados);
+                }
             } else {
+                System.out.println("Atualizando item");
                 itensPedidosBO.update(pedido.getItensPedido().get(i));
             }
         }

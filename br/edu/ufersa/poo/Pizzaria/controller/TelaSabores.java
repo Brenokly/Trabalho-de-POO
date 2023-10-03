@@ -90,8 +90,18 @@ public class TelaSabores implements Initializable {
   private Button funcionarios;
 
   @FXML
+  void CarregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
     Telas.TelaFuncionarios();
+  }
+
+  @FXML
+  void CarregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
   }
 
   @FXML

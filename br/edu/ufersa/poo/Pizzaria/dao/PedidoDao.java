@@ -22,14 +22,14 @@ import java.time.format.DateTimeFormatter;
 public class PedidoDao extends BaseDaoImpl<Pedido> {
     public Long inserir(Pedido pedido) {
         Long pedidoId = null;
-        String insertPedidoSql = "INSERT INTO tb_pedido (id_cliente, estado, data, valor) VALUES (?, ?, ?, ?)";
+        ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
+        String insertPedidoSql = "INSERT INTO tb_pedido (id_cliente, estado, data) VALUES (?, ?, ?)";
 
         try (Connection con = getConnection();
                 PreparedStatement ps = con.prepareStatement(insertPedidoSql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, pedido.getCliente().getId());
             ps.setString(2, pedido.getEstado().getDescricao());
             ps.setObject(3, pedido.getData());
-            ps.setDouble(4, pedido.getValor());
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -39,6 +39,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
                         pedido.setId(pedidoId);
                         for (ItensPedidos itemPedido : pedido.getItensPedido()) {
                             itemPedido.setIdPedido(pedidoId);
+                            itensPedidosDao.inserir(itemPedido);
                         }
                     } catch (IdInvalido ii) {
                         ii.printStackTrace();

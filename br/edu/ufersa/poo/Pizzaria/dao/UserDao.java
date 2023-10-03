@@ -98,6 +98,7 @@ public class UserDao extends BaseDaoImpl<Usuario> {
         return user;
     }
 
+    
     public Usuario buscar(Usuario entity) {
         String sql = "SELECT * FROM tb_user WHERE id = ?";
         Usuario user = null;

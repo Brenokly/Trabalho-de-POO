@@ -103,11 +103,26 @@ public class TelaInicial implements Initializable {
 
         if (pedido != null) {
             try {
-                Telas.TelaInicial2(pedido);  
+                Telas.TelaInicial2(pedido);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
+    }
+
+    @FXML
+    void CarregarPedidos(ActionEvent event) throws Exception {
+        //Telas.TelaPedidos();
+    }
+
+    @FXML
+    void CarregarClientes(ActionEvent event) throws Exception {
+        Telas.TelaClientes();
+    }
+
+    @FXML
+    void CarregarSabores(ActionEvent event) throws Exception {
+        Telas.TelaSabores();
     }
 
     @FXML

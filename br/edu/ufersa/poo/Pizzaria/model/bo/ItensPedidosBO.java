@@ -1,6 +1,8 @@
 package br.edu.ufersa.poo.Pizzaria.model.bo;
 
 import java.util.List;
+import java.util.Set;
+
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
 import br.edu.ufersa.poo.Pizzaria.dao.ItensPedidosDao;
@@ -61,6 +63,34 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
     } catch (Exception e) {
       // Lidar com exceções de banco de dados aqui, se necessário
       e.printStackTrace();
+    }
+  }
+
+  public void deleteAdicionais(ItensPedidos bo, Set<Adicional> adicionaisRemovidos) throws Exception {
+    if (bo != null){
+      ItensPedidosDao pedidos = new ItensPedidosDao();
+      pedidos.buscar(bo);
+
+      if (bo != null){
+        pedidos.deletarAdicionais(bo, adicionaisRemovidos);
+      }
+    }
+    else{
+      throw new PedidoInvalido("Adicional inválido");
+    }
+  }
+
+  public void createAdicionais(ItensPedidos bo, Set<Adicional> adicionaisAdicionados) throws Exception {
+    if (bo != null){
+      ItensPedidosDao pedidos = new ItensPedidosDao();
+      pedidos.buscar(bo);
+
+      if (bo != null){
+        pedidos.inserirAdicionais(bo, adicionaisAdicionados);
+      }
+    }
+    else{
+      throw new PedidoInvalido("Adicional inválido");
     }
   }
 
