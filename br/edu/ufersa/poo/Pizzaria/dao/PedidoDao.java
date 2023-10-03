@@ -86,7 +86,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
             closeConnection();
         }
     }
-
+    
     public Pedido buscar(Pedido entity) {
         Connection con = getConnection();
         Pedido resultado = new Pedido();

@@ -66,8 +66,15 @@ public class TelaInicial implements Initializable {
         List<Pedido> pedido = null;
         try {
             pedido = pedidoBO.buscarTodos();
+            List<Pedido> pedido2 = new ArrayList<>();
+            for (Pedido p : pedido) {
+                if (p.getEstado().getDescricao().equals("pendente")) {
+                    p.tostring();
+                    pedido2.add(p);
+                }
+            }
 
-            list.addAll(pedido);
+            list.addAll(pedido2);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -112,7 +119,7 @@ public class TelaInicial implements Initializable {
 
     @FXML
     void CarregarPedidos(ActionEvent event) throws Exception {
-        //Telas.TelaPedidos();
+        // Telas.TelaPedidos();
     }
 
     @FXML

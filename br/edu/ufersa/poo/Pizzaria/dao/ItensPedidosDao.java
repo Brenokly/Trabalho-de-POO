@@ -8,8 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import Exceptions.IdInvalido;
-
 import java.sql.Statement;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
 
@@ -17,6 +15,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
     public Long inserir(ItensPedidos entity) {
         Connection con = getConnection();
         Long pizzaId = null;
+        Long idPizzaAdicional = null;
 
         String insertPizzaSql = "INSERT INTO tb_itenspedido (id_tipopizza, id_pedido, tamanho, valor, descricao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
@@ -34,12 +33,20 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
                     // Insira as informações dos adicionais na tabela tb_pizza_adicional
                     String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
-                    try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql)) {
+                    try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql,
+                            Statement.RETURN_GENERATED_KEYS)) {
                         for (Adicional adicional : entity.getAdicionais()) {
                             psAdicional.setLong(1, pizzaId);
                             psAdicional.setLong(2, adicional.getId()); // Use o ID do adicional no banco de dados
                             psAdicional.setInt(3, adicional.getQuantidade()); // Use a quantidade do adicional
                             psAdicional.executeUpdate();
+
+                            try (ResultSet rt = psAdicional.getGeneratedKeys()) {
+                                if (rs.next()) {
+                                    idPizzaAdicional = rs.getLong(1);
+                                    entity.setIdPizzaAdicional(idPizzaAdicional);
+                                }
+                            }
                         }
                     }
                 }
@@ -115,12 +122,13 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             ps.executeUpdate();
 
             // Atualize os dados da tabela tb_pizza_adicional
-            String updatePizzaAdicionalSql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? WHERE id_pizza = ?";
+            String updatePizzaAdicionalSql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? , id_pizza = ? where id = ?";
             try (PreparedStatement psAdicional = con.prepareStatement(updatePizzaAdicionalSql)) {
                 for (Adicional adicional : entity.getAdicionais()) {
                     psAdicional.setLong(1, adicional.getId());
                     psAdicional.setInt(2, adicional.getQuantidade());
                     psAdicional.setLong(3, entity.getId()); // Onde id_pizza é igual ao ID do item do pedido
+                    psAdicional.setLong(4, adicional.getId());
                     psAdicional.executeUpdate();
                 }
             }
@@ -133,9 +141,9 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
     public ItensPedidos buscar(ItensPedidos entity) {
         Connection con = getConnection();
-        ItensPedidos resultado = null;
+        ItensPedidos pizza = null;
 
-        String sql = "SELECT * FROM tb_itenspedido as e WHERE e.id = ?";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_itenspedido = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -145,15 +153,21 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
             if (rs.next()) {
                 // Se encontrou um registro, crie um objeto Pizza
-                resultado = new ItensPedidos();
-
+                pizza = new ItensPedidos();
                 try {
-                    resultado.setId(rs.getLong("id"));
-                    resultado.setIdPedido(rs.getLong("id_pedido"));
-                    resultado.getPizza().setId(rs.getLong("id_tipopizza"));
-                    resultado.setTamanho(rs.getString("tamanho"));
-                    resultado.setValor(rs.getDouble("valor"));
-                    resultado.setDescricao(rs.getString("descricao"));
+                    pizza.setId(rs.getLong("id_itenspedido"));
+                    pizza.setIdPedido(rs.getLong("id_pedido"));
+                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
+                    pizza.setTamanho(rs.getString("tamanho"));
+                    pizza.setValor(rs.getDouble("valor"));
+                    pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
+                    pizza.setDescricao(rs.getString("descricao"));
+                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
+                            && rs.getDouble("valor_adicional") != 0.0) {
+                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                        pizza.getAdicionais().add(adicional);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -167,14 +181,14 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             closeConnection();
         }
 
-        return resultado;
+        return pizza;
     }
 
     public List<ItensPedidos> buscar(Cliente cliente) {
         Connection con = getConnection();
         List<ItensPedidos> pizzas = new ArrayList<>();
 
-        String sql = "SELECT * FROM tb_itenspedido WHERE EXISTS (SELECT id FROM tb_pedido WHERE id_cliente = ?);";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_cliente = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -182,14 +196,25 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                // Obtenha os detalhes da pizza usando o ID do pedido
-                ItensPedidos pizza;
+                ItensPedidos pizza = new ItensPedidos();
                 try {
-                    pizza = buscar(new ItensPedidos(rs.getLong("id")));
-                    pizzas.add(pizza);
-                } catch (IdInvalido e) {
+                    pizza.setId(rs.getLong("id_itenspedido"));
+                    pizza.setIdPedido(rs.getLong("id_pedido"));
+                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
+                    pizza.setTamanho(rs.getString("tamanho"));
+                    pizza.setValor(rs.getDouble("valor"));
+                    pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
+                    pizza.setDescricao(rs.getString("descricao"));
+                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
+                            && rs.getDouble("valor_adicional") != 0.0) {
+                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                        pizza.getAdicionais().add(adicional);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+                pizzas.add(pizza);
             }
 
             rs.close();
@@ -216,7 +241,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         Connection con = getConnection();
         List<ItensPedidos> pizzas = new ArrayList<>();
 
-        String sql = "SELECT * FROM tb_itenspedido WHERE id_tipopizza = ?";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -226,12 +251,19 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             while (rs.next()) {
                 ItensPedidos pizza = new ItensPedidos();
                 try {
-                    pizza.setId(rs.getLong("id"));
+                    pizza.setId(rs.getLong("id_itenspedido"));
                     pizza.setIdPedido(rs.getLong("id_pedido"));
                     pizza.getPizza().setId(rs.getLong("id_tipopizza"));
                     pizza.setTamanho(rs.getString("tamanho"));
                     pizza.setValor(rs.getDouble("valor"));
+                    pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
                     pizza.setDescricao(rs.getString("descricao"));
+                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
+                            && rs.getDouble("valor_adicional") != 0.0) {
+                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                        pizza.getAdicionais().add(adicional);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -270,8 +302,12 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     pizza.setValor(rs.getDouble("valor"));
                     pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
                     pizza.setDescricao(rs.getString("descricao"));
-                    pizza.getAdicionais().add(new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                            rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional")));
+                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
+                            && rs.getDouble("valor_adicional") != 0.0) {
+                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                        pizza.getAdicionais().add(adicional);
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -6,6 +6,7 @@ import Exceptions.*;
 
 public class ItensPedidos extends Produto {
   private Long IdPedido;
+  private Long IdPizzaAdicional;
   private TiposPizzas pizza;
   private Tamanho tamanho;
   private List<Adicional> adicionais = new ArrayList<>(3);
@@ -21,7 +22,8 @@ public class ItensPedidos extends Produto {
     pizza.setId(id);
   }
 
-  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao)
+  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, Long idPizzaAdicional,
+      List<Adicional> adicionais, String descricao)
       throws Exception {
     super(descricao, idProduto);
     pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
@@ -32,6 +34,7 @@ public class ItensPedidos extends Produto {
       super.setValor(Tpizza.getValorPequena());
     }
 
+    setIdPizzaAdicional(idPizzaAdicional);
     this.adicionais = new ArrayList<>(adicionais);
     setPizza(pizza);
     setTamanho(tamanho);
@@ -79,6 +82,18 @@ public class ItensPedidos extends Produto {
       this.IdPedido = idPedido;
     } else {
       throw new IdInvalido("Id inválido");
+    }
+  }
+
+  public Long getIdPizzaAdicional() {
+    return IdPizzaAdicional;
+  }
+
+  public void setIdPizzaAdicional(Long IdPizzaAdicional) {
+    if (IdPizzaAdicional != null) {
+      this.IdPizzaAdicional = pizza.getId();
+    } else {
+      throw new NullPointerException("Id inválido");
     }
   }
 
