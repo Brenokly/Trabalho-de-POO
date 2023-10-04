@@ -64,12 +64,11 @@ public class TelaInicial implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         List<Pedido> pedido = null;
+        List<Pedido> pedido2 = new ArrayList<>();
         try {
             pedido = pedidoBO.buscarTodos();
-            List<Pedido> pedido2 = new ArrayList<>();
             for (Pedido p : pedido) {
                 if (p.getEstado().getDescricao().equals("pendente")) {
-                    p.tostring();
                     pedido2.add(p);
                 }
             }
@@ -96,7 +95,7 @@ public class TelaInicial implements Initializable {
         table.setItems(list);
 
         // Adicionar os dados originais à lista allAdicionais
-        allPedidos.addAll(pedido);
+        allPedidos.addAll(pedido2);
     }
 
     @FXML
@@ -118,17 +117,17 @@ public class TelaInicial implements Initializable {
     }
 
     @FXML
-    void CarregarPedidos(ActionEvent event) throws Exception {
+    void carregarPedidos(ActionEvent event) throws Exception {
         // Telas.TelaPedidos();
     }
 
     @FXML
-    void CarregarClientes(ActionEvent event) throws Exception {
+    void carregarClientes(ActionEvent event) throws Exception {
         Telas.TelaClientes();
     }
 
     @FXML
-    void CarregarSabores(ActionEvent event) throws Exception {
+    void carregarSabores(ActionEvent event) throws Exception {
         Telas.TelaSabores();
     }
 
@@ -151,25 +150,27 @@ public class TelaInicial implements Initializable {
     void onSearchKeyReleased(KeyEvent event) {
         String searchTerm = searchTextField.getText().toLowerCase();
 
-        if (searchTerm.isEmpty()) {
-            // Campo de pesquisa vazio, exiba todos os dados originais
-            table.setItems(allPedidos);
-        } else {
-            // Realize a pesquisa e atualize a TableView com os resultados
-            List<Pedido> resultados = new ArrayList<>();
+        if (allPedidos != null) {
+            if (searchTerm.isEmpty()) {
+                // Campo de pesquisa vazio, exiba todos os dados originais
+                table.setItems(allPedidos);
+            } else {
+                // Realize a pesquisa e atualize a TableView com os resultados
+                List<Pedido> resultados = new ArrayList<>();
 
-            for (Pedido pedido : allPedidos) { // buscar por cliente, por pizza (nome do sabor) e por estado
-                if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm) ||
-                        pedido.getEstado().getDescricao().toLowerCase().contains(searchTerm) ||
-                        pedido.getItensPedido().get(0).getPizza().getNome().toLowerCase().contains(searchTerm)) {
-                    resultados.add(pedido);
+                for (Pedido pedido : allPedidos) { // buscar por cliente, por pizza (nome do sabor) e por estado
+                    if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm) ||
+                            pedido.getEstado().getDescricao().toLowerCase().contains(searchTerm) ||
+                            pedido.getItensPedido().get(0).getPizza().getNome().toLowerCase().contains(searchTerm)) {
+                        resultados.add(pedido);
+                    }
                 }
+
+                ObservableList<Pedido> resultadosObservable = FXCollections.observableArrayList();
+                resultadosObservable.addAll(resultados);
+
+                table.setItems(resultadosObservable);
             }
-
-            ObservableList<Pedido> resultadosObservable = FXCollections.observableArrayList();
-            resultadosObservable.addAll(resultados);
-
-            table.setItems(resultadosObservable);
         }
     }
 

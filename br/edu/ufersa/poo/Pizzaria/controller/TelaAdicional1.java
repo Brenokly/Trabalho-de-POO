@@ -151,6 +151,11 @@ public class TelaAdicional1 implements Initializable {
   }
 
   @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
+  }
+
+  @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
     Telas.TelaFuncionarios();
   }

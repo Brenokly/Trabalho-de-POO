@@ -11,10 +11,10 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import br.edu.ufersa.poo.Pizzaria.dao.ClienteDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
-
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,14 +24,47 @@ public class TelaClientes implements Initializable {
     private ClienteDao clienteDao = new ClienteDao();
 
     @FXML
+    private Button clientes;
+
+    @FXML
+    private Button adicionar;
+
+    @FXML
+    private Button adicionais;
+
+    @FXML
+    private Button editar;
+
+    @FXML
+    private Button funcionarios;
+
+    @FXML
+    private Button inicio;
+
+    @FXML
+    private Button pedidos;
+
+    @FXML
+    private Button sair;
+
+    @FXML
+    private Button sabores;
+
+    @FXML
+    private TextField searchTextField;
+
+    @FXML
     private TableView<Cliente> tableClientes;
 
     @FXML
     private TableColumn<Cliente, Long> id; // Coluna para o ID, se necessário
+
     @FXML
     private TableColumn<Cliente, String> colNome;
+
     @FXML
     private TableColumn<Cliente, String> colCpf;
+
     @FXML
     private TableColumn<Cliente, String> colEndereco;
 
@@ -56,9 +89,6 @@ public class TelaClientes implements Initializable {
         // Adicionar os dados originais à lista allUsuarios
         allClientes.addAll(clientes);
     }
-
-    @FXML
-    private TextField searchTextField;
 
     @FXML
     private void onSearchKeyReleased(KeyEvent event) {
@@ -87,46 +117,32 @@ public class TelaClientes implements Initializable {
     }
 
     @FXML
-    private Button adicionar;
-
-    @FXML
-    void CarregarTelaClientes2(ActionEvent event) {
-      try {
-        Telas.TelaClientes2();
-      } catch (Exception e) {
-        e.printStackTrace();
-      }
+    void ClienteClicked(MouseEvent event) {
     }
 
     @FXML
-    private Button editar;
+    void CarregarTelaClientes2(ActionEvent event) {
+        try {
+            Telas.TelaClientes2();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     @FXML
     void CarregarTelaClientes3(ActionEvent event) {
         Cliente cliente = tableClientes.getSelectionModel().getSelectedItem();
 
         if (cliente != null) {
-        try {
-            // Chame o método TelaCliente3 e passe o Funcionario selecionado
-            Telas.TelaClientes3(cliente);
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+            try {
+                // Chame o método TelaCliente3 e passe o Funcionario selecionado
+                Telas.TelaClientes3(cliente);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
-
-
-    @FXML
-    private Button inicio;
-
-    @FXML
-    void carregarInicio(ActionEvent event) throws Exception {
-        Telas.TelaInicial();
-    }
-
-    @FXML
-    private Button clientes;
 
     @FXML
     void carregarClientes(ActionEvent event) throws Exception {
@@ -134,23 +150,9 @@ public class TelaClientes implements Initializable {
     }
 
     @FXML
-    private Button pedidos;
-    
-    @FXML
-    void carregarPedidos(ActionEvent event) throws Exception {
-        //Telas.TelaPedidos();
-    }
-
-    @FXML
-    private Button sabores;
-    
-    @FXML
     void carregarSabores(ActionEvent event) throws Exception {
         Telas.TelaSabores();
     }
-
-    @FXML
-    private Button adicionais;
 
     @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
@@ -158,7 +160,9 @@ public class TelaClientes implements Initializable {
     }
 
     @FXML
-    private Button funcionarios;
+    void carregarPedidos(ActionEvent event) throws Exception {
+        // Telas.TelaPedidos();
+    }
 
     @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
@@ -166,7 +170,9 @@ public class TelaClientes implements Initializable {
     }
 
     @FXML
-    private Button sair;
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
+    }
 
     @FXML
     void carregarLogin(ActionEvent event) throws Exception {

@@ -208,7 +208,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       pedido.getItensPedido().get(currentPageIndex).setAdicionais(adicionais);
 
       pedido.setValor(pedido.calcValor());
-    
+
       PedidoBO pedidoBO = new PedidoBO();
       pedidoBO.update(pedido);
 
@@ -283,6 +283,16 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   }
 
   @FXML
+  void CarregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
+  void CarregarSabores(ActionEvent event) throws Exception {
+    Telas.TelaSabores();
+  }
+
+  @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
     Telas.TelaFuncionarios();
   }
@@ -295,6 +305,11 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
     Telas.TelaLogin();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
   }
 
   public void setPedido(Pedido pedido) {
