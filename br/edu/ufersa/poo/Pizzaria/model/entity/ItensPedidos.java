@@ -6,7 +6,6 @@ import Exceptions.*;
 
 public class ItensPedidos extends Produto {
   private Long IdPedido;
-  private Long IdPizzaAdicional;
   private TiposPizzas pizza;
   private Tamanho tamanho;
   private List<Adicional> adicionais = new ArrayList<>(3);
@@ -22,7 +21,7 @@ public class ItensPedidos extends Produto {
     pizza.setId(id);
   }
 
-  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, Long idPizzaAdicional,
+  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto,
       List<Adicional> adicionais, String descricao)
       throws Exception {
     super(descricao, idProduto);
@@ -34,7 +33,6 @@ public class ItensPedidos extends Produto {
       super.setValor(Tpizza.getValorPequena());
     }
 
-    setIdPizzaAdicional(idPizzaAdicional);
     this.adicionais = new ArrayList<>(adicionais);
     setPizza(pizza);
     setTamanho(tamanho);
@@ -82,18 +80,6 @@ public class ItensPedidos extends Produto {
       this.IdPedido = idPedido;
     } else {
       throw new IdInvalido("Id inválido");
-    }
-  }
-
-  public Long getIdPizzaAdicional() {
-    return this.IdPizzaAdicional;
-  }
-
-  public void setIdPizzaAdicional(Long IdPizzaAdicional) {
-    if (IdPizzaAdicional != null) {
-      this.IdPizzaAdicional = IdPizzaAdicional;
-    } else {
-      throw new NullPointerException("Id inválido");
     }
   }
 

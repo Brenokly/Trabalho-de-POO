@@ -21,6 +21,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Dialog;
@@ -86,6 +87,12 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
   @FXML
   private Button salvar;
+
+  @FXML
+  private ImageView AdicionarNotOpaco;
+
+  @FXML
+  private ImageView AdicionarOpaco;
 
   @FXML
   private Pagination Pagina;
@@ -249,6 +256,9 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       linha3.setVisible(true);
       Adicional3Box.getItems().addAll(nomesA);
 
+      Adicionar.setDisable(true);
+      AdicionarNotOpaco.setVisible(false);
+      AdicionarOpaco.setVisible(true);
     }
   }
 
@@ -258,6 +268,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       Adicional3Box.setVisible(false);
       linha3.setVisible(false);
       Adicional3Box.getItems().clear();
+
+      Adicionar.setDisable(false);
+      AdicionarNotOpaco.setVisible(true);
+      AdicionarOpaco.setVisible(false);
     } else if (Adicional2Box.isVisible()) {
       Adicional2Box.setVisible(false);
       linha2.setVisible(false);
@@ -310,6 +324,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   }
 
   public void setPedido(Pedido pedido) {
+    System.out.println("pedido.getItensPedido().size(): " + pedido.getItensPedido().size());
     Pagina.setPageCount(pedido.getItensPedido().size());
 
     try {
@@ -347,6 +362,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
             Adicional3Box.setValue(adicionais.get(2).getNome());
             Adicional3Box.setVisible(true);
             linha3.setVisible(true);
+
+            Adicionar.setDisable(true);
+            AdicionarNotOpaco.setVisible(false);
+            AdicionarOpaco.setVisible(true);
           }
         }
       }
@@ -367,9 +386,11 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   public Node createPage(int pageIndex) {
     // Crie um novo Pane para agrupar os elementos
     Pane pageContent = new Pane();
+    int numItens = 1;
+    numItens += pageIndex;
 
     // Adicione elementos relevantes ao Pane
-    Label label = new Label("Pizza  " + pageIndex + 1 + ":");
+    Label label = new Label("Pizza  " + numItens + ":");
     pageContent.getChildren().add(label);
 
     // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas
@@ -384,12 +405,18 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     linha3.setVisible(false);
     PizzaBox.getItems().clear();
 
+    System.out.println("pageIndex: " + pageIndex);
+
+    pedido.tostring();
+
     // Obtenha a lista de nomes de pizzas
     TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // será o bo
     List<TiposPizzas> tiposPizzas = tiposPizzasDao.listar();
     List<String> nomesP = new ArrayList<>();
 
-    PizzaBox.setValue(tiposPizzas.get(pageIndex).getNome());
+    System.out.println(pedido.getItensPedido().get(pageIndex).getAdicionais().size());
+
+    PizzaBox.setValue(pedido.getItensPedido().get(pageIndex).getPizza().getNome());
 
     for (TiposPizzas tp : tiposPizzas) {
       nomesP.add(tp.getNome());
@@ -433,6 +460,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
             Adicional3Box.setValue(adicionais.get(2).getNome());
             Adicional3Box.setVisible(true);
             linha3.setVisible(true);
+
+            Adicionar.setDisable(true);
+            AdicionarNotOpaco.setVisible(false);
+            AdicionarOpaco.setVisible(true);
           }
         }
       }

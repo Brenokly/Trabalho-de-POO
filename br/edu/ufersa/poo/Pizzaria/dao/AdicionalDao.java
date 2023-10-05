@@ -77,49 +77,46 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
     }
   }
 
-  public void deletarAdicionais(ItensPedidos entity) {
-    System.out.println("Deletando adicionais: ");
-    System.out.println(entity.getId());
-
+  public void inserirAdicionaisPD(ItensPedidos entity, List<Adicional> adicionais) {
     Connection con = getConnection();
+    String sql = "INSERT INTO tb_pizza_adicional (id_pizza, quantidade, id_adicional) VALUES (?, ?, ?)";
 
-    String sql = "DELETE FROM tb_pizza_adicional WHERE id = ?";
-    try (PreparedStatement ps = con.prepareStatement(sql)) {
-      ps.setLong(1, entity.getIdPizzaAdicional());
-      ps.executeUpdate();
-    } catch (Exception e) {
-      e.printStackTrace();
-    } finally {
-      closeConnection();
-    }
-  }
-
-  public ItensPedidos inserirAdicionais(ItensPedidos entity) {
-    System.out.println("Inserindo adicionais: ");
-    System.out.println(entity.getId());
-
-    Connection con = getConnection();
-    String sql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
-    try (PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
-      for (Adicional adicional : entity.getAdicionais()) {
+    try {
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      for (Adicional adicional : adicionais) {
         ps.setLong(1, entity.getId());
-        ps.setLong(2, adicional.getId());
-        ps.setInt(3, adicional.getQuantidade());
+        ps.setInt(2, adicional.getQuantidade());
+        ps.setLong(3, adicional.getId());
         ps.executeUpdate();
 
         try (ResultSet rs = ps.getGeneratedKeys()) {
           if (rs.next()) {
-            entity.setIdPizzaAdicional(rs.getLong("id"));
+            for (Adicional adicional2 : entity.getAdicionais()) {
+              if (adicional2.getIdPizzaAdicional() == null) {
+                adicional2.setIdPizzaAdicional(rs.getLong("id"));
+              }
+            }
           }
         }
       }
     } catch (Exception e) {
       e.printStackTrace();
-    } finally {
-      closeConnection();
     }
+  }
 
-    return entity;
+  public void deletarAdicionaisPD(List<Adicional> adicionais) {
+    Connection con = getConnection();
+    String sql = "DELETE FROM tb_pizza_adicional WHERE id = ?";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      for (Adicional adicional : adicionais) {
+        ps.setLong(1, adicional.getIdPizzaAdicional());
+        ps.executeUpdate();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
   }
 
   public void alterar(ItensPedidos entity) {

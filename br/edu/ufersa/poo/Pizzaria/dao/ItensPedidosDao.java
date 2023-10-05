@@ -5,9 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
-
+import java.util.Map;
 import java.sql.Statement;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
 
@@ -15,7 +15,6 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
     public Long inserir(ItensPedidos entity) {
         Connection con = getConnection();
         Long pizzaId = null;
-        Long idPizzaAdicional = null;
 
         String insertPizzaSql = "INSERT INTO tb_itenspedido (id_tipopizza, id_pedido, tamanho, valor, descricao) VALUES (?, ?, ?, ?, ?)";
         try (PreparedStatement ps = con.prepareStatement(insertPizzaSql, Statement.RETURN_GENERATED_KEYS)) {
@@ -43,8 +42,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
                             try (ResultSet rt = psAdicional.getGeneratedKeys()) {
                                 if (rs.next()) {
-                                    idPizzaAdicional = rs.getLong(1);
-                                    entity.setIdPizzaAdicional(idPizzaAdicional);
+                                    adicional.setIdPizzaAdicional(rt.getLong("id"));
                                 }
                             }
                         }
@@ -66,7 +64,6 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
             ps.setLong(1, entity.getId());
             ps.executeUpdate();
-
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
@@ -95,7 +92,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                         psAdicional.setLong(1, adicional.getId());
                         psAdicional.setInt(2, adicional.getQuantidade());
                         psAdicional.setLong(3, entity.getId());
-                        psAdicional.setLong(4, entity.getIdPizzaAdicional());
+                        psAdicional.setLong(4, adicional.getIdPizzaAdicional());
                         psAdicional.executeUpdate();
                     }
                 }
@@ -135,9 +132,9 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
                             && rs.getDouble("valor_adicional") != 0.0) {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
+                                rs.getLong("id_pizza_adicional"));
                         pizza.getAdicionais().add(adicional);
-                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -179,9 +176,9 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
                             && rs.getDouble("valor_adicional") != 0.0) {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
+                                rs.getLong("id_pizza_adicional"));
                         pizza.getAdicionais().add(adicional);
-                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -198,15 +195,6 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         }
 
         return pizzas;
-    }
-
-    public void inserirAdicionais(ItensPedidos entity, Set<Adicional> adicionais) {
-        Connection con = getConnection();
-        String sql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
-    }
-
-    public void deletarAdicionais(ItensPedidos entity, Set<Adicional> adicionais) {
-        throw new UnsupportedOperationException("Unimplemented method 'buscar'");
     }
 
     public List<ItensPedidos> buscar(TiposPizzas tipoPizza) {
@@ -233,9 +221,9 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
                             && rs.getDouble("valor_adicional") != 0.0) {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
+                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
+                                rs.getLong("id_pizza_adicional"));
                         pizza.getAdicionais().add(adicional);
-                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -265,34 +253,44 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             ps.setLong(1, pedido.getId());
             ResultSet rs = ps.executeQuery();
 
+            Map<Long, ItensPedidos> mapItensPedido = new HashMap<>();
+
             while (rs.next()) {
-                ItensPedidos pizza = new ItensPedidos();
-                try {
-                    pizza.setId(rs.getLong("id_itenspedido"));
+                long idItensPedido = rs.getLong("id_itenspedido");
+                ItensPedidos pizza;
+
+                if (mapItensPedido.containsKey(idItensPedido)) {
+                    pizza = mapItensPedido.get(idItensPedido);
+                } else {
+                    pizza = new ItensPedidos();
+                    pizza.setId(idItensPedido);
                     pizza.setIdPedido(rs.getLong("id_pedido"));
                     pizza.getPizza().setId(rs.getLong("id_tipopizza"));
                     pizza.setTamanho(rs.getString("tamanho"));
                     pizza.setValor(rs.getDouble("valor"));
                     pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
                     pizza.setDescricao(rs.getString("descricao"));
-                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
-                            && rs.getDouble("valor_adicional") != 0.0) {
-                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
-                        pizza.getAdicionais().add(adicional);
-                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                    mapItensPedido.put(idItensPedido, pizza);
                 }
-                pizzas.add(pizza);
+
+                long idAdicional = rs.getLong("id_adicional");
+                String nomeAdicional = rs.getString("nome_adicional");
+                double valorAdicional = rs.getDouble("valor_adicional");
+                int quantidadeAdicional = rs.getInt("quantidade_adicional");
+                long idPizzaAdicional = rs.getLong("id_pizza_adicional");
+
+                if (idAdicional != 0 && nomeAdicional != null && valorAdicional != 0.0) {
+                    Adicional adicional = new Adicional(idAdicional, nomeAdicional, valorAdicional, quantidadeAdicional,
+                            idPizzaAdicional);
+                    pizza.getAdicionais().add(adicional);
+                }
             }
 
             rs.close();
             ps.close();
-        } catch (
 
-        SQLException e) {
+            pizzas.addAll(mapItensPedido.values());
+        } catch (SQLException e) {
             e.printStackTrace();
         } catch (Exception e) {
             e.printStackTrace();
@@ -328,8 +326,8 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     if (rs.getObject("id_adicional") != null) {
                         resultado.getAdicionais()
                                 .add(new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                        rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional")));
-                        resultado.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
+                                        rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
+                                        rs.getLong("id_pizza_adicional")));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

@@ -24,6 +24,7 @@ import javafx.scene.input.MouseEvent;
 
 public class TelaInicial implements Initializable {
     private PedidoBO pedidoBO = new PedidoBO();
+    private Pedido pedido = new Pedido();
 
     @FXML
     private Button adicionais;
@@ -69,8 +70,7 @@ public class TelaInicial implements Initializable {
             pedido = pedidoBO.buscarTodos();
             for (Pedido p : pedido) {
                 if (p.getEstado().getDescricao().equals("pendente") &&
-                !p.getItensPedido().isEmpty()) {
-                    p.tostring();
+                        !p.getItensPedido().isEmpty()) {
                     pedido2.add(p);
                 }
             }
@@ -102,7 +102,7 @@ public class TelaInicial implements Initializable {
 
     @FXML
     void AdicionalClicked(MouseEvent event) {
-
+       
     }
 
     @FXML
@@ -111,6 +111,7 @@ public class TelaInicial implements Initializable {
 
         if (pedido != null) {
             try {
+                System.out.println("pedido.getItensPedido().size() inicial1: " + pedido.getItensPedido().size());
                 Telas.TelaInicial2(pedido);
             } catch (Exception e) {
                 e.printStackTrace();

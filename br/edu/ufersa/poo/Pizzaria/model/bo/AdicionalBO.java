@@ -4,10 +4,13 @@ import java.util.List;
 
 import Exceptions.AdicionaJaExiste;
 import Exceptions.NomeInvalido;
+import Exceptions.PedidoInvalido;
 import Exceptions.QuantidadeInvalida;
 import Exceptions.ValorInvalido;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
+import br.edu.ufersa.poo.Pizzaria.dao.ItensPedidosDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
+import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 
 public class AdicionalBO implements BaseBO<Adicional> {
   @Override
@@ -69,6 +72,36 @@ public class AdicionalBO implements BaseBO<Adicional> {
     System.out.println("afons" + existingAdicional.getNome()  + " " + existingAdicional.getValor() + " " + existingAdicional.getQuantidade() + " " + existingAdicional.getId());
 
     adicionalDao.alterar(adicional);
+  }
+
+  public void deleteAdicionaisPD(ItensPedidos bo, List<Adicional> adicionaisRemovidos) throws Exception {
+    if (bo != null){
+      ItensPedidosDao pedidos = new ItensPedidosDao();
+      pedidos.buscar(bo);
+
+      if (bo != null){
+        AdicionalDao adicionalDao = new AdicionalDao();
+        adicionalDao.deletarAdicionaisPD(adicionaisRemovidos);
+      }
+    }
+    else{
+      throw new PedidoInvalido("Adicional inválido");
+    }
+  }
+
+  public void createAdicionaisPD(ItensPedidos bo, List<Adicional> adicionaisAdicionados) throws Exception {
+    if (bo != null){
+      ItensPedidosDao pedidos = new ItensPedidosDao();
+      pedidos.buscar(bo);
+
+      if (bo != null){
+        AdicionalDao adicionalDao = new AdicionalDao();
+        adicionalDao.inserirAdicionaisPD(bo, adicionaisAdicionados);
+      }
+    }
+    else{
+      throw new PedidoInvalido("Adicional inválido");
+    }
   }
 
   @Override

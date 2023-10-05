@@ -28,5 +28,6 @@ public class Teste {
     for (Pedido p : pedido2) {
       p.tostring();
     }
+    System.out.println("Tamanho de itens pedidos: " + pedido2.get(0).getItensPedido().size());
   }
 }
