@@ -32,13 +32,13 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     pizzaId = rs.getLong(1);
 
                     // Insira as informações dos adicionais na tabela tb_pizza_adicional
-                    String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
+                    String insertPizzaAdicionalSql = "INSERT INTO tb_pizza_adicional (id_pizza, quantidade, id_adicional) VALUES (?, ?, ?)";
                     try (PreparedStatement psAdicional = con.prepareStatement(insertPizzaAdicionalSql,
                             Statement.RETURN_GENERATED_KEYS)) {
                         for (Adicional adicional : entity.getAdicionais()) {
                             psAdicional.setLong(1, pizzaId);
-                            psAdicional.setLong(2, adicional.getId()); // Use o ID do adicional no banco de dados
-                            psAdicional.setInt(3, adicional.getQuantidade()); // Use a quantidade do adicional
+                            psAdicional.setInt(2, adicional.getQuantidade()); // Use o ID do adicional no banco de dados
+                            psAdicional.setLong(3, adicional.getId()); // Use a quantidade do adicional
                             psAdicional.executeUpdate();
 
                             try (ResultSet rt = psAdicional.getGeneratedKeys()) {
@@ -74,47 +74,13 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         }
     }
 
-    public void deletarAdicionais(ItensPedidos entity) {
-        System.out.println("Deletando adicionais: ");
-        System.out.println(entity.getId());
-        Connection con = getConnection();
-        String sql = "DELETE FROM tb_pizza_adicional WHERE id = ?";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            ps.setLong(1, entity.getId());
-            ps.executeUpdate();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
-    public void inserirAdicionais(ItensPedidos entity) {
-        System.out.println("Inserindo adicionais: ");
-        System.out.println(entity.getId());
-        Connection con = getConnection();
-        String sql = "INSERT INTO tb_pizza_adicional (id_pizza, id_adicional, quantidade) VALUES (?, ?, ?)";
-        try (PreparedStatement ps = con.prepareStatement(sql)) {
-            for (Adicional adicional : entity.getAdicionais()) {
-                ps.setLong(1, entity.getId());
-                ps.setLong(2, adicional.getId());
-                ps.setInt(3, adicional.getQuantidade());
-                ps.executeUpdate();
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
-        }
-    }
-
     public void alterar(ItensPedidos entity) {
         Connection con = getConnection();
         String sql = "UPDATE tb_itenspedido SET id_tipopizza = ?, tamanho = ?, valor = ?, descricao = ? WHERE id = ?";
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
-            ps.setLong(1, entity.getId());
+            ps.setLong(1, entity.getPizza().getId());
             ps.setString(2, entity.getTamanho().getDescricao());
             ps.setDouble(3, entity.getValor());
             ps.setString(4, entity.getDescricao());
@@ -125,14 +91,18 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
             String updatePizzaAdicionalSql = "UPDATE tb_pizza_adicional SET id_adicional = ?, quantidade = ? , id_pizza = ? where id = ?";
             try (PreparedStatement psAdicional = con.prepareStatement(updatePizzaAdicionalSql)) {
                 for (Adicional adicional : entity.getAdicionais()) {
-                    psAdicional.setLong(1, adicional.getId());
-                    psAdicional.setInt(2, adicional.getQuantidade());
-                    psAdicional.setLong(3, entity.getId()); // Onde id_pizza é igual ao ID do item do pedido
-                    psAdicional.setLong(4, adicional.getId());
-                    psAdicional.executeUpdate();
+                    if (adicional != null) {
+                        psAdicional.setLong(1, adicional.getId());
+                        psAdicional.setInt(2, adicional.getQuantidade());
+                        psAdicional.setLong(3, entity.getId());
+                        psAdicional.setLong(4, entity.getIdPizzaAdicional());
+                        psAdicional.executeUpdate();
+                    }
                 }
             }
-        } catch (Exception e) {
+        } catch (
+
+        Exception e) {
             e.printStackTrace();
         } finally {
             closeConnection();
@@ -167,6 +137,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
                                 rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
                         pizza.getAdicionais().add(adicional);
+                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -210,6 +181,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
                                 rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
                         pizza.getAdicionais().add(adicional);
+                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -263,6 +235,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
                                 rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
                         pizza.getAdicionais().add(adicional);
+                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -307,6 +280,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                         Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
                                 rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"));
                         pizza.getAdicionais().add(adicional);
+                        pizza.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -351,9 +325,12 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     resultado.setValor(rs.getDouble("valor"));
                     resultado.getPizza().setNome(rs.getString("nome_tipopizza"));
                     resultado.setDescricao(rs.getString("descricao"));
-                    resultado.getAdicionais()
-                            .add(new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                    rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional")));
+                    if (rs.getObject("id_adicional") != null) {
+                        resultado.getAdicionais()
+                                .add(new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+                                        rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional")));
+                        resultado.setIdPizzaAdicional(rs.getLong("id_pizza_adicional"));
+                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -370,4 +347,5 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
 
         return resultados;
     }
+
 }

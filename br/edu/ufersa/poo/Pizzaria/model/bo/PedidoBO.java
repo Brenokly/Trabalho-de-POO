@@ -67,17 +67,18 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new Exception("Erro no banco de dados, pedido não encontrado.");
         }
 
-        System.out.println("Pedido antigo ______________________________________");
-        pedidoAntigo.tostring();
-        System.out.println("Pedido novo ______________________________________");
-        pedido.tostring();
-
         ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
+        Set<Adicional> adicionaisAtuais = null;
+        Set<Adicional> adicionaisAntigos = null;
         for (int i = 0; i < pedido.getItensPedido().size(); i++) {
-            Set<Adicional> adicionaisAtuais = new HashSet<>(pedido.getItensPedido().get(i).getAdicionais());
-            Set<Adicional> adicionaisAntigos = new HashSet<>(pedidoAntigo.getItensPedido().get(i).getAdicionais());
+            if (pedido.getItensPedido().get(i).getAdicionais() != null) {
+                adicionaisAtuais = new HashSet<>(pedido.getItensPedido().get(i).getAdicionais());
+            }
+            if (pedidoAntigo.getItensPedido().get(i).getAdicionais() != null) {
+                adicionaisAntigos = new HashSet<>(pedidoAntigo.getItensPedido().get(i).getAdicionais());
+            }
 
-            if (!adicionaisAtuais.equals(adicionaisAntigos)) {
+            if (adicionaisAtuais.size() != adicionaisAntigos.size()) {
                 // Algo foi alterado nos adicionais do item de pedido
                 Set<Adicional> adicionaisRemovidos = new HashSet<>(adicionaisAntigos);
                 adicionaisRemovidos.removeAll(adicionaisAtuais);
@@ -86,15 +87,13 @@ public class PedidoBO implements BaseBO<Pedido> {
                 adicionaisAdicionados.removeAll(adicionaisAntigos);
 
                 if (!adicionaisRemovidos.isEmpty()) {
-                    System.out.println(pedidoAntigo.getItensPedido().get(i).getPizza().getId());
                     System.out.println("Removendo adicionais: " + adicionaisRemovidos);
-                    itensPedidosBO.deleteAdicionais(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
+                    //3itensPedidosBO.deleteAdicionais(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
                 }
 
                 if (!adicionaisAdicionados.isEmpty()) {
-                    System.out.println(pedido.getItensPedido().get(i).getId());
                     System.out.println("Adicionando adicionais: " + adicionaisAdicionados);
-                    itensPedidosBO.createAdicionais(pedido.getItensPedido().get(i), adicionaisAdicionados);
+                    //itensPedidosBO.createAdicionais(pedido.getItensPedido().get(i), adicionaisAdicionados);
                 }
             } else {
                 System.out.println("Atualizando item");

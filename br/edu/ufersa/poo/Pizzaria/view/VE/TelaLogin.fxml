@@ -30,7 +30,7 @@
       <AnchorPane layoutX="390.0" prefHeight="600.0" prefWidth="450.0">
          <children>
             <TextField fx:id="login" layoutX="50.0" layoutY="241.0" prefHeight="50.0" prefWidth="350.0" promptText="Usuário" styleClass="textfield" AnchorPane.bottomAnchor="350.0" />
-            <PasswordField fx:id="senha" layoutX="50.0" layoutY="295.0" prefHeight="50.0" prefWidth="350.0" promptText="Senha" styleClass="textfield" AnchorPane.bottomAnchor="270.0" />
+            <PasswordField fx:id="senha" layoutX="50.0" layoutY="295.0" onAction="#Autenticar" prefHeight="50.0" prefWidth="350.0" promptText="Senha" styleClass="textfield" AnchorPane.bottomAnchor="270.0" />
             <Button fx:id="entrar" layoutX="160.0" layoutY="375.0" mnemonicParsing="false" onAction="#Autenticar" prefHeight="35.0" prefWidth="130.0" styleClass="filled_button" text="Entrar" AnchorPane.bottomAnchor="195.0" AnchorPane.rightAnchor="80.0">
                <font>
                   <Font name="Montserrat Regular" size="10.0" />

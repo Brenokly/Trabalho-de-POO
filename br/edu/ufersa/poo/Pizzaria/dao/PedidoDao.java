@@ -86,7 +86,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
             closeConnection();
         }
     }
-    
+
     public Pedido buscar(Pedido entity) {
         Connection con = getConnection();
         Pedido resultado = new Pedido();
@@ -235,7 +235,9 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
                 resultados.add(resultado);
             }
-        } catch (SQLException e) {
+        } catch (
+
+        SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();

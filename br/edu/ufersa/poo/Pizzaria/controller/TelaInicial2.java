@@ -14,7 +14,6 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Tamanho;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
 import br.edu.ufersa.poo.Pizzaria.dao.ClienteDao;
-import br.edu.ufersa.poo.Pizzaria.dao.ItensPedidosDao;
 import br.edu.ufersa.poo.Pizzaria.dao.TiposPizzasDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -207,8 +206,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
       pedido.getItensPedido().get(currentPageIndex).setAdicionais(adicionais);
 
-      pedido.setValor(pedido.calcValor());
-
       PedidoBO pedidoBO = new PedidoBO();
       pedidoBO.update(pedido);
 
@@ -360,8 +357,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       // Atualize o Pagination para garantir que ele esteja na página correta
       Pagina.setPageFactory(this::createPage);
 
-      System.out.println("currentPageIndex: " + currentPageIndex);
-
       // Configure a página atual para a página carregada
       Pagina.setCurrentPageIndex(currentPageIndex);
     } catch (Exception e) {
@@ -374,7 +369,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     Pane pageContent = new Pane();
 
     // Adicione elementos relevantes ao Pane
-    Label label = new Label("Pizza ID: " + pedido.getItensPedido().get(pageIndex).getId());
+    Label label = new Label("Pizza  " + pageIndex + 1 + ":");
     pageContent.getChildren().add(label);
 
     // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas

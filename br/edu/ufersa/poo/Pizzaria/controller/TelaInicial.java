@@ -68,7 +68,9 @@ public class TelaInicial implements Initializable {
         try {
             pedido = pedidoBO.buscarTodos();
             for (Pedido p : pedido) {
-                if (p.getEstado().getDescricao().equals("pendente")) {
+                if (p.getEstado().getDescricao().equals("pendente") &&
+                !p.getItensPedido().isEmpty()) {
+                    p.tostring();
                     pedido2.add(p);
                 }
             }

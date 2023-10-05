@@ -86,12 +86,12 @@ public class ItensPedidos extends Produto {
   }
 
   public Long getIdPizzaAdicional() {
-    return IdPizzaAdicional;
+    return this.IdPizzaAdicional;
   }
 
   public void setIdPizzaAdicional(Long IdPizzaAdicional) {
     if (IdPizzaAdicional != null) {
-      this.IdPizzaAdicional = pizza.getId();
+      this.IdPizzaAdicional = IdPizzaAdicional;
     } else {
       throw new NullPointerException("Id inválido");
     }
