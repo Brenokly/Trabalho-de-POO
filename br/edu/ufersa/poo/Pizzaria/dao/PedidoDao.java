@@ -91,7 +91,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
         Connection con = getConnection();
         Pedido resultado = new Pedido();
 
-        String sql = "SELECT * FROM tb_pedido WHERE id = ?";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -100,14 +100,14 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
             if (rs.next()) {
                 try {
-                    resultado.setId(rs.getLong("id"));
-                    entity.setId(rs.getLong("id"));
+                    resultado.setId(rs.getLong("id_pedido"));
+                    entity.setId(rs.getLong("id_pedido"));
 
                     ClienteDao ClienteDao = new ClienteDao();
                     Cliente cliente = ClienteDao.buscar(rs.getLong("id_cliente"));
                     entity.setCliente(cliente);
-
                     resultado.setCliente(cliente);
+
                     resultado.setEstado(rs.getString("estado"));
                     entity.setEstado(rs.getString("estado"));
 
@@ -118,25 +118,10 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
                     ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
                     List<ItensPedidos> itensPedido = itensPedidosDao.buscar(resultado);
                     entity.setItensPedido(itensPedido);
-
                     resultado.setItensPedido(itensPedido);
+
                     resultado.setValor(rs.getDouble("valor"));
                     entity.setValor(rs.getDouble("valor"));
-
-                    AdicionalDao adicionalDao = new AdicionalDao();
-                    List<Adicional> adicionais = new ArrayList<>();
-                    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
-                    for (int i = 0; i < resultado.getItensPedido().size(); i++) {
-                        entity.getItensPedido().get(i).setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
-                        resultado.getItensPedido().get(i)
-                                .setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
-                        adicionais.add(adicionalDao.buscarAdPedido(itensPedido.get(i)));
-                    }
-
-                    for (int i = 0; i < resultado.getItensPedido().size(); i++) {
-                        entity.getItensPedido().get(i).setAdicionais(adicionais.get(i));
-                        resultado.getItensPedido().get(i).setAdicionais(adicionais.get(i));
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

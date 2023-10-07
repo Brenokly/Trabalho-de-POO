@@ -198,49 +198,63 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
     }
 
     public List<ItensPedidos> buscar(TiposPizzas tipoPizza) {
-        Connection con = getConnection();
-        List<ItensPedidos> pizzas = new ArrayList<>();
+    Connection con = getConnection();
+    List<ItensPedidos> pizzas = new ArrayList<>();
 
-        String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
+    String sql = "SELECT * FROM vw_itenspedido WHERE id_tipopizza = ?";
 
-        try {
-            PreparedStatement ps = con.prepareStatement(sql);
-            ps.setLong(1, tipoPizza.getId());
-            ResultSet rs = ps.executeQuery();
+    try {
+        PreparedStatement ps = con.prepareStatement(sql);
+        ps.setLong(1, tipoPizza.getId());
+        ResultSet rs = ps.executeQuery();
 
-            while (rs.next()) {
-                ItensPedidos pizza = new ItensPedidos();
-                try {
-                    pizza.setId(rs.getLong("id_itenspedido"));
-                    pizza.setIdPedido(rs.getLong("id_pedido"));
-                    pizza.getPizza().setId(rs.getLong("id_tipopizza"));
-                    pizza.setTamanho(rs.getString("tamanho"));
-                    pizza.setValor(rs.getDouble("valor"));
-                    pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
-                    pizza.setDescricao(rs.getString("descricao"));
-                    if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
-                            && rs.getDouble("valor_adicional") != 0.0) {
-                        Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
-                                rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
-                                rs.getLong("id_pizza_adicional"));
-                        pizza.getAdicionais().add(adicional);
-                    }
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                pizzas.add(pizza);
+        Map<Long, ItensPedidos> mapItensPedido = new HashMap<>();
+
+        while (rs.next()) {
+            long idItensPedido = rs.getLong("id_itenspedido");
+            ItensPedidos pizza;
+
+            if (mapItensPedido.containsKey(idItensPedido)) {
+                pizza = mapItensPedido.get(idItensPedido);
+            } else {
+                pizza = new ItensPedidos();
+                pizza.setId(idItensPedido);
+                pizza.setIdPedido(rs.getLong("id_pedido"));
+                pizza.getPizza().setId(rs.getLong("id_tipopizza"));
+                pizza.setTamanho(rs.getString("tamanho"));
+                pizza.setValor(rs.getDouble("valor"));
+                pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
+                pizza.setDescricao(rs.getString("descricao"));
+                mapItensPedido.put(idItensPedido, pizza);
             }
 
-            rs.close();
-            ps.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            closeConnection();
+            long idAdicional = rs.getLong("id_adicional");
+            String nomeAdicional = rs.getString("nome_adicional");
+            double valorAdicional = rs.getDouble("valor_adicional");
+            int quantidadeAdicional = rs.getInt("quantidade_adicional");
+            long idPizzaAdicional = rs.getLong("id_pizza_adicional");
+
+            if (idAdicional != 0 && nomeAdicional != null && valorAdicional != 0.0) {
+                Adicional adicional = new Adicional(idAdicional, nomeAdicional, valorAdicional, quantidadeAdicional, idPizzaAdicional);
+                pizza.getAdicionais().add(adicional);
+            }
         }
 
-        return pizzas;
+        rs.close();
+        ps.close();
+
+        pizzas.addAll(mapItensPedido.values());
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } catch (Exception e) {
+        e.printStackTrace();
+    } finally {
+        closeConnection();
     }
+
+    return pizzas;
+}
+
 
     public List<ItensPedidos> buscar(Pedido pedido) {
         Connection con = getConnection();

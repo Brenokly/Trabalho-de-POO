@@ -324,7 +324,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   }
 
   public void setPedido(Pedido pedido) {
-    System.out.println("pedido.getItensPedido().size(): " + pedido.getItensPedido().size());
     Pagina.setPageCount(pedido.getItensPedido().size());
 
     try {
@@ -413,8 +412,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // será o bo
     List<TiposPizzas> tiposPizzas = tiposPizzasDao.listar();
     List<String> nomesP = new ArrayList<>();
-
-    System.out.println(pedido.getItensPedido().get(pageIndex).getAdicionais().size());
 
     PizzaBox.setValue(pedido.getItensPedido().get(pageIndex).getPizza().getNome());
 

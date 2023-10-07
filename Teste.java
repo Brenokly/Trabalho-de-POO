@@ -1,33 +1,25 @@
+import br.edu.ufersa.poo.Pizzaria.dao.PedidoDao;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.*;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import Exceptions.IdInvalido;
+
 public class Teste {
   public static void main(String[] args) {
-    PedidoBO pedidoBO = new PedidoBO();
+    PedidoDao pedidoBO = new PedidoDao();
 
-    List<Pedido> pedido = null;
+    Pedido pedido = new Pedido();
 
     try {
-      pedido = pedidoBO.buscarTodos();
-    } catch (Exception e) {
+      pedido.setId(2L);
+      Pedido pedido2 = pedidoBO.buscar(pedido);
+      pedido2.tostring();
+      System.out.println(pedido2.getItensPedido().get(0).getAdicionais().size());
+    } catch (IdInvalido e) {
       e.printStackTrace();
     }
-
-    List<Pedido> pedido2 = new ArrayList<>();
-
-    for (Pedido p : pedido) {
-      if (p.getEstado().getDescricao().equals("pendente")) {
-        pedido2.add(p);
-      }
-
-    }
-
-    for (Pedido p : pedido2) {
-      p.tostring();
-    }
-    System.out.println("Tamanho de itens pedidos: " + pedido2.get(0).getItensPedido().size());
   }
 }

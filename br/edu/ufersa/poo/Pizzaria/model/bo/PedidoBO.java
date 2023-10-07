@@ -60,39 +60,27 @@ public class PedidoBO implements BaseBO<Pedido> {
 
         Pedido pedidoAntigo = PedidoDao.buscar(existingPedido);
 
-        if (pedidoAntigo == null) {
-            throw new Exception("Erro no banco de dados, pedido não encontrado.");
-        }
-
         AdicionalBO AdicionaisPD = new AdicionalBO();
         ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
         List<Adicional> adicionaisAtuais = null;
         List<Adicional> adicionaisAntigos = null;
-        for (int i = 0; i < pedido.getItensPedido().size(); i++) {
+        int TamanhoPedidoAtual = pedido.getItensPedido().size();
+        for (int i = 0; i < TamanhoPedidoAtual; i++) {
             if (pedido.getItensPedido().get(i).getAdicionais() != null) {
                 adicionaisAtuais = new ArrayList<>(pedido.getItensPedido().get(i).getAdicionais());
-                System.out.println("Atuais\n---------------------------------------------");
-                for (Adicional adicional : adicionaisAtuais) {
-                    System.out.println(adicional.getNome());
-                }
             }
             if (pedidoAntigo.getItensPedido().get(i).getAdicionais() != null) {
                 adicionaisAntigos = new ArrayList<>(pedidoAntigo.getItensPedido().get(i).getAdicionais());
-                System.out.println(
-                        "Adicionais Antigos\n---------------------------------------------");
-                for (Adicional adicional : adicionaisAntigos) {
-                    System.out.println(adicional.getNome());
-                }
             }
 
-            for (Adicional adicionalAtual : adicionaisAtuais) {
-                for (Adicional adicionalAntigo : adicionaisAntigos) {
-                    if (adicionalAtual.getNome().equals(adicionalAntigo.getNome())) {
+            for (Adicional adicional : pedido.getItensPedido().get(i).getAdicionais()) {
+                for (Adicional adicional2 : pedidoAntigo.getItensPedido().get(i).getAdicionais()) {
+                    if (adicional.getNome().equals(adicional2.getNome())) {
                         // Remove o adicional com nome igual do conjunto atual
-                        adicionaisAtuais.remove(adicionalAtual);
+                        adicionaisAtuais.remove(adicional);
                         // Remove o adicional com nome igual do conjunto antigo
-                        adicionaisAntigos.remove(adicionalAntigo);
-                        break; // Sai do loop interno após encontrar uma correspondência
+                        adicionaisAntigos.remove(adicional2);
+                        break;
                     }
                 }
             }
@@ -104,14 +92,12 @@ public class PedidoBO implements BaseBO<Pedido> {
 
                 if (!adicionaisRemovidos.isEmpty()) {
                     System.out.println("Removendo adicionais: " + adicionaisRemovidos);
-                    AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i),
-                            adicionaisRemovidos);
+                    AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i),adicionaisRemovidos);
                 }
 
                 if (!adicionaisAdicionados.isEmpty()) {
                     System.out.println("Adicionando adicionais: " + adicionaisAdicionados);
-                    AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i),
-                            adicionaisAdicionados);
+                    AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i),adicionaisAdicionados);
                 }
             } else {
                 System.out.println("Atualizando item");
