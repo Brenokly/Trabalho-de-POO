@@ -95,6 +95,12 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   private ImageView AdicionarOpaco;
 
   @FXML
+  private ImageView RemoverNotOpaco;
+
+  @FXML
+  private ImageView RemoverOpaco;
+
+  @FXML
   private Pagination Pagina;
 
   int currentPageIndex = 0; // Adicione esta variável para rastrear a página atual
@@ -247,6 +253,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       Adicional1Box.setVisible(true);
       linha1.setVisible(true);
       Adicional1Box.getItems().addAll(nomesA);
+
+      RemoverNotOpaco.setDisable(false);
+      RemoverNotOpaco.setVisible(true);
+      RemoverOpaco.setVisible(false);
     } else if (!Adicional2Box.isVisible()) {
       Adicional2Box.setVisible(true);
       linha2.setVisible(true);
@@ -256,9 +266,9 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       linha3.setVisible(true);
       Adicional3Box.getItems().addAll(nomesA);
 
-      Adicionar.setDisable(true);
       AdicionarNotOpaco.setVisible(false);
       AdicionarOpaco.setVisible(true);
+      Adicionar.setDisable(true);
     }
   }
 
@@ -269,9 +279,9 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       linha3.setVisible(false);
       Adicional3Box.getItems().clear();
 
-      Adicionar.setDisable(false);
       AdicionarNotOpaco.setVisible(true);
       AdicionarOpaco.setVisible(false);
+      Adicionar.setDisable(false);
     } else if (Adicional2Box.isVisible()) {
       Adicional2Box.setVisible(false);
       linha2.setVisible(false);
@@ -280,6 +290,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       Adicional1Box.setVisible(false);
       linha1.setVisible(false);
       Adicional1Box.getItems().clear();
+
+      RemoverNotOpaco.setDisable(true);
+      RemoverNotOpaco.setVisible(false);
+      RemoverOpaco.setVisible(true);
     }
   }
 
