@@ -2,8 +2,12 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.ResourceBundle;
+
+import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
@@ -140,6 +144,10 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       nomesA.add(ad.getNome());
     }
 
+    AdicionarNotOpaco.setVisible(true);
+    AdicionarOpaco.setVisible(false);
+    Adicionar.setDisable(false);
+
     Adicional1Box.getItems().addAll(nomesA);
     Adicional2Box.getItems().addAll(nomesA);
     Adicional3Box.getItems().addAll(nomesA);
@@ -192,30 +200,71 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       }
 
       List<Adicional> adicionais = new ArrayList<>();
+      Map<String, Integer> adicionalQuantidades = new HashMap<>();
       if (Adicional1Box.isVisible()) {
-        for (Adicional ad : new AdicionalDao().listar()) {
-          if (ad.getNome().equals(Adicional1Box.getValue())) {
-            adicionais.add(ad);
-            break;
-          }
+        String adicionalSelecionado = Adicional1Box.getValue();
+        if (adicionalQuantidades.containsKey(adicionalSelecionado)) {
+          adicionalQuantidades.put(adicionalSelecionado, adicionalQuantidades.get(adicionalSelecionado) + 1);
+        } else {
+          adicionalQuantidades.put(adicionalSelecionado, 1);
         }
       }
+
       if (Adicional2Box.isVisible()) {
-        for (Adicional ad : new AdicionalDao().listar()) {
-          if (ad.getNome().equals(Adicional2Box.getValue())) {
-            adicionais.add(ad);
-            break;
-          }
+        String adicionalSelecionado = Adicional2Box.getValue();
+        if (adicionalQuantidades.containsKey(adicionalSelecionado)) {
+          adicionalQuantidades.put(adicionalSelecionado, adicionalQuantidades.get(adicionalSelecionado) + 1);
+        } else {
+          adicionalQuantidades.put(adicionalSelecionado, 1);
         }
       }
+
       if (Adicional3Box.isVisible()) {
-        for (Adicional ad : new AdicionalDao().listar()) {
-          if (ad.getNome().equals(Adicional3Box.getValue())) {
-            adicionais.add(ad);
+        String adicionalSelecionado = Adicional3Box.getValue();
+        if (adicionalQuantidades.containsKey(adicionalSelecionado)) {
+          adicionalQuantidades.put(adicionalSelecionado, adicionalQuantidades.get(adicionalSelecionado) + 1);
+        } else {
+          adicionalQuantidades.put(adicionalSelecionado, 1);
+        }
+      }
+
+      List<Adicional> adicionalList = new AdicionalBO()
+          .buscarAdicionaisPD(pedido.getItensPedido().get(currentPageIndex));
+
+      // Agora, adicione os adicionais consolidados à lista
+      for (Map.Entry<String, Integer> entry : adicionalQuantidades.entrySet()) {
+        Adicional ad = new Adicional();
+        ad.setNome(entry.getKey());
+        ad.setQuantidade(entry.getValue());
+        for (Adicional adicional : adicionalList) {
+          if (adicional.getNome().equals(ad.getNome())) {
+            ad.setIdPizzaAdicional(adicional.getIdPizzaAdicional());
+            break;
+          }
+        }
+        adicionais.add(ad);
+      }
+
+      for (Adicional adicional : new AdicionalBO().buscarTodos()) {
+        for (Adicional adicional2 : adicionais) {
+          if (adicional.getNome().equals(adicional2.getNome())) {
+            adicional2.setId(adicional.getId());
+            adicional2.setValor(adicional.getValor());
             break;
           }
         }
       }
+
+      System.out.println("--------------------\nAdicionais do banco de dados\n");
+      for (Adicional adicion : new AdicionalBO().buscarTodos()) {
+        System.out.println(adicion.getNome() + " " + adicion.getId() + " " + adicion.getValor());
+      }
+      System.out.println("--------------------\n");
+      System.out.println("Adicionais da disgrala\n");
+      for (Adicional adicion : adicionais) {
+        System.out.println(adicion.getNome() + " " + adicion.getId() + " " + adicion.getValor());
+      }
+      System.out.println("--------------------\n");
 
       pedido.getItensPedido().get(currentPageIndex).setAdicionais(adicionais);
 
@@ -241,8 +290,12 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
   @FXML
   void AdicionalADD(ActionEvent event) {
-    AdicionalDao adicionalDao = new AdicionalDao(); // será o bo
-    List<Adicional> adicional = adicionalDao.listar();
+    List<Adicional> adicional = new ArrayList<>();
+    try {
+      adicional = new AdicionalBO().buscarTodos();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     List<String> nomesA = new ArrayList<>();
 
     for (Adicional ad : adicional) {
@@ -261,7 +314,9 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       Adicional2Box.setVisible(true);
       linha2.setVisible(true);
       Adicional2Box.getItems().addAll(nomesA);
+
     } else if (!Adicional3Box.isVisible()) {
+
       Adicional3Box.setVisible(true);
       linha3.setVisible(true);
       Adicional3Box.getItems().addAll(nomesA);
@@ -286,6 +341,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       Adicional2Box.setVisible(false);
       linha2.setVisible(false);
       Adicional2Box.getItems().clear();
+
     } else if (Adicional1Box.isVisible()) {
       Adicional1Box.setVisible(false);
       linha1.setVisible(false);
@@ -355,34 +411,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       this.pedido.setId(pedido.getId());
       this.pedido.setData(pedido.getData());
 
-      if (!pedido.getItensPedido().get(0).getAdicionais().isEmpty()) {
-        List<Adicional> adicionais = pedido.getItensPedido().get(0).getAdicionais();
-
-        if (!adicionais.isEmpty()) {
-          // A lista de adicionais do primeiro item não está vazia
-          if (adicionais.size() >= 1) {
-
-            Adicional1Box.setValue(adicionais.get(0).getNome());
-            Adicional1Box.setVisible(true);
-            linha1.setVisible(true);
-          }
-          if (adicionais.size() >= 2) {
-            Adicional2Box.setValue(adicionais.get(1).getNome());
-            Adicional2Box.setVisible(true);
-            linha2.setVisible(true);
-          }
-          if (adicionais.size() >= 3) {
-            Adicional3Box.setValue(adicionais.get(2).getNome());
-            Adicional3Box.setVisible(true);
-            linha3.setVisible(true);
-
-            Adicionar.setDisable(true);
-            AdicionarNotOpaco.setVisible(false);
-            AdicionarOpaco.setVisible(true);
-          }
-        }
-      }
-
       // Obtenha o índice da página atual
       currentPageIndex = Pagina.getCurrentPageIndex();
 
@@ -418,10 +446,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     linha3.setVisible(false);
     PizzaBox.getItems().clear();
 
-    System.out.println("pageIndex: " + pageIndex);
-
-    pedido.tostring();
-
     // Obtenha a lista de nomes de pizzas
     TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // será o bo
     List<TiposPizzas> tiposPizzas = tiposPizzasDao.listar();
@@ -445,8 +469,12 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       if (!itemAtual.getAdicionais().isEmpty()) {
         List<Adicional> adicionais = itemAtual.getAdicionais();
 
-        AdicionalDao adicionalDao = new AdicionalDao(); // será o bo
-        List<Adicional> adicional = adicionalDao.listar();
+        List<Adicional> adicional = new ArrayList<>();
+        try {
+          adicional = new AdicionalBO().buscarTodos();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
         List<String> nomesA = new ArrayList<>();
 
         for (Adicional ad : adicional) {
@@ -455,26 +483,57 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
         if (!adicionais.isEmpty()) {
           if (adicionais.size() >= 1) {
-            Adicional1Box.getItems().addAll(nomesA);
             Adicional1Box.setValue(adicionais.get(0).getNome());
             Adicional1Box.setVisible(true);
             linha1.setVisible(true);
-          }
-          if (adicionais.size() >= 2) {
-            Adicional2Box.getItems().addAll(nomesA);
-            Adicional2Box.setValue(adicionais.get(1).getNome());
-            Adicional2Box.setVisible(true);
-            linha2.setVisible(true);
-          }
-          if (adicionais.size() >= 3) {
-            Adicional3Box.getItems().addAll(nomesA);
-            Adicional3Box.setValue(adicionais.get(2).getNome());
-            Adicional3Box.setVisible(true);
-            linha3.setVisible(true);
+            Adicional1Box.getItems().addAll(nomesA);
 
-            Adicionar.setDisable(true);
-            AdicionarNotOpaco.setVisible(false);
-            AdicionarOpaco.setVisible(true);
+            if (adicionais.get(0).getQuantidade() > 1) {
+              Adicional2Box.setValue(adicionais.get(0).getNome());
+              Adicional2Box.setVisible(true);
+              linha2.setVisible(true);
+              Adicional2Box.getItems().addAll(nomesA);
+            }
+
+            if (adicionais.get(0).getQuantidade() > 2) {
+              Adicional3Box.setValue(adicionais.get(0).getNome());
+              Adicional3Box.setVisible(true);
+              linha3.setVisible(true);
+              Adicional3Box.getItems().addAll(nomesA);
+
+              Adicionar.setDisable(true);
+              AdicionarNotOpaco.setVisible(false);
+              AdicionarOpaco.setVisible(true);
+            }
+
+            if (adicionais.size() >= 2 && adicionais.get(0).getQuantidade() == 1) {
+              Adicional2Box.setValue(adicionais.get(1).getNome());
+              Adicional2Box.setVisible(true);
+              linha2.setVisible(true);
+              Adicional2Box.getItems().addAll(nomesA);
+            }
+
+            if (adicionais.size() >= 2 && adicionais.get(1).getQuantidade() == 2) {
+              Adicional3Box.setValue(adicionais.get(1).getNome());
+              Adicional3Box.setVisible(true);
+              linha3.setVisible(true);
+              Adicional3Box.getItems().addAll(nomesA);
+
+              Adicionar.setDisable(true);
+              AdicionarNotOpaco.setVisible(false);
+              AdicionarOpaco.setVisible(true);
+            }
+
+            if (adicionais.size() >= 3) {
+              Adicional3Box.setValue(adicionais.get(2).getNome());
+              Adicional3Box.setVisible(true);
+              linha3.setVisible(true);
+              Adicional3Box.getItems().addAll(nomesA);
+
+              Adicionar.setDisable(true);
+              AdicionarNotOpaco.setVisible(false);
+              AdicionarOpaco.setVisible(true);
+            }
           }
         }
       }

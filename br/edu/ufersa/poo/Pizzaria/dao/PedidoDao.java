@@ -11,7 +11,6 @@ import java.util.List;
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.classes.EnumEstado;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Estado;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;

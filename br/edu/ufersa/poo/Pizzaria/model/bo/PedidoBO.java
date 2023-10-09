@@ -58,6 +58,8 @@ public class PedidoBO implements BaseBO<Pedido> {
 
         Pedido existingPedido = new Pedido(pedido);
 
+        pedido.tostring();
+
         Pedido pedidoAntigo = PedidoDao.buscar(existingPedido);
 
         AdicionalBO AdicionaisPD = new AdicionalBO();
@@ -75,7 +77,7 @@ public class PedidoBO implements BaseBO<Pedido> {
 
             for (Adicional adicional : pedido.getItensPedido().get(i).getAdicionais()) {
                 for (Adicional adicional2 : pedidoAntigo.getItensPedido().get(i).getAdicionais()) {
-                    if (adicional.getNome().equals(adicional2.getNome())) {
+                    if (adicional.getNome().equals(adicional2.getNome()) && adicional.getQuantidade() == adicional2.getQuantidade()) {
                         // Remove o adicional com nome igual do conjunto atual
                         adicionaisAtuais.remove(adicional);
                         // Remove o adicional com nome igual do conjunto antigo
@@ -91,16 +93,23 @@ public class PedidoBO implements BaseBO<Pedido> {
                 List<Adicional> adicionaisAdicionados = new ArrayList<>(adicionaisAtuais);
 
                 if (!adicionaisRemovidos.isEmpty()) {
-                    System.out.println("Removendo adicionais: " + adicionaisRemovidos);
-                    AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i),adicionaisRemovidos);
+                    AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
+                    for (Adicional adicional : adicionaisRemovidos) {
+                        Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() + adicional.getQuantidade());
+                        AdicionaisPD.updateQuant(adicionalAtual);
+                    }
                 }
 
                 if (!adicionaisAdicionados.isEmpty()) {
-                    System.out.println("Adicionando adicionais: " + adicionaisAdicionados);
-                    AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i),adicionaisAdicionados);
+                    AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i), adicionaisAdicionados);
+                    for (Adicional adicional : adicionaisAdicionados) {
+                        Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() - adicional.getQuantidade());
+                        AdicionaisPD.updateQuant(adicionalAtual);
+                    }
                 }
             } else {
-                System.out.println("Atualizando item");
                 itensPedidosBO.update(pedido.getItensPedido().get(i));
             }
         }

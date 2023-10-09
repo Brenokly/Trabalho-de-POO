@@ -68,38 +68,60 @@ public class AdicionalBO implements BaseBO<Adicional> {
       throw new Exception("Erro no banco de dados, adicional não encontrado.");
     }
 
-    System.out.println("Cleitin" + adicional.getNome()  + " " + adicional.getValor() + " " + adicional.getQuantidade() + " " + adicional.getId());
-    System.out.println("afons" + existingAdicional.getNome()  + " " + existingAdicional.getValor() + " " + existingAdicional.getQuantidade() + " " + existingAdicional.getId());
-
     adicionalDao.alterar(adicional);
   }
 
+  public void updateQuant(Adicional adicional) throws Exception {
+    AdicionalDao adicionalDao = new AdicionalDao();
+    // Verificar se o nome é uma string válida
+    if (adicional.getNome() == null || adicional.getNome().isEmpty()) {
+      throw new NomeInvalido("Nome inválido");
+    }
+
+    // Verificar se o valor é maior que 0.0
+    if (adicional.getValor() <= 0.0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+
+    // Verificar se a quantidade é maior que 0
+    if (adicional.getQuantidade() < 0) {
+      throw new QuantidadeInvalida("Quantidade inválida");
+    }
+
+    // Verificar se um adicional com o mesmo nome já existe
+    Adicional existingAdicional = adicionalDao.buscar(adicional);
+
+    if (existingAdicional == null) {
+      throw new Exception("Erro no banco de dados, adicional não encontrado.");
+    }
+
+    adicionalDao.alterarQuant(adicional);
+  }
+
   public void deleteAdicionaisPD(ItensPedidos bo, List<Adicional> adicionaisRemovidos) throws Exception {
-    if (bo != null){
+    if (bo != null) {
       ItensPedidosDao pedidos = new ItensPedidosDao();
       pedidos.buscar(bo);
 
-      if (bo != null){
+      if (bo != null) {
         AdicionalDao adicionalDao = new AdicionalDao();
         adicionalDao.deletarAdicionaisPD(adicionaisRemovidos);
       }
-    }
-    else{
+    } else {
       throw new PedidoInvalido("Adicional inválido");
     }
   }
 
   public void createAdicionaisPD(ItensPedidos bo, List<Adicional> adicionaisAdicionados) throws Exception {
-    if (bo != null){
+    if (bo != null) {
       ItensPedidosDao pedidos = new ItensPedidosDao();
       pedidos.buscar(bo);
 
-      if (bo != null){
+      if (bo != null) {
         AdicionalDao adicionalDao = new AdicionalDao();
         adicionalDao.inserirAdicionaisPD(bo, adicionaisAdicionados);
       }
-    }
-    else{
+    } else {
       throw new PedidoInvalido("Adicional inválido");
     }
   }
@@ -134,8 +156,30 @@ public class AdicionalBO implements BaseBO<Adicional> {
 
   @Override
   public Adicional buscar(Adicional bo) throws Exception {
-    // TODO Auto-generated method stub
-    return null;
+    AdicionalDao adicionalDao = new AdicionalDao();
+
+    // Verificar se o nome é uma string válida
+    if (bo.getNome() == null || bo.getNome().isEmpty()) {
+      throw new NomeInvalido("Nome inválido");
+    }
+
+    // Verificar se o valor é maior que 0.0
+    if (bo.getValor() <= 0.0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+
+    // Verificar se a quantidade é maior que 0
+    if (bo.getQuantidade() < 0) {
+      throw new QuantidadeInvalida("Quantidade inválida");
+    }
+
+    Adicional existingAdicional = adicionalDao.buscar(bo);
+
+    if (existingAdicional == null) {
+      throw new Exception("Erro no banco de dados, adicional não encontrado.");
+    }
+
+    return existingAdicional;
   }
 
   @Override
@@ -147,5 +191,16 @@ public class AdicionalBO implements BaseBO<Adicional> {
     }
 
     return adicionalDao.listar();
+  }
+
+  public List<Adicional> buscarAdicionaisPD(ItensPedidos bo) throws Exception {
+    AdicionalDao adicionalDao = new AdicionalDao();
+
+    if (bo != null) {
+      List<Adicional> adicional = adicionalDao.buscarAdPedido(bo);
+      return adicional;
+    } else {
+      throw new Exception("Erro no banco de dados, nenhum adicional encontrado.");
+    }
   }
 }
