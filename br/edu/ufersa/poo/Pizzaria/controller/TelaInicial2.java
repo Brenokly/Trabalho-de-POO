@@ -254,18 +254,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
           }
         }
       }
-
-      System.out.println("--------------------\nAdicionais do banco de dados\n");
-      for (Adicional adicion : new AdicionalBO().buscarTodos()) {
-        System.out.println(adicion.getNome() + " " + adicion.getId() + " " + adicion.getValor());
-      }
-      System.out.println("--------------------\n");
-      System.out.println("Adicionais da disgrala\n");
-      for (Adicional adicion : adicionais) {
-        System.out.println(adicion.getNome() + " " + adicion.getId() + " " + adicion.getValor());
-      }
-      System.out.println("--------------------\n");
-
+      
       pedido.getItensPedido().get(currentPageIndex).setAdicionais(adicionais);
 
       PedidoBO pedidoBO = new PedidoBO();

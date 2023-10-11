@@ -58,8 +58,6 @@ public class PedidoBO implements BaseBO<Pedido> {
 
         Pedido existingPedido = new Pedido(pedido);
 
-        pedido.tostring();
-
         Pedido pedidoAntigo = PedidoDao.buscar(existingPedido);
 
         AdicionalBO AdicionaisPD = new AdicionalBO();

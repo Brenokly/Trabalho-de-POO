@@ -208,13 +208,14 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
   public Adicional buscar(Adicional entity) {
     Connection con = getConnection();
     String sql = "SELECT * FROM tb_adicional WHERE id = ?";
-    Adicional adicional = new Adicional();
+    Adicional adicional = null;
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
       ps.setLong(1, entity.getId());
       ResultSet rs = ps.executeQuery();
       if (rs.next()) {
+        adicional = new Adicional();
         adicional.setQuantidade(rs.getInt("quantidade"));
         adicional.setId(rs.getLong("id"));
         adicional.setNome(rs.getString("nome"));

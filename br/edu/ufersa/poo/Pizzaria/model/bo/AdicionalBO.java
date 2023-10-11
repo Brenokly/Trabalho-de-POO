@@ -36,11 +36,15 @@ public class AdicionalBO implements BaseBO<Adicional> {
     Adicional existingAdicional = adicionalDao.buscar(adicional);
 
     if (existingAdicional != null) {
+      System.out.println("Adicional já existe");
+      System.out.println(
+          "Adicional existente: " + existingAdicional.getNome() + " " + existingAdicional.getValor() + " " + existingAdicional.getQuantidade());
       throw new AdicionaJaExiste("Adicional com o mesmo nome já existe.");
+    } else {
+      System.out.println(
+          "Adicional existente: " + adicional.getNome() + " " + adicional.getValor() + " " + adicional.getQuantidade());
+      adicionalDao.inserir(adicional);
     }
-
-    // Agora você pode chamar o método de inserção do AdicionalDao
-    adicionalDao.inserir(adicional);
   }
 
   @Override
