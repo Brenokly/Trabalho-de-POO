@@ -47,11 +47,11 @@
       <Button fx:id="editar" layoutX="729.0" layoutY="549.0" mnemonicParsing="false" onAction="#EditarPedido" opacity="0.0" prefHeight="35.0" prefWidth="94.0" text="Editar Adicional" />
       <TableView fx:id="table" layoutX="249.0" layoutY="128.0" onMouseClicked="#AdicionalClicked" prefHeight="408.0" prefWidth="575.0">
          <columns>
-            <TableColumn fx:id="id" prefWidth="78.0" text="Id" />
+            <TableColumn fx:id="id" prefWidth="44.0" text="Id" />
             <TableColumn fx:id="cliente" prefWidth="209.0" text="Cliente" />
-            <TableColumn fx:id="estado" minWidth="15.0" prefWidth="92.0" text="Estado" />
-            <TableColumn fx:id="data" prefWidth="90.0" text="Data" />
-            <TableColumn fx:id="valor" prefWidth="105.0" text="Valor (R$)" />
+            <TableColumn fx:id="estado" minWidth="15.0" prefWidth="105.0" text="Estado" />
+            <TableColumn fx:id="data" prefWidth="109.0" text="Data" />
+            <TableColumn fx:id="valor" prefWidth="107.0" text="Valor (R$)" />
          </columns>
       </TableView>
       <TextField fx:id="searchTextField" layoutX="289.0" layoutY="83.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="514.0" promptText="BUSCAR PEDIDO" style="-fx-background-color: transparent;">
