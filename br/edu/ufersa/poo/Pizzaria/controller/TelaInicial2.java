@@ -235,7 +235,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       for (Map.Entry<String, Integer> entry : adicionalQuantidades.entrySet()) {
         Adicional ad = new Adicional();
         ad.setNome(entry.getKey());
-        ad.setValor(entry.getValue());
+        ad.setQuantidade(entry.getValue());
         for (Adicional adicional : adicionalList) {
           if (adicional.getNome().equals(ad.getNome())) {
             ad.setIdPizzaAdicional(adicional.getIdPizzaAdicional());

@@ -65,7 +65,7 @@
             <TableColumn fx:id="id" prefWidth="78.4000244140625" text="ID" />
             <TableColumn fx:id="nome" minWidth="15.0" prefWidth="224.79998779296875" text="NOME" />
             <TableColumn fx:id="valor" prefWidth="135.99993896484375" text="VALOR (R$)" />
-            <TableColumn fx:id="quantidade" prefWidth="136.0001220703125" text="QUANTIDADE (KG)" />
+            <TableColumn fx:id="quantidade" prefWidth="134.0" text="QUANTIDADE (KG)" />
          </columns>
       </TableView>
       <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="763.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
