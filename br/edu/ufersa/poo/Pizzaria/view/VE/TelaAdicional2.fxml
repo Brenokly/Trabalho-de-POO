@@ -17,7 +17,7 @@
             <Region prefHeight="60.0" prefWidth="840.0" />
             <ImageView fitHeight="60.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@inicioAdmin/Group%2068.png" />
+                  <Image url="@adicionaisElogin/Rectangle%2038.png" />
                </image>
             </ImageView>
          </children>

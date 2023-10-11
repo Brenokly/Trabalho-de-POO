@@ -3,7 +3,14 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.stage.Stage;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
+import javafx.scene.Node;
+
+import java.util.Optional;
+
 import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
@@ -58,12 +65,32 @@ public class TelaClientes3 extends Dialog<Cliente> {
     @FXML
     void ExcluirCliente(ActionEvent event) {
         if (cliente != null) {
-            ClienteBO clienteBO = new ClienteBO();
-            try {
-                clienteBO.deletar(cliente);
-                Telas.TelaClientes();
-            } catch (Exception e) {
-                e.printStackTrace();
+            Alert alert = new Alert(AlertType.CONFIRMATION);
+            alert.setTitle("Confirmação");
+            alert.setHeaderText("Excluir Cliente");
+            alert.setContentText("Tem certeza de que deseja excluir este cliente?");
+
+            ButtonType buttonTypeSim = new ButtonType("Sim", ButtonData.OK_DONE);
+            ButtonType buttonTypeNao = new ButtonType("Não", ButtonData.CANCEL_CLOSE);
+            alert.getButtonTypes().setAll(buttonTypeSim, buttonTypeNao);
+
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+            alert.initOwner(stage);
+            alert.setX(330);
+            alert.setY(400);
+
+            Optional<ButtonType> result = alert.showAndWait();
+
+            if (result.isPresent() && result.get() == buttonTypeSim) {
+                // O usuário confirmou a exclusão, proceda com a exclusão do cliente
+                ClienteBO clienteBO = new ClienteBO();
+                try {
+                    clienteBO.deletar(cliente);
+                    Telas.TelaClientes();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         }
     }

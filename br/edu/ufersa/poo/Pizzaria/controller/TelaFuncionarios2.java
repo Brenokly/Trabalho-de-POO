@@ -12,6 +12,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
 public class TelaFuncionarios2 {
@@ -32,19 +33,23 @@ public class TelaFuncionarios2 {
   private TextField email;
 
   @FXML
-  private TextField senha;
+  private PasswordField senha1;
+
+  @FXML
+  private PasswordField senha2;
 
   @FXML
   private Label funcionariosExistente;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
-    UserBO UserBO = new UserBO();
+    UserBO userBO = new UserBO();
 
     String nomeTexto = nome.getText();
     String cpfTexto = cpf.getText();
     String emailTexto = email.getText();
-    String senhaTexto = senha.getText();
+    String senhaTexto = senha1.getText();
+    String senhaTexto2 = senha2.getText();
 
     boolean nomeValido = !nomeTexto.isEmpty();
     boolean nomeApenasLetras = nomeTexto.matches("^[\\p{L}\\s]*$");
@@ -55,10 +60,11 @@ public class TelaFuncionarios2 {
 
     boolean emailValido = !emailTexto.isEmpty() && emailTexto.contains("@") && emailTexto.contains(".");
     boolean senhaValida = !senhaTexto.isEmpty() && senhaTexto.length() >= 8;
+    boolean senhasIguais = senhaTexto.equals(senhaTexto2); // Verifica se as senhas são iguais
 
     if (nomeValido && nomeApenasLetras && cpfValido && cpfApenasNumeros && cpfTamanhoValido && emailValido
-        && senhaValida) {
-      // Todas as entradas são válidas, continue com a criação do Funcionario
+        && senhaValida && senhasIguais) {
+      // Todas as entradas são válidas, continue com a criação do Funcionário
 
       Usuario usuario = new Usuario();
       usuario.setNome(nomeTexto);
@@ -68,11 +74,11 @@ public class TelaFuncionarios2 {
       usuario.setAdmin(false);
 
       try {
-        UserBO.create(usuario);
+        userBO.create(usuario);
         Alert alert = new Alert(AlertType.INFORMATION);
         alert.setTitle("Sucesso");
         alert.setHeaderText("Inserção Bem-sucedida");
-        alert.setContentText("O funcionario foi inserido com sucesso!");
+        alert.setContentText("O funcionário foi inserido com sucesso!");
 
         // Crie um botão "OK" no alerta
         ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);
@@ -95,11 +101,11 @@ public class TelaFuncionarios2 {
       }
 
       if (!cpfValido) {
-        displayAlert("Cpf inválido", "O cpf não pode estar vazio. ");
+        displayAlert("CPF inválido", "O CPF não pode estar vazio.");
       }
 
       if (!cpfApenasNumeros) {
-        displayAlert("Cpf inválido", "O cpf deve conter apenas números.");
+        displayAlert("CPF inválido", "O CPF deve conter apenas números.");
       }
 
       if (!emailValido) {
@@ -109,6 +115,10 @@ public class TelaFuncionarios2 {
       if (!senhaValida) {
         displayAlert("Senha inválida", "A senha não pode estar vazia e deve conter pelo menos 8 caracteres.");
       }
+
+      if (!senhasIguais) {
+        displayAlert("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");
+      }
     }
   }
 
@@ -116,6 +126,7 @@ public class TelaFuncionarios2 {
   void cancelarFuncionario(ActionEvent event) throws Exception {
     Telas.TelaFuncionarios();
   }
+
   private void displayAlert(String title, String message) {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Erro");

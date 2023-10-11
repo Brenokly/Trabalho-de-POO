@@ -3,12 +3,17 @@ package br.edu.ufersa.poo.Pizzaria.controller;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.stage.Stage;
+import java.util.Optional;
 import Exceptions.NomeInvalido;
 import Exceptions.QuantidadeInvalida;
 import Exceptions.ValorInvalido;
 import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.scene.Node;
 
 public class TelaAdicional3 extends Dialog<Adicional> {
   private Adicional adicional = new Adicional();
@@ -46,12 +51,31 @@ public class TelaAdicional3 extends Dialog<Adicional> {
   @FXML
   void ExcluirAdicional(ActionEvent event) {
     if (adicional != null) {
-      AdicionalBO adicionalBo = new AdicionalBO();
-      try {
-        adicionalBo.deletar(adicional);
-        Telas.TelaAdicional();
-      } catch (Exception e) {
-        e.printStackTrace();
+      Alert alert = new Alert(AlertType.CONFIRMATION);
+      alert.setTitle("Confirmação");
+      alert.setHeaderText("Excluir Adicional");
+      alert.setContentText("Tem certeza de que deseja excluir este adicional?");
+
+      ButtonType buttonTypeSim = new ButtonType("Sim", ButtonData.OK_DONE);
+      ButtonType buttonTypeNao = new ButtonType("Não", ButtonData.CANCEL_CLOSE);
+      alert.getButtonTypes().setAll(buttonTypeSim, buttonTypeNao);
+
+      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
+      alert.initOwner(stage);
+      alert.setX(330);
+      alert.setY(400);
+
+      Optional<ButtonType> result = alert.showAndWait();
+
+      if (result.isPresent() && result.get() == buttonTypeSim) {
+        AdicionalBO adicionalBo = new AdicionalBO();
+        try {
+          adicionalBo.deletar(adicional);
+          Telas.TelaAdicional();
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
       }
     }
   }
