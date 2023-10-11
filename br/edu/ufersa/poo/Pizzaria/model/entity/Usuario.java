@@ -8,7 +8,8 @@ public class Usuario {
     private String senha;
     private boolean isAdmin;
 
-    public Usuario() {}
+    public Usuario() {
+    }
 
     public Usuario(String nome, String cpf, String email, String senha, boolean isAdmin) {
         setNome(nome);
@@ -52,7 +53,7 @@ public class Usuario {
         validateStringInput(cpf, "CPF inválido");
         this.cpf = cpf;
     }
-    
+
     public String getEmail() {
         return email;
     }

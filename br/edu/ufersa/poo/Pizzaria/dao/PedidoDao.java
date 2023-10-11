@@ -11,7 +11,6 @@ import java.util.List;
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.classes.EnumEstado;
-import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Estado;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
@@ -22,14 +21,14 @@ import java.time.format.DateTimeFormatter;
 public class PedidoDao extends BaseDaoImpl<Pedido> {
     public Long inserir(Pedido pedido) {
         Long pedidoId = null;
-        String insertPedidoSql = "INSERT INTO tb_pedido (id_cliente, estado, data, valor) VALUES (?, ?, ?, ?)";
+        ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
+        String insertPedidoSql = "INSERT INTO tb_pedido (id_cliente, estado, data) VALUES (?, ?, ?)";
 
         try (Connection con = getConnection();
                 PreparedStatement ps = con.prepareStatement(insertPedidoSql, Statement.RETURN_GENERATED_KEYS)) {
             ps.setLong(1, pedido.getCliente().getId());
             ps.setString(2, pedido.getEstado().getDescricao());
             ps.setObject(3, pedido.getData());
-            ps.setDouble(4, pedido.getValor());
             ps.executeUpdate();
 
             try (ResultSet rs = ps.getGeneratedKeys()) {
@@ -39,6 +38,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
                         pedido.setId(pedidoId);
                         for (ItensPedidos itemPedido : pedido.getItensPedido()) {
                             itemPedido.setIdPedido(pedidoId);
+                            itensPedidosDao.inserir(itemPedido);
                         }
                     } catch (IdInvalido ii) {
                         ii.printStackTrace();
@@ -90,7 +90,7 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
         Connection con = getConnection();
         Pedido resultado = new Pedido();
 
-        String sql = "SELECT * FROM tb_pedido WHERE id = ?";
+        String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql);) {
 
@@ -99,14 +99,14 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
             if (rs.next()) {
                 try {
-                    resultado.setId(rs.getLong("id"));
-                    entity.setId(rs.getLong("id"));
+                    resultado.setId(rs.getLong("id_pedido"));
+                    entity.setId(rs.getLong("id_pedido"));
 
                     ClienteDao ClienteDao = new ClienteDao();
                     Cliente cliente = ClienteDao.buscar(rs.getLong("id_cliente"));
                     entity.setCliente(cliente);
-
                     resultado.setCliente(cliente);
+
                     resultado.setEstado(rs.getString("estado"));
                     entity.setEstado(rs.getString("estado"));
 
@@ -117,25 +117,10 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
                     ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
                     List<ItensPedidos> itensPedido = itensPedidosDao.buscar(resultado);
                     entity.setItensPedido(itensPedido);
-
                     resultado.setItensPedido(itensPedido);
+
                     resultado.setValor(rs.getDouble("valor"));
                     entity.setValor(rs.getDouble("valor"));
-
-                    AdicionalDao adicionalDao = new AdicionalDao();
-                    List<Adicional> adicionais = new ArrayList<>();
-                    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
-                    for (int i = 0; i < resultado.getItensPedido().size(); i++) {
-                        entity.getItensPedido().get(i).setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
-                        resultado.getItensPedido().get(i)
-                                .setPizza(tiposPizzasDao.buscar(itensPedido.get(i).getPizza()));
-                        adicionais.add(adicionalDao.buscarAdPedido(itensPedido.get(i)));
-                    }
-
-                    for (int i = 0; i < resultado.getItensPedido().size(); i++) {
-                        entity.getItensPedido().get(i).setAdicionais(adicionais.get(i));
-                        resultado.getItensPedido().get(i).setAdicionais(adicionais.get(i));
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -234,7 +219,9 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
 
                 resultados.add(resultado);
             }
-        } catch (SQLException e) {
+        } catch (
+
+        SQLException e) {
             e.printStackTrace();
         } finally {
             closeConnection();

@@ -7,6 +7,7 @@ import Exceptions.ValorInvalido;
 
 public class Adicional {
   private Long id;
+  private Long IdPizzaAdicional;
   private String nome;
   private double valor;
   private int quantidade;
@@ -26,7 +27,8 @@ public class Adicional {
     setQuantidade(quantidade_pedida);
   }
 
-  public Adicional(Long id, String nome, double valor, int quantidade) throws Exception {
+  public Adicional(Long id, String nome, double valor, int quantidade, Long IdPizzaAdicional) throws Exception {
+    setIdPizzaAdicional(IdPizzaAdicional);
     setId(id);
     setNome(nome);
     setValor(valor);
@@ -38,6 +40,18 @@ public class Adicional {
       this.id = id;
     } else {
       throw new IdInvalido("O id do adicional não pode ser vazio");
+    }
+  }
+
+  public Long getIdPizzaAdicional() {
+    return this.IdPizzaAdicional;
+  }
+
+  public void setIdPizzaAdicional(Long IdPizzaAdicional) {
+    if (IdPizzaAdicional != null) {
+      this.IdPizzaAdicional = IdPizzaAdicional;
+    } else {
+      throw new NullPointerException("Id inválido");
     }
   }
 
@@ -67,7 +81,7 @@ public class Adicional {
 
   @Override
   public String toString() {
-    return "Nome: " + this.getNome() + 
+    return "Nome: " + this.getNome() +
         " - Quantidade: " + this.getQuantidade();
   }
 

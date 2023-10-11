@@ -21,7 +21,8 @@ public class ItensPedidos extends Produto {
     pizza.setId(id);
   }
 
-  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto, List<Adicional> adicionais, String descricao)
+  public ItensPedidos(TiposPizzas Tpizza, Tamanho tamanho, Long idProduto,
+      List<Adicional> adicionais, String descricao)
       throws Exception {
     super(descricao, idProduto);
     pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
@@ -76,14 +77,14 @@ public class ItensPedidos extends Produto {
 
   public void setIdPedido(Long idPedido) throws IdInvalido {
     if (idPedido != null) {
-      IdPedido = idPedido;
+      this.IdPedido = idPedido;
     } else {
       throw new IdInvalido("Id inválido");
     }
   }
 
   public Long getIdPedido() {
-    return IdPedido;
+    return this.IdPedido;
   }
 
   public void setPizza(TiposPizzas pizza) throws PizzaInvalida {
@@ -152,6 +153,7 @@ public class ItensPedidos extends Produto {
 
     sb.append("Id do pedido: ").append(getIdPedido()).append("\n");
     sb.append("Pizza: ").append(getPizza().getNome()).append("\n");
+    sb.append("Id Pizza: ").append(getPizza().getId()).append("\n");
     sb.append("Tamanho: ").append(getTamanho().getDescricao()).append("\n");
     sb.append("Valor: ").append(getValor()).append("\n");
     sb.append("Descrição: ").append(getDescricao()).append("\n");
@@ -160,6 +162,7 @@ public class ItensPedidos extends Produto {
     for (Adicional adicional : adicionais) {
       sb.append(" - Nome: ").append(adicional.getNome()).append("\n");
       sb.append("   Valor: ").append(adicional.getValor()).append("\n");
+      sb.append("   Quantidade: ").append(adicional.getQuantidade()).append("\n");
     }
 
     return sb.toString();

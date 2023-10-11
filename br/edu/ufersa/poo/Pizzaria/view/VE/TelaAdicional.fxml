@@ -19,7 +19,7 @@
             <TableColumn fx:id="quantidade" prefWidth="114.0" text="Quantidade (KG)" />
          </columns>
       </TableView>
-      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="282.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparents;">
+      <TextField fx:id="searchTextField" layoutX="218.0" layoutY="68.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="282.0" promptText="BUSCAR ADICIONAL" style="-fx-background-color: transparent;">
          <font>
             <Font name="Arial" size="14.0" />
          </font>
@@ -59,5 +59,7 @@
          </image>
       </ImageView>
       <Button fx:id="adicionar" layoutX="508.0" layoutY="63.0" mnemonicParsing="false" onAction="#CarregaTelaAdicional2" opacity="0.0" prefHeight="35.0" prefWidth="37.0" text="Button" />
+      <Button fx:id="clientes" layoutX="46.0" layoutY="166.0" mnemonicParsing="false" onAction="#carregarClientes" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Button" />
+      <Button fx:id="sabores" layoutX="46.0" layoutY="244.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="64.0" text="Button" />
    </children>
 </Pane>

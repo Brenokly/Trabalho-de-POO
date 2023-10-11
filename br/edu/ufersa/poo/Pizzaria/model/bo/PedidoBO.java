@@ -4,11 +4,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.dao.PedidoDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
-import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 
 public class PedidoBO implements BaseBO<Pedido> {
@@ -62,31 +60,59 @@ public class PedidoBO implements BaseBO<Pedido> {
 
         Pedido pedidoAntigo = PedidoDao.buscar(existingPedido);
 
-        if (pedidoAntigo == null) {
-            throw new Exception("Erro no banco de dados, pedido não encontrado.");
-        }
-
+        AdicionalBO AdicionaisPD = new AdicionalBO();
         ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
-        for (int i = 0; i < pedido.getItensPedido().size(); i++) {
-            if (pedido.getItensPedido().get(i).getAdicionais().size() != pedidoAntigo.getItensPedido().get(i)
-                    .getAdicionais().size()) {
+        List<Adicional> adicionaisAtuais = null;
+        List<Adicional> adicionaisAntigos = null;
+        int TamanhoPedidoAtual = pedido.getItensPedido().size();
+        for (int i = 0; i < TamanhoPedidoAtual; i++) {
+            if (pedido.getItensPedido().get(i).getAdicionais() != null) {
+                adicionaisAtuais = new ArrayList<>(pedido.getItensPedido().get(i).getAdicionais());
+            }
+            if (pedidoAntigo.getItensPedido().get(i).getAdicionais() != null) {
+                adicionaisAntigos = new ArrayList<>(pedidoAntigo.getItensPedido().get(i).getAdicionais());
+            }
 
-                if (pedido.getItensPedido().get(i).getAdicionais().size() < pedidoAntigo.getItensPedido().get(i)
-                        .getAdicionais().size()) { // significa que o usuário removeu um adicional
-                    
-                    
-                        
-                    
+            for (Adicional adicional : pedido.getItensPedido().get(i).getAdicionais()) {
+                for (Adicional adicional2 : pedidoAntigo.getItensPedido().get(i).getAdicionais()) {
+                    if (adicional.getNome().equals(adicional2.getNome()) && adicional.getQuantidade() == adicional2.getQuantidade()) {
+                        // Remove o adicional com nome igual do conjunto atual
+                        adicionaisAtuais.remove(adicional);
+                        // Remove o adicional com nome igual do conjunto antigo
+                        adicionaisAntigos.remove(adicional2);
+                        break;
+                    }
+                }
+            }
 
+            if (adicionaisAtuais.size() != adicionaisAntigos.size()) {
+                // Algo foi alterado nos adicionais do item de pedido
+                List<Adicional> adicionaisRemovidos = new ArrayList<>(adicionaisAntigos);
+                List<Adicional> adicionaisAdicionados = new ArrayList<>(adicionaisAtuais);
+
+                if (!adicionaisRemovidos.isEmpty()) {
+                    AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
+                    for (Adicional adicional : adicionaisRemovidos) {
+                        Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() + adicional.getQuantidade());
+                        AdicionaisPD.updateQuant(adicionalAtual);
+                    }
                 }
 
+                if (!adicionaisAdicionados.isEmpty()) {
+                    AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i), adicionaisAdicionados);
+                    for (Adicional adicional : adicionaisAdicionados) {
+                        Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() - adicional.getQuantidade());
+                        AdicionaisPD.updateQuant(adicionalAtual);
+                    }
+                }
             } else {
                 itensPedidosBO.update(pedido.getItensPedido().get(i));
             }
         }
 
         PedidoDao.alterar(pedido);
-
     }
 
     @Override

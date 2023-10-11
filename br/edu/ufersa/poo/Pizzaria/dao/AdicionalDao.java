@@ -77,6 +77,48 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
     }
   }
 
+  public void inserirAdicionaisPD(ItensPedidos entity, List<Adicional> adicionais) {
+    Connection con = getConnection();
+    String sql = "INSERT INTO tb_pizza_adicional (id_pizza, quantidade, id_adicional) VALUES (?, ?, ?)";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+      for (Adicional adicional : adicionais) {
+        ps.setLong(1, entity.getId());
+        ps.setInt(2, adicional.getQuantidade());
+        ps.setLong(3, adicional.getId());
+        ps.executeUpdate();
+
+        try (ResultSet rs = ps.getGeneratedKeys()) {
+          if (rs.next()) {
+            for (Adicional adicional2 : entity.getAdicionais()) {
+              if (adicional2.getIdPizzaAdicional() == null) {
+                adicional2.setIdPizzaAdicional(rs.getLong("id"));
+              }
+            }
+          }
+        }
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
+  public void deletarAdicionaisPD(List<Adicional> adicionais) {
+    Connection con = getConnection();
+    String sql = "DELETE FROM tb_pizza_adicional WHERE id = ?";
+
+    try {
+      PreparedStatement ps = con.prepareStatement(sql);
+      for (Adicional adicional : adicionais) {
+        ps.setLong(1, adicional.getIdPizzaAdicional());
+        ps.executeUpdate();
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
+  }
+
   public void alterar(ItensPedidos entity) {
     Connection con = getConnection();
 
@@ -104,24 +146,13 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
   public void alterarQuant(Adicional entity) {
     Connection con = getConnection();
     PreparedStatement ps = null;
-    ResultSet rs = null;
 
     try {
-      String sql = "SELECT quantidade FROM tb_adicional WHERE id = ?";
+      String sql = "UPDATE tb_adicional SET quantidade = ? WHERE id = ?";
       ps = con.prepareStatement(sql);
-      ps.setLong(1, entity.getId());
-      rs = ps.executeQuery();
-
-      if (rs.next()) {
-        int quantidadeAtual = rs.getInt("quantidade");
-        int novaQuantidade = quantidadeAtual - entity.getQuantidade();
-
-        sql = "UPDATE tb_adicional SET quantidade = ? WHERE id = ?";
-        ps = con.prepareStatement(sql);
-        ps.setInt(1, novaQuantidade);
-        ps.setLong(2, entity.getId());
-        ps.executeUpdate();
-      }
+      ps.setInt(1, entity.getQuantidade());
+      ps.setLong(2, entity.getId());
+      ps.executeUpdate();
     } catch (SQLException e) {
       e.printStackTrace();
     } finally {
@@ -176,54 +207,53 @@ public class AdicionalDao extends BaseDaoImpl<Adicional> {
 
   public Adicional buscar(Adicional entity) {
     Connection con = getConnection();
-
-    String sql = "SELECT * FROM tb_adicional where id=?";
+    String sql = "SELECT * FROM tb_adicional WHERE id = ?";
+    Adicional adicional = null;
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
       ps.setLong(1, entity.getId());
       ResultSet rs = ps.executeQuery();
-      if (rs.next())
-        return entity;
-
+      if (rs.next()) {
+        adicional = new Adicional();
+        adicional.setQuantidade(rs.getInt("quantidade"));
+        adicional.setId(rs.getLong("id"));
+        adicional.setNome(rs.getString("nome"));
+        adicional.setValor(rs.getDouble("valor"));
+      }
     } catch (Exception e) {
 
     } finally {
       closeConnection();
     }
-    return null;
+    return adicional;
   }
 
-  public Adicional buscarAdPedido(ItensPedidos pizza) {
+  public List<Adicional> buscarAdPedido(ItensPedidos pizza) {
     Connection con = getConnection();
-    Adicional entity = new Adicional();
+    List<Adicional> entity = new ArrayList<>();
 
-    String sql = "SELECT * FROM tb_pizza_adicional where id_pizza = ?";
+    String sql = "SELECT * FROM vw_itenspedido WHERE id_itenspedido = ?";
 
     try {
       PreparedStatement ps = con.prepareStatement(sql);
       ps.setLong(1, pizza.getId());
       ResultSet rs = ps.executeQuery();
-      if (rs.next())
-        entity.setId(rs.getLong("id_adicional"));
-      entity.setQuantidade(rs.getInt("quantidade"));
-
-      sql = "SELECT * FROM tb_adicional where id = ?";
-      ps = con.prepareStatement(sql);
-      ps.setLong(1, entity.getId());
-      rs = ps.executeQuery();
-      if (rs.next()) {
-        entity.setNome(rs.getString("nome"));
-        entity.setValor(rs.getDouble("valor"));
+      while (rs.next()) {
+        if (rs.getLong("id_adicional") != 0 && rs.getString("nome_adicional") != null
+            && rs.getDouble("valor_adicional") != 0.0) {
+          Adicional adicional = new Adicional(rs.getLong("id_adicional"), rs.getString("nome_adicional"),
+              rs.getDouble("valor_adicional"), rs.getInt("quantidade_adicional"),
+              rs.getLong("id_pizza_adicional"));
+          entity.add(adicional);
+        }
       }
-
-      return entity;
     } catch (Exception e) {
-
+      e.printStackTrace();
     } finally {
       closeConnection();
     }
-    return null;
+    return entity;
   }
 
   public List<Adicional> buscar(List<Adicional> entidades) {

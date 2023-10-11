@@ -136,8 +136,23 @@ public class TelaAdicional1 implements Initializable {
   }
 
   @FXML
+  void carregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
+  void carregarSabores(ActionEvent event) throws Exception {
+    Telas.TelaSabores();
+  }
+
+  @FXML
   void CarregaTelaAdicional2(ActionEvent event) throws Exception {
     Telas.TelaAdicional2();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
   }
 
   @FXML
