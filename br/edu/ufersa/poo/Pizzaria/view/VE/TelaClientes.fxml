@@ -62,10 +62,10 @@
       </ImageView>
       <TableView fx:id="tableClientes" layoutX="249.0" layoutY="128.0" onMouseClicked="#ClienteClicked" prefHeight="408.0" prefWidth="575.0">
          <columns>
-            <TableColumn fx:id="id" prefWidth="56.0" text="id" />
-            <TableColumn fx:id="colNome" prefWidth="126.0" text="nome" />
-            <TableColumn fx:id="colCpf" prefWidth="149.0" text="cpf" />
-            <TableColumn fx:id="colEndereco" prefWidth="243.0" text="endereço" />
+            <TableColumn fx:id="id" prefWidth="40.0" text="id" />
+            <TableColumn fx:id="colNome" prefWidth="129.0" text="nome" />
+            <TableColumn fx:id="colCpf" prefWidth="122.0" text="cpf" />
+            <TableColumn fx:id="colEndereco" prefWidth="283.0" text="endereço" />
          </columns>
       </TableView>
       <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="763.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">

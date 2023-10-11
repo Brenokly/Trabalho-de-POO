@@ -67,14 +67,16 @@ public class TelaInicial implements Initializable {
         List<Pedido> pedido2 = new ArrayList<>();
         try {
             pedido = pedidoBO.buscarTodos();
-            for (Pedido p : pedido) {
-                if (p.getEstado().getDescricao().equals("pendente") &&
-                        !p.getItensPedido().isEmpty()) {
-                    pedido2.add(p);
+            if (pedido != null) {
+                for (Pedido p : pedido) {
+                    if (p.getEstado().getDescricao().equals("pendente") &&
+                            !p.getItensPedido().isEmpty()) {
+                        pedido2.add(p);
+                    }
                 }
-            }
 
-            list.addAll(pedido2);
+                list.addAll(pedido2);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -92,16 +94,18 @@ public class TelaInicial implements Initializable {
         valor.setCellValueFactory(new PropertyValueFactory<>("valor"));
         data.setCellValueFactory(new PropertyValueFactory<>("data"));
 
-        // Adicionar os dados à TableView
-        table.setItems(list);
+        if (list != null) {
+            // Adicionar os dados à TableView
+            table.setItems(list);
 
-        // Adicionar os dados originais à lista allAdicionais
-        allPedidos.addAll(pedido2);
+            // Adicionar os dados originais à lista allAdicionais
+            allPedidos.addAll(pedido2);
+        }
     }
 
     @FXML
     void AdicionalClicked(MouseEvent event) {
-       
+
     }
 
     @FXML
@@ -139,7 +143,7 @@ public class TelaInicial implements Initializable {
 
     @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
-        Telas.TelaAdicional();
+        Telas.TelaFuncionarios();
     }
 
     @FXML

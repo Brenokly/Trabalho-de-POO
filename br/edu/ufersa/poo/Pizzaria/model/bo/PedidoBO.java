@@ -176,16 +176,16 @@ public class PedidoBO implements BaseBO<Pedido> {
     }
 
     @Override
-    public List<Pedido> buscarTodos() throws Exception {
+    public List<Pedido> buscarTodos() {
         PedidoDao PedidoDao = new PedidoDao();
-        List<Pedido> arrayExistingPedidos = new ArrayList<>();
+        List<Pedido> arrayExistingPedidos = null;
 
         arrayExistingPedidos = PedidoDao.listar();
 
         if (arrayExistingPedidos.size() <= 0) {
-            throw new Exception("Erro no banco de dados, nenhum pedido encontrado.");
-        }
-
+            System.out.println("Nenhum pedido pendente encontrado.");
+            return null;
+        } 
         return arrayExistingPedidos;
     }
 

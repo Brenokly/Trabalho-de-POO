@@ -110,6 +110,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   int currentPageIndex = 0; // Adicione esta variável para rastrear a página atual
   int pageIndex = 0;
 
+
   @Override
   public void initialize(URL location, ResourceBundle resources) {
     ClienteDao clienteDao = new ClienteDao(); // será o bo

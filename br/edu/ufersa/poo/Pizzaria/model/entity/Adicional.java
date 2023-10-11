@@ -56,7 +56,7 @@ public class Adicional {
   }
 
   public Long getId() {
-    return id;
+    return this.id;
   }
 
   public void setNome(String nome) throws NomeInvalido {
@@ -68,7 +68,7 @@ public class Adicional {
   }
 
   public String getNome() {
-    return nome;
+    return this.nome;
   }
 
   public void setValor(double valor) throws ValorInvalido {
@@ -86,7 +86,7 @@ public class Adicional {
   }
 
   public double getValor() {
-    return valor;
+    return this.valor;
   }
 
   public void setQuantidade(int quantidade) throws QuantidadeInvalida {
@@ -98,6 +98,6 @@ public class Adicional {
   }
 
   public int getQuantidade() {
-    return quantidade;
+    return this.quantidade;
   }
 }

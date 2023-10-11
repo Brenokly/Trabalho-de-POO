@@ -30,12 +30,30 @@ public class TelaClientes3 extends Dialog<Cliente> {
 
     @FXML
     private TextField senha;
-    
+
     @FXML
     private Button salvar;
 
     @FXML
     private Button cancelar;
+
+    @FXML
+    private Button clientes;
+
+    @FXML
+    private Button pedidos;
+
+    @FXML
+    private Button sabores;
+
+    @FXML
+    private Button adicionais;
+
+    @FXML
+    private Button funcionarios;
+
+    @FXML
+    private Button sair;
 
     @FXML
     void ExcluirCliente(ActionEvent event) {
@@ -108,28 +126,9 @@ public class TelaClientes3 extends Dialog<Cliente> {
     }
 
     @FXML
-    void carregarInicio(ActionEvent event) throws Exception {
-        Telas.TelaInicial();
-    }
-
-    @FXML
-    private Button clientes;
-
-    @FXML
     void carregarClientes(ActionEvent event) throws Exception {
         Telas.TelaClientes();
     }
-
-    @FXML
-    private Button pedidos;
-
-    @FXML
-    void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
-    }
-
-    @FXML
-    private Button sabores;
 
     @FXML
     void carregarSabores(ActionEvent event) throws Exception {
@@ -137,15 +136,14 @@ public class TelaClientes3 extends Dialog<Cliente> {
     }
 
     @FXML
-    private Button adicionais;
-
-    @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
         Telas.TelaAdicional();
     }
 
     @FXML
-    private Button funcionarios;
+    void carregarPedidos(ActionEvent event) throws Exception {
+        // Telas.TelaPedidos();
+    }
 
     @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
@@ -153,7 +151,9 @@ public class TelaClientes3 extends Dialog<Cliente> {
     }
 
     @FXML
-    private Button sair;
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
+    }
 
     @FXML
     void carregarLogin(ActionEvent event) throws Exception {

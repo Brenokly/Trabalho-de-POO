@@ -10,6 +10,7 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyEvent;
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
@@ -25,7 +26,6 @@ public class TelaFuncionarios implements Initializable {
 
     @FXML
     private TableView<Usuario> tableFuncionarios;
-
     @FXML
     private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
     @FXML
@@ -36,6 +36,11 @@ public class TelaFuncionarios implements Initializable {
     private TableColumn<Usuario, String> colEmail;
     @FXML
     private TableColumn<Usuario, Boolean> colAdministrator;
+    @FXML
+    private ImageView AddFuncionarios;
+    @FXML
+    private ImageView editarFunc;
+
     // Outras colunas, se necessário
 
     ObservableList<Usuario> list = FXCollections.observableArrayList();
@@ -64,6 +69,13 @@ public class TelaFuncionarios implements Initializable {
 
         // Adicionar os dados originais à lista allUsuarios
         allUsuarios.addAll(funcionarios);
+
+        if (Telas.getAdmin() == false) {
+            AddFuncionarios.setVisible(false);
+            editarFunc.setVisible(false);
+            adicionar.setDisable(true);
+            editar.setDisable(true);
+        }
     }
 
     @FXML

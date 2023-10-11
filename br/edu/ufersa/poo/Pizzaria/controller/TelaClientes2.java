@@ -38,6 +38,27 @@ public class TelaClientes2 {
   private Label clientesExistente;
 
   @FXML
+  private Button inicio;
+
+  @FXML
+  private Button clientes;
+
+  @FXML
+  private Button pedidos;
+
+  @FXML
+  private Button sabores;
+
+  @FXML
+  private Button adicionais;
+
+  @FXML
+  private Button funcionarios;
+
+  @FXML
+  private Button sair;
+
+  @FXML
   void salvarCliente(ActionEvent event) throws Exception {
     ClienteBO ClienteBO = new ClienteBO();
 
@@ -113,31 +134,9 @@ public class TelaClientes2 {
   }
 
   @FXML
-  private Button inicio;
-
-  @FXML
-  void carregarInicio(ActionEvent event) throws Exception {
-    Telas.TelaInicial();
-  }
-
-  @FXML
-  private Button clientes;
-
-  @FXML
   void carregarClientes(ActionEvent event) throws Exception {
     Telas.TelaClientes();
   }
-
-  @FXML
-  private Button pedidos;
-
-  @FXML
-  void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
-  }
-
-  @FXML
-  private Button sabores;
 
   @FXML
   void carregarSabores(ActionEvent event) throws Exception {
@@ -145,15 +144,14 @@ public class TelaClientes2 {
   }
 
   @FXML
-  private Button adicionais;
-
-  @FXML
   void carregarAdicionais(ActionEvent event) throws Exception {
     Telas.TelaAdicional();
   }
 
   @FXML
-  private Button funcionarios;
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
+  }
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
@@ -161,7 +159,9 @@ public class TelaClientes2 {
   }
 
   @FXML
-  private Button sair;
+  void carregarInicio(ActionEvent event) throws Exception {
+    Telas.TelaInicial();
+  }
 
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {

@@ -17,6 +17,15 @@ import javafx.stage.Stage;
 
 public class Telas extends Application {
   private static Stage primaryStage;
+  private static Boolean isAdmin = false;
+
+  public static void setAdmin(Boolean isAdmin) {
+    Telas.isAdmin = isAdmin;
+  }
+
+  public static Boolean getAdmin() {
+    return isAdmin;
+  }
 
   public static Stage getPrimaryStage() {
     return primaryStage;

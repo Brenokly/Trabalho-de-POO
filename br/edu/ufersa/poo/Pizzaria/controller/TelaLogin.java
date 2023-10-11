@@ -35,8 +35,10 @@ public class TelaLogin {
     usuario.setEmail(userLogin);
     usuario.setSenha(userSenha);
 
+    Boolean isAdmin = false;
     try {
-      userbo.Autenticar(usuario);
+      isAdmin = userbo.Autenticar(usuario);
+      Telas.setAdmin(isAdmin);
       login.pseudoClassStateChanged(starter, true);
       senha.pseudoClassStateChanged(starter, true);
       Telas.TelaInicial();

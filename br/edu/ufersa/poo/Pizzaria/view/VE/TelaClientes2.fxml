@@ -5,106 +5,116 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.Region?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientes2">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientes2">
    <children>
-
-      <ImageView fitHeight="84.0" fitWidth="600.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Clientes/Top%20Bar.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="401.0" fitWidth="184.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Clientes/Variant12.png" />
-         </image>
-      </ImageView>
-      <ImageView disable="true" fitHeight="33.0" fitWidth="99.0" layoutX="494.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+      <AnchorPane prefHeight="60.0" prefWidth="840.0">
+         <children>
+            <Region prefHeight="60.0" prefWidth="840.0" />
+            <ImageView fitHeight="60.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Clientes/Top%20Bar.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane prefHeight="540.0" prefWidth="177.0">
+         <children>
+            <Region prefHeight="600.0" prefWidth="234.0" />
+            <ImageView fitHeight="600.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@Clientes/Variant12.png" />
+               </image>
+            </ImageView>
+            <Button fx:id="funcionarios" layoutX="39.0" layoutY="484.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="156.0" text="Button" />
+            <Button fx:id="sair" layoutX="95.0" layoutY="531.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="25.0" prefWidth="43.0" text="Button" />
+            <Button fx:id="adicionais" layoutX="55.0" layoutY="429.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="124.0" text="Button" />
+            <Button fx:id="pedidos" layoutX="69.0" layoutY="313.0" mnemonicParsing="false" onAction="#carregarPedidos" opacity="0.0" prefHeight="25.0" prefWidth="94.0" text="pedidos" />
+            <Button fx:id="inicio" layoutX="81.0" layoutY="198.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="Button" />
+            <Button fx:id="sabores" layoutX="64.0" layoutY="371.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="102.0" text="Button" />
+         </children>
+      </AnchorPane>
+      <ImageView disable="true" fitHeight="35.0" fitWidth="114.0" layoutX="730.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/SALVAR.png" />
          </image>
       </ImageView>
-      <ImageView disable="true" fitHeight="33.0" fitWidth="139.0" layoutX="369.0" layoutY="348.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView disable="true" fitHeight="35.0" fitWidth="139.0" layoutX="596.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/CANCELAR.png" />
          </image>
       </ImageView>
-      <Label layoutX="184.0" layoutY="99.0" text="Nome:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="186.0" layoutY="127.0" text="Cpf:">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Label>
-      <Label layoutX="171.0" layoutY="61.0" text="Dados Pessoais">
+      <Label layoutX="274.0" layoutY="142.0" text="Nome:">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <ImageView fitHeight="1.0" fitWidth="390.0" layoutX="172.0" layoutY="91.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
+      <Label layoutX="274.0" layoutY="197.0" text="Cpf:">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <Label layoutX="261.0" layoutY="90.0" text="Dados Pessoais">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="17.0" fitWidth="538.0" layoutX="258.0" layoutY="120.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2089.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="20.0" fitWidth="289.0" layoutX="227.0" layoutY="146.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="8.0" fitWidth="234.0" layoutX="312.0" layoutY="220.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2089.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="1.0" fitWidth="390.0" layoutX="172.0" layoutY="228.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/Rectangle%2089.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="1.0" fitWidth="286.0" layoutX="247.0" layoutY="259.0" pickOnBounds="true">
+      <ImageView fitHeight="1.0" fitWidth="319.0" layoutX="361.0" layoutY="332.0" pickOnBounds="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2090.png" />
          </image>
       </ImageView>
-      <TextField fx:id="nome" layoutX="243.0" layoutY="96.0" prefHeight="10.0" prefWidth="300.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="nome" layoutX="326.0" layoutY="139.0" prefHeight="30.0" prefWidth="378.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="cpf" layoutX="218.0" layoutY="125.0" prefHeight="30.0" prefWidth="298.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="cpf" layoutX="304.0" layoutY="194.0" prefHeight="30.0" prefWidth="244.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <TextField fx:id="endereco" layoutX="247.0" layoutY="235.0" prefHeight="30.0" prefWidth="290.0" style="-fx-background-color: transparent;">
+      <TextField fx:id="endereco" layoutX="353.0" layoutY="306.0" prefHeight="30.0" prefWidth="325.0" style="-fx-background-color: transparent;">
          <font>
             <Font size="14.0" />
          </font>
       </TextField>
-      <ImageView fitHeight="2.0" fitWidth="313.0" layoutX="237.0" layoutY="118.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="9.0" fitWidth="368.0" layoutX="334.0" layoutY="165.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Rectangle%2089.png" />
          </image>
       </ImageView>
-      <Label layoutX="175.0" layoutY="198.0" text="Entrega: ">
+      <Label layoutX="261.0" layoutY="259.0" text="Entrega: ">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label layoutX="180.0" layoutY="243.0" text="Endereço:">
+      <Label layoutX="274.0" layoutY="309.0" text="Endereço:">
          <font>
-            <Font name="System Bold" size="14.0" />
+            <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <Label fx:id="clienteExistente" layoutX="171.0" layoutY="44.0" text="Cliente já existe!" textFill="RED" visible="false" />
-      <Button fx:id="inicio" layoutX="53.0" layoutY="127.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" text="Button" />
-      <Button fx:id="clientes" layoutX="45.0" layoutY="169.0" mnemonicParsing="false" onAction="#carregarClientes" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="Clientes" />
-      <Button fx:id="pedidos" layoutX="45.0" layoutY="205.0" mnemonicParsing="false" onAction="#carregarPedidos" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="pedidos" />
-      <Button fx:id="sabores" layoutX="44.0" layoutY="246.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="sabores" />
-      <Button fx:id="adicionais" layoutX="38.0" layoutY="283.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="83.0" text="Adicionais" />
-      <Button fx:id="funcionarios" layoutX="21.0" layoutY="323.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="114.0" text="funcionarios" />
-      <Button fx:id="sair" layoutX="61.0" layoutY="353.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="10.0" prefWidth="36.0" text="Button" />
-      <Button fx:id="salvar" layoutX="499.0" layoutY="348.0" mnemonicParsing="false" onAction="#salvarCliente" opacity="0.0" prefHeight="33.0" prefWidth="82.0" text="Salvar" />
-      <Button fx:id="cancelar" layoutX="374.0" layoutY="347.0" mnemonicParsing="false" onAction="#cancelarClientes" opacity="0.0" prefHeight="33.0" prefWidth="107.0" text="Cancelar" />
+      <Label fx:id="clienteExistente" layoutX="261.0" layoutY="70.0" text="Cliente já existe!" textFill="RED" visible="false" />
+      <Button fx:id="salvar" layoutX="730.0" layoutY="549.0" mnemonicParsing="false" onAction="#salvarCliente" opacity="0.0" prefHeight="33.0" prefWidth="94.0" text="Salvar" />
+      <Button fx:id="cancelar" layoutX="594.0" layoutY="550.0" mnemonicParsing="false" onAction="#cancelarClientes" opacity="0.0" prefHeight="33.0" prefWidth="124.0" text="Cancelar" />
+      <ImageView fitHeight="17.0" fitWidth="538.0" layoutX="259.0" layoutY="283.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@adicionaisElogin/Rectangle%2089.png" />
+         </image>
+      </ImageView>
    </children>
 </Pane>

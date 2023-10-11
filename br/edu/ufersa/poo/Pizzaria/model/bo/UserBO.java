@@ -8,12 +8,12 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 
 public class UserBO implements BaseBO<Usuario> {
 
-  public Usuario Autenticar(Usuario bo) throws UsuarioInvalido {
+  public Boolean Autenticar(Usuario bo) throws UsuarioInvalido {
     UserDao UserDao = new UserDao();
     Usuario usuarioAutenticado = UserDao.buscarPorECpf(bo);
     if (usuarioAutenticado != null && usuarioAutenticado.getSenha().equals(bo.getSenha())) {
       // Usuário autenticado com sucesso
-      return usuarioAutenticado;
+      return usuarioAutenticado.isAdmin();
     } else {
       throw new UsuarioInvalido("Login ou senha não encontrados");
     }

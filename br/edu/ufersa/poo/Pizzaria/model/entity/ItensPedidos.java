@@ -126,8 +126,17 @@ public class ItensPedidos extends Produto {
   }
 
   public void setDescricao() throws DescricaoInvalida {
-    super.setDescricao("Pizza de " + this.pizza.getNome() + " - " + this.tamanho.getDescricao()
-        + " - Adicionais: " + this.adicionais.toString());
+    String descricao = "Pizza de " + this.pizza.getNome() + " - " + this.tamanho.getDescricao() + " - Adicionais: ";
+
+    for (Adicional adicional : adicionais) {
+      descricao += adicional.getNome() + ", ";
+    }
+
+    if (descricao.endsWith(", ")) {
+      descricao = descricao.substring(0, descricao.length() - 2);
+    }
+
+    super.setDescricao(descricao);
   }
 
   public List<Adicional> getAdicionais() {

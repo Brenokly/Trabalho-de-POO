@@ -106,6 +106,11 @@ public class TelaAdicional2 {
     }
   }
 
+  @FXML
+  void cancelarAdicional(ActionEvent event) throws Exception {
+    Telas.TelaAdicional();
+  }
+
   private boolean isValidDouble(String value) {
     try {
       double parsedValue = Double.parseDouble(value);
@@ -133,13 +138,28 @@ public class TelaAdicional2 {
   }
 
   @FXML
-  void cancelarAdicional(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+  void carregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
+  void carregarSabores(ActionEvent event) throws Exception {
+    Telas.TelaSabores();
+  }
+
+  @FXML
+  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
+    Telas.TelaAdicional2();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
   }
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+    Telas.TelaFuncionarios();
   }
 
   @FXML

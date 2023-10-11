@@ -11,12 +11,12 @@
 
 <Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="401.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionarios">
    <children>
-      <ImageView fitHeight="80.0" fitWidth="42.0" layoutX="506.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="AddFuncionarios" fitHeight="80.0" fitWidth="42.0" layoutX="506.0" layoutY="60.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@Funcionarios/adicionar.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="35.0" fitWidth="114.0" layoutX="483.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="editarFunc" fitHeight="35.0" fitWidth="114.0" layoutX="483.0" layoutY="354.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@adicionaisElogin/Filled%20Button.png" />
          </image>

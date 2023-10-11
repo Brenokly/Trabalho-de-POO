@@ -110,8 +110,28 @@ public class TelaAdicional3 extends Dialog<Adicional> {
   }
 
   @FXML
+  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
+    Telas.TelaAdicional2();
+  }
+
+  @FXML
+  void carregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
+  void carregarSabores(ActionEvent event) throws Exception {
+    Telas.TelaSabores();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
+  }
+
+  @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+    Telas.TelaFuncionarios();
   }
 
   @FXML

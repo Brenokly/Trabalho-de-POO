@@ -31,9 +31,9 @@
                   <Image url="@inicioAdmin/sidebar.png" />
                </image>
             </ImageView>
-            <Button fx:id="funcionarios" layoutX="39.0" layoutY="484.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="156.0" text="Button" />
+            <Button fx:id="funcionarios" layoutX="39.0" layoutY="483.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="156.0" text="Button" />
             <Button fx:id="sair" layoutX="95.0" layoutY="531.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="25.0" prefWidth="43.0" text="Button" />
-            <Button fx:id="adicionais" layoutX="55.0" layoutY="429.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="124.0" text="Button" />
+            <Button fx:id="adicionais" layoutX="55.0" layoutY="428.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="124.0" text="Button" />
             <Button fx:id="clientes" layoutX="69.0" layoutY="256.0" mnemonicParsing="false" onAction="#carregarClientes" opacity="0.0" prefHeight="25.0" prefWidth="93.0" text="Button" />
             <Button fx:id="sabores" layoutX="69.0" layoutY="372.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="93.0" text="Button" />
             <Button fx:id="pedidos" layoutX="69.0" layoutY="313.0" mnemonicParsing="false" onAction="#carregarPedidos" opacity="0.0" prefHeight="25.0" prefWidth="94.0" text="pedidos" />
@@ -44,7 +44,7 @@
             <Image url="@adicionaisElogin/Filled%20Button.png" />
          </image>
       </ImageView>
-      <Button fx:id="editar" layoutX="729.0" layoutY="549.0" mnemonicParsing="false" onAction="#EditarPedido" opacity="0.0" prefHeight="35.0" prefWidth="94.0" text="Editar Adicional" />
+      <Button fx:id="editar" layoutX="728.0" layoutY="548.0" mnemonicParsing="false" onAction="#EditarPedido" opacity="0.0" prefHeight="35.0" prefWidth="94.0" text="Editar Adicional" />
       <TableView fx:id="table" layoutX="249.0" layoutY="128.0" onMouseClicked="#AdicionalClicked" prefHeight="408.0" prefWidth="575.0">
          <columns>
             <TableColumn fx:id="id" prefWidth="44.0" text="Id" />
