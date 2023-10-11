@@ -43,11 +43,11 @@ public class Cliente{
     }
 
     public String getCpf() { return this.cpf; }
-    public void setCpf(String cpf) throws CpfInvalido {
+    public void setCpf(String cpf) throws Cpfnvalido {
         if (cpf != null) {
             this.cpf = cpf;
         } else {
-            throw new CpfInvalido("CPF inválido");
+            throw new Cpfnvalido("CPF inválido");
         }
     }
 
