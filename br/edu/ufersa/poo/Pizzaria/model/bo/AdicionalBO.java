@@ -33,18 +33,13 @@ public class AdicionalBO implements BaseBO<Adicional> {
     }
 
     // Verificar se um adicional com o mesmo nome já existe
-    Adicional existingAdicional = adicionalDao.buscar(adicional);
-
-    if (existingAdicional != null) {
-      System.out.println("Adicional já existe");
-      System.out.println(
-          "Adicional existente: " + existingAdicional.getNome() + " " + existingAdicional.getValor() + " " + existingAdicional.getQuantidade());
-      throw new AdicionaJaExiste("Adicional com o mesmo nome já existe.");
-    } else {
-      System.out.println(
-          "Adicional existente: " + adicional.getNome() + " " + adicional.getValor() + " " + adicional.getQuantidade());
+    List<Adicional> existingAdicional = adicionalDao.listar();
+    for (Adicional adicional2 : existingAdicional) {
+      if (adicional.getNome().toLowerCase().equals(adicional2.getNome().toLowerCase())) {
+        throw new AdicionaJaExiste("Adicional com o mesmo nome já existe.");
+      }
+    } 
       adicionalDao.inserir(adicional);
-    }
   }
 
   @Override

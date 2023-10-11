@@ -30,6 +30,9 @@ public class TelaAdicional1 implements Initializable {
   private Button editar;
 
   @FXML
+  private Button pedidos;
+
+  @FXML
   private Button funcionarios;
 
   @FXML
@@ -119,6 +122,7 @@ public class TelaAdicional1 implements Initializable {
 
   @FXML
   void AdicionalClicked(MouseEvent event) {
+
   }
 
   @FXML
