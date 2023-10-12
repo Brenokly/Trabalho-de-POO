@@ -1,3 +1,7 @@
+.root {
+    -fx-background-color: #F3F3F3;
+}
+
 /* Button styling */
 
 .outlined_button {
@@ -12,7 +16,7 @@
     -fx-effect: none;
 }
 .outlined_button:hover {
-    -fx-background-color: #0D0106, #F3F3F3, #0d010633; /* 20% neutral color */
+    -fx-background-color: #0D0106, #F3F3F3, #0D010633; /* 20% neutral color */
     -fx-background-insets: 0, 2;
 }
 .filled_button {
@@ -26,21 +30,27 @@
     -fx-effect: none;
 }
 .filled_button:hover {
-    -fx-background-color: #2e382ecc; /* 80% primary color */
+    -fx-background-color: #2E382ECC; /* 80% primary color */
 }
 .icon_button {
     -fx-background-color: transparent;
     -fx-padding: 0;
     -fx-font-size: 18;
+    -fx-font-family: "Montserrat";
     -fx-text-fill: #0D0106;
     -fx-effect: none;
 }
 .icon_button:hover, .icon_button:selected, .icon_button:drag {
-    -fx-background-color: #2e382e1a; /* 10% primary color */
+    -fx-background-color: #2E382E1A; /* 10% primary color */
 }
 
 #back_button {
     -fx-text-fill: #2E382E;
+}
+
+#menu_button {
+    -fx-text-fill: #F3F3F3;
+    -fx-font-size: 20;
 }
 
 #cancel_button {
@@ -54,7 +64,7 @@
 
 /* TextField styling */
 
-.textfield, .textfield:empty {
+.textfield, .textfield:starter {
     -fx-background-color: #0D0106, #F3F3F3;
     -fx-background-insets: 0, 0 0 2 0;
     -fx-background-radius: 0;
@@ -75,4 +85,76 @@
     -fx-background-color: transparent, #0D0106;
     -fx-background-insets: 0, 29 0 0 0;
     -fx-background-radius: 0;
+}
+
+/* Table styling */
+
+.table-view,
+.table-view .corner,
+.table-view .column-header-background .filler {
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: #2E382ECC;
+    -fx-background-radius: 7px 7px 0px 0px;
+    -fx-padding: 0 0 5px 0;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-text-background-color: #F3F3F3;
+    -fx-font-weight: bold;
+}
+
+.table-view .column-header .arrow {
+    -fx-background-color: #F3F3F3;
+}
+
+.table-view .table-cell {
+    -fx-background-color: transparent;
+    -fx-padding: 10 0 10 10;
+}
+
+.table-view .table-row-cell:odd {
+    -fx-background-color: #C0BDA580;
+    -fx-table-cell-border-color: #0D01061A;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+.table-view .table-row-cell:even {
+    -fx-background-color: transparent;
+    -fx-table-cell-border-color: #0D01061A;
+    -fx-background-insets: 0, 0 0 1 0;
+}
+
+.table-view .table-row-cell:hover {
+    -fx-background-color: #2E382E1A;
+    -fx-font-weigth: bold;
+}
+
+.table-view .table-row-cell:selected,
+.table-view .table-row-cell:highlighted {
+    -fx-background-color: #2E382EA6;
+    -fx-selection-bar: #2E382EA6; /* Define a cor de fundo da linha selecionada */
+    -fx-selection-bar-non-focused: #2E382EA6; /* Define a cor de fundo da linha selecionada quando a TableView não está focada */
+    -fx-font-weight: bold;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical,
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:vertical .track-background,
+.table-view .virtual-flow .scroll-bar:horizontal,
+.table-view .virtual-flow .scroll-bar:horizontal .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar .increment-button,
+.table-view .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .thumb {
+    -fx-background-color: #2E382ECC;
 }

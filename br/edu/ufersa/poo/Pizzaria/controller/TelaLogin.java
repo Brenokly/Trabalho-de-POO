@@ -9,20 +9,27 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class TelaLogin {
   private UserBO userbo = new UserBO();
+  
+  private PseudoClass error = PseudoClass.getPseudoClass("error");
 
   @FXML private TextField login;
   @FXML private PasswordField senha;
+
+  @FXML
+  void onTextFieldContentChanged(KeyEvent event) {
+    TextField sourceTextField = (TextField) event.getSource();
+    
+    sourceTextField.pseudoClassStateChanged(error, false);
+  }
   
   public void Autenticar(ActionEvent event) {
     Usuario usuario = new Usuario();
     String userLogin = login.getText();
     String userSenha = senha.getText();
-
-    PseudoClass error = PseudoClass.getPseudoClass("error");
-    PseudoClass starter = PseudoClass.getPseudoClass("empty");
 
     if (userLogin == null || userLogin.isEmpty()) {
       login.pseudoClassStateChanged(error, true);
@@ -39,8 +46,6 @@ public class TelaLogin {
     try {
       isAdmin = userbo.Autenticar(usuario);
       Telas.setAdmin(isAdmin);
-      login.pseudoClassStateChanged(starter, true);
-      senha.pseudoClassStateChanged(starter, true);
       Telas.TelaInicial();
     } catch (UsuarioInvalido e) {
       login.pseudoClassStateChanged(error, true);
