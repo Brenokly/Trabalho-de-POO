@@ -145,7 +145,7 @@ public class TelaClientes2 {
 
   @FXML
   void carregarAdicionais(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+    Telas.TelaAdicionalListagem();
   }
 
   @FXML

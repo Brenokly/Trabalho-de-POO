@@ -164,7 +164,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
 
     @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
-        Telas.TelaAdicional();
+        Telas.TelaAdicionalListagem();
     }
 
     @FXML

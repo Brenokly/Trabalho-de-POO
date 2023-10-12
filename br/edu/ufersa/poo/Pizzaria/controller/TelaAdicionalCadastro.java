@@ -4,6 +4,7 @@ import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,34 +14,20 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
-public class TelaAdicional2 {
-  @FXML
-  private Label AdicionalExistente;
+public class TelaAdicionalCadastro {
+  private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML
-  private Button cancelar;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  private TextField nome;
-
-  @FXML
-  private TextField preco;
-
-  @FXML
-  private TextField quantidade;
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  private Button salvar;
+  @FXML private Label AdicionalExistente;
+  @FXML private Button cancelar;
+  @FXML private Button funcionarios;
+  @FXML private Button inicio;
+  @FXML private TextField nome;
+  @FXML private TextField preco;
+  @FXML private TextField quantidade;
+  @FXML private Button sair;
+  @FXML private Button salvar;
 
   @FXML
   void SalvarAdicional(ActionEvent event) throws Exception {
@@ -78,9 +65,10 @@ public class TelaAdicional2 {
         alert.showAndWait();
 
         // Retorne para a TelaAdicional1 após o sucesso
-        Telas.TelaAdicional();
+        Telas.TelaAdicionalListagem();
       } catch (AdicionaJaExiste e) {
         AdicionalExistente.setVisible(true);
+        nome.pseudoClassStateChanged(error, true);
       } catch (QuantidadeInvalida e) {
         e.printStackTrace();
       } catch (ValorInvalido e) {
@@ -91,16 +79,20 @@ public class TelaAdicional2 {
     } else {
       // Alguma entrada é inválida, exiba alertas de erro
       if (!nomeValido) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome não pode estar vazio.");
       } else if (!nomeApenasLetras) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome deve conter apenas letras.");
       }
 
       if (!precoValido) {
+        preco.pseudoClassStateChanged(error, true);
         displayAlert("Preço inválido", "O preço deve ser um número decimal maior que 0.0.");
       }
 
       if (!quantidadeValida) {
+        quantidade.pseudoClassStateChanged(error, true);
         displayAlert("Quantidade inválida", "A quantidade deve ser um número inteiro maior ou igual a 0.");
       }
     }
@@ -108,7 +100,15 @@ public class TelaAdicional2 {
 
   @FXML
   void cancelarAdicional(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+    Telas.TelaAdicionalListagem();
+  }
+
+  @FXML
+  void onTextFieldContentChanged(KeyEvent event) {
+    TextField sourceTextField = (TextField) event.getSource();
+    
+    AdicionalExistente.setVisible(false);
+    sourceTextField.pseudoClassStateChanged(error, false);
   }
 
   private boolean isValidDouble(String value) {
@@ -145,11 +145,6 @@ public class TelaAdicional2 {
   @FXML
   void carregarSabores(ActionEvent event) throws Exception {
     Telas.TelaSabores();
-  }
-
-  @FXML
-  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
-    Telas.TelaAdicional2();
   }
 
   @FXML

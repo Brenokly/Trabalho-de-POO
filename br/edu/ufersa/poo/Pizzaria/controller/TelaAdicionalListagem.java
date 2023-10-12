@@ -20,44 +20,21 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class TelaAdicional1 implements Initializable {
+public class TelaAdicionalListagem implements Initializable {
   AdicionalBO adicionalBO = new AdicionalBO();
 
-  @FXML
-  private Button adicionar;
-
-  @FXML
-  private Button editar;
-
-  @FXML
-  private Button pedidos;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  private TableColumn<Adicional, Long> id;
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  private TableColumn<Adicional, String> nome;
-
-  @FXML
-  private TableColumn<Adicional, Integer> quantidade;
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  private TextField searchTextField;
-
-  @FXML
-  private TableView<Adicional> table;
-
-  @FXML
-  private TableColumn<Adicional, Double> valor;
+  @FXML private Button adicionar;
+  @FXML private Button editar;
+  @FXML private Button pedidos;
+  @FXML private Button funcionarios;
+  @FXML private Button inicio;
+  @FXML private Button sair;
+  @FXML private TextField searchTextField;
+  @FXML private TableView<Adicional> table;
+  @FXML private TableColumn<Adicional, Long> id;
+  @FXML private TableColumn<Adicional, String> nome;
+  @FXML private TableColumn<Adicional, Integer> quantidade;
+  @FXML private TableColumn<Adicional, Double> valor;
 
   ObservableList<Adicional> list = FXCollections.observableArrayList();
   ObservableList<Adicional> allAdicionais = FXCollections.observableArrayList();
@@ -114,7 +91,7 @@ public class TelaAdicional1 implements Initializable {
   @FXML
   void AddAdicional(ActionEvent event) {
     try {
-      Telas.TelaAdicional2();
+      Telas.TelaAdicionalCadastro();
     } catch (Exception e) {
       e.printStackTrace();
     }
@@ -132,7 +109,7 @@ public class TelaAdicional1 implements Initializable {
     if (adicional != null) {
       try {
         // Chame o método TelaAdicional3 e passe o Adicional selecionado
-        Telas.TelaAdicional3(adicional);
+        Telas.TelaAdicionalEditar(adicional);
       } catch (Exception e) {
         e.printStackTrace();
       }
@@ -151,7 +128,7 @@ public class TelaAdicional1 implements Initializable {
 
   @FXML
   void CarregaTelaAdicional2(ActionEvent event) throws Exception {
-    Telas.TelaAdicional2();
+    Telas.TelaAdicionalCadastro();
   }
 
   @FXML

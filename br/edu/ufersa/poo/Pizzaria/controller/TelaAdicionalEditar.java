@@ -1,10 +1,12 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import java.util.Optional;
 import Exceptions.NomeInvalido;
@@ -15,38 +17,20 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import javafx.scene.Node;
 
-public class TelaAdicional3 extends Dialog<Adicional> {
+public class TelaAdicionalEditar extends Dialog<Adicional> {
   private Adicional adicional = new Adicional();
 
-  @FXML
-  private Label AdicionalExistente;
+  private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML
-  private Button excluir;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  private TextField nome;
-
-  @FXML
-  private TextField preco;
-
-  @FXML
-  private TextField quantidade;
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  private Button salvar;
-
-  @FXML
-  private Button cancelar;
+  @FXML private Button excluir;
+  @FXML private Button funcionarios;
+  @FXML private Button inicio;
+  @FXML private TextField nome;
+  @FXML private TextField preco;
+  @FXML private TextField quantidade;
+  @FXML private Button sair;
+  @FXML private Button salvar;
+  @FXML private Button cancelar;
 
   @FXML
   void ExcluirAdicional(ActionEvent event) {
@@ -72,7 +56,7 @@ public class TelaAdicional3 extends Dialog<Adicional> {
         AdicionalBO adicionalBo = new AdicionalBO();
         try {
           adicionalBo.deletar(adicional);
-          Telas.TelaAdicional();
+          Telas.TelaAdicionalListagem();
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -106,7 +90,7 @@ public class TelaAdicional3 extends Dialog<Adicional> {
         adicionalBo.update(adicional);
 
         // Redireciona para a tela desejada após o salvamento bem-sucedido
-        Telas.TelaAdicional();
+        Telas.TelaAdicionalListagem();
       } catch (NomeInvalido e) {
         exibirMensagemDeErro("Nome inválido", e.getMessage());
       } catch (ValorInvalido e) {
@@ -119,6 +103,13 @@ public class TelaAdicional3 extends Dialog<Adicional> {
     }
   }
 
+  @FXML
+  void onTextFieldContentChanged(KeyEvent event) {
+    TextField sourceTextField = (TextField) event.getSource();
+    
+    sourceTextField.pseudoClassStateChanged(error, false);
+  }
+
   // Método para exibir uma mensagem de erro personalizada
   private void exibirMensagemDeErro(String titulo, String mensagem) {
     Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -129,13 +120,8 @@ public class TelaAdicional3 extends Dialog<Adicional> {
   }
 
   @FXML
-  void Cancelar(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
-  }
-
-  @FXML
-  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
-    Telas.TelaAdicional2();
+  void cancelarAdicional(ActionEvent event) throws Exception {
+    Telas.TelaAdicionalListagem();
   }
 
   @FXML

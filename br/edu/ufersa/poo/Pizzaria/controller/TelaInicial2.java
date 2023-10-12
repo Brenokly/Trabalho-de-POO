@@ -350,7 +350,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
   @FXML
   void carregarAdicionais(ActionEvent event) throws Exception {
-    Telas.TelaAdicional();
+    Telas.TelaAdicionalListagem();
   }
 
   @FXML
