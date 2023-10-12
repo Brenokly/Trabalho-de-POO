@@ -4,4 +4,10 @@ Esse arquivo conterá a descrição do nosso projeto, que se trata de um softwar
 Implementaremos as classes no pacote br/edu/ufersa/poo/classe
 
 # Criando as tabelas do Banco de Dados
-Para criar as tabelas do banco de dados é necessário executar o Script Create_BD.java, localizado na pasta Pizzaria.
+Para criar as tabelas do banco de dados é necessário executar o Script Create_DB.java, localizado na pasta Pizzaria.
+
+# Populando as tabelas do Banco de Dados
+Para popular as tabelas do banco de dados é necessário executar o Script Seed_DB.java, localizado na pasta Pizzaria.
+
+# Deletando as tabelas do Banco de Dados
+Para deletar as tabelas do banco de dados é necessário executar o Script Delete_DB.java, localizado na pasta Pizzaria.
