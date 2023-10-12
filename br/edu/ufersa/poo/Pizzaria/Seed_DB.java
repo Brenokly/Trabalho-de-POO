@@ -19,9 +19,9 @@ public class Seed_DB {
             // Tabela tb_user
             statement.executeUpdate("INSERT INTO tb_user (nome, cpf, email, senha, isadmin) VALUES " +
                                    "('admin', '12345678901', 'admin', 'admin', true), " +
-                                   "('Usuário 1', '12345678901', 'usuario1@email.com', 'senha123', true), " +
-                                   "('Usuário 2', '98765432109', 'usuario2@email.com', 'senha456', false), " +
-                                   "('Usuário 3', '45678901234', 'usuario3@email.com', 'senha789', false), " +
+                                   "('matheus', '12345678901', 'matheus', 'matheus', false), " +
+                                   "('juhan', '98765432109', 'juhan', 'juhan', false), " +
+                                   "('breno', '45678901234', 'breno', 'breno', false), " +
                                    "('Usuário 4', '56789012345', 'usuario4@email.com', 'senha101', true), " +
                                    "('Usuário 5', '67890123456', 'usuario5@email.com', 'senha202', false)");
 
