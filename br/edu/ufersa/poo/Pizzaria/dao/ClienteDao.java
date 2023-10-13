@@ -86,7 +86,7 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
                 cliente.setId(rs.getLong("id"));
                 cliente.setNome(rs.getString("nome"));
                 cliente.setCpf(rs.getString("cpf"));
-                cliente.setEndereco(rs.getString("email"));
+                cliente.setEndereco(rs.getString("endereco"));
             }
         } catch (IdInvalido e){
             e.printStackTrace();

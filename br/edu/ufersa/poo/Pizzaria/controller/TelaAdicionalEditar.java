@@ -96,7 +96,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
       } catch (ValorInvalido e) {
         exibirMensagemDeErro("Preço inválido", "O valor deve ser um número decimal maior que 0.0");
       } catch (QuantidadeInvalida e) {
-        exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número inteiro maior ou igual a 0");
+        exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número decimal maior ou igual a 0");
       } catch (Exception e) {
         exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());
       }
@@ -141,7 +141,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+    Telas.TelaFuncionariosListagem();
   }
 
   @FXML
@@ -164,29 +164,13 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
       preco.setText(String.valueOf(adicional.getValor()));
       quantidade.setText(String.valueOf(adicional.getQuantidade()));
     } catch (NomeInvalido e) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Nome inválido");
-      alert.setContentText(e.getMessage());
-      alert.showAndWait();
+      exibirMensagemDeErro("Nome inválido", e.getMessage());
     } catch (ValorInvalido e) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Valor inválido");
-      alert.setContentText("O valor deve ser um número decimal maior que 0.0");
-      alert.showAndWait();
+      exibirMensagemDeErro("Valor inválido", "O valor deve ser um número decimal maior que 0.0");
     } catch (QuantidadeInvalida e) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Quantidade inválida");
-      alert.setContentText("A quantidade deve ser um número inteiro maior que 0");
-      alert.showAndWait();
+      exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número decimal maior ou igual a 0.0");
     } catch (Exception e) {
-      Alert alert = new Alert(Alert.AlertType.ERROR);
-      alert.setTitle("Erro");
-      alert.setHeaderText("Erro ao carregar adicional");
-      alert.setContentText(e.getMessage());
-      alert.showAndWait();
+      exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());
     }
   }
 }

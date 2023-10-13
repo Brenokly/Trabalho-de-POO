@@ -169,10 +169,5 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb {
-    -fx-background-color: 
-        linear-gradient(to bottom, derive(#2E382EA6, -20%), derive(#2E382EA6, -30%)),
-        #F3F3F3,
-        #C0BDA580;
-    -fx-background-insets: 0, 1, 2;
-    -fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.1), 5, 0.0 , 0, 2);
+    -fx-background-color: #2E382EA6;
 }

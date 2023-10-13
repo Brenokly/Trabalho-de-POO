@@ -174,7 +174,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
 
     @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
-        Telas.TelaFuncionarios();
+        Telas.TelaFuncionariosListagem();
     }
 
     @FXML

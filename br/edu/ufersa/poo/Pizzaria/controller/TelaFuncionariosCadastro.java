@@ -15,31 +15,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class TelaFuncionarios2 {
+public class TelaFuncionariosCadastro {
 
-  @FXML
-  private Button salvar;
-
-  @FXML
-  private Button cancelar;
-
-  @FXML
-  private TextField nome;
-
-  @FXML
-  private TextField cpf;
-
-  @FXML
-  private TextField email;
-
-  @FXML
-  private PasswordField senha1;
-
-  @FXML
-  private PasswordField senha2;
-
-  @FXML
-  private Label funcionariosExistente;
+  @FXML private Button salvar;
+  @FXML private Button cancelar;
+  @FXML private TextField nome;
+  @FXML private TextField cpf;
+  @FXML private TextField email;
+  @FXML private PasswordField senha1;
+  @FXML private PasswordField senha2;
+  @FXML private Label funcionariosExistente;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
@@ -88,7 +73,7 @@ public class TelaFuncionarios2 {
         alert.showAndWait();
 
         // Retorne para a TelaFuncionario1 após o sucesso
-        Telas.TelaFuncionarios();
+        Telas.TelaFuncionariosListagem();
       } catch (UsuarioInvalido e) {
         displayAlert("Erro", e.getMessage());
       }
@@ -124,7 +109,7 @@ public class TelaFuncionarios2 {
 
   @FXML
   void cancelarFuncionario(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+    Telas.TelaFuncionariosListagem();
   }
 
   private void displayAlert(String title, String message) {
@@ -180,7 +165,7 @@ public class TelaFuncionarios2 {
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+    Telas.TelaFuncionariosListagem();
   }
 
   @FXML

@@ -14,7 +14,7 @@ import java.util.Optional;
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
-public class TelaFuncionarios3 extends Dialog<Usuario> {
+public class TelaFuncionariosEditar extends Dialog<Usuario> {
     private Usuario funcionario = new Usuario();
 
     @FXML
@@ -73,7 +73,7 @@ public class TelaFuncionarios3 extends Dialog<Usuario> {
                 UserBO userBO = new UserBO();
                 try {
                     userBO.deletar(funcionario);
-                    Telas.TelaFuncionarios();
+                    Telas.TelaFuncionariosListagem();
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -104,7 +104,7 @@ public class TelaFuncionarios3 extends Dialog<Usuario> {
                     userBO.update(funcionario);
 
                     // Redirecione para a tela desejada após o salvamento bem-sucedido
-                    Telas.TelaFuncionarios();
+                    Telas.TelaFuncionariosListagem();
                 } else {
                     exibirMensagemDeErro("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");
                 }
@@ -125,7 +125,7 @@ public class TelaFuncionarios3 extends Dialog<Usuario> {
 
     @FXML
     void Cancelar(ActionEvent event) throws Exception {
-        Telas.TelaFuncionarios();
+        Telas.TelaFuncionariosListagem();
     }
 
     public void setFuncionario(Usuario funcionario) {
@@ -190,7 +190,7 @@ public class TelaFuncionarios3 extends Dialog<Usuario> {
 
     @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
-        Telas.TelaFuncionarios();
+        Telas.TelaFuncionariosListagem();
     }
 
     @FXML
