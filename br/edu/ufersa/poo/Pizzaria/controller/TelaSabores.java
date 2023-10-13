@@ -73,7 +73,8 @@ public class TelaSabores implements Initializable {
   }
 
   @FXML
-  void carregarTelaSaboresCadastro(ActionEvent event) throws Exception {
+  void CadastrarSabor(ActionEvent event) throws Exception {
+    Telas.TelaSaboresCadastro();
   }
 
   @FXML
@@ -103,6 +104,11 @@ public class TelaSabores implements Initializable {
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
     Telas.TelaLogin();
+  }
+
+  @FXML
+  void cadastrarSabor(ActionEvent event) throws Exception {
+    Telas.TelaSaboresCadastro();
   }
 
   @FXML
