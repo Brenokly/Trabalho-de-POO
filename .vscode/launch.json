@@ -1,0 +1,36 @@
+{
+  // Use o IntelliSense para saber mais sobre os atributos possíveis.
+  // Focalizar para exibir as descrições dos atributos existentes.
+  // Para obter mais informações, acesse: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Teste",
+      "request": "launch",
+      "mainClass": "Teste",
+      "projectName": "src_c1e66256"
+    },
+    {
+      "name": "Java",
+      "type": "java",
+      "request": "launch",
+      "stopOnEntry": true,
+      "jdkPath": "${env:JAVA_HOME}/bin",
+      "cwd": "${fileDirname}",
+      "startupClass": "${fileBasenameNoExtension}",
+      "classpath": [
+        ".",
+        "${fileDirname}"
+      ]
+    },
+    {
+      "type": "java",
+      "name": "Telas",
+      "request": "launch",
+      "mainClass": "br.edu.ufersa.poo.Pizzaria.view.Telas",
+      "projectName": "src_c1e66256",
+      "vmArgs": "--module-path \"D:/Program Files/Java/jdk-17/lib/javafx-sdk-17.0.8/lib\" --add-modules javafx.controls,javafx.fxml"
+    }
+  ]
+}
