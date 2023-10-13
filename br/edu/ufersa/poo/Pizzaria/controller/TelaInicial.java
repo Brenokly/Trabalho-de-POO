@@ -122,11 +122,6 @@ public class TelaInicial implements Initializable {
     }
 
     @FXML
-    void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
-    }
-
-    @FXML
     void carregarClientes(ActionEvent event) throws Exception {
         Telas.TelaClientes();
     }
@@ -142,8 +137,18 @@ public class TelaInicial implements Initializable {
     }
 
     @FXML
+    void carregarPedidos(ActionEvent event) throws Exception {
+        // Telas.TelaPedidos();
+    }
+
+    @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
         Telas.TelaFuncionarios();
+    }
+
+    @FXML
+    void carregarInicio(ActionEvent event) throws Exception {
+        Telas.TelaInicial();
     }
 
     @FXML

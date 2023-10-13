@@ -58,7 +58,7 @@ public class Telas extends Application {
   }
 
   public static void TelaInicial() throws Exception {
-    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaInicial.fxml"));
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaInicialListagem.fxml"));
 
     Scene scene = new Scene(root);
 
@@ -66,7 +66,7 @@ public class Telas extends Application {
   }
 
   public static void TelaInicial2(Pedido pedido) throws Exception {
-    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaInicial2.fxml"));
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaInicialEditar.fxml"));
     Parent root = loader.load();
 
     // Obtenha o controlador da TelaFuncionarios2

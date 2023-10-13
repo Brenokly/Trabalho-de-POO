@@ -8,9 +8,9 @@ import java.sql.ResultSet;
 
 public class Delete_DB {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://localhost/Teste";
+        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "admin";
+        final String PASS = "breno";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);

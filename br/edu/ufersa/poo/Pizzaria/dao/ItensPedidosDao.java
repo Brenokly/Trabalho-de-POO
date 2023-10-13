@@ -261,7 +261,6 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         List<ItensPedidos> pizzas = new ArrayList<>();
 
         String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
-
         try {
             PreparedStatement ps = con.prepareStatement(sql);
             ps.setLong(1, pedido.getId());
@@ -281,7 +280,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                     pizza.setIdPedido(rs.getLong("id_pedido"));
                     pizza.getPizza().setId(rs.getLong("id_tipopizza"));
                     pizza.setTamanho(rs.getString("tamanho"));
-                    pizza.setValor(rs.getDouble("valor"));
+                    pizza.setValor(rs.getDouble("valor_itenspedido"));
                     pizza.getPizza().setNome(rs.getString("nome_tipopizza"));
                     pizza.setDescricao(rs.getString("descricao"));
                     mapItensPedido.put(idItensPedido, pizza);
@@ -291,7 +290,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                 String nomeAdicional = rs.getString("nome_adicional");
                 double valorAdicional = rs.getDouble("valor_adicional");
                 int quantidadeAdicional = rs.getInt("quantidade_adicional");
-                long idPizzaAdicional = rs.getLong("id_adicional");
+                long idPizzaAdicional = rs.getLong("id_pizza_adicional");
 
                 if (idAdicional != 0 && nomeAdicional != null && valorAdicional != 0.0) {
                     Adicional adicional = new Adicional(idAdicional, nomeAdicional, valorAdicional, quantidadeAdicional,

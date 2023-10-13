@@ -12,7 +12,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
-import br.edu.ufersa.poo.Pizzaria.dao.ClienteDao;
+import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 import java.net.URL;
@@ -20,8 +20,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TelaClientes implements Initializable {
-    private ClienteDao clienteDao = new ClienteDao();
+public class TelaClientesListagem implements Initializable {
+    private ClienteBO clienteBo = new ClienteBO();
 
     @FXML
     private Button clientes;
@@ -79,15 +79,23 @@ public class TelaClientes implements Initializable {
         colCpf.setCellValueFactory(new PropertyValueFactory<>("cpf"));
         colEndereco.setCellValueFactory(new PropertyValueFactory<>("endereco"));
         // Obter os dados dos funcionários do banco de dados
-        List<Cliente> clientes = clienteDao.listar();
+        List<Cliente> clientes = new ArrayList<>();
+        try {
+            clientes = clienteBo.buscarTodos();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if (clientes != null) {
+            list.addAll(clientes);
 
-        list.addAll(clientes);
+            // Preencher a tabela com os dados
+            tableClientes.setItems(list);
 
-        // Preencher a tabela com os dados
-        tableClientes.setItems(list);
-
-        // Adicionar os dados originais à lista allUsuarios
-        allClientes.addAll(clientes);
+            // Adicionar os dados originais à lista allUsuarios
+            allClientes.addAll(clientes);
+        } else {
+            System.out.println("Não há clientes cadastrados");
+        }
     }
 
     @FXML

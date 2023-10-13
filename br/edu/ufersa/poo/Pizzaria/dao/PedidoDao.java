@@ -93,34 +93,27 @@ public class PedidoDao extends BaseDaoImpl<Pedido> {
         String sql = "SELECT * FROM vw_itenspedido WHERE id_pedido = ?";
 
         try (PreparedStatement ps = con.prepareStatement(sql);) {
-
             ps.setLong(1, entity.getId());
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
                 try {
                     resultado.setId(rs.getLong("id_pedido"));
-                    entity.setId(rs.getLong("id_pedido"));
 
                     ClienteDao ClienteDao = new ClienteDao();
                     Cliente cliente = ClienteDao.buscar(rs.getLong("id_cliente"));
-                    entity.setCliente(cliente);
                     resultado.setCliente(cliente);
 
                     resultado.setEstado(rs.getString("estado"));
-                    entity.setEstado(rs.getString("estado"));
 
                     LocalDate data = rs.getDate("data").toLocalDate();
                     resultado.setData(data);
-                    entity.setData(data);
 
                     ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
                     List<ItensPedidos> itensPedido = itensPedidosDao.buscar(resultado);
-                    entity.setItensPedido(itensPedido);
                     resultado.setItensPedido(itensPedido);
 
                     resultado.setValor(rs.getDouble("valor"));
-                    entity.setValor(rs.getDouble("valor"));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }

@@ -6,6 +6,27 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Delete_DB",
+      "request": "launch",
+      "mainClass": "br.edu.ufersa.poo.Pizzaria.Delete_DB",
+      "projectName": "src_c1e66256"
+    },
+    {
+      "type": "java",
+      "name": "Create_DB",
+      "request": "launch",
+      "mainClass": "br.edu.ufersa.poo.Pizzaria.Create_DB",
+      "projectName": "src_c1e66256"
+    },
+    {
+      "type": "java",
+      "name": "Seed_DB",
+      "request": "launch",
+      "mainClass": "br.edu.ufersa.poo.Pizzaria.Seed_DB",
+      "projectName": "src_c1e66256"
+    },
+    {
+      "type": "java",
       "name": "Teste",
       "request": "launch",
       "mainClass": "Teste",

@@ -7,9 +7,9 @@ import java.sql.Statement;
 
 public class Create_DB {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://localhost/Teste";
+        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "admin";
+        final String PASS = "breno";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);
@@ -75,68 +75,69 @@ public class Create_DB {
             String createView = 
                 "CREATE OR REPLACE VIEW vw_itenspedido AS " +
                 "SELECT " +
-                "P.id AS id_pedido, " +
-                "P.id_cliente, " +
-                "P.estado, " +
-                "P.data, " +
-                "P.valor, " +
-                "IP.id AS id_itenspedido, " +
-                "IP.id_tipopizza, " +
-                "TP.nome AS nome_tipopizza, " +
-                "IP.tamanho, " +
-                "IP.valor AS valor_itenspedido, " +
-                "IP.descricao, " +
-                "PA.id_adicional, " +
-                "A.nome AS nome_adicional, " +
-                "A.valor AS valor_adicional, " +
-                "PA.quantidade AS quantidade_adicional " +
+                "p.id AS id_pedido, " +
+                "p.id_cliente, " +
+                "p.estado, " +
+                "p.data, " +
+                "p.valor, " +
+                "ip.id AS id_itenspedido, " +
+                "ip.id_tipopizza, " +
+                "tp.nome AS nome_tipopizza, " +
+                "ip.tamanho, " +
+                "ip.valor AS valor_itenspedido, " +
+                "ip.descricao, " +
+                "pa.id_adicional, " +
+                "a.nome AS nome_adicional, " +
+                "a.valor AS valor_adicional, " +
+                "pa.quantidade AS quantidade_adicional, " +
+                "pa.id AS id_pizza_adicional " +
                 "FROM " +
-                "tb_pedido AS P " +
-                "JOIN tb_itenspedido AS IP ON P.id = IP.id_pedido " +
-                "JOIN tb_tipospizza AS TP ON IP.id_tipopizza = TP.id " +
-                "LEFT JOIN tb_pizza_adicional AS PA ON IP.id = PA.id_pizza " +
-                "LEFT JOIN tb_adicional AS A ON PA.id_adicional = A.id;";
+                "tb_pedido p " +
+                "JOIN tb_itenspedido ip ON p.id = ip.id_pedido " +
+                "JOIN tb_tipospizza tp ON ip.id_tipopizza = tp.id " +
+                "LEFT JOIN tb_pizza_adicional pa ON ip.id = pa.id_pizza " +
+                "LEFT JOIN tb_adicional a ON pa.id_adicional = a.id;";
 
             // Declarações SQL para criar funções
-            String createFunctions = 
-                "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_total_pedido(pedido_id BIGINT) " +
-                "RETURNS NUMERIC(10, 2) AS $$ " +
-                "DECLARE " +
-                "pedido_total NUMERIC(10, 2); " +
-                "BEGIN " +
-                "SELECT COALESCE(SUM(valor), 0) " +
-                "INTO pedido_total " +
-                "FROM tb_itenspedido " +
-                "WHERE id_pedido = pedido_id; " +
-                "UPDATE tb_pedido " +
-                "SET valor = pedido_total " +
-                "WHERE id = pedido_id; " +
-                "RETURN pedido_total; " +
-                "END; " +
-                "$$ LANGUAGE plpgsql; " +
+            // String createFunctions = 
+            //     "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_total_pedido(pedido_id BIGINT) " +
+            //     "RETURNS NUMERIC(10, 2) AS $$ " +
+            //     "DECLARE " +
+            //     "pedido_total NUMERIC(10, 2); " +
+            //     "BEGIN " +
+            //     "SELECT COALESCE(SUM(valor), 0) " +
+            //     "INTO pedido_total " +
+            //     "FROM tb_itenspedido " +
+            //     "WHERE id_pedido = pedido_id; " +
+            //     "UPDATE tb_pedido " +
+            //     "SET valor = pedido_total " +
+            //     "WHERE id = pedido_id; " +
+            //     "RETURN pedido_total; " +
+            //     "END; " +
+            //     "$$ LANGUAGE plpgsql; " +
 
-                "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_item_pedido(item_id BIGINT) " +
-                "RETURNS NUMERIC(10, 2) AS $$ " +
-                "DECLARE " +
-                "item_total NUMERIC(10, 2); " +
-                "BEGIN " +
-                "SELECT COALESCE(SUM(tp.valor), 0) + COALESCE(SUM(a.valor * pa.quantidade), 0) " +
-                "INTO item_total " +
-                "FROM tb_itenspedido tp " +
-                "LEFT JOIN tb_pizza_adicional pa ON tp.id = pa.id_pizza " +
-                "LEFT JOIN tb_adicional a ON pa.id_adicional = a.id " +
-                "WHERE tp.id = item_id; " +
-                "UPDATE tb_itenspedido " +
-                "SET valor = item_total " +
-                "WHERE id = item_id; " +
-                "RETURN item_total; " +
-                "END; " +
-                "$$ LANGUAGE plpgsql;";
+            //     "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_item_pedido(item_id BIGINT) " +
+            //     "RETURNS NUMERIC(10, 2) AS $$ " +
+            //     "DECLARE " +
+            //     "item_total NUMERIC(10, 2); " +
+            //     "BEGIN " +
+            //     "SELECT COALESCE(SUM(tp.valor), 0) + COALESCE(SUM(a.valor * pa.quantidade), 0) " +
+            //     "INTO item_total " +
+            //     "FROM tb_itenspedido tp " +
+            //     "LEFT JOIN tb_pizza_adicional pa ON tp.id = pa.id_pizza " +
+            //     "LEFT JOIN tb_adicional a ON pa.id_adicional = a.id " +
+            //     "WHERE tp.id = item_id; " +
+            //     "UPDATE tb_itenspedido " +
+            //     "SET valor = item_total " +
+            //     "WHERE id = item_id; " +
+            //     "RETURN item_total; " +
+            //     "END; " +
+            //     "$$ LANGUAGE plpgsql;";
 
             // Execute todas as declarações SQL para criar tabelas, view e funções
             statement.executeUpdate(createTables);
             statement.executeUpdate(createView);
-            statement.executeUpdate(createFunctions);
+            // statement.executeUpdate(createFunctions);
 
             System.out.println("Tabelas, view e funções criadas ou modificadas com sucesso!");
 

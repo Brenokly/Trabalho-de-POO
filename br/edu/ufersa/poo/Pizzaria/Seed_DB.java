@@ -7,16 +7,16 @@ import java.sql.Statement;
 
 public class Seed_DB {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://localhost/Teste";
+        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "admin";
+        final String PASS = "breno";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);
             Statement statement = connection.createStatement();
 
             // Inserir dados nas tabelas
-            // Tabela tb_user
+            //Tabela tb_user
             statement.executeUpdate("INSERT INTO tb_user (nome, cpf, email, senha, isadmin) VALUES " +
                                    "('admin', '12345678901', 'admin', 'admin', true), " +
                                    "('matheus', '12345678901', 'matheus', 'matheus', false), " +
@@ -33,7 +33,7 @@ public class Seed_DB {
                                    "('Cliente 4', '56789012345', 'Endereço 4'), " +
                                    "('Cliente 5', '67890123456', 'Endereço 5')");
 
-            // Tabela tb_pedido
+            //Tabela tb_pedido
             statement.executeUpdate("INSERT INTO tb_pedido (id_cliente, estado, valor) VALUES " +
                                    "(1, 'pendente', 50.0), " +
                                    "(2, 'preparando', 75.5), " +
@@ -51,11 +51,11 @@ public class Seed_DB {
 
             // Tabela tb_itenspedido
             statement.executeUpdate("INSERT INTO tb_itenspedido (id_pedido, id_tipopizza, tamanho, valor, descricao) VALUES " +
-                                   "(1, 1, 'Grande', 30.0, 'Pizza Margherita Grande'), " +
-                                   "(1, 2, 'Pequena', 25.0, 'Pizza Pepperoni Pequena'), " +
-                                   "(2, 3, 'Grande', 40.0, 'Pizza Quatro Queijos Grande'), " +
-                                   "(2, 4, 'Pequena', 25.0, 'Pizza Frango Catupiry Pequena'), " +
-                                   "(3, 2, 'Grande', 35.0, 'Pizza Pepperoni Grande')");
+                                   "(1, 1, 'grande', 30.0, 'Pizza Margherita Grande'), " +
+                                   "(2, 2, 'pequena', 25.0, 'Pizza Pepperoni Pequena'), " +
+                                   "(3, 3, 'grande', 40.0, 'Pizza Quatro Queijos Grande'), " +
+                                   "(4, 4, 'pequena', 25.0, 'Pizza Frango Catupiry Pequena'), " +
+                                   "(5, 2, 'grande', 35.0, 'Pizza Pepperoni Grande')");
 
             // Tabela tb_adicional
             statement.executeUpdate("INSERT INTO tb_adicional (nome, valor, quantidade) VALUES " +

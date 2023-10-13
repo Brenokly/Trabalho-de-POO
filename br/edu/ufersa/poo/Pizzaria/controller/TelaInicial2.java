@@ -6,9 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-
 import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
+import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
+import br.edu.ufersa.poo.Pizzaria.model.bo.TiposPizzasBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Estado;
@@ -16,9 +17,6 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.ItensPedidos;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Tamanho;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
-import br.edu.ufersa.poo.Pizzaria.dao.AdicionalDao;
-import br.edu.ufersa.poo.Pizzaria.dao.ClienteDao;
-import br.edu.ufersa.poo.Pizzaria.dao.TiposPizzasDao;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -107,14 +105,21 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   @FXML
   private Pagination Pagina;
 
+  @FXML
+  private Button back_button;
+
   int currentPageIndex = 0; // Adicione esta variável para rastrear a página atual
   int pageIndex = 0;
 
-
   @Override
   public void initialize(URL location, ResourceBundle resources) {
-    ClienteDao clienteDao = new ClienteDao(); // será o bo
-    List<Cliente> clientes = clienteDao.listar();
+    ClienteBO clienteBO = new ClienteBO();
+    List<Cliente> clientes = new ArrayList<>();
+    try {
+      clientes = clienteBO.buscarTodos();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     List<String> nomesC = new ArrayList<>();
 
     for (Cliente cl : clientes) {
@@ -127,8 +132,13 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
     TamanhoBox.getItems().addAll("grande", "pequena");
 
-    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // será o bo
-    List<TiposPizzas> tiposPizzas = tiposPizzasDao.listar();
+    TiposPizzasBO tiposPizzaBo = new TiposPizzasBO(); // será o bo
+    List<TiposPizzas> tiposPizzas = new ArrayList<>();
+    try {
+      tiposPizzas = tiposPizzaBo.buscarTodos();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     List<String> nomesP = new ArrayList<>();
 
     for (TiposPizzas tp : tiposPizzas) {
@@ -137,17 +147,29 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
     PizzaBox.getItems().addAll(nomesP);
 
-    AdicionalDao adicionalDao = new AdicionalDao(); // será o bo
-    List<Adicional> adicional = adicionalDao.listar();
+    AdicionalBO adicionalBO = new AdicionalBO(); // será o bo
+    List<Adicional> adicional = new ArrayList<>();
+    try {
+      adicional = adicionalBO.buscarTodos();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     List<String> nomesA = new ArrayList<>();
 
     for (Adicional ad : adicional) {
-      nomesA.add(ad.getNome());
+      System.out.println(ad.getQuantidade() + " nome " + ad.getNome());
+      if (ad.getQuantidade() > 0) {
+        nomesA.add(ad.getNome());
+      }
     }
 
     AdicionarNotOpaco.setVisible(true);
     AdicionarOpaco.setVisible(false);
     Adicionar.setDisable(false);
+
+    RemoverNotOpaco.setDisable(true);
+    RemoverNotOpaco.setVisible(false);
+    RemoverOpaco.setVisible(true);
 
     Adicional1Box.getItems().addAll(nomesA);
     Adicional2Box.getItems().addAll(nomesA);
@@ -183,7 +205,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
       pedido.setEstado(estado);
       pedido.getItensPedido().get(currentPageIndex).setTamanho(tamanho);
 
-      for (Cliente cliente : new ClienteDao().listar()) {
+      for (Cliente cliente : new ClienteBO().buscarTodos()) {
         if (cliente.getNome().equals(ClienteBox.getValue())) {
           pedido.setCliente(cliente);
           break;
@@ -192,7 +214,7 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
 
       // Alterar itens do pedido com os valores que estão na box PizzaBox
       // e AdicionalBox1,2,3 se existirem
-      for (TiposPizzas tp : new TiposPizzasDao().listar()) {
+      for (TiposPizzas tp : new TiposPizzasBO().buscarTodos()) {
         if (tp.getNome().equals(PizzaBox.getValue())) {
           pedido.getItensPedido().get(currentPageIndex).setPizza(tp);
           pedido.getItensPedido().get(currentPageIndex).setDescricao();
@@ -354,13 +376,18 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   }
 
   @FXML
-  void CarregarClientes(ActionEvent event) throws Exception {
+  void carregarClientes(ActionEvent event) throws Exception {
     Telas.TelaClientes();
   }
 
   @FXML
-  void CarregarSabores(ActionEvent event) throws Exception {
+  void carregarSabores(ActionEvent event) throws Exception {
     Telas.TelaSabores();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
   }
 
   @FXML
@@ -376,11 +403,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
     Telas.TelaLogin();
-  }
-
-  @FXML
-  void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
   }
 
   public void setPedido(Pedido pedido) {
@@ -437,8 +459,13 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     PizzaBox.getItems().clear();
 
     // Obtenha a lista de nomes de pizzas
-    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao(); // será o bo
-    List<TiposPizzas> tiposPizzas = tiposPizzasDao.listar();
+    TiposPizzasBO tiposPizzasBo = new TiposPizzasBO(); // será o bo
+    List<TiposPizzas> tiposPizzas = new ArrayList<>();
+    try {
+      tiposPizzas = tiposPizzasBo.buscarTodos();
+    } catch (Exception e) {
+      e.printStackTrace();
+    }
     List<String> nomesP = new ArrayList<>();
 
     PizzaBox.setValue(pedido.getItensPedido().get(pageIndex).getPizza().getNome());
@@ -477,6 +504,9 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
             Adicional1Box.setVisible(true);
             linha1.setVisible(true);
             Adicional1Box.getItems().addAll(nomesA);
+            RemoverNotOpaco.setDisable(false);
+            RemoverNotOpaco.setVisible(true);
+            RemoverOpaco.setVisible(false);
 
             if (adicionais.get(0).getQuantidade() > 1) {
               Adicional2Box.setValue(adicionais.get(0).getNome());
