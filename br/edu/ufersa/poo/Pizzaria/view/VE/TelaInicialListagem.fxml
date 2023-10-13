@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaInicial">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaInicialListagem">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="230.0" spacing="28.0" style="-fx-background-color: #2E382E;">
          <children>

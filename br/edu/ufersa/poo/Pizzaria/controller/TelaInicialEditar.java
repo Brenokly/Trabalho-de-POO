@@ -33,7 +33,7 @@ import javafx.scene.control.Separator;
 import javafx.scene.layout.Pane;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
-public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
+public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
 
   @FXML
@@ -157,7 +157,6 @@ public class TelaInicial2 extends Dialog<Pedido> implements Initializable {
     List<String> nomesA = new ArrayList<>();
 
     for (Adicional ad : adicional) {
-      System.out.println(ad.getQuantidade() + " nome " + ad.getNome());
       if (ad.getQuantidade() > 0) {
         nomesA.add(ad.getNome());
       }

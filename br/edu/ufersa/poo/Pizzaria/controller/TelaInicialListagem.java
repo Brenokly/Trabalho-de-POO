@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class TelaInicial implements Initializable {
+public class TelaInicialListagem implements Initializable {
     private PedidoBO pedidoBO = new PedidoBO();
 
     @FXML
