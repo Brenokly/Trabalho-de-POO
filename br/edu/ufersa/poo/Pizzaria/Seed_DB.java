@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Seed_DB {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
+        final String URL = "jdbc:postgresql://localhost/Teste";
         final String USER = "postgres";
         final String PASS = "admin";
 

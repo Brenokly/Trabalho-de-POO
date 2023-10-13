@@ -6,7 +6,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 public abstract class BaseDaoImpl<E> implements BaseDao<E>{
-  final static String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
+  final static String URL = "jdbc:postgresql://localhost/Teste";
   final static String USER = "postgres";
 	final static String PASS = "admin";
 	static Connection con = null ;
