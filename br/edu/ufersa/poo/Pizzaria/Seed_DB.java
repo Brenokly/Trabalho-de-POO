@@ -7,7 +7,7 @@ import java.sql.Statement;
 
 public class Seed_DB {
     public static void main(String[] args) {
-        final String URL = "jdbc:postgresql://localhost/Teste";
+        final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
         final String PASS = "admin";
 
@@ -35,11 +35,11 @@ public class Seed_DB {
 
             // Tabela tb_pedido
             statement.executeUpdate("INSERT INTO tb_pedido (id_cliente, estado, valor) VALUES " +
-                                   "(1, 'Aberto', 50.0), " +
-                                   "(2, 'Fechado', 75.5), " +
-                                   "(3, 'Aberto', 60.0), " +
-                                   "(4, 'Entregue', 90.0), " +
-                                   "(5, 'Aberto', 55.5)");
+                                   "(1, 'pendente', 50.0), " +
+                                   "(2, 'preparando', 75.5), " +
+                                   "(3, 'pendente', 60.0), " +
+                                   "(4, 'entregue', 90.0), " +
+                                   "(5, 'pendente', 55.5)");
 
             // Tabela tb_tipospizza
             statement.executeUpdate("INSERT INTO tb_tipospizza (nome, valor_grande, valor_pequena) VALUES " +

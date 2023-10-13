@@ -52,6 +52,12 @@
     -fx-text-fill: #F3F3F3;
     -fx-font-size: 20;
 }
+#menu_button:disabled {
+    -fx-text-fill: #F3F3F3;
+    -fx-font-weight: bold;
+    -fx-font-size: 20;
+    -fx-opacity: 1;
+}
 
 #cancel_button {
     -fx-background-color: #F55F51, #F3F3F3; /* error color */
@@ -85,6 +91,10 @@
     -fx-background-color: transparent, #0D0106;
     -fx-background-insets: 0, 29 0 0 0;
     -fx-background-radius: 0;
+}
+
+.dropdown .list-cell:focused:focus-within:selected:filled {
+    -fx-background-color: transparent;
 }
 
 /* Table styling */
@@ -141,12 +151,15 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical,
-.table-view .virtual-flow .scroll-bar:vertical .track,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
 .table-view .virtual-flow .scroll-bar:horizontal,
 .table-view .virtual-flow .scroll-bar:horizontal .track,
 .table-view .virtual-flow .scroll-bar:horizontal .track-background {
     -fx-background-color: transparent;
+}
+
+.table-view .virtual-flow .scroll-bar:vertical .track {
+    -fx-background-color: #F3F3F3;
 }
 
 .table-view .virtual-flow .scroll-bar .increment-button,
@@ -156,5 +169,10 @@
 }
 
 .table-view .virtual-flow .scroll-bar:vertical .thumb {
-    -fx-background-color: #2E382ECC;
+    -fx-background-color: 
+        linear-gradient(to bottom, derive(#2E382EA6, -20%), derive(#2E382EA6, -30%)),
+        #F3F3F3,
+        #C0BDA580;
+    -fx-background-insets: 0, 1, 2;
+    -fx-effect: dropshadow(two-pass-box , rgba(0, 0, 0, 0.1), 5, 0.0 , 0, 2);
 }

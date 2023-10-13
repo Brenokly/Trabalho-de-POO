@@ -127,7 +127,7 @@ public class TelaAdicionalListagem implements Initializable {
   }
 
   @FXML
-  void CarregaTelaAdicional2(ActionEvent event) throws Exception {
+  void CadastrarAdicional(ActionEvent event) throws Exception {
     Telas.TelaAdicionalCadastro();
   }
 

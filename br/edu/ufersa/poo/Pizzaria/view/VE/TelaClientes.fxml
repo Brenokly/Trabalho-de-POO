@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
@@ -9,70 +11,62 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientes">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientes">
    <children>
-      <AnchorPane prefHeight="60.0" prefWidth="840.0">
+      <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="230.0" spacing="28.0" style="-fx-background-color: #2E382E;">
          <children>
-            <Region prefHeight="60.0" prefWidth="840.0" />
-            <ImageView fitHeight="60.0" fitWidth="840.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@Clientes/Top%20Bar.png" />
+                  <Image url="@Assets/Logo.png" />
                </image>
             </ImageView>
+            <Button id="menu_button" fx:id="inicio" mnemonicParsing="false" onAction="#carregarInicio" styleClass="icon_button" text="Início" />
+            <Button id="menu_button" fx:id="clientes" disable="true" mnemonicParsing="false" onAction="#carregarClientes" styleClass="icon_button" text="Clientes" />
+            <Button id="menu_button" fx:id="pedidos" mnemonicParsing="false" onAction="#carregarPedidos" styleClass="icon_button" text="Pedidos" />
+            <Button id="menu_button" fx:id="sabores" mnemonicParsing="false" onAction="#carregarSabores" styleClass="icon_button" text="Sabores" />
+            <Button id="menu_button" fx:id="adicionais" mnemonicParsing="false" onAction="#carregarAdicionais" styleClass="icon_button" text="Adicionais" />
+            <Button id="menu_button" fx:id="funcionarios" mnemonicParsing="false" onAction="#carregarFuncionarios" styleClass="icon_button" text="Funcionários" />
+            <Button id="menu_button" fx:id="sair" mnemonicParsing="false" onAction="#carregarLogin" styleClass="icon_button" text="Sair" />
          </children>
-      </AnchorPane>
-      <AnchorPane prefHeight="540.0" prefWidth="177.0">
+         <padding>
+            <Insets top="30.0" />
+         </padding>
+      </VBox>
+      <AnchorPane layoutX="230.0" prefHeight="600.0" prefWidth="610.0">
          <children>
-            <Region prefHeight="600.0" prefWidth="234.0" />
-            <ImageView fitHeight="600.0" fitWidth="241.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@Clientes/Variant12.png" />
-               </image>
-            </ImageView>
-            <Button fx:id="funcionarios" layoutX="39.0" layoutY="484.0" mnemonicParsing="false" onAction="#carregarFuncionarios" opacity="0.0" prefHeight="25.0" prefWidth="156.0" text="Button" />
-            <Button fx:id="sair" layoutX="95.0" layoutY="531.0" mnemonicParsing="false" onAction="#carregarLogin" opacity="0.0" prefHeight="25.0" prefWidth="43.0" text="Button" />
-            <Button fx:id="adicionais" layoutX="55.0" layoutY="429.0" mnemonicParsing="false" onAction="#carregarAdicionais" opacity="0.0" prefHeight="25.0" prefWidth="124.0" text="Button" />
-            <Button fx:id="pedidos" layoutX="69.0" layoutY="313.0" mnemonicParsing="false" onAction="#carregarPedidos" opacity="0.0" prefHeight="25.0" prefWidth="94.0" text="pedidos" />
-            <Button fx:id="inicio" layoutX="81.0" layoutY="198.0" mnemonicParsing="false" onAction="#carregarInicio" opacity="0.0" prefHeight="25.0" prefWidth="70.0" text="Button" />
-            <Button fx:id="sabores" layoutX="64.0" layoutY="371.0" mnemonicParsing="false" onAction="#carregarSabores" opacity="0.0" prefHeight="25.0" prefWidth="102.0" text="Button" />
+            <Region prefHeight="60.0" prefWidth="610.0" style="-fx-background-color: #C0BDA5;" AnchorPane.topAnchor="0.0" />
+            <Label layoutX="26.0" layoutY="15.0" minHeight="-Infinity" prefHeight="30.0" text="Clientes" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
+               <font>
+                  <Font name="Montserrat Regular" size="18.0" />
+               </font>
+            </Label>
+            <TableView fx:id="tableClientes" layoutX="30.0" layoutY="165.0" onMouseClicked="#ClienteClicked" prefHeight="340.0" prefWidth="550.0" AnchorPane.bottomAnchor="95.0">
+               <columns>
+                  <TableColumn fx:id="id" prefWidth="40.0" text="Id" />
+                  <TableColumn fx:id="colNome" prefWidth="129.0" text="Nome" />
+                  <TableColumn fx:id="colCpf" prefWidth="122.0" text="CPF" />
+                  <TableColumn fx:id="colEndereco" prefWidth="246.0" text="Endereço" />
+               </columns>
+            </TableView>
+            <Button fx:id="editar" layoutX="450.0" layoutY="525.0" mnemonicParsing="false" onAction="#CarregarTelaClientes3" prefHeight="35.0" prefWidth="100.0" styleClass="filled_button" text="EDITAR" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" />
+            <TextField fx:id="searchTextField" layoutX="30.0" layoutY="83.0" onKeyReleased="#onSearchKeyReleased" prefHeight="50.0" prefWidth="550.0" promptText="Buscar Cliente" styleClass="textfield" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="85.0">
+               <padding>
+                  <Insets left="10.0" right="35.0" />
+               </padding>
+            </TextField>
+            <Button fx:id="adicionar" layoutX="545.0" layoutY="97.0" mnemonicParsing="false" onAction="#CarregarTelaClientes2" prefHeight="20.0" prefWidth="20.0" styleClass="icon_button">
+               <graphic>
+                  <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@Assets/PlusIcon.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="35.0" fitWidth="114.0" layoutX="730.0" layoutY="551.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/Filled%20Button.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="editar" layoutX="729.0" layoutY="548.0" mnemonicParsing="false" onAction="#CarregarTelaClientes3" opacity="0.0" prefHeight="35.0" prefWidth="94.0" text="Editar Adicional" />
-      <TextField fx:id="searchTextField" layoutX="289.0" layoutY="83.0" onKeyReleased="#onSearchKeyReleased" prefHeight="26.0" prefWidth="474.0" promptText="BUSCAR PEDIDO" style="-fx-background-color: transparent;">
-         <font>
-            <Font name="Arial" size="14.0" />
-         </font>
-      </TextField>
-      <ImageView fitHeight="25.0" fitWidth="540.0" layoutX="263.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@inicioAdmin/Rectangle%2024.png" />
-         </image>
-      </ImageView>
-      <ImageView fitHeight="25.0" fitWidth="26.0" layoutX="263.0" layoutY="83.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@Funcionarios/Subtract.png" />
-         </image>
-      </ImageView>
-      <TableView fx:id="tableClientes" layoutX="249.0" layoutY="128.0" onMouseClicked="#ClienteClicked" prefHeight="408.0" prefWidth="575.0">
-         <columns>
-            <TableColumn fx:id="id" prefWidth="40.0" text="id" />
-            <TableColumn fx:id="colNome" prefWidth="129.0" text="nome" />
-            <TableColumn fx:id="colCpf" prefWidth="122.0" text="cpf" />
-            <TableColumn fx:id="colEndereco" prefWidth="283.0" text="endereço" />
-         </columns>
-      </TableView>
-      <ImageView fitHeight="43.0" fitWidth="43.0" layoutX="763.0" layoutY="73.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@adicionaisElogin/adicionar.png" />
-         </image>
-      </ImageView>
-      <Button fx:id="adicionar" layoutX="764.0" layoutY="76.0" mnemonicParsing="false" onAction="#CarregarTelaClientes2" opacity="0.0" prefHeight="35.0" prefWidth="42.0" />
    </children>
 </Pane>

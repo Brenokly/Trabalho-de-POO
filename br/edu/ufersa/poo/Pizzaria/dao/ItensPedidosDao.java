@@ -291,7 +291,7 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
                 String nomeAdicional = rs.getString("nome_adicional");
                 double valorAdicional = rs.getDouble("valor_adicional");
                 int quantidadeAdicional = rs.getInt("quantidade_adicional");
-                long idPizzaAdicional = rs.getLong("id_pizza_adicional");
+                long idPizzaAdicional = rs.getLong("id_adicional");
 
                 if (idAdicional != 0 && nomeAdicional != null && valorAdicional != 0.0) {
                     Adicional adicional = new Adicional(idAdicional, nomeAdicional, valorAdicional, quantidadeAdicional,

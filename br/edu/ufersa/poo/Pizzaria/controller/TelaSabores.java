@@ -24,16 +24,21 @@ public class TelaSabores implements Initializable {
   TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
   public static Telas telas = new Telas();
 
-  @FXML
-  private TableView<TiposPizzas> table;
-  @FXML
-  private TableColumn<TiposPizzas, Long> id;
-  @FXML
-  private TableColumn<TiposPizzas, String> nome;
-  @FXML
-  private TableColumn<TiposPizzas, Double> valorPequena;
-  @FXML
-  private TableColumn<TiposPizzas, Double> valorGrande;
+  @FXML private Button adicionais;
+  @FXML private Button adicionar;
+  @FXML private Button clientes;
+  @FXML private Button editar;
+  @FXML private Button funcionarios;
+  @FXML private TableColumn<TiposPizzas, Long> id;
+  @FXML private Button inicio;
+  @FXML private TableColumn<TiposPizzas, String> nome;
+  @FXML private Button pedidos;
+  @FXML private Button sabores;
+  @FXML private Button sair;
+  @FXML private TextField searchTextField;
+  @FXML private TableView<TiposPizzas> table;
+  @FXML private TableColumn<TiposPizzas, Double> valorGrande;
+  @FXML private TableColumn<TiposPizzas, Double> valorPequena;
 
   ObservableList<TiposPizzas> list = FXCollections.observableArrayList();
   ObservableList<TiposPizzas> allSabores = FXCollections.observableArrayList();
@@ -59,7 +64,42 @@ public class TelaSabores implements Initializable {
   }
 
   @FXML
-  private TextField searchTextField;
+  void CarregarTelaSaboresCadastro(ActionEvent event) throws Exception {
+  }
+
+  @FXML
+  void CarregarTelaSaboresEditar(ActionEvent event) throws Exception {
+  }
+
+  @FXML
+  void carregarAdicionais(ActionEvent event) throws Exception {
+    Telas.TelaAdicionalListagem();
+  }
+
+  @FXML
+  void carregarClientes(ActionEvent event) throws Exception {
+    Telas.TelaClientes();
+  }
+
+  @FXML
+  void carregarFuncionarios(ActionEvent event) throws Exception {
+    Telas.TelaFuncionarios();
+  }
+
+  @FXML
+  void carregarInicio(ActionEvent event) throws Exception {
+    Telas.TelaInicial();
+  }
+
+  @FXML
+  void carregarLogin(ActionEvent event) throws Exception {
+    Telas.TelaLogin();
+  }
+
+  @FXML
+  void carregarPedidos(ActionEvent event) throws Exception {
+    // Telas.TelaPedidos();
+  }
 
   @FXML
   private void onSearchKeyReleased(KeyEvent event) {
@@ -84,47 +124,5 @@ public class TelaSabores implements Initializable {
 
       table.setItems(resultadosObservable);
     }
-  }
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  void CarregarClientes(ActionEvent event) throws Exception {
-    Telas.TelaClientes();
-  }
-
-  @FXML
-  void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
-  }
-
-  @FXML
-  void CarregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
-  }
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  void carregarInicio(ActionEvent event) throws Exception {
-    Telas.TelaInicial();
-  }
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  void carregarLogin(ActionEvent event) throws Exception {
-    Telas.TelaLogin();
-  }
-
-  @FXML
-  private Button adicionais;
-
-  @FXML
-  void carregarAdicionais(ActionEvent event) throws Exception {
-    Telas.TelaAdicionalListagem();
   }
 }
