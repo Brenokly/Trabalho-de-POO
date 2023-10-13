@@ -9,7 +9,7 @@ public class Create_DB {
     public static void main(String[] args) {
         final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "breno";
+        final String PASS = "admin";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);
@@ -98,48 +98,10 @@ public class Create_DB {
                 "LEFT JOIN tb_pizza_adicional pa ON ip.id = pa.id_pizza " +
                 "LEFT JOIN tb_adicional a ON pa.id_adicional = a.id;";
 
-            // Declarações SQL para criar funções
-            // String createFunctions = 
-            //     "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_total_pedido(pedido_id BIGINT) " +
-            //     "RETURNS NUMERIC(10, 2) AS $$ " +
-            //     "DECLARE " +
-            //     "pedido_total NUMERIC(10, 2); " +
-            //     "BEGIN " +
-            //     "SELECT COALESCE(SUM(valor), 0) " +
-            //     "INTO pedido_total " +
-            //     "FROM tb_itenspedido " +
-            //     "WHERE id_pedido = pedido_id; " +
-            //     "UPDATE tb_pedido " +
-            //     "SET valor = pedido_total " +
-            //     "WHERE id = pedido_id; " +
-            //     "RETURN pedido_total; " +
-            //     "END; " +
-            //     "$$ LANGUAGE plpgsql; " +
-
-            //     "CREATE OR REPLACE FUNCTION calcular_e_atualizar_valor_item_pedido(item_id BIGINT) " +
-            //     "RETURNS NUMERIC(10, 2) AS $$ " +
-            //     "DECLARE " +
-            //     "item_total NUMERIC(10, 2); " +
-            //     "BEGIN " +
-            //     "SELECT COALESCE(SUM(tp.valor), 0) + COALESCE(SUM(a.valor * pa.quantidade), 0) " +
-            //     "INTO item_total " +
-            //     "FROM tb_itenspedido tp " +
-            //     "LEFT JOIN tb_pizza_adicional pa ON tp.id = pa.id_pizza " +
-            //     "LEFT JOIN tb_adicional a ON pa.id_adicional = a.id " +
-            //     "WHERE tp.id = item_id; " +
-            //     "UPDATE tb_itenspedido " +
-            //     "SET valor = item_total " +
-            //     "WHERE id = item_id; " +
-            //     "RETURN item_total; " +
-            //     "END; " +
-            //     "$$ LANGUAGE plpgsql;";
-
-            // Execute todas as declarações SQL para criar tabelas, view e funções
             statement.executeUpdate(createTables);
             statement.executeUpdate(createView);
-            // statement.executeUpdate(createFunctions);
 
-            System.out.println("Tabelas, view e funções criadas ou modificadas com sucesso!");
+            System.out.println("Tabelas e view criadas ou modificadas com sucesso!");
 
             statement.close();
             connection.close();

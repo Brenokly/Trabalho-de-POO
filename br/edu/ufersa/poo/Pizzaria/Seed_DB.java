@@ -9,7 +9,7 @@ public class Seed_DB {
     public static void main(String[] args) {
         final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "breno";
+        final String PASS = "admin";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);
