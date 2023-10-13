@@ -9,7 +9,7 @@ public class Seed_DB {
     public static void main(String[] args) {
         final String URL = "jdbc:postgresql://localhost/PizzariaMichelangelo";
         final String USER = "postgres";
-        final String PASS = "breno";
+        final String PASS = "admin";
 
         try {
             Connection connection = DriverManager.getConnection(URL, USER, PASS);
@@ -22,16 +22,16 @@ public class Seed_DB {
                                    "('matheus', '12345678901', 'matheus', 'matheus', false), " +
                                    "('juhan', '98765432109', 'juhan', 'juhan', false), " +
                                    "('breno', '45678901234', 'breno', 'breno', false), " +
-                                   "('Usuário 4', '56789012345', 'usuario4@email.com', 'senha101', true), " +
-                                   "('Usuário 5', '67890123456', 'usuario5@email.com', 'senha202', false)");
+                                   "('Michelangelo', '56789012345', 'mikey', 'senha101', true), " +
+                                   "('Hamato Yoshi', '67890123456', 'splinter', 'senha202', false)");
 
             // Tabela tb_cliente
             statement.executeUpdate("INSERT INTO tb_cliente (nome, cpf, endereco) VALUES " +
-                                   "('Cliente 1', '12345678901', 'Endereço 1'), " +
-                                   "('Cliente 2', '98765432109', 'Endereço 2'), " +
-                                   "('Cliente 3', '45678901234', 'Endereço 3'), " +
-                                   "('Cliente 4', '56789012345', 'Endereço 4'), " +
-                                   "('Cliente 5', '67890123456', 'Endereço 5')");
+                                   "('April Oneal', '12345678901', 'Endereço 1'), " +
+                                   "('Raphael', '98765432109', 'Endereço 2'), " +
+                                   "('Leonardo', '45678901234', 'Endereço 3'), " +
+                                   "('Donatello', '56789012345', 'Endereço 4'), " +
+                                   "('Oroku Saki', '67890123456', 'Endereço 5')");
 
             //Tabela tb_pedido
             statement.executeUpdate("INSERT INTO tb_pedido (id_cliente, estado, valor) VALUES " +
@@ -63,6 +63,17 @@ public class Seed_DB {
                                    "('Refrigerante 2L', 8.0, 2), " +
                                    "('Batata Frita', 12.0, 1), " +
                                    "('Sobremesa', 10.0, 3), " +
+                                   "('Molho de Tomate', 2.5, 7), " +
+                                   "('Camarão', 6.5, 5), " +
+                                   "('Cebola', 1.5, 6), " +
+                                   "('Coentro', 0.5, 10), " +
+                                   "('Azeite', 1.5, 3), " +
+                                   "('Bacon', 5.5, 8), " +
+                                   "('Pimentões', 1.5, 4), " +
+                                   "('Manjericão', 1.75, 2), " +
+                                   "('Frango', 4.5, 9), " +
+                                   "('Catupiry', 3.5, 3), " +
+                                   "('Queijo Mussarela', 3.5, 15), " +
                                    "('Molho Especial', 3.0, 2)");
 
             // Tabela tb_pizza_adicional

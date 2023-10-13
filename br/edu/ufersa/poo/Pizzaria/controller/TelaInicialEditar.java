@@ -391,7 +391,7 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+    Telas.TelaFuncionariosListagem();
   }
 
   @FXML

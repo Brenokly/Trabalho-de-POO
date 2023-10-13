@@ -28,15 +28,15 @@ public class TelaSabores implements Initializable {
   @FXML private Button adicionar;
   @FXML private Button clientes;
   @FXML private Button editar;
-  @FXML private Button funcionarios;
-  @FXML private TableColumn<TiposPizzas, Long> id;
   @FXML private Button inicio;
-  @FXML private TableColumn<TiposPizzas, String> nome;
+  @FXML private Button funcionarios;
   @FXML private Button pedidos;
   @FXML private Button sabores;
   @FXML private Button sair;
   @FXML private TextField searchTextField;
   @FXML private TableView<TiposPizzas> table;
+  @FXML private TableColumn<TiposPizzas, Long> id;
+  @FXML private TableColumn<TiposPizzas, String> nome;
   @FXML private TableColumn<TiposPizzas, Double> valorGrande;
   @FXML private TableColumn<TiposPizzas, Double> valorPequena;
 
@@ -61,14 +61,23 @@ public class TelaSabores implements Initializable {
 
     // Adicionar os dados originais à lista allSabores
     allSabores.addAll(sabores);
+
+    if (Telas.getAdmin() == false) {
+      adicionar.setVisible(false);
+      adicionar.setFocusTraversable(false);
+      adicionar.setMouseTransparent(true);
+      editar.setVisible(false);
+      editar.setFocusTraversable(false);
+      editar.setMouseTransparent(true);
+    }
   }
 
   @FXML
-  void CarregarTelaSaboresCadastro(ActionEvent event) throws Exception {
+  void carregarTelaSaboresCadastro(ActionEvent event) throws Exception {
   }
 
   @FXML
-  void CarregarTelaSaboresEditar(ActionEvent event) throws Exception {
+  void carregarTelaSaboresEditar(ActionEvent event) throws Exception {
   }
 
   @FXML
@@ -83,7 +92,7 @@ public class TelaSabores implements Initializable {
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
-    Telas.TelaFuncionarios();
+    Telas.TelaFuncionariosListagem();
   }
 
   @FXML

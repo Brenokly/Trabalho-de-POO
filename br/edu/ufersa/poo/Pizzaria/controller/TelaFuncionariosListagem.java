@@ -21,25 +21,25 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class TelaFuncionarios implements Initializable {
+public class TelaFuncionariosListagem implements Initializable {
     private UserBO userBO = new UserBO();
 
-    @FXML
-    private TableView<Usuario> tableFuncionarios;
-    @FXML
-    private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
-    @FXML
-    private TableColumn<Usuario, String> colNome;
-    @FXML
-    private TableColumn<Usuario, String> colCpf;
-    @FXML
-    private TableColumn<Usuario, String> colEmail;
-    @FXML
-    private TableColumn<Usuario, Boolean> colAdministrator;
-    @FXML
-    private ImageView AddFuncionarios;
-    @FXML
-    private ImageView editarFunc;
+    @FXML private TableView<Usuario> tableFuncionarios;
+    @FXML private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
+    @FXML private TableColumn<Usuario, String> colNome;
+    @FXML private TableColumn<Usuario, String> colCpf;
+    @FXML private TableColumn<Usuario, String> colEmail;
+    @FXML private TableColumn<Usuario, Boolean> colAdministrator;
+    @FXML private Button adicionar;
+    @FXML private TextField searchTextField;
+    @FXML private Button editar;
+    @FXML private Button inicio;
+    @FXML private Button clientes;
+    @FXML private Button pedidos;
+    @FXML private Button sabores;
+    @FXML private Button adicionais;
+    @FXML private Button funcionarios;
+    @FXML private Button sair;
 
     // Outras colunas, se necessário
 
@@ -71,15 +71,14 @@ public class TelaFuncionarios implements Initializable {
         allUsuarios.addAll(funcionarios);
 
         if (Telas.getAdmin() == false) {
-            AddFuncionarios.setVisible(false);
-            editarFunc.setVisible(false);
-            adicionar.setDisable(true);
-            editar.setDisable(true);
+            adicionar.setVisible(false);
+            adicionar.setFocusTraversable(false);
+            adicionar.setMouseTransparent(true);
+            editar.setVisible(false);
+            editar.setFocusTraversable(false);
+            editar.setMouseTransparent(true);
         }
     }
-
-    @FXML
-    private TextField searchTextField;
 
     @FXML
     private void onSearchKeyReleased(KeyEvent event) {
@@ -108,28 +107,22 @@ public class TelaFuncionarios implements Initializable {
     }
 
     @FXML
-    private Button adicionar;
-
-    @FXML
-    void CarregarTelaFuncionarios2(ActionEvent event) {
+    void carregarTelaFuncionariosCadastro(ActionEvent event) {
         try {
-            Telas.TelaFuncionarios2();
+            Telas.TelaFuncionariosCadastro();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
     @FXML
-    private Button editar;
-
-    @FXML
-    void CarregarTelaFuncionarios3(ActionEvent event) {
+    void carregarTelaFuncionariosEditar(ActionEvent event) {
         Usuario funcionario = tableFuncionarios.getSelectionModel().getSelectedItem();
 
         if (funcionario != null) {
             try {
                 // Chame o método TelaFuncionario3 e passe o Funcionario selecionado
-                Telas.TelaFuncionarios3(funcionario);
+                Telas.TelaFuncionariosEditar(funcionario);
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -138,15 +131,9 @@ public class TelaFuncionarios implements Initializable {
     }
 
     @FXML
-    private Button inicio;
-
-    @FXML
     void carregarInicio(ActionEvent event) throws Exception {
         Telas.TelaInicial();
     }
-
-    @FXML
-    private Button clientes;
 
     @FXML
     void carregarClientes(ActionEvent event) throws Exception {
@@ -154,15 +141,9 @@ public class TelaFuncionarios implements Initializable {
     }
 
     @FXML
-    private Button pedidos;
-
-    @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
         // Telas.TelaPedidos();
     }
-
-    @FXML
-    private Button sabores;
 
     @FXML
     void carregarSabores(ActionEvent event) throws Exception {
@@ -170,23 +151,14 @@ public class TelaFuncionarios implements Initializable {
     }
 
     @FXML
-    private Button adicionais;
-
-    @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
         Telas.TelaAdicionalListagem();
     }
 
     @FXML
-    private Button funcionarios;
-
-    @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
-        Telas.TelaFuncionarios();
+        Telas.TelaFuncionariosListagem();
     }
-
-    @FXML
-    private Button sair;
 
     @FXML
     void carregarLogin(ActionEvent event) throws Exception {
