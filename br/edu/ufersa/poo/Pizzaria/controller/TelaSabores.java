@@ -79,6 +79,7 @@ public class TelaSabores implements Initializable {
 
   @FXML
   void carregarTelaSaboresEditar(ActionEvent event) throws Exception {
+    Telas.TelaSaboresEditar(table.getSelectionModel().getSelectedItem());
   }
 
   @FXML

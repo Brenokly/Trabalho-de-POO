@@ -27,27 +27,59 @@ public class TiposPizzasBO implements BaseBO<TiposPizzas> {
       throw new ValorInvalido("Valor inválido");
     }
 
-    // Verificar se um adicional com o mesmo nome já existe
+    // Verificar se um sabor com o mesmo nome já existe
     List<TiposPizzas> existingTiposPizzas = tiposPizzaDao.listar();
     for (TiposPizzas tiposPizzas2 : existingTiposPizzas) {
       if (tiposPizzas.getNome().toLowerCase().equals(tiposPizzas2.getNome().toLowerCase())) {
         throw new SaborJaExiste("Sabor com o mesmo nome já existe.");
       }
-    } 
-      tiposPizzaDao.inserir(tiposPizzas);
+    }
+    tiposPizzaDao.inserir(tiposPizzas);
   }
 
   @Override
   public void update(TiposPizzas bo) throws Exception {
-    // TODO Auto-generated method stub
-    
-    throw new UnsupportedOperationException("Unimplemented method 'update'");
+    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
+    // Verificar se o nome é uma string válida
+    if (bo.getNome() == null || bo.getNome().isEmpty()) {
+      throw new NomeInvalido("Nome inválido");
+    }
+
+    // Verificar se o valor é maior que 0.0
+    if (bo.getValorGrande() <= 0.0 || bo.getValorPequena() <= 0.0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+
+    // Verificar se um sabor com o mesmo nome já existe
+    TiposPizzas existingSabor = tiposPizzasDao.buscar(bo);
+
+    if (existingSabor == null) {
+      throw new Exception("Erro no banco de dados, adicional não encontrado.");
+    }
+
+    tiposPizzasDao.alterar(bo);
   }
 
-  @Override
   public void deletar(TiposPizzas bo) throws Exception {
-    // TODO Auto-generated method stub
-    throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
+
+    // Verificar se o nome é uma string válida
+    if (bo.getNome() == null || bo.getNome().isEmpty()) {
+      throw new NomeInvalido("Nome inválido");
+    }
+
+    // Verificar se o valor é maior que 0.0
+    if (bo.getValorGrande() <= 0.0 || bo.getValorPequena() <= 0.0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+
+    TiposPizzas existingSabor = tiposPizzasDao.buscar(bo);
+
+    if (existingSabor == null) {
+      throw new Exception("Erro no banco de dados, sabor não encontrado.");
+    }
+
+    tiposPizzasDao.deletar(bo);
   }
 
   @Override

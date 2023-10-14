@@ -4,8 +4,10 @@ import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicionalEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionariosEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaClientes3;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaInicialEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaSaboresEditar;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
+import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import javafx.application.Application;
@@ -179,5 +181,19 @@ public class Telas extends Application {
     Scene scene = new Scene(root);
 
     primaryStage.setScene(scene);
-  } 
+  }
+
+  public static void TelaSaboresEditar(TiposPizzas tiposPizzas) throws Exception {
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaSaboresEditar.fxml"));
+    Parent root = loader.load();
+
+    // Obtenha o controlador da SaboresEditar
+    TelaSaboresEditar controller = loader.getController();
+
+    controller.setTiposPizzas(tiposPizzas);
+
+    Scene scene = new Scene(root);
+    primaryStage.setScene(scene);
+  }
+
 }
