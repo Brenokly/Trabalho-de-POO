@@ -126,12 +126,19 @@ public class TelaPedidosListagem implements Initializable {
         LocalDate minDate = LocalDate.of(2023, 10, 1);
 
         startDatePicker.setValue(minDate);
+        startDatePicker.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(date.isBefore(minDate) || date.isAfter(currentDate));
+            }
+        });
+
 
         endDatePicker.setValue(currentDate);
         endDatePicker.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(minDate) || date.isAfter(currentDate));
+                setDisable(date.isBefore(minDate) || date.isAfter(currentDate) || startDatePicker.getValue() != null && date.isBefore(startDatePicker.getValue()));
             }
         });
     }
