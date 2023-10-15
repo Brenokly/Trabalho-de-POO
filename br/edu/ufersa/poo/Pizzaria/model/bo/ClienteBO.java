@@ -13,13 +13,12 @@ public class ClienteBO implements BaseBO<Cliente> {
     // Método para criar usuário verificando se já não existe um funcionario no
     // banco de dados com o mesmo nome
     ClienteDao ClienteDao = new ClienteDao();
-    Cliente cliente = ClienteDao.buscar(bo);
-    System.out.println("Criando cliente..." + " " + bo.getId() + bo.getNome() + " " + bo.getCpf() + " " + bo.getEndereco());
+    Cliente cliente = ClienteDao.buscarPorCpf(bo);
     
     if (bo.getId() == null || bo.getId() < 1) {
-        throw new UsuarioInvalido("ID inválido");
+      throw new UsuarioInvalido("ID inválido");
     }
-    
+
     if (cliente == null) {
       ClienteDao.inserir(bo);
     } else {
@@ -30,10 +29,16 @@ public class ClienteBO implements BaseBO<Cliente> {
   @Override
   public void update(Cliente bo) throws Exception {
     ClienteDao clienteDao = new ClienteDao();
-    Cliente cliente = clienteDao.buscar(bo);
+    Cliente clienteID = clienteDao.buscar(bo);
+    Cliente cliente = clienteDao.buscarPorCpf(bo);
 
-    if (cliente != null) {
-      clienteDao.alterar(bo);
+    if (clienteID != null) {
+      if (cliente == null) {
+        clienteDao.alterar(bo);
+      }
+      else {
+        throw new UsuarioInvalido("Cliente já cadastrado");
+      }
     } else {
       throw new UsuarioInvalido("Cliente não encontrado");
     }
