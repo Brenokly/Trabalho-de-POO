@@ -88,22 +88,17 @@ public class TelaPedidosListagem implements Initializable {
 
     private void loadPedidos() {
         List<Pedido> pedidos = null;
-        List<Pedido> filteredPedidos = new ArrayList<>();
         try {
             pedidos = pedidoBO.buscarTodos();
             if (pedidos != null) {
-                for (Pedido pedido : pedidos) {
-                    if (!pedido.getItensPedido().isEmpty()) {
-                        filteredPedidos.add(pedido);
-                    }
-                }
-                list.addAll(filteredPedidos);
+                list.addAll(pedidos);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        allPedidos.addAll(filteredPedidos);
+        allPedidos.addAll(pedidos);
     }
+    
 
     private void setupTableViewColumns() {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));

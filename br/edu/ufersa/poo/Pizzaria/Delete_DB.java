@@ -48,7 +48,9 @@ public class Delete_DB {
                 "DROP TABLE IF EXISTS tb_tipospizza CASCADE; " +
                 "DROP TABLE IF EXISTS tb_pedido CASCADE; " +
                 "DROP TABLE IF EXISTS tb_cliente CASCADE; " +
-                "DROP TABLE IF EXISTS tb_user CASCADE;";
+                "DROP TABLE IF EXISTS tb_user CASCADE;" +
+                "DROP TABLE IF EXISTS tb_pedido_log CASCADE;";
+
 
             // SQL para excluir a visão
             String dropView = "DROP VIEW IF EXISTS vw_itenspedido;";
@@ -56,13 +58,17 @@ public class Delete_DB {
             // SQL para excluir funções
             String dropFunctions = 
                 "DROP FUNCTION IF EXISTS calcular_e_atualizar_valor_total_pedido(bigint); " +
-                "DROP FUNCTION IF EXISTS calcular_e_atualizar_valor_item_pedido(bigint);";
+                "DROP FUNCTION IF EXISTS calcular_e_atualizar_valor_item_pedido(bigint);" +
+                "DROP FUNCTION IF EXISTS log_pedido_estado() CASCADE;";
 
+            String dropTrigger = "DROP TRIGGER IF EXISTS trigger_log_pedido_estado ON tb_pedido;";
+            
             // Executar SQL para deletar dados, excluir tabelas, visão e funções
             statement.executeUpdate(deleteData);
             statement.executeUpdate(dropTablesCascade);
             statement.executeUpdate(dropView);
             statement.executeUpdate(dropFunctions);
+            statement.executeUpdate(dropTrigger);
 
             System.out.println("Tabelas, visão, funções e dados associados excluídos com sucesso!");
 
