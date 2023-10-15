@@ -3,6 +3,7 @@ package br.edu.ufersa.poo.Pizzaria.model.bo;
 import java.util.List;
 
 import Exceptions.UsuarioInvalido;
+import Exceptions.UsuarioJaExiste;
 import br.edu.ufersa.poo.Pizzaria.dao.UserDao;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 
@@ -29,19 +30,25 @@ public class UserBO implements BaseBO<Usuario> {
     if (usuario == null) {
       UserDao.inserir(bo);
     } else {
-      throw new UsuarioInvalido("Usuário já cadastrado");
+      throw new UsuarioJaExiste("Usuário já cadastrado");
     }
   }
 
   @Override
   public void update(Usuario bo) throws Exception {
     UserDao UserDao = new UserDao();
+    Usuario usuarioID = UserDao.buscar(bo);
     Usuario usuario = UserDao.buscarPorECpf(bo);
 
-    if (usuario != null) {
+    if (usuarioID != null) {
+      if (usuario == null){
       UserDao.alterar(bo);
+      }
+      else {
+        throw new UsuarioInvalido("Usuário já cadastrado");
+      }
     } else {
-      throw new UsuarioInvalido("Usuário não encontrado");
+      throw new UsuarioJaExiste("Usuário não encontrado");
     }
   }
 

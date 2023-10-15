@@ -38,9 +38,9 @@ public class TelaFuncionariosListagem implements Initializable {
     @FXML
     private Button adicionar;
     @FXML
-    private TextField searchTextField;
-    @FXML
     private Button editar;
+    @FXML
+    private TextField searchTextField;
     @FXML
     private Button inicio;
     @FXML
@@ -122,9 +122,9 @@ public class TelaFuncionariosListagem implements Initializable {
     }
 
     @FXML
-    void carregarTelaFuncionariosCadastro(ActionEvent event) {
+    void carregarTelaFuncionariosCadastro(ActionEvent event)  {
         try {
-            Telas.TelaFuncionariosCadastro();
+            Telas.TelaFuncionariosCadastrar();
         } catch (Exception e) {
             e.printStackTrace();
         }

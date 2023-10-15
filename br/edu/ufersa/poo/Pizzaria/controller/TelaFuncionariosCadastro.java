@@ -32,7 +32,7 @@ public class TelaFuncionariosCadastro {
   @FXML
   private PasswordField senha2;
   @FXML
-  private Label funcionariosExistente;
+  private Label FuncionarioExistente;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
@@ -83,6 +83,7 @@ public class TelaFuncionariosCadastro {
         // Retorne para a TelaFuncionario1 após o sucesso
         Telas.TelaFuncionariosListagem();
       } catch (UsuarioInvalido e) {
+        FuncionarioExistente.setVisible(true);
         displayAlert("Erro", e.getMessage());
       }
     } else {

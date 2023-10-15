@@ -1,15 +1,15 @@
 {
-    "java.project.referencedLibraries": [
-        "lib/**/*.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.base.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.controls.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.fxml.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.graphics.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.media.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.swing.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.web.jar",
-        "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx-swt.jar",
-        "d:\\Documentos\\poo\\postgresql-42.6.0.jar",
-        "d:\\Documentos\\poo\\itextpdf-5.4.2.jar"
-    ]
+  "java.project.referencedLibraries": [
+    "lib/**/*.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\postgresql-42.6.0.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.base.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.controls.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.fxml.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.graphics.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.media.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.swing.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.web.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx-swt.jar",
+    "d:\\Program Files\\Java\\jdk-17\\lib\\itextpdf-5.4.2.jar"
+  ]
 }

@@ -10,7 +10,6 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import javafx.scene.Node;
 
 import java.util.Optional;
-
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
@@ -106,9 +105,14 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
                     Telas.TelaFuncionariosListagem();
                 } else {
                     exibirMensagemDeErro("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");
+                } 
+            } catch (Exception e){
+                exibirMensagemDeErro("Erro ao salvar funcionário", e.getMessage());
+                if (e.getMessage().equals("Usuário já cadastrado")) {
+                    FuncionarioExistente.setVisible(true);
+                } else {
+                    FuncionarioExistente.setVisible(false);
                 }
-            } catch (Exception e) {
-                exibirMensagemDeErro("Erro ao carregar funcionário", e.getMessage());
             }
         }
     }
