@@ -150,7 +150,7 @@ public class TelaClientes2 {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

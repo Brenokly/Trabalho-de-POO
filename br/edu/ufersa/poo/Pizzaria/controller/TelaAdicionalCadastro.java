@@ -19,15 +19,24 @@ import javafx.scene.input.KeyEvent;
 public class TelaAdicionalCadastro {
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML private Label AdicionalExistente;
-  @FXML private Button cancelar;
-  @FXML private Button funcionarios;
-  @FXML private Button inicio;
-  @FXML private TextField nome;
-  @FXML private TextField preco;
-  @FXML private TextField quantidade;
-  @FXML private Button sair;
-  @FXML private Button salvar;
+  @FXML
+  private Label AdicionalExistente;
+  @FXML
+  private Button cancelar;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button inicio;
+  @FXML
+  private TextField nome;
+  @FXML
+  private TextField preco;
+  @FXML
+  private TextField quantidade;
+  @FXML
+  private Button sair;
+  @FXML
+  private Button salvar;
 
   @FXML
   void SalvarAdicional(ActionEvent event) throws Exception {
@@ -106,7 +115,7 @@ public class TelaAdicionalCadastro {
   @FXML
   void onTextFieldContentChanged(KeyEvent event) {
     TextField sourceTextField = (TextField) event.getSource();
-    
+
     AdicionalExistente.setVisible(false);
     sourceTextField.pseudoClassStateChanged(error, false);
   }
@@ -149,7 +158,7 @@ public class TelaAdicionalCadastro {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

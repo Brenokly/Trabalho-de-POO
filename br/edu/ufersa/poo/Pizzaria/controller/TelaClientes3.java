@@ -169,7 +169,7 @@ public class TelaClientes3 extends Dialog<Cliente> {
 
     @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
+        Telas.TelaPedidos();
     }
 
     @FXML

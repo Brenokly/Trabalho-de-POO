@@ -22,15 +22,24 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
 
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML private Button excluir;
-  @FXML private Button funcionarios;
-  @FXML private Button inicio;
-  @FXML private TextField nome;
-  @FXML private TextField preco;
-  @FXML private TextField quantidade;
-  @FXML private Button sair;
-  @FXML private Button salvar;
-  @FXML private Button cancelar;
+  @FXML
+  private Button excluir;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button inicio;
+  @FXML
+  private TextField nome;
+  @FXML
+  private TextField preco;
+  @FXML
+  private TextField quantidade;
+  @FXML
+  private Button sair;
+  @FXML
+  private Button salvar;
+  @FXML
+  private Button cancelar;
 
   @FXML
   void ExcluirAdicional(ActionEvent event) {
@@ -106,7 +115,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
   @FXML
   void onTextFieldContentChanged(KeyEvent event) {
     TextField sourceTextField = (TextField) event.getSource();
-    
+
     sourceTextField.pseudoClassStateChanged(error, false);
   }
 
@@ -136,7 +145,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

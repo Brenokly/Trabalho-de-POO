@@ -55,7 +55,6 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
             alert.setHeaderText("Excluir Funcionário");
             alert.setContentText("Tem certeza de que deseja excluir este funcionário?");
 
-          
             ButtonType buttonTypeSim = new ButtonType("Sim", ButtonData.OK_DONE);
             ButtonType buttonTypeNao = new ButtonType("Não", ButtonData.CANCEL_CLOSE);
             alert.getButtonTypes().setAll(buttonTypeSim, buttonTypeNao);
@@ -166,7 +165,7 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
 
     @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
+        Telas.TelaPedidos();
     }
 
     @FXML

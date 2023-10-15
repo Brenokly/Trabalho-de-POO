@@ -23,18 +23,30 @@ import javafx.scene.input.MouseEvent;
 public class TelaAdicionalListagem implements Initializable {
   AdicionalBO adicionalBO = new AdicionalBO();
 
-  @FXML private Button adicionar;
-  @FXML private Button editar;
-  @FXML private Button pedidos;
-  @FXML private Button funcionarios;
-  @FXML private Button inicio;
-  @FXML private Button sair;
-  @FXML private TextField searchTextField;
-  @FXML private TableView<Adicional> table;
-  @FXML private TableColumn<Adicional, Long> id;
-  @FXML private TableColumn<Adicional, String> nome;
-  @FXML private TableColumn<Adicional, Integer> quantidade;
-  @FXML private TableColumn<Adicional, Double> valor;
+  @FXML
+  private Button adicionar;
+  @FXML
+  private Button editar;
+  @FXML
+  private Button pedidos;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button inicio;
+  @FXML
+  private Button sair;
+  @FXML
+  private TextField searchTextField;
+  @FXML
+  private TableView<Adicional> table;
+  @FXML
+  private TableColumn<Adicional, Long> id;
+  @FXML
+  private TableColumn<Adicional, String> nome;
+  @FXML
+  private TableColumn<Adicional, Integer> quantidade;
+  @FXML
+  private TableColumn<Adicional, Double> valor;
 
   ObservableList<Adicional> list = FXCollections.observableArrayList();
   ObservableList<Adicional> allAdicionais = FXCollections.observableArrayList();
@@ -133,7 +145,7 @@ public class TelaAdicionalListagem implements Initializable {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

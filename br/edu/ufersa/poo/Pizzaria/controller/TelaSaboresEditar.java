@@ -21,15 +21,24 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
 
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML private Button excluir;
-  @FXML private Button funcionarios;
-  @FXML private Button inicio;
-  @FXML private TextField nome;
-  @FXML private TextField valor_grande;
-  @FXML private TextField valor_pequena;
-  @FXML private Button sair;
-  @FXML private Button salvar;
-  @FXML private Button cancelar;
+  @FXML
+  private Button excluir;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button inicio;
+  @FXML
+  private TextField nome;
+  @FXML
+  private TextField valor_grande;
+  @FXML
+  private TextField valor_pequena;
+  @FXML
+  private Button sair;
+  @FXML
+  private Button salvar;
+  @FXML
+  private Button cancelar;
 
   @FXML
   void ExcluirSabor(ActionEvent event) {
@@ -103,7 +112,7 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
   @FXML
   void onTextFieldContentChanged(KeyEvent event) {
     TextField sourceTextField = (TextField) event.getSource();
-    
+
     sourceTextField.pseudoClassStateChanged(error, false);
   }
 
@@ -133,7 +142,7 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

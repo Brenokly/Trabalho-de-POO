@@ -24,21 +24,36 @@ public class TelaSabores implements Initializable {
   TiposPizzasDao tiposPizzasDao = new TiposPizzasDao();
   public static Telas telas = new Telas();
 
-  @FXML private Button adicionais;
-  @FXML private Button adicionar;
-  @FXML private Button clientes;
-  @FXML private Button editar;
-  @FXML private Button inicio;
-  @FXML private Button funcionarios;
-  @FXML private Button pedidos;
-  @FXML private Button sabores;
-  @FXML private Button sair;
-  @FXML private TextField searchTextField;
-  @FXML private TableView<TiposPizzas> table;
-  @FXML private TableColumn<TiposPizzas, Long> id;
-  @FXML private TableColumn<TiposPizzas, String> nome;
-  @FXML private TableColumn<TiposPizzas, Double> valorGrande;
-  @FXML private TableColumn<TiposPizzas, Double> valorPequena;
+  @FXML
+  private Button adicionais;
+  @FXML
+  private Button adicionar;
+  @FXML
+  private Button clientes;
+  @FXML
+  private Button editar;
+  @FXML
+  private Button inicio;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button pedidos;
+  @FXML
+  private Button sabores;
+  @FXML
+  private Button sair;
+  @FXML
+  private TextField searchTextField;
+  @FXML
+  private TableView<TiposPizzas> table;
+  @FXML
+  private TableColumn<TiposPizzas, Long> id;
+  @FXML
+  private TableColumn<TiposPizzas, String> nome;
+  @FXML
+  private TableColumn<TiposPizzas, Double> valorGrande;
+  @FXML
+  private TableColumn<TiposPizzas, Double> valorPequena;
 
   ObservableList<TiposPizzas> list = FXCollections.observableArrayList();
   ObservableList<TiposPizzas> allSabores = FXCollections.observableArrayList();
@@ -114,7 +129,7 @@ public class TelaSabores implements Initializable {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

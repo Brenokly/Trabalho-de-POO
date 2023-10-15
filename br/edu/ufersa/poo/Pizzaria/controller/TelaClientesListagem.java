@@ -169,7 +169,7 @@ public class TelaClientesListagem implements Initializable {
 
     @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
+        Telas.TelaPedidos();
     }
 
     @FXML

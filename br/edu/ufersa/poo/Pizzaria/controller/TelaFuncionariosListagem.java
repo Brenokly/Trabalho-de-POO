@@ -23,22 +23,38 @@ import java.util.ResourceBundle;
 public class TelaFuncionariosListagem implements Initializable {
     private UserBO userBO = new UserBO();
 
-    @FXML private TableView<Usuario> tableFuncionarios;
-    @FXML private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
-    @FXML private TableColumn<Usuario, String> colNome;
-    @FXML private TableColumn<Usuario, String> colCpf;
-    @FXML private TableColumn<Usuario, String> colEmail;
-    @FXML private TableColumn<Usuario, Boolean> colAdministrator;
-    @FXML private Button adicionar;
-    @FXML private TextField searchTextField;
-    @FXML private Button editar;
-    @FXML private Button inicio;
-    @FXML private Button clientes;
-    @FXML private Button pedidos;
-    @FXML private Button sabores;
-    @FXML private Button adicionais;
-    @FXML private Button funcionarios;
-    @FXML private Button sair;
+    @FXML
+    private TableView<Usuario> tableFuncionarios;
+    @FXML
+    private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
+    @FXML
+    private TableColumn<Usuario, String> colNome;
+    @FXML
+    private TableColumn<Usuario, String> colCpf;
+    @FXML
+    private TableColumn<Usuario, String> colEmail;
+    @FXML
+    private TableColumn<Usuario, Boolean> colAdministrator;
+    @FXML
+    private Button adicionar;
+    @FXML
+    private TextField searchTextField;
+    @FXML
+    private Button editar;
+    @FXML
+    private Button inicio;
+    @FXML
+    private Button clientes;
+    @FXML
+    private Button pedidos;
+    @FXML
+    private Button sabores;
+    @FXML
+    private Button adicionais;
+    @FXML
+    private Button funcionarios;
+    @FXML
+    private Button sair;
 
     // Outras colunas, se necessário
 
@@ -141,7 +157,7 @@ public class TelaFuncionariosListagem implements Initializable {
 
     @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
-        // Telas.TelaPedidos();
+        Telas.TelaPedidos();
     }
 
     @FXML

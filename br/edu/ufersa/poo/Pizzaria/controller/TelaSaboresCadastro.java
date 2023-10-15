@@ -19,15 +19,24 @@ import javafx.scene.input.KeyEvent;
 public class TelaSaboresCadastro {
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML private Label SaborExistente;
-  @FXML private Button cancelar;
-  @FXML private Button funcionarios;
-  @FXML private Button inicio;
-  @FXML private TextField nome;
-  @FXML private TextField valor_grande;
-  @FXML private TextField valor_pequena;
-  @FXML private Button sair;
-  @FXML private Button salvar;
+  @FXML
+  private Label SaborExistente;
+  @FXML
+  private Button cancelar;
+  @FXML
+  private Button funcionarios;
+  @FXML
+  private Button inicio;
+  @FXML
+  private TextField nome;
+  @FXML
+  private TextField valor_grande;
+  @FXML
+  private TextField valor_pequena;
+  @FXML
+  private Button sair;
+  @FXML
+  private Button salvar;
 
   @FXML
   void SalvarSabor(ActionEvent event) throws Exception {
@@ -104,7 +113,7 @@ public class TelaSaboresCadastro {
   @FXML
   void onTextFieldContentChanged(KeyEvent event) {
     TextField sourceTextField = (TextField) event.getSource();
-    
+
     SaborExistente.setVisible(false);
     sourceTextField.pseudoClassStateChanged(error, false);
   }
@@ -117,7 +126,6 @@ public class TelaSaboresCadastro {
       return false;
     }
   }
-
 
   private void displayAlert(String title, String message) {
     Alert alert = new Alert(AlertType.ERROR);
@@ -139,7 +147,7 @@ public class TelaSaboresCadastro {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML

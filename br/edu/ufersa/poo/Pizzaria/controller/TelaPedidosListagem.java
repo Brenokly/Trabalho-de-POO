@@ -22,7 +22,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 
-public class TelaInicialListagem implements Initializable {
+public class TelaPedidosListagem implements Initializable {
     private PedidoBO pedidoBO = new PedidoBO();
 
     @FXML
@@ -63,14 +63,14 @@ public class TelaInicialListagem implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        System.out.println("TelaPedidoListagem.initialize()");
         List<Pedido> pedido = null;
         List<Pedido> pedido2 = new ArrayList<>();
         try {
             pedido = pedidoBO.buscarTodos();
             if (pedido != null) {
                 for (Pedido p : pedido) {
-                    if (p.getEstado().getDescricao().equals("pendente") &&
-                            !p.getItensPedido().isEmpty()) {
+                    if (!p.getItensPedido().isEmpty()) {
                         pedido2.add(p);
                     }
                 }

@@ -17,14 +17,22 @@ import javafx.scene.control.TextField;
 
 public class TelaFuncionariosCadastro {
 
-  @FXML private Button salvar;
-  @FXML private Button cancelar;
-  @FXML private TextField nome;
-  @FXML private TextField cpf;
-  @FXML private TextField email;
-  @FXML private PasswordField senha1;
-  @FXML private PasswordField senha2;
-  @FXML private Label funcionariosExistente;
+  @FXML
+  private Button salvar;
+  @FXML
+  private Button cancelar;
+  @FXML
+  private TextField nome;
+  @FXML
+  private TextField cpf;
+  @FXML
+  private TextField email;
+  @FXML
+  private PasswordField senha1;
+  @FXML
+  private PasswordField senha2;
+  @FXML
+  private Label funcionariosExistente;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
@@ -141,7 +149,7 @@ public class TelaFuncionariosCadastro {
 
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
-    // Telas.TelaPedidos();
+    Telas.TelaPedidos();
   }
 
   @FXML
