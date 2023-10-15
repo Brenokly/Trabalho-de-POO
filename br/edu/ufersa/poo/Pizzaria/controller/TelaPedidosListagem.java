@@ -1,13 +1,23 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+
+import com.itextpdf.text.pdf.PdfWriter;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.*;
+
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,6 +25,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,6 +50,9 @@ public class TelaPedidosListagem implements Initializable {
     private Button editar;
 
     @FXML
+    private Button imprimir;
+
+    @FXML
     private TableColumn<Pedido, String> estado;
 
     @FXML
@@ -58,35 +73,45 @@ public class TelaPedidosListagem implements Initializable {
     @FXML
     private TableView<Pedido> table;
 
-    ObservableList<Pedido> list = FXCollections.observableArrayList();
-    ObservableList<Pedido> allPedidos = FXCollections.observableArrayList();
+    @FXML
+    private DatePicker startDatePicker;
+
+    @FXML
+    private DatePicker endDatePicker;
+
+    private ObservableList<Pedido> list = FXCollections.observableArrayList();
+    private ObservableList<Pedido> allPedidos = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        System.out.println("TelaPedidoListagem.initialize()");
-        List<Pedido> pedido = null;
-        List<Pedido> pedido2 = new ArrayList<>();
+        loadPedidos();
+        setupTableViewColumns();
+        setupDatePickers();
+    }
+
+    private void loadPedidos() {
+        List<Pedido> pedidos = null;
+        List<Pedido> filteredPedidos = new ArrayList<>();
         try {
-            pedido = pedidoBO.buscarTodos();
-            if (pedido != null) {
-                for (Pedido p : pedido) {
-                    if (!p.getItensPedido().isEmpty()) {
-                        pedido2.add(p);
+            pedidos = pedidoBO.buscarTodos();
+            if (pedidos != null) {
+                for (Pedido pedido : pedidos) {
+                    if (!pedido.getItensPedido().isEmpty()) {
+                        filteredPedidos.add(pedido);
                     }
                 }
-
-                list.addAll(pedido2);
+                list.addAll(filteredPedidos);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        allPedidos.addAll(filteredPedidos);
+    }
 
-        // Configurar as colunas da TableView
+    private void setupTableViewColumns() {
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         estado.setCellValueFactory(new PropertyValueFactory<>("estado"));
         cliente.setCellValueFactory(cellData -> {
-            // cellData.getValue() retorna um objeto Pedido
-            // A partir do objeto Pedido, você pode acessar o cliente e, em seguida, o nome
             Cliente clienteDoPedido = cellData.getValue().getCliente();
             String nomeDoCliente = clienteDoPedido != null ? clienteDoPedido.getNome() : "";
             return new SimpleStringProperty(nomeDoCliente);
@@ -95,12 +120,23 @@ public class TelaPedidosListagem implements Initializable {
         data.setCellValueFactory(new PropertyValueFactory<>("data"));
 
         if (list != null) {
-            // Adicionar os dados à TableView
             table.setItems(list);
-
-            // Adicionar os dados originais à lista allAdicionais
-            allPedidos.addAll(pedido2);
         }
+    }
+
+    private void setupDatePickers() {
+        LocalDate currentDate = LocalDate.now();
+        LocalDate minDate = LocalDate.of(2023, 10, 1);
+
+        startDatePicker.setValue(minDate);
+
+        endDatePicker.setValue(currentDate);
+        endDatePicker.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(date.isBefore(minDate) || date.isAfter(currentDate));
+            }
+        });
     }
 
     @FXML
@@ -118,6 +154,101 @@ public class TelaPedidosListagem implements Initializable {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+        }
+    }
+
+    @FXML
+    void atualizarTabelaPorData(ActionEvent event) {
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
+
+        ObservableList<Pedido> resultados = FXCollections.observableArrayList();
+
+        for (Pedido pedido : allPedidos) {
+            LocalDate dataPedido = pedido.getData();
+
+            if (startDate == null && endDate == null) {
+                resultados.addAll(allPedidos);
+                break;
+            }
+
+            if ((startDate == null || dataPedido.isEqual(startDate) || dataPedido.isAfter(startDate)) &&
+                    (endDate == null || dataPedido.isEqual(endDate) || dataPedido.isBefore(endDate))) {
+                resultados.add(pedido);
+            }
+        }
+
+        table.setItems(resultados);
+    }
+
+    @FXML
+    void Imprimir(ActionEvent event) {
+        String pdfFileName = "pedidos.pdf";
+        LocalDate startDate = startDatePicker.getValue();
+        LocalDate endDate = endDatePicker.getValue();
+
+        Document document = new Document();
+
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream(pdfFileName));
+            document.open();
+
+            // Adicionar informações da empresa
+            Font empresaFont = FontFactory.getFont(FontFactory.HELVETICA_BOLD, 16, BaseColor.BLACK);
+            Paragraph empresa = new Paragraph("Pizzaria Michelangelo", empresaFont);
+            empresa.setAlignment(Element.ALIGN_CENTER);
+            document.add(empresa);
+
+            if (startDate != null || endDate != null) {
+                String intervaloTempo = "";
+
+                if (startDate != null) {
+                    intervaloTempo += "Tempo Inicial: " + startDate.toString() + "\n";
+                }
+
+                if (endDate != null) {
+                    intervaloTempo += "Tempo Final: " + endDate.toString() + "\n";
+                }
+
+                Paragraph intervaloTempoParagrafo = new Paragraph(intervaloTempo);
+                document.add(intervaloTempoParagrafo);
+            }
+
+            Paragraph title = new Paragraph("Relatório de Pedidos\n\n");
+            title.setAlignment(Paragraph.ALIGN_CENTER);
+            document.add(title);
+
+            PdfPTable pdfTable = new PdfPTable(5);
+
+            PdfPCell cell = new PdfPCell(new Phrase("ID"));
+            pdfTable.addCell(cell);
+            cell = new PdfPCell(new Phrase("Estado"));
+            pdfTable.addCell(cell);
+            cell = new PdfPCell(new Phrase("Cliente"));
+            pdfTable.addCell(cell);
+            cell = new PdfPCell(new Phrase("Valor"));
+            pdfTable.addCell(cell);
+            cell = new PdfPCell(new Phrase("Data"));
+            pdfTable.addCell(cell);
+
+            for (Pedido pedido : allPedidos) {
+                LocalDate dataPedido = pedido.getData();
+
+                if ((startDate == null || dataPedido.isEqual(startDate) || dataPedido.isAfter(startDate)) &&
+                        (endDate == null || dataPedido.isEqual(endDate) || dataPedido.isBefore(endDate))) {
+                    pdfTable.addCell(String.valueOf(pedido.getId()));
+                    pdfTable.addCell(pedido.getEstado().getDescricao());
+                    pdfTable.addCell(pedido.getCliente().getNome());
+                    pdfTable.addCell(String.valueOf(pedido.getValor()));
+                    pdfTable.addCell(dataPedido.toString());
+                }
+            }
+
+            document.add(pdfTable);
+            document.close();
+            System.out.println("PDF criado com sucesso em " + pdfFileName);
+        } catch (DocumentException | IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -162,13 +293,11 @@ public class TelaPedidosListagem implements Initializable {
 
         if (allPedidos != null) {
             if (searchTerm.isEmpty()) {
-                // Campo de pesquisa vazio, exiba todos os dados originais
                 table.setItems(allPedidos);
             } else {
-                // Realize a pesquisa e atualize a TableView com os resultados
                 List<Pedido> resultados = new ArrayList<>();
 
-                for (Pedido pedido : allPedidos) { // buscar por cliente, por pizza (nome do sabor) e por estado
+                for (Pedido pedido : allPedidos) {
                     if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm) ||
                             pedido.getEstado().getDescricao().toLowerCase().contains(searchTerm) ||
                             pedido.getItensPedido().get(0).getPizza().getNome().toLowerCase().contains(searchTerm)) {
@@ -183,5 +312,4 @@ public class TelaPedidosListagem implements Initializable {
             }
         }
     }
-
 }

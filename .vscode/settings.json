@@ -9,6 +9,7 @@
         "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.swing.jar",
         "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx.web.jar",
         "c:\\Program Files\\Java\\jdk-17\\lib\\javafx-sdk-17.0.8\\lib\\javafx-swt.jar",
-        "d:\\Documentos\\poo\\postgresql-42.6.0.jar"
+        "d:\\Documentos\\poo\\postgresql-42.6.0.jar",
+        "d:\\Documentos\\poo\\itextpdf-5.4.2.jar"
     ]
 }
