@@ -35,7 +35,7 @@ public class TelaClientesCadastrar {
   private TextField senha;
 
   @FXML
-  private Label clientesExistente;
+  private Label clienteExistente;
 
   @FXML
   private Button inicio;
@@ -101,6 +101,11 @@ public class TelaClientesCadastrar {
         Telas.TelaClientes();
       } catch (UsuarioInvalido e) {
         displayAlert("Erro", e.getMessage());
+        if (e.getMessage().equals("Cliente já cadastrado")) {
+          clienteExistente.setVisible(true);
+        } else {
+          clienteExistente.setVisible(false);
+        }
       }
     } else {
       // Alguma entrada é inválida, exiba alertas de erro

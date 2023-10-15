@@ -18,7 +18,7 @@ public class TelaClientesEditar extends Dialog<Cliente> {
     private Cliente cliente = new Cliente();
 
     @FXML
-    private Label ClienteExistente;
+    private Label clienteExistente;
 
     @FXML
     private Button excluir;
@@ -116,6 +116,9 @@ public class TelaClientesEditar extends Dialog<Cliente> {
                 Telas.TelaClientes();
             } catch (Exception e) {
                 exibirMensagemDeErro("Erro ao carregar funcionário", e.getMessage());
+                if (e.getMessage().equals("Cliente já cadastrado")) {
+                    clienteExistente.setVisible(true);
+                }
             }
         }
     }
