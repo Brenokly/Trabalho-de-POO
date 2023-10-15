@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Seed_DB {
         public static void main(String[] args) {
@@ -18,7 +19,7 @@ public class Seed_DB {
                         Connection connection = DriverManager.getConnection(URL, USER, PASS);
                         Statement statement = connection.createStatement();
 
-                        // Inserir dados nas tabelas
+                        // Inserindo dados nas tabelas
                         // Tabela tb_user
                         statement.executeUpdate("INSERT INTO tb_user (nome, cpf, email, senha, isadmin) VALUES " +
                                         "('admin', '12345678901', 'admin', 'admin', true), " +
@@ -53,7 +54,12 @@ public class Seed_DB {
                                                         "('Pizza Pepperoni', 35.0, 25.0), " +
                                                         "('Pizza Quatro Queijos', 40.0, 30.0), " +
                                                         "('Pizza Frango Catupiry', 35.0, 25.0), " +
-                                                        "('Pizza Calabresa', 33.0, 23.0)");
+                                                        "('Pizza Calabresa', 33.0, 23.0), " +
+                                                        "('Pizza Portuguesa', 37.0, 27.0), " +
+                                                        "('Pizza Vegetariana', 38.0, 28.0), " +
+                                                        "('Pizza Margherita Especial', 42.0, 32.0), " +
+                                                        "('Pizza Bacon e Ovo', 36.0, 26.0), " +
+                                                        "('Pizza Peperoncino', 34.0, 24.0)");
 
                         // Tabela tb_adicional
                         statement.executeUpdate("INSERT INTO tb_adicional (nome, valor, quantidade) VALUES " +
@@ -98,14 +104,35 @@ public class Seed_DB {
                                 pedidoIds.add(generatedKeys.getLong(1));
                         }
 
-                        // Associar tipos de pizza reais a pedidos
-                        int tipoPizzaId = 1; // O ID do tipo de pizza real que você deseja associar
-                        for (Long pedidoId : pedidoIds) {
-                                statement.executeUpdate(
-                                                "INSERT INTO tb_itenspedido (id_pedido, id_tipopizza, tamanho, valor, descricao) VALUES "
-                                                                +
-                                                                "(" + pedidoId + ", " + tipoPizzaId
-                                                                + ", 'grande', 30.0, 'Pizza Grande')");
+                        // Consulta para obter a quantidade máxima de itens de pedidos registrados
+                        ResultSet maxItemsResult = statement.executeQuery("SELECT MAX(id) FROM tb_tipospizza");
+                        int maxItems = 0;
+                        if (maxItemsResult.next()) {
+                                maxItems = maxItemsResult.getInt(1);
+                                if (maxItems <= 0) {
+                                        maxItems = 1; // Certificando-se de que maxItems seja pelo menos 1
+                                }
+                        } else {
+                                maxItems = 1; // Em caso de falha na consulta, definindo maxItems como 1
+                        }
+
+                        // Associando tipos de pizza a pedidos
+                        Random random = new Random();
+                        for (int i = 0; i < 3; i++) {
+                                for (Long pedidoId : pedidoIds) {
+                                        String[] tamanhos = { "grande", "pequena" };
+                                        int tipoPizzaId = random.nextInt(maxItems) + 1;
+                                        String tamanho = tamanhos[random.nextInt(tamanhos.length)];
+                                        double valor = 10.0 + (random.nextDouble() * 30.0); // Valor aleatório entre
+                                        // 10.0 e 40.0
+                                        String descricao = "Pizza " + tamanho;
+
+                                        statement.executeUpdate(
+                                                        "INSERT INTO tb_itenspedido (id_pedido, id_tipopizza, tamanho, valor, descricao) VALUES "
+                                                                        + "(" + pedidoId + ", " + tipoPizzaId + ", '"
+                                                                        + tamanho + "', " + valor + ", '" + descricao
+                                                                        + "')");
+                                }
                         }
 
                         statement.close();
