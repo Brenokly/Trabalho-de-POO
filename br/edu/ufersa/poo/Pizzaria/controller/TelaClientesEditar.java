@@ -14,7 +14,7 @@ import java.util.Optional;
 import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
-public class TelaClientes3 extends Dialog<Cliente> {
+public class TelaClientesEditar extends Dialog<Cliente> {
     private Cliente cliente = new Cliente();
 
     @FXML

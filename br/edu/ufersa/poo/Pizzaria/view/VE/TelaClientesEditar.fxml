@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientesCadastrar">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaClientesEditar">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="230.0" spacing="28.0" style="-fx-background-color: #2E382E;">
          <children>
@@ -42,7 +42,7 @@
                   <Font name="Montserrat Regular" size="18.0" />
                </font>
             </Label>
-            <Button id="back_button" fx:id="back_button" mnemonicParsing="false" onAction="#cancelarClientes" styleClass="icon_button" text="Voltar" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0">
+            <Button id="back_button" fx:id="back_button" mnemonicParsing="false" onAction="#Cancelar" styleClass="icon_button" text="Voltar" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor>
@@ -57,8 +57,7 @@
                   <Font name="Montserrat Regular" size="12.0" />
                </font>
             </Button>
-            <Button fx:id="salvar" layoutX="253.0" layoutY="440.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="35.0" prefWidth="100.0" styleClass="filled_button" text="Salvar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" />
-            <Button id="cancel_button" fx:id="cancelar" layoutX="401.0" layoutY="518.0" mnemonicParsing="false" onAction="#cancelarClientes" prefHeight="35.0" prefWidth="100.0" styleClass="outlined_button" text="Cancelar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="170.0" />
+            <Button fx:id="salvar" layoutX="475.0" layoutY="531.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="35.0" prefWidth="100.0" styleClass="filled_button" text="Salvar" AnchorPane.bottomAnchor="34.0" AnchorPane.rightAnchor="35.0" />
             <Label layoutX="52.0" layoutY="171.0" text="Nome">
                <font>
                   <Font size="18.0" />
@@ -114,6 +113,7 @@
                   <Image url="@adicionaisElogin/Rectangle%2089.png" />
                </image>
             </ImageView>
+            <Button id="cancel_button" fx:id="excluir" layoutX="331.0" layoutY="531.0" mnemonicParsing="false" onAction="#ExcluirCliente" prefHeight="35.0" prefWidth="100.0" styleClass="outlined_button" text="Excluir" />
          </children>
       </AnchorPane>
    </children>

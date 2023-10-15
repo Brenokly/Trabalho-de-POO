@@ -2,7 +2,7 @@ package br.edu.ufersa.poo.Pizzaria.view;
 
 import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicionalEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionariosEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaClientes3;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaClientesEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaInicialEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaSaboresEditar;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
@@ -140,7 +140,7 @@ public class Telas extends Application {
   }
 
   public static void TelaClientes() throws Exception {
-    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientes.fxml"));
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientesListagem.fxml"));
 
     Scene scene = new Scene(root);
 
@@ -148,7 +148,7 @@ public class Telas extends Application {
   }
 
   public static void TelaClientes2() throws Exception {
-    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientes2.fxml"));
+    Parent root = FXMLLoader.load(Telas.class.getResource("VE/TelaClientesCadastrar.fxml"));
 
     Scene scene = new Scene(root);
 
@@ -156,10 +156,10 @@ public class Telas extends Application {
   }
 
   public static void TelaClientes3(Cliente cliente) throws Exception {
-    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaClientes3.fxml"));
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaClientesEditar.fxml"));
     Parent root = loader.load();
 
-    TelaClientes3 controller = loader.getController();
+    TelaClientesEditar controller = loader.getController();
 
     controller.setCliente(cliente);
 
