@@ -5,6 +5,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -60,58 +61,65 @@
             </Button>
             <Button fx:id="salvar" layoutX="253.0" layoutY="440.0" mnemonicParsing="false" onAction="#SalvarFuncionario" prefHeight="35.0" prefWidth="100.0" styleClass="filled_button" text="Salvar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" />
             <Button id="cancel_button" fx:id="excluir" layoutX="401.0" layoutY="518.0" mnemonicParsing="false" onAction="#ExcluirFuncionario" prefHeight="35.0" prefWidth="100.0" styleClass="outlined_button" text="Excluir" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="170.0" />
-            <Label layoutX="52.0" layoutY="136.0" text="Nome">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="70.0" layoutY="220.0">
+            <Label prefHeight="30.0" text="Dados Pessoais" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <Label layoutX="53.0" layoutY="273.0" text="E-mai">
+            <Separator prefWidth="510.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="160.0" />
+            <Label layoutX="52.0" layoutY="136.0" prefHeight="30.0" text="Nome" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="180.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="nome" layoutX="137.0" layoutY="132.0" prefHeight="35.0" prefWidth="437.0" styleClass="textfield">
+            <TextField fx:id="nome" layoutX="137.0" layoutY="132.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="180.0">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="cpf" layoutX="134.0" layoutY="204.0" prefHeight="35.0" prefWidth="437.0" styleClass="textfield">
+            <Label layoutX="52.0" layoutY="206.0" prefHeight="30.0" text="Cpf" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="230.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cpf" layoutX="134.0" layoutY="204.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="230.0">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <TextField fx:id="email" layoutX="137.0" layoutY="266.0" prefHeight="30.0" prefWidth="437.0" styleClass="textfield">
+            <Label fx:id="FuncionarioExistente" layoutX="440.0" layoutY="238.0" text="Funcionário já existe!" textFill="#f55f51" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="265.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label prefHeight="30.0" text="Credenciais" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="290.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Separator prefWidth="510.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="320.0" />
+            <Label layoutX="53.0" layoutY="273.0" prefHeight="30.0" text="E-mail" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="350.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="email" layoutX="137.0" layoutY="266.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="350.0">
                <font>
                   <Font size="14.0" />
                </font>
             </TextField>
-            <Label layoutX="52.0" layoutY="206.0" text="Cpf">
+            <Label layoutX="52.0" layoutY="336.0" prefHeight="30.0" text="Senha" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="400.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label layoutX="52.0" layoutY="336.0" text="Senha">
+            <PasswordField fx:id="senha1" layoutX="137.0" layoutY="331.0" prefHeight="30.0" prefWidth="310.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="400.0" />
+            <Label layoutX="52.0" layoutY="401.0" prefHeight="30.0" text="Confirme a Senha" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="450.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="senha1" layoutX="137.0" layoutY="331.0" prefHeight="35.0" prefWidth="284.0" styleClass="textfield" />
-            <Label layoutX="52.0" layoutY="401.0" text="Confirme a Senha">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <PasswordField fx:id="senha2" layoutX="214.0" layoutY="398.0" prefHeight="25.0" prefWidth="284.0" styleClass="textfield" />
-            <Label fx:id="FuncionarioExistente" layoutX="440.0" layoutY="238.0" text="Funcionário já existe!" textFill="RED" visible="false">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
+            <PasswordField fx:id="senha2" layoutX="214.0" layoutY="398.0" prefHeight="30.0" prefWidth="310.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="450.0" />
          </children>
       </AnchorPane>
    </children>

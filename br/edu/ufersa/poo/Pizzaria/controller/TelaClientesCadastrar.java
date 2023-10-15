@@ -15,48 +15,10 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
 public class TelaClientesCadastrar {
-
-  @FXML
-  private Button salvar;
-
-  @FXML
-  private Button cancelar;
-
-  @FXML
-  private TextField nome;
-
-  @FXML
-  private TextField cpf;
-
-  @FXML
-  private TextField endereco;
-
-  @FXML
-  private TextField senha;
-
-  @FXML
-  private Label clienteExistente;
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  private Button clientes;
-
-  @FXML
-  private Button pedidos;
-
-  @FXML
-  private Button sabores;
-
-  @FXML
-  private Button adicionais;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  private Button sair;
+  @FXML private Label clienteExistente;
+  @FXML private TextField nome, cpf, endereco, senha;
+  @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+  @FXML private Button salvar, cancelar;
 
   @FXML
   void salvarCliente(ActionEvent event) throws Exception {

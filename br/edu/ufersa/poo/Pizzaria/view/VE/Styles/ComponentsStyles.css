@@ -97,6 +97,45 @@
     -fx-background-color: transparent;
 }
 
+/* DatePicker styling */
+
+.date-picker {
+    -fx-background-color: #0D0106;
+    -fx-background-insets: 28 0 0 0;
+    -fx-background-radius: 0;
+}
+
+.date-picker .text-field {
+    -fx-background-color: transparent;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #2E382ECC;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #0D0106, #F3F3F3;
+    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-base: #2E382E;
+    -fx-mark-highlight-color: #F3F3F3;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup > * > .spinner > .button > .left-arrow,
+.date-picker-popup > * > .spinner > .button > .right-arrow {
+    -fx-padding: 0.333333em 0.25em 0.333333em 0.25em;
+    -fx-background-color: #F3F3F3;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-background-color: #C0BDA580;
+}
+
 /* Table styling */
 
 .table-view,
@@ -153,12 +192,12 @@
 .table-view .virtual-flow .scroll-bar:vertical,
 .table-view .virtual-flow .scroll-bar:vertical .track-background,
 .table-view .virtual-flow .scroll-bar:horizontal,
-.table-view .virtual-flow .scroll-bar:horizontal .track,
 .table-view .virtual-flow .scroll-bar:horizontal .track-background {
     -fx-background-color: transparent;
 }
 
-.table-view .virtual-flow .scroll-bar:vertical .track {
+.table-view .virtual-flow .scroll-bar:vertical .track,
+.table-view .virtual-flow .scroll-bar:horizontal .track {
     -fx-background-color: #F3F3F3;
 }
 
@@ -168,6 +207,7 @@
     -fx-padding: 2;
 }
 
-.table-view .virtual-flow .scroll-bar:vertical .thumb {
+.table-view .virtual-flow .scroll-bar:vertical .thumb,
+.table-view .virtual-flow .scroll-bar:horizontal .thumb {
     -fx-background-color: #2E382EA6;
 }

@@ -22,24 +22,9 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
 
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML
-  private Button excluir;
-  @FXML
-  private Button funcionarios;
-  @FXML
-  private Button inicio;
-  @FXML
-  private TextField nome;
-  @FXML
-  private TextField preco;
-  @FXML
-  private TextField quantidade;
-  @FXML
-  private Button sair;
-  @FXML
-  private Button salvar;
-  @FXML
-  private Button cancelar;
+  @FXML private Button inicio, funcionarios, sair;
+  @FXML private TextField nome, preco, quantidade;
+  @FXML private Button salvar, cancelar, excluir;
 
   @FXML
   void ExcluirAdicional(ActionEvent event) {

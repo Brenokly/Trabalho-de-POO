@@ -53,9 +53,9 @@
                <columns>
                   <TableColumn fx:id="id" prefWidth="36.0" text="Id" />
                   <TableColumn fx:id="colNome" prefWidth="154.0" text="Nome" />
-                  <TableColumn fx:id="colCpf" prefWidth="106.0" text="Cpf" />
-                  <TableColumn fx:id="colEmail" prefWidth="154.0" text="E-mail" />
-                  <TableColumn fx:id="colAdministrator" prefWidth="99.0" text="Administrador" />
+                  <TableColumn fx:id="colCpf" prefWidth="101.0" text="Cpf" />
+                  <TableColumn fx:id="colEmail" prefWidth="152.0" text="E-mail" />
+                  <TableColumn fx:id="colAdministrator" prefWidth="94.0" text="Administrador" />
                </columns>
             </TableView>
             <Button fx:id="adicionar" layoutX="545.0" layoutY="97.0" mnemonicParsing="false" onAction="#carregarTelaFuncionariosCadastro" prefHeight="20.0" prefWidth="20.0" styleClass="icon_button">

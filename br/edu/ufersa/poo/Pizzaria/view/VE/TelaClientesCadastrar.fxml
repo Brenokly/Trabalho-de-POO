@@ -4,6 +4,7 @@
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -59,61 +60,53 @@
             </Button>
             <Button fx:id="salvar" layoutX="253.0" layoutY="440.0" mnemonicParsing="false" onAction="#salvarCliente" prefHeight="35.0" prefWidth="100.0" styleClass="filled_button" text="Salvar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="35.0" />
             <Button id="cancel_button" fx:id="cancelar" layoutX="401.0" layoutY="518.0" mnemonicParsing="false" onAction="#cancelarClientes" prefHeight="35.0" prefWidth="100.0" styleClass="outlined_button" text="Cancelar" AnchorPane.bottomAnchor="35.0" AnchorPane.rightAnchor="170.0" />
-            <Label layoutX="52.0" layoutY="171.0" text="Nome">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="52.0" layoutY="240.0" text="Cpf">
-               <font>
-                  <Font size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="39.0" layoutY="126.0" text="Dados Pessoais">
+            <Label layoutX="39.0" layoutY="126.0" prefHeight="30.0" text="Dados Pessoais" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="130.0">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Label>
-            <ImageView fitHeight="17.0" fitWidth="538.0" layoutX="36.0" layoutY="149.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@adicionaisElogin/Rectangle%2089.png" />
-               </image>
-            </ImageView>
-            <TextField fx:id="nome" layoutX="117.0" layoutY="166.0" prefHeight="35.0" prefWidth="418.0" styleClass="textfield">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="cpf" layoutX="117.0" layoutY="237.0" prefHeight="35.0" prefWidth="294.0" styleClass="textfield">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <TextField fx:id="endereco" layoutX="141.0" layoutY="376.0" prefHeight="30.0" prefWidth="325.0" styleClass="textfield">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </TextField>
-            <Label layoutX="41.0" layoutY="321.0" text="Entrega">
-               <font>
-                  <Font name="System Bold" size="18.0" />
-               </font>
-            </Label>
-            <Label layoutX="52.0" layoutY="380.0" text="Endereço">
+            <Separator layoutX="190.0" layoutY="170.0" prefWidth="510.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="160.0" />
+            <Label layoutX="52.0" layoutY="171.0" prefHeight="30.0" text="Nome" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="200.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <Label fx:id="clienteExistente" layoutX="325.0" layoutY="276.0" text="Cliente já existe!" textFill="RED" visible="false">
+            <TextField fx:id="nome" layoutX="117.0" layoutY="166.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label fx:id="clienteExistente" layoutX="325.0" layoutY="276.0" text="Cliente já existe!" textFill="#f55f51" visible="false" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="235.0">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
             </Label>
-            <ImageView fitHeight="17.0" fitWidth="538.0" layoutX="37.0" layoutY="347.0" opacity="0.14" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@adicionaisElogin/Rectangle%2089.png" />
-               </image>
-            </ImageView>
+            <Label layoutX="52.0" layoutY="240.0" prefHeight="30.0" text="Cpf" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="260.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="cpf" layoutX="117.0" layoutY="237.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="260.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="41.0" layoutY="321.0" prefHeight="30.0" text="Entrega" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="330.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Separator layoutX="200.0" layoutY="180.0" prefWidth="510.0" AnchorPane.leftAnchor="50.0" AnchorPane.topAnchor="360.0" />
+            <Label layoutX="52.0" layoutY="380.0" prefHeight="30.0" text="Endereço" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="400.0">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="endereco" layoutX="141.0" layoutY="376.0" prefHeight="30.0" prefWidth="390.0" styleClass="textfield" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="400.0">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
          </children>
       </AnchorPane>
    </children>

@@ -17,26 +17,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 
 public class TelaAdicionalCadastro {
-  private PseudoClass error = PseudoClass.getPseudoClass("error");
+  private PseudoClass error = PseudoClass.getPseudoClass("error"); 
 
-  @FXML
-  private Label AdicionalExistente;
-  @FXML
-  private Button cancelar;
-  @FXML
-  private Button funcionarios;
-  @FXML
-  private Button inicio;
-  @FXML
-  private TextField nome;
-  @FXML
-  private TextField preco;
-  @FXML
-  private TextField quantidade;
-  @FXML
-  private Button sair;
-  @FXML
-  private Button salvar;
+  @FXML private Label AdicionalExistente;
+  @FXML private Button inicio, funcionarios, sair;
+  @FXML private TextField nome, preco, quantidade;
+  @FXML private Button salvar, cancelar;
 
   @FXML
   void SalvarAdicional(ActionEvent event) throws Exception {

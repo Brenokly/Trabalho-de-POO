@@ -23,91 +23,23 @@ import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
-import javafx.scene.image.ImageView;
 import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.control.Pagination;
-import javafx.scene.control.Separator;
 import javafx.scene.layout.Pane;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
-
-  @FXML
-  private ChoiceBox<String> Adicional1Box;
-
-  @FXML
-  private ChoiceBox<String> Adicional2Box;
-
-  @FXML
-  private ChoiceBox<String> Adicional3Box;
-
-  @FXML
-  private Button Adicionar;
-
-  @FXML
-  private ChoiceBox<String> ClienteBox;
-
-  @FXML
-  private ChoiceBox<String> EstadoBox;
-
-  @FXML
-  private ChoiceBox<String> PizzaBox;
-
-  @FXML
-  private Button Remover;
-
-  @FXML
-  private ChoiceBox<String> TamanhoBox;
-
-  @FXML
-  private Button adicionais;
-
-  @FXML
-  private Button cancelar;
-
-  @FXML
-  private Button funcionarios;
-
-  @FXML
-  private Button inicio;
-
-  @FXML
-  private Separator linha1;
-
-  @FXML
-  private Separator linha2;
-
-  @FXML
-  private Separator linha3;
-
-  @FXML
-  private Button sair;
-
-  @FXML
-  private Button salvar;
-
-  @FXML
-  private ImageView AdicionarNotOpaco;
-
-  @FXML
-  private ImageView AdicionarOpaco;
-
-  @FXML
-  private ImageView RemoverNotOpaco;
-
-  @FXML
-  private ImageView RemoverOpaco;
-
-  @FXML
-  private Pagination Pagina;
-
-  @FXML
-  private Button back_button;
-
+  
+  @FXML private Pagination Pagina;
+  @FXML private ComboBox<String> ClienteBox, EstadoBox, PizzaBox, TamanhoBox;
+  @FXML private ComboBox<String> Adicional1Box, Adicional2Box, Adicional3Box;
+  @FXML private Button Adicionar, Remover;
+  @FXML private Button back_button, salvar, cancelar;
+  
   int currentPageIndex = 0; // Adicione esta variável para rastrear a página atual
   int pageIndex = 0;
 
@@ -162,13 +94,9 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
       }
     }
 
-    AdicionarNotOpaco.setVisible(true);
-    AdicionarOpaco.setVisible(false);
     Adicionar.setDisable(false);
 
-    RemoverNotOpaco.setDisable(true);
-    RemoverNotOpaco.setVisible(false);
-    RemoverOpaco.setVisible(true);
+    Remover.setDisable(true);
 
     Adicional1Box.getItems().addAll(nomesA);
     Adicional2Box.getItems().addAll(nomesA);
@@ -315,25 +243,18 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
 
     if (!Adicional1Box.isVisible()) {
       Adicional1Box.setVisible(true);
-      linha1.setVisible(true);
       Adicional1Box.getItems().addAll(nomesA);
 
-      RemoverNotOpaco.setDisable(false);
-      RemoverNotOpaco.setVisible(true);
-      RemoverOpaco.setVisible(false);
+      Remover.setDisable(false);
     } else if (!Adicional2Box.isVisible()) {
       Adicional2Box.setVisible(true);
-      linha2.setVisible(true);
       Adicional2Box.getItems().addAll(nomesA);
 
     } else if (!Adicional3Box.isVisible()) {
 
       Adicional3Box.setVisible(true);
-      linha3.setVisible(true);
       Adicional3Box.getItems().addAll(nomesA);
 
-      AdicionarNotOpaco.setVisible(false);
-      AdicionarOpaco.setVisible(true);
       Adicionar.setDisable(true);
     }
   }
@@ -342,25 +263,18 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
   void RemoverADD(ActionEvent event) {
     if (Adicional3Box.isVisible()) {
       Adicional3Box.setVisible(false);
-      linha3.setVisible(false);
       Adicional3Box.getItems().clear();
 
-      AdicionarNotOpaco.setVisible(true);
-      AdicionarOpaco.setVisible(false);
       Adicionar.setDisable(false);
     } else if (Adicional2Box.isVisible()) {
       Adicional2Box.setVisible(false);
-      linha2.setVisible(false);
       Adicional2Box.getItems().clear();
 
     } else if (Adicional1Box.isVisible()) {
       Adicional1Box.setVisible(false);
-      linha1.setVisible(false);
       Adicional1Box.getItems().clear();
 
-      RemoverNotOpaco.setDisable(true);
-      RemoverNotOpaco.setVisible(false);
-      RemoverOpaco.setVisible(true);
+      Remover.setDisable(true);
     }
   }
 
@@ -452,9 +366,6 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
     Adicional1Box.setVisible(false);
     Adicional2Box.setVisible(false);
     Adicional3Box.setVisible(false);
-    linha1.setVisible(false);
-    linha2.setVisible(false);
-    linha3.setVisible(false);
     PizzaBox.getItems().clear();
 
     // Obtenha a lista de nomes de pizzas
@@ -501,57 +412,43 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
           if (adicionais.size() >= 1) {
             Adicional1Box.setValue(adicionais.get(0).getNome());
             Adicional1Box.setVisible(true);
-            linha1.setVisible(true);
             Adicional1Box.getItems().addAll(nomesA);
-            RemoverNotOpaco.setDisable(false);
-            RemoverNotOpaco.setVisible(true);
-            RemoverOpaco.setVisible(false);
+            Remover.setDisable(false);
 
             if (adicionais.get(0).getQuantidade() > 1) {
               Adicional2Box.setValue(adicionais.get(0).getNome());
               Adicional2Box.setVisible(true);
-              linha2.setVisible(true);
               Adicional2Box.getItems().addAll(nomesA);
             }
 
             if (adicionais.get(0).getQuantidade() > 2) {
               Adicional3Box.setValue(adicionais.get(0).getNome());
               Adicional3Box.setVisible(true);
-              linha3.setVisible(true);
               Adicional3Box.getItems().addAll(nomesA);
 
               Adicionar.setDisable(true);
-              AdicionarNotOpaco.setVisible(false);
-              AdicionarOpaco.setVisible(true);
             }
 
             if (adicionais.size() >= 2 && adicionais.get(0).getQuantidade() == 1) {
               Adicional2Box.setValue(adicionais.get(1).getNome());
               Adicional2Box.setVisible(true);
-              linha2.setVisible(true);
               Adicional2Box.getItems().addAll(nomesA);
             }
 
             if (adicionais.size() >= 2 && adicionais.get(1).getQuantidade() == 2) {
               Adicional3Box.setValue(adicionais.get(1).getNome());
               Adicional3Box.setVisible(true);
-              linha3.setVisible(true);
               Adicional3Box.getItems().addAll(nomesA);
 
               Adicionar.setDisable(true);
-              AdicionarNotOpaco.setVisible(false);
-              AdicionarOpaco.setVisible(true);
             }
 
             if (adicionais.size() >= 3) {
               Adicional3Box.setValue(adicionais.get(2).getNome());
               Adicional3Box.setVisible(true);
-              linha3.setVisible(true);
               Adicional3Box.getItems().addAll(nomesA);
 
               Adicionar.setDisable(true);
-              AdicionarNotOpaco.setVisible(false);
-              AdicionarOpaco.setVisible(true);
             }
           }
         }

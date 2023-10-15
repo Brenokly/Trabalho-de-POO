@@ -17,50 +17,10 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 public class TelaClientesEditar extends Dialog<Cliente> {
     private Cliente cliente = new Cliente();
 
-    @FXML
-    private Label clienteExistente;
-
-    @FXML
-    private Button excluir;
-
-    @FXML
-    private Button inicio;
-
-    @FXML
-    private TextField nome;
-
-    @FXML
-    private TextField cpf;
-
-    @FXML
-    private TextField endereco;
-
-    @FXML
-    private TextField senha;
-
-    @FXML
-    private Button salvar;
-
-    @FXML
-    private Button cancelar;
-
-    @FXML
-    private Button clientes;
-
-    @FXML
-    private Button pedidos;
-
-    @FXML
-    private Button sabores;
-
-    @FXML
-    private Button adicionais;
-
-    @FXML
-    private Button funcionarios;
-
-    @FXML
-    private Button sair;
+    @FXML private Label clienteExistente;
+    @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+    @FXML private Button cancelar, excluir, salvar;
+    @FXML private TextField nome, cpf, endereco, senha;
 
     @FXML
     void ExcluirCliente(ActionEvent event) {
@@ -133,7 +93,7 @@ public class TelaClientesEditar extends Dialog<Cliente> {
     }
 
     @FXML
-    void Cancelar(ActionEvent event) throws Exception {
+    void cancelar(ActionEvent event) throws Exception {
         Telas.TelaClientes();
     }
 
