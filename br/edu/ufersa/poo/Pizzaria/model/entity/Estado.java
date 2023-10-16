@@ -1,14 +1,14 @@
 package br.edu.ufersa.poo.Pizzaria.model.entity;
 
 public enum Estado {
-    PENDENTE("pendente"),
-    PREPARANDO("preparando"),
-    ENTREGUE("entregue");
+    PENDENTE("Pendente"),
+    PREPARANDO("Preparando"),
+    ENTREGUE("Entregue");
     
     private String descricao;
 
     Estado(String descricao) {
-        if ("pendente".equals(descricao) || "preparando".equals(descricao) || "entregue".equals(descricao)) {
+        if ("Pendente".equals(descricao) || "Preparando".equals(descricao) || "Entregue".equals(descricao)) {
             this.descricao = descricao;
         }
     }

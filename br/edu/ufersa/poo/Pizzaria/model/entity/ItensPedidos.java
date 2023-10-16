@@ -27,9 +27,9 @@ public class ItensPedidos extends Produto {
     super(descricao, idProduto);
     pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
 
-    if (("grande".equals(tamanho.getDescricao()))) {
+    if (("Grande".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorGrande());
-    } else if (("pequena".equals(tamanho.getDescricao()))) {
+    } else if (("Pequena".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorPequena());
     }
 
@@ -45,9 +45,9 @@ public class ItensPedidos extends Produto {
     super(descricao, idProduto);
     pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
 
-    if (("grande".equals(tamanho.getDescricao()))) {
+    if (("Grande".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorGrande());
-    } else if (("pequena".equals(tamanho.getDescricao()))) {
+    } else if (("Pequena".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorPequena());
     }
 
@@ -63,9 +63,9 @@ public class ItensPedidos extends Produto {
     super();
     pizza = Tpizza; // Atribua a instância diretamente, não precisa criar outra
 
-    if (("grande".equals(tamanho.getDescricao()))) {
+    if (("Grande".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorGrande());
-    } else if (("pequena".equals(tamanho.getDescricao()))) {
+    } else if (("Pequena".equals(tamanho.getDescricao()))) {
       super.setValor(Tpizza.getValorPequena());
     }
 
@@ -100,9 +100,9 @@ public class ItensPedidos extends Produto {
   }
 
   public void setTamanho(String tamanho) throws TamanhoInvalido {
-    if ("grande".equals(tamanho)) {
+    if ("Grande".equals(tamanho)) {
       this.tamanho = Tamanho.GRANDE;
-    } else if ("pequena".equals(tamanho)) {
+    } else if ("Pequena".equals(tamanho)) {
       this.tamanho = Tamanho.PEQUENA;
     } else {
       throw new TamanhoInvalido("Tamanho inválido");
@@ -110,7 +110,7 @@ public class ItensPedidos extends Produto {
   }
 
   public void setTamanho(Tamanho tamanho) throws TamanhoInvalido {
-    if ("grande".equals(tamanho.getDescricao()) || "pequena".equals(tamanho.getDescricao())) {
+    if ("Grande".equals(tamanho.getDescricao()) || "Pequena".equals(tamanho.getDescricao())) {
       this.tamanho = tamanho;
     } else {
       throw new TamanhoInvalido("Tamanho inválido");

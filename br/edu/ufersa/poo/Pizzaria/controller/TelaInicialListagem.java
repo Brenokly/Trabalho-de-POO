@@ -46,7 +46,7 @@ public class TelaInicialListagem implements Initializable {
             pedido = pedidoBO.buscarTodos();
             if (pedido != null) {
                 for (Pedido p : pedido) {
-                    if (p.getEstado().getDescricao().equals("pendente") || p.getEstado().getDescricao().equals("preparando")
+                    if (p.getEstado().getDescricao().equals("Pendente") || p.getEstado().getDescricao().equals("Preparando")
                            && !p.getItensPedido().isEmpty()) {
                         pedido2.add(p);
                     }

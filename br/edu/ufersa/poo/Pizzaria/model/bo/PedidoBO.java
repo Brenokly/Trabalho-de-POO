@@ -19,7 +19,7 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new ClienteInvalido("Cliente Inválido");
         }
         if (pedido.getEstado() == null
-                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+                || !Arrays.asList("Pendente", "Preparando", "Entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -43,7 +43,7 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new ClienteInvalido("Cliente Inválido");
         }
         if (pedido.getEstado() == null
-                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+                || !Arrays.asList("Pendente", "Preparando", "Entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -94,6 +94,7 @@ public class PedidoBO implements BaseBO<Pedido> {
                     AdicionaisPD.deleteAdicionaisPD(pedidoAntigo.getItensPedido().get(i), adicionaisRemovidos);
                     for (Adicional adicional : adicionaisRemovidos) {
                         Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        pedido.getItensPedido().get(i).setValor(pedido.getItensPedido().get(i).getValor() - adicionalAtual.getValor() * adicional.getQuantidade());
                         adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() + adicional.getQuantidade());
                         AdicionaisPD.updateQuant(adicionalAtual);
                     }
@@ -103,10 +104,12 @@ public class PedidoBO implements BaseBO<Pedido> {
                     AdicionaisPD.createAdicionaisPD(pedido.getItensPedido().get(i), adicionaisAdicionados);
                     for (Adicional adicional : adicionaisAdicionados) {
                         Adicional adicionalAtual = AdicionaisPD.buscar(adicional);
+                        pedido.getItensPedido().get(i).setValor(pedido.getItensPedido().get(i).getValor() + adicionalAtual.getValor() * adicional.getQuantidade());
                         adicionalAtual.setQuantidade(adicionalAtual.getQuantidade() - adicional.getQuantidade());
                         AdicionaisPD.updateQuant(adicionalAtual);
                     }
                 }
+
             } else {
                 itensPedidosBO.update(pedido.getItensPedido().get(i));
             }
@@ -123,7 +126,7 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new ClienteInvalido("Cliente Inválido");
         }
         if (pedido.getEstado() == null
-                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+                || !Arrays.asList("Pendente", "Preparando", "Entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -153,7 +156,7 @@ public class PedidoBO implements BaseBO<Pedido> {
             throw new ClienteInvalido("Cliente Inválido");
         }
         if (pedido.getEstado() == null
-                || !Arrays.asList("pendente", "preparando", "entregue").contains(pedido.getEstado().getDescricao())) {
+                || !Arrays.asList("Pendente", "Preparando", "Entregue").contains(pedido.getEstado().getDescricao())) {
             throw new EstadoInvalido("Estado Inválido");
         }
         if (pedido.getData() == null || pedido.getData().compareTo(LocalDate.now()) > 0) {
@@ -183,7 +186,7 @@ public class PedidoBO implements BaseBO<Pedido> {
         arrayExistingPedidos = PedidoDao.listar();
 
         if (arrayExistingPedidos.size() <= 0) {
-            System.out.println("Nenhum pedido pendente encontrado.");
+            System.out.println("Nenhum pedido Pendente encontrado.");
             return null;
         } 
         return arrayExistingPedidos;

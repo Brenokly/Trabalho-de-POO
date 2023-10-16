@@ -33,13 +33,18 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
-  
-  @FXML private Pagination Pagina;
-  @FXML private ComboBox<String> ClienteBox, EstadoBox, PizzaBox, TamanhoBox;
-  @FXML private ComboBox<String> Adicional1Box, Adicional2Box, Adicional3Box;
-  @FXML private Button Adicionar, Remover;
-  @FXML private Button back_button, salvar, cancelar;
-  
+
+  @FXML
+  private Pagination Pagina;
+  @FXML
+  private ComboBox<String> ClienteBox, EstadoBox, PizzaBox, TamanhoBox;
+  @FXML
+  private ComboBox<String> Adicional1Box, Adicional2Box, Adicional3Box;
+  @FXML
+  private Button Adicionar, Remover;
+  @FXML
+  private Button back_button, salvar, cancelar;
+
   int currentPageIndex = 0; // Adicione esta variável para rastrear a página atual
   int pageIndex = 0;
 
@@ -64,7 +69,7 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
 
     TamanhoBox.getItems().addAll("Grande", "Pequena");
 
-    TiposPizzasBO tiposPizzaBo = new TiposPizzasBO(); // será o bo
+    TiposPizzasBO tiposPizzaBo = new TiposPizzasBO();
     List<TiposPizzas> tiposPizzas = new ArrayList<>();
     try {
       tiposPizzas = tiposPizzaBo.buscarTodos();
@@ -114,18 +119,18 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   void SalvarPedido(ActionEvent event) throws Exception {
     try {
       Estado estado = null;
-      if (EstadoBox.getValue().equals("entregue")) {
+      if (EstadoBox.getValue().equals("Entregue")) {
         estado = Estado.ENTREGUE;
-      } else if (EstadoBox.getValue().equals("pendente")) {
+      } else if (EstadoBox.getValue().equals("Pendente")) {
         estado = Estado.PENDENTE;
-      } else if (EstadoBox.getValue().equals("preparando")) {
+      } else if (EstadoBox.getValue().equals("Preparando")) {
         estado = Estado.PREPARANDO;
       }
 
       Tamanho tamanho = null;
-      if (TamanhoBox.getValue().equals("grande")) {
+      if (TamanhoBox.getValue().equals("Grande")) {
         tamanho = Tamanho.GRANDE;
-      } else if (TamanhoBox.getValue().equals("pequena")) {
+      } else if (TamanhoBox.getValue().equals("Pequena")) {
         tamanho = Tamanho.PEQUENA;
       }
 
@@ -242,16 +247,18 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
     }
 
     if (!Adicional1Box.isVisible()) {
+      Adicional1Box.getItems().clear();
       Adicional1Box.setVisible(true);
       Adicional1Box.getItems().addAll(nomesA);
 
       Remover.setDisable(false);
     } else if (!Adicional2Box.isVisible()) {
+      Adicional2Box.getItems().clear();
       Adicional2Box.setVisible(true);
       Adicional2Box.getItems().addAll(nomesA);
 
     } else if (!Adicional3Box.isVisible()) {
-
+      Adicional3Box.getItems().clear();
       Adicional3Box.setVisible(true);
       Adicional3Box.getItems().addAll(nomesA);
 
@@ -355,18 +362,16 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
     int numItens = 1;
     numItens += pageIndex;
 
+    Adicionar.setDisable(false);
+
     // Adicione elementos relevantes ao Pane
     Label label = new Label("Pizza  " + numItens + ":");
     pageContent.getChildren().add(label);
 
     // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas
-    Adicional1Box.getItems().clear();
-    Adicional2Box.getItems().clear();
-    Adicional3Box.getItems().clear();
     Adicional1Box.setVisible(false);
     Adicional2Box.setVisible(false);
     Adicional3Box.setVisible(false);
-    PizzaBox.getItems().clear();
 
     // Obtenha a lista de nomes de pizzas
     TiposPizzasBO tiposPizzasBo = new TiposPizzasBO(); // será o bo

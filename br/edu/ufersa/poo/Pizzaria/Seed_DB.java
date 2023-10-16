@@ -82,21 +82,21 @@ public class Seed_DB {
 
                         // Tabela tb_pedido
                         statement.executeUpdate("INSERT INTO tb_pedido (id_cliente, estado, valor, data) VALUES " +
-                                        "(1, 'pendente', 50.0, '2023-10-01'), " +
-                                        "(2, 'preparando', 75.5, '2023-10-02'), " +
-                                        "(3, 'pendente', 60.0, '2023-10-03'), " +
-                                        "(4, 'entregue', 90.0, '2023-10-04'), " +
-                                        "(5, 'pendente', 55.5, '2023-10-05'), " +
-                                        "(6, 'pendente', 70.0, '2023-10-15'), " +
-                                        "(7, 'preparando', 45.5, '2023-10-14'), " +
-                                        "(8, 'entregue', 85.0, '2023-10-13'), " +
-                                        "(9, 'pendente', 60.5, '2023-10-12'), " +
-                                        "(10, 'entregue', 92.0, '2023-10-11'), " +
-                                        "(11, 'preparando', 55.0, '2023-10-10'), " +
-                                        "(12, 'entregue', 72.5, '2023-10-09'), " +
-                                        "(13, 'pendente', 63.0, '2023-10-08'), " +
-                                        "(14, 'entregue', 80.0, '2023-10-07'), " +
-                                        "(15, 'pendente', 59.5, '2023-10-06')", Statement.RETURN_GENERATED_KEYS);
+                                        "(1, 'Pendente', 50.0, '2023-10-01'), " +
+                                        "(2, 'Preparando', 75.5, '2023-10-02'), " +
+                                        "(3, 'Pendente', 60.0, '2023-10-03'), " +
+                                        "(4, 'Entregue', 90.0, '2023-10-04'), " +
+                                        "(5, 'Pendente', 55.5, '2023-10-05'), " +
+                                        "(6, 'Pendente', 70.0, '2023-10-15'), " +
+                                        "(7, 'Preparando', 45.5, '2023-10-14'), " +
+                                        "(8, 'Entregue', 85.0, '2023-10-13'), " +
+                                        "(9, 'Pendente', 60.5, '2023-10-12'), " +
+                                        "(10, 'Entregue', 92.0, '2023-10-11'), " +
+                                        "(11, 'Preparando', 55.0, '2023-10-10'), " +
+                                        "(12, 'Entregue', 72.5, '2023-10-09'), " +
+                                        "(13, 'Pendente', 63.0, '2023-10-08'), " +
+                                        "(14, 'Entregue', 80.0, '2023-10-07'), " +
+                                        "(15, 'Pendente', 59.5, '2023-10-06')", Statement.RETURN_GENERATED_KEYS);
 
                         ResultSet generatedKeys = statement.getGeneratedKeys();
                         List<Long> pedidoIds = new ArrayList<>();
@@ -120,7 +120,7 @@ public class Seed_DB {
                         Random random = new Random();
                         for (int i = 0; i < 3; i++) {
                                 for (Long pedidoId : pedidoIds) {
-                                        String[] tamanhos = { "grande", "pequena" };
+                                        String[] tamanhos = { "Grande", "Pequena" };
                                         int tipoPizzaId = random.nextInt(maxItems) + 1;
                                         String tamanho = tamanhos[random.nextInt(tamanhos.length)];
                                         double valor = 10.0 + (random.nextDouble() * 30.0); // Valor aleatório entre

@@ -1,13 +1,13 @@
 package br.edu.ufersa.poo.Pizzaria.model.entity;
 
 public enum Tamanho {
-    GRANDE("grande"),
-    PEQUENA("pequena");
+    GRANDE("Grande"),
+    PEQUENA("Pequena");
 
     private String descricao;
 
     Tamanho(String descricao){
-        if ("grande".equals(descricao) || "pequena".equals(descricao)) {
+        if ("Grande".equals(descricao) || "Pequena".equals(descricao)) {
             this.descricao = descricao;
         }
     }

@@ -129,11 +129,11 @@ public class Pedido {
     public Estado getEstado() { return this.estado; }
 
     public void setEstado(String estado) throws EstadoInvalido {
-        if ("pendente".equals(estado)) {
+        if ("Pendente".equals(estado)) {
           this.estado = Estado.PENDENTE;
-        } else if ("preparando".equals(estado)) {
+        } else if ("Preparando".equals(estado)) {
           this.estado = Estado.PREPARANDO;
-        } else if ("entregue".equals(estado)) {
+        } else if ("Entregue".equals(estado)) {
           this.estado = Estado.ENTREGUE;
         } else {
           throw new EstadoInvalido("Estado inválido");
@@ -141,7 +141,7 @@ public class Pedido {
     }
 
     public void setEstado(Estado estado) throws EstadoInvalido {
-        if ("pendente".equals(estado.getDescricao()) || "preparando".equals(estado.getDescricao()) || "entregue".equals(estado.getDescricao())) {
+        if ("Pendente".equals(estado.getDescricao()) || "Preparando".equals(estado.getDescricao()) || "Entregue".equals(estado.getDescricao())) {
             this.estado = estado;
         } else {
             throw new EstadoInvalido("Estado inválido");
