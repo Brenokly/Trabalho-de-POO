@@ -22,51 +22,14 @@ import java.util.ResourceBundle;
 
 public class TelaClientesListagem implements Initializable {
     private ClienteBO clienteBo = new ClienteBO();
-
-    @FXML
-    private Button clientes;
-
-    @FXML
-    private Button adicionar;
-
-    @FXML
-    private Button adicionais;
-
-    @FXML
-    private Button editar;
-
-    @FXML
-    private Button funcionarios;
-
-    @FXML
-    private Button inicio;
-
-    @FXML
-    private Button pedidos;
-
-    @FXML
-    private Button sair;
-
-    @FXML
-    private Button sabores;
-
-    @FXML
-    private TextField searchTextField;
-
-    @FXML
-    private TableView<Cliente> tableClientes;
-
-    @FXML
-    private TableColumn<Cliente, Long> id; // Coluna para o ID, se necessário
-
-    @FXML
-    private TableColumn<Cliente, String> colNome;
-
-    @FXML
-    private TableColumn<Cliente, String> colCpf;
-
-    @FXML
-    private TableColumn<Cliente, String> colEndereco;
+    @FXML private Button adicionar, editar;
+    @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+    @FXML private TextField searchTextField;
+    @FXML private TableView<Cliente> tableClientes;
+    @FXML private TableColumn<Cliente, Long> id; // Coluna para o ID, se necessário
+    @FXML private TableColumn<Cliente, String> colNome;
+    @FXML private TableColumn<Cliente, String> colCpf;
+    @FXML private TableColumn<Cliente, String> colEndereco;
 
     ObservableList<Cliente> list = FXCollections.observableArrayList();
     ObservableList<Cliente> allClientes = FXCollections.observableArrayList();

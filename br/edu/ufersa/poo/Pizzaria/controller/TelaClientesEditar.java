@@ -1,10 +1,12 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import javafx.scene.Node;
@@ -16,6 +18,8 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 public class TelaClientesEditar extends Dialog<Cliente> {
     private Cliente cliente = new Cliente();
+
+    private PseudoClass error = PseudoClass.getPseudoClass("error");
 
     @FXML private Label clienteExistente;
     @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
@@ -75,7 +79,7 @@ public class TelaClientesEditar extends Dialog<Cliente> {
                 // Redirecione para a tela desejada após o salvamento bem-sucedido
                 Telas.TelaClientes();
             } catch (Exception e) {
-                exibirMensagemDeErro("Erro ao carregar funcionário", e.getMessage());
+                exibirMensagemDeErro("Erro ao carregar cliente", e.getMessage());
                 if (e.getMessage().equals("Cliente já cadastrado")) {
                     clienteExistente.setVisible(true);
                 }
@@ -107,12 +111,17 @@ public class TelaClientesEditar extends Dialog<Cliente> {
             cpf.setText(cliente.getCpf());
             endereco.setText(cliente.getEndereco());
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Nome inválido");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            exibirMensagemDeErro("Nome inválido", e.getMessage());
         }
+    }
+
+    @FXML
+    void onTextFieldContentChanged(KeyEvent event) {
+        TextField sourceTextField = (TextField) event.getSource();
+
+        if (sourceTextField == nome) { clienteExistente.setVisible(false); }
+
+        sourceTextField.pseudoClassStateChanged(error, false);
     }
 
     @FXML

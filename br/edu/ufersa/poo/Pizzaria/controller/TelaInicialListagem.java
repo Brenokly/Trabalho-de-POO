@@ -25,38 +25,15 @@ import javafx.scene.input.MouseEvent;
 public class TelaInicialListagem implements Initializable {
     private PedidoBO pedidoBO = new PedidoBO();
 
-    @FXML
-    private Button adicionais;
-
-    @FXML
-    private TableColumn<Pedido, String> cliente;
-
-    @FXML
-    private TableColumn<Pedido, String> data;
-
-    @FXML
-    private Button editar;
-
-    @FXML
-    private TableColumn<Pedido, String> estado;
-
-    @FXML
-    private Button funcionarios;
-
-    @FXML
-    private TableColumn<Pedido, Long> id;
-
-    @FXML
-    private TableColumn<Pedido, Double> valor;
-
-    @FXML
-    private Button sair;
-
-    @FXML
-    private TextField searchTextField;
-
-    @FXML
-    private TableView<Pedido> table;
+    @FXML private TableView<Pedido> table;
+    @FXML private TableColumn<Pedido, Long> id;
+    @FXML private TableColumn<Pedido, String> cliente;
+    @FXML private TableColumn<Pedido, String> data;
+    @FXML private TableColumn<Pedido, String> estado;
+    @FXML private TableColumn<Pedido, Double> valor;
+    @FXML private TextField searchTextField;
+    @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+    @FXML private Button editar;
 
     ObservableList<Pedido> list = FXCollections.observableArrayList();
     ObservableList<Pedido> allPedidos = FXCollections.observableArrayList();
@@ -114,7 +91,7 @@ public class TelaInicialListagem implements Initializable {
 
         if (pedido != null) {
             try {
-                Telas.TelaInicial2(pedido);
+                Telas.TelaPedidosEditar(pedido);
             } catch (Exception e) {
                 e.printStackTrace();
             }

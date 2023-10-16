@@ -27,7 +27,7 @@
             <Button id="menu_button" fx:id="clientes" disable="true" mnemonicParsing="false" onAction="#carregarClientes" styleClass="icon_button" text="Clientes" />
             <Button id="menu_button" fx:id="pedidos" mnemonicParsing="false" onAction="#carregarPedidos" styleClass="icon_button" text="Pedidos" />
             <Button id="menu_button" fx:id="sabores" mnemonicParsing="false" onAction="#carregarSabores" styleClass="icon_button" text="Sabores" />
-            <Label id="menu_button" styleClass="icon_button" text="Adicionais" />
+            <Button id="menu_button" fx:id="adicionais" mnemonicParsing="false" onAction="#carregarAdicionais" styleClass="icon_button" text="Adicionais" />
             <Button id="menu_button" fx:id="funcionarios" mnemonicParsing="false" onAction="#carregarFuncionarios" styleClass="icon_button" text="Funcionários" />
             <Button id="menu_button" fx:id="sair" mnemonicParsing="false" onAction="#carregarLogin" styleClass="icon_button" text="Sair" />
          </children>
@@ -71,7 +71,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="nome" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
+            <TextField fx:id="nome" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="200.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -86,7 +86,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="cpf" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="260.0">
+            <TextField fx:id="cpf" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="260.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -102,7 +102,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="endereco" prefHeight="30.0" prefWidth="390.0" styleClass="textfield" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="400.0">
+            <TextField fx:id="endereco" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="390.0" styleClass="textfield" AnchorPane.leftAnchor="170.0" AnchorPane.topAnchor="400.0">
                <font>
                   <Font size="14.0" />
                </font>

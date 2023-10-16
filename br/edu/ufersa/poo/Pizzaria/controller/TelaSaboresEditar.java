@@ -21,24 +21,9 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
 
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML
-  private Button excluir;
-  @FXML
-  private Button funcionarios;
-  @FXML
-  private Button inicio;
-  @FXML
-  private TextField nome;
-  @FXML
-  private TextField valor_grande;
-  @FXML
-  private TextField valor_pequena;
-  @FXML
-  private Button sair;
-  @FXML
-  private Button salvar;
-  @FXML
-  private Button cancelar;
+  @FXML private TextField nome, valor_grande, valor_pequena;
+  @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+  @FXML private Button salvar, excluir, cancelar;
 
   @FXML
   void ExcluirSabor(ActionEvent event) {
@@ -83,6 +68,8 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
         novoValorG = Double.parseDouble(valor_grande.getText());
         novoValorP = Double.parseDouble(valor_pequena.getText());
       } catch (NumberFormatException e) {
+        valor_grande.pseudoClassStateChanged(error, true);
+        valor_pequena.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Valores inválidos", "Os valores devem ser números válidos.");
         return; // Não tente salvar o sabor se os valores forem inválidos
       }
@@ -100,8 +87,11 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
         // Redireciona para a tela desejada após o salvamento bem-sucedido
         Telas.TelaSabores();
       } catch (NomeInvalido e) {
+        nome.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Nome inválido", e.getMessage());
       } catch (ValorInvalido e) {
+        valor_grande.pseudoClassStateChanged(error, true);
+        valor_pequena.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Valor inválido", "O valor deve ser um número decimal maior que 0.0");
       } catch (Exception e) {
         exibirMensagemDeErro("Erro ao carregar sabor", e.getMessage());
@@ -138,6 +128,11 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
   @FXML
   void carregarSabores(ActionEvent event) throws Exception {
     Telas.TelaSabores();
+  }
+
+  @FXML
+  void carregarAdicionais(ActionEvent event) throws Exception {
+    Telas.TelaAdicionalListagem();
   }
 
   @FXML

@@ -117,7 +117,8 @@
 
 .date-picker .arrow-button .arrow {
     -fx-background-color: #0D0106, #F3F3F3;
-    -fx-padding: 0.5em 0.5em 0.5em 0.5em;
+    -fx-shape: "M152 24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H64C28.7 64 0 92.7 0 128v16 48V448c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V192 144 128c0-35.3-28.7-64-64-64H344V24c0-13.3-10.7-24-24-24s-24 10.7-24 24V64H152V24zM48 192H400V448c0 8.8-7.2 16-16 16H64c-8.8 0-16-7.2-16-16V192z";
+    -fx-padding: 0.55em 0.5em 0.55em 0.5em;
 }
 
 .date-picker-popup .month-year-pane {
@@ -126,14 +127,94 @@
     -fx-font-weight: bold;
 }
 
-.date-picker-popup > * > .spinner > .button > .left-arrow,
-.date-picker-popup > * > .spinner > .button > .right-arrow {
+.date-picker-popup * .spinner .button:focused,
+.date-picker-popup * .spinner .button:hover,
+.date-picker-popup * .spinner .button:armed {
+    -fx-background-color: #2E382ECC;
+}
+
+.date-picker-popup * .spinner .button .left-arrow,
+.date-picker-popup * .spinner .button .right-arrow {
     -fx-padding: 0.333333em 0.25em 0.333333em 0.25em;
     -fx-background-color: #F3F3F3;
 }
 
 .date-picker-popup .calendar-grid {
     -fx-background-color: #C0BDA580;
+}
+
+.date-picker-popup * .today {
+    -fx-background-color: #0D0106, derive(#F3F3F3, -20%), #F3F3F3;
+    -fx-background-insets: 1, 2, 3;
+}
+
+.date-picker-popup * .day-cell:hover,
+.date-picker-popup * .selected,
+.date-picker-popup * .previous-month.selected,
+.date-picker-popup * .next-month.selected {
+    -fx-background-color: #2E382ECC;
+}
+
+.date-picker-popup * .day-cell:hover .secondary-text,
+.date-picker-popup * .selected .secondary-text,
+.date-picker-popup * .previous-month.selected .secondary-text,
+.date-picker-popup * .next-month.selected .secondary-text {
+    -fx-fill: #F3F3F3;
+}
+
+/* Pagination styling */
+
+.pagination {
+    -fx-page-information-visible: false;
+    -fx-tooltip-visible: false;
+}
+
+.pagination .pagination-control .control-box {
+    -fx-spacing: 0;
+    -fx-font-size: 12;
+}
+
+.pagination .pagination-control .control-box .number-button,
+.pagination .pagination-control .control-box .bullet-button,
+.pagination .pagination-control .control-box .left-arrow-button,
+.pagination .pagination-control .control-box .right-arrow-button {
+    -fx-background-color: #C0BDA580, #F3F3F3;
+    -fx-background-insets: 0, 1;
+    -fx-min-width: 30;
+    -fx-min-height: 30;
+    -fx-text-fill: #0D0106;
+}
+
+.pagination .pagination-control .control-box .number-button:hover,
+.pagination .pagination-control .control-box .bullet-button:hover,
+.pagination .pagination-control .control-box .left-arrow-button:hover,
+.pagination .pagination-control .control-box .right-arrow-button:hover {
+    -fx-background-insets: 0;
+    -fx-background-color: #2E382E1A;
+}
+
+.pagination .pagination-control .control-box .number-button:selected,
+.pagination .pagination-control .control-box .bullet-button:selected{
+    -fx-background-insets: 0;
+    -fx-background-color: #2E382ECC;
+    -fx-text-fill: #F3F3F3;
+    -fx-font-weigth: bold;
+}
+
+.pagination .pagination-control .left-arrow,
+.pagination .pagination-control .right-arrow {
+    -fx-background-color: #2E382E;
+    -fx-background-insets: 1 0 -1 0, 0;
+    -fx-padding: 0.5em 0.25em 0.5em 0.25em;
+    -fx-scale-shape: true;
+}
+
+.pagination .pagination-control .left-arrow {
+    -fx-shape: "M11.0865 1.91905L9.405 0.237549L0 9.64255L9.405 19.0475L11.0865 17.366L3.363 9.64255L11.0865 1.91905Z";
+}
+
+.pagination .pagination-control .right-arrow {
+    -fx-shape: "M7.9135 17.081L9.595 18.7625L19 9.35745L9.595 -0.0475479L7.9135 1.63395L15.637 9.35745L7.9135 17.081Z";
 }
 
 /* Table styling */

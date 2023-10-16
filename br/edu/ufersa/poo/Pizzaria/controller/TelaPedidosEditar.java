@@ -31,7 +31,7 @@ import javafx.scene.control.Pagination;
 import javafx.scene.layout.Pane;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
-public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
+public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
   
   @FXML private Pagination Pagina;
@@ -60,9 +60,9 @@ public class TelaInicialEditar extends Dialog<Pedido> implements Initializable {
 
     ClienteBox.getItems().addAll(nomesC);
 
-    EstadoBox.getItems().addAll("entregue", "pendente", "preparando");
+    EstadoBox.getItems().addAll("Entregue", "Pendente", "Preparando");
 
-    TamanhoBox.getItems().addAll("grande", "pequena");
+    TamanhoBox.getItems().addAll("Grande", "Pequena");
 
     TiposPizzasBO tiposPizzaBo = new TiposPizzasBO(); // será o bo
     List<TiposPizzas> tiposPizzas = new ArrayList<>();

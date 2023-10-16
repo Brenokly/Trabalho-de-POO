@@ -26,8 +26,8 @@
             <Button id="menu_button" fx:id="inicio" mnemonicParsing="false" onAction="#carregarInicio" styleClass="icon_button" text="Início" />
             <Button id="menu_button" fx:id="clientes" mnemonicParsing="false" onAction="#carregarClientes" styleClass="icon_button" text="Clientes" />
             <Button id="menu_button" fx:id="pedidos" mnemonicParsing="false" onAction="#carregarPedidos" styleClass="icon_button" text="Pedidos" />
-            <Button id="menu_button" fx:id="sabores" mnemonicParsing="false" onAction="#carregarSabores" style="-fx-font-weight: bold;" styleClass="icon_button" text="Sabores" />
-            <Label id="menu_button" fx:id="adicionais" onDragDetected="#carregarAdicionais" styleClass="icon_button" text="Adicionais" />
+            <Button id="menu_button" fx:id="sabores" disable="true" mnemonicParsing="false" styleClass="icon_button" text="Sabores" />
+            <Button id="menu_button" fx:id="adicionais" mnemonicParsing="false" onAction="#carregarAdicionais" styleClass="icon_button" text="Adicionais" />
             <Button id="menu_button" fx:id="funcionarios" mnemonicParsing="false" onAction="#carregarFuncionarios" styleClass="icon_button" text="Funcionários" />
             <Button id="menu_button" fx:id="sair" mnemonicParsing="false" onAction="#carregarLogin" styleClass="icon_button" text="Sair" />
          </children>

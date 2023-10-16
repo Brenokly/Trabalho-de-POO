@@ -3,7 +3,7 @@ package br.edu.ufersa.poo.Pizzaria.view;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicionalEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionariosEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaClientesEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaInicialEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaPedidosEditar;
 import br.edu.ufersa.poo.Pizzaria.controller.TelaSaboresEditar;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
@@ -67,12 +67,12 @@ public class Telas extends Application {
     primaryStage.setScene(scene);
   }
 
-  public static void TelaInicial2(Pedido pedido) throws Exception {
-    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaPedidosCadastro.fxml"));
+  public static void TelaPedidosEditar(Pedido pedido) throws Exception {
+    FXMLLoader loader = new FXMLLoader(Telas.class.getResource("VE/TelaPedidosEditar.fxml"));
     Parent root = loader.load();
 
     // Obtenha o controlador da TelaFuncionarios2
-    TelaInicialEditar controller = loader.getController();
+    TelaPedidosEditar controller = loader.getController();
 
     controller.setPedido(pedido);
 

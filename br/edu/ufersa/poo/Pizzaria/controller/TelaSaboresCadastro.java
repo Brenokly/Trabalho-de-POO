@@ -19,24 +19,10 @@ import javafx.scene.input.KeyEvent;
 public class TelaSaboresCadastro {
   private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-  @FXML
-  private Label SaborExistente;
-  @FXML
-  private Button cancelar;
-  @FXML
-  private Button funcionarios;
-  @FXML
-  private Button inicio;
-  @FXML
-  private TextField nome;
-  @FXML
-  private TextField valor_grande;
-  @FXML
-  private TextField valor_pequena;
-  @FXML
-  private Button sair;
-  @FXML
-  private Button salvar;
+  @FXML private Label SaborExistente;
+  @FXML private TextField nome, valor_grande, valor_pequena;
+  @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+  @FXML private Button salvar, cancelar;
 
   @FXML
   void SalvarSabor(ActionEvent event) throws Exception {
@@ -76,12 +62,15 @@ public class TelaSaboresCadastro {
         // Retorne para a TelaSabores após o sucesso
         Telas.TelaSabores();
       } catch (SaborJaExiste e) {
-        SaborExistente.setVisible(true);
         nome.pseudoClassStateChanged(error, true);
-      } catch (QuantidadeInvalida e) {
-        e.printStackTrace();
+        SaborExistente.setVisible(true);
+      } catch (ValorInvalido e) {
+        valor_grande.pseudoClassStateChanged(error, true);
+        valor_pequena.pseudoClassStateChanged(error, true);
+        displayAlert("Valor inválido", "O valor deve ser um número decimal maior que 0.0");
       } catch (NomeInvalido e) {
-        e.printStackTrace();
+        nome.pseudoClassStateChanged(error, true);
+        displayAlert("Nome inválido", e.getMessage());
       }
     } else {
       // Alguma entrada é inválida, exiba alertas de erro
@@ -114,7 +103,8 @@ public class TelaSaboresCadastro {
   void onTextFieldContentChanged(KeyEvent event) {
     TextField sourceTextField = (TextField) event.getSource();
 
-    SaborExistente.setVisible(false);
+    if (sourceTextField == nome) { SaborExistente.setVisible(false); }
+
     sourceTextField.pseudoClassStateChanged(error, false);
   }
 

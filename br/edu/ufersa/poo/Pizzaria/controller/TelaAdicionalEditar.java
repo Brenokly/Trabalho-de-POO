@@ -70,6 +70,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
         novaQuantidade = Integer.parseInt(quantidade.getText());
       } catch (NumberFormatException e) {
         exibirMensagemDeErro("Valores inválidos", "Os valores devem ser números válidos.");
+        preco.pseudoClassStateChanged(error, true);
         return; // Não tente salvar o adicional se os valores forem inválidos
       }
 
@@ -86,10 +87,13 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
         // Redireciona para a tela desejada após o salvamento bem-sucedido
         Telas.TelaAdicionalListagem();
       } catch (NomeInvalido e) {
+        nome.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Nome inválido", e.getMessage());
       } catch (ValorInvalido e) {
+        preco.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Preço inválido", "O valor deve ser um número decimal maior que 0.0");
       } catch (QuantidadeInvalida e) {
+        quantidade.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número decimal maior ou igual a 0");
       } catch (Exception e) {
         exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());
@@ -129,6 +133,11 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
   }
 
   @FXML
+  void carregarAdicionais(ActionEvent event) throws Exception {
+    Telas.TelaAdicionalListagem();
+  }
+
+  @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
     Telas.TelaPedidos();
   }
@@ -158,10 +167,13 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
       preco.setText(String.valueOf(adicional.getValor()));
       quantidade.setText(String.valueOf(adicional.getQuantidade()));
     } catch (NomeInvalido e) {
+      nome.pseudoClassStateChanged(error, true);
       exibirMensagemDeErro("Nome inválido", e.getMessage());
     } catch (ValorInvalido e) {
+      preco.pseudoClassStateChanged(error, true);
       exibirMensagemDeErro("Valor inválido", "O valor deve ser um número decimal maior que 0.0");
     } catch (QuantidadeInvalida e) {
+      quantidade.pseudoClassStateChanged(error, true);
       exibirMensagemDeErro("Quantidade inválida", "A quantidade deve ser um número decimal maior ou igual a 0.0");
     } catch (Exception e) {
       exibirMensagemDeErro("Erro ao carregar adicional", e.getMessage());

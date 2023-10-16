@@ -1,10 +1,12 @@
 package br.edu.ufersa.poo.Pizzaria.controller;
 
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import javafx.scene.Node;
@@ -16,35 +18,13 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 public class TelaFuncionariosEditar extends Dialog<Usuario> {
     private Usuario funcionario = new Usuario();
 
-    @FXML
-    private Label FuncionarioExistente;
+    private PseudoClass error = PseudoClass.getPseudoClass("error");
 
-    @FXML
-    private Button excluir;
-
-    @FXML
-    private Button inicio;
-
-    @FXML
-    private TextField nome;
-
-    @FXML
-    private TextField cpf;
-
-    @FXML
-    private TextField email;
-
-    @FXML
-    private PasswordField senha1;
-
-    @FXML
-    private PasswordField senha2;
-
-    @FXML
-    private Button salvar;
-
-    @FXML
-    private Button cancelar;
+    @FXML private Label FuncionarioExistente;
+    @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+    @FXML private TextField nome, cpf, email;
+    @FXML private PasswordField senha1, senha2;
+    @FXML private Button salvar, excluir, cancelar;
 
     @FXML
     void ExcluirFuncionario(ActionEvent event) {
@@ -104,6 +84,7 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
                     // Redirecione para a tela desejada após o salvamento bem-sucedido
                     Telas.TelaFuncionariosListagem();
                 } else {
+                    senha2.pseudoClassStateChanged(error, false);
                     exibirMensagemDeErro("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");
                 } 
             } catch (Exception e){
@@ -143,12 +124,18 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
             email.setText(funcionario.getEmail());
             senha1.setText(funcionario.getSenha());
         } catch (Exception e) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Erro");
-            alert.setHeaderText("Nome inválido");
-            alert.setContentText(e.getMessage());
-            alert.showAndWait();
+            nome.pseudoClassStateChanged(error, false);
+            exibirMensagemDeErro("Nome inválido", e.getMessage());
         }
+    }
+
+    @FXML
+    void onTextFieldContentChanged(KeyEvent event) {
+        TextField sourceTextField = (TextField) event.getSource();
+
+        if (sourceTextField == nome) { FuncionarioExistente.setVisible(false); }
+
+        sourceTextField.pseudoClassStateChanged(error, false);
     }
 
     @FXML
@@ -157,15 +144,9 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
     }
 
     @FXML
-    private Button clientes;
-
-    @FXML
     void carregarClientes(ActionEvent event) throws Exception {
         Telas.TelaClientes();
     }
-
-    @FXML
-    private Button pedidos;
 
     @FXML
     void carregarPedidos(ActionEvent event) throws Exception {
@@ -173,15 +154,9 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
     }
 
     @FXML
-    private Button sabores;
-
-    @FXML
     void carregarSabores(ActionEvent event) throws Exception {
         Telas.TelaSabores();
     }
-
-    @FXML
-    private Button adicionais;
 
     @FXML
     void carregarAdicionais(ActionEvent event) throws Exception {
@@ -189,15 +164,9 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
     }
 
     @FXML
-    private Button funcionarios;
-
-    @FXML
     void carregarFuncionarios(ActionEvent event) throws Exception {
         Telas.TelaFuncionariosListagem();
     }
-
-    @FXML
-    private Button sair;
 
     @FXML
     void carregarLogin(ActionEvent event) throws Exception {

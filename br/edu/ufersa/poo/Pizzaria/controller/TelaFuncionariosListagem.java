@@ -23,38 +23,15 @@ import java.util.ResourceBundle;
 public class TelaFuncionariosListagem implements Initializable {
     private UserBO userBO = new UserBO();
 
-    @FXML
-    private TableView<Usuario> tableFuncionarios;
-    @FXML
-    private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
-    @FXML
-    private TableColumn<Usuario, String> colNome;
-    @FXML
-    private TableColumn<Usuario, String> colCpf;
-    @FXML
-    private TableColumn<Usuario, String> colEmail;
-    @FXML
-    private TableColumn<Usuario, Boolean> colAdministrator;
-    @FXML
-    private Button adicionar;
-    @FXML
-    private Button editar;
-    @FXML
-    private TextField searchTextField;
-    @FXML
-    private Button inicio;
-    @FXML
-    private Button clientes;
-    @FXML
-    private Button pedidos;
-    @FXML
-    private Button sabores;
-    @FXML
-    private Button adicionais;
-    @FXML
-    private Button funcionarios;
-    @FXML
-    private Button sair;
+    @FXML private TextField searchTextField;
+    @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+    @FXML private Button adicionar, editar;
+    @FXML private TableView<Usuario> tableFuncionarios;
+    @FXML private TableColumn<Usuario, Long> id; // Coluna para o ID, se necessário
+    @FXML private TableColumn<Usuario, String> colNome;
+    @FXML private TableColumn<Usuario, String> colCpf;
+    @FXML private TableColumn<Usuario, String> colEmail;
+    @FXML private TableColumn<Usuario, Boolean> colAdministrator;
 
     // Outras colunas, se necessário
 

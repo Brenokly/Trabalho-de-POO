@@ -4,6 +4,7 @@ import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -13,8 +14,11 @@ import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class TelaClientesCadastrar {
+  private PseudoClass error = PseudoClass.getPseudoClass("error");
+
   @FXML private Label clienteExistente;
   @FXML private TextField nome, cpf, endereco, senha;
   @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
@@ -64,6 +68,7 @@ public class TelaClientesCadastrar {
       } catch (UsuarioInvalido e) {
         displayAlert("Erro", e.getMessage());
         if (e.getMessage().equals("Cliente já cadastrado")) {
+          nome.pseudoClassStateChanged(error, true);
           clienteExistente.setVisible(true);
         } else {
           clienteExistente.setVisible(false);
@@ -72,16 +77,20 @@ public class TelaClientesCadastrar {
     } else {
       // Alguma entrada é inválida, exiba alertas de erro
       if (!nomeValido) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome não pode estar vazio.");
       } else if (!nomeApenasLetras) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome deve conter apenas letras.");
       }
 
       if (!cpfValido) {
+        cpf.pseudoClassStateChanged(error, true);
         displayAlert("Cpf inválido", "O cpf não pode estar vazio. ");
       }
 
       if (!cpfApenasNumeros) {
+        cpf.pseudoClassStateChanged(error, true);
         displayAlert("Cpf inválido", "O cpf deve conter apenas números.");
       }
     }
@@ -98,6 +107,15 @@ public class TelaClientesCadastrar {
   @FXML
   void cancelarClientes(ActionEvent event) throws Exception {
     Telas.TelaClientes();
+  }
+
+  @FXML
+  void onTextFieldContentChanged(KeyEvent event) {
+    TextField sourceTextField = (TextField) event.getSource();
+
+    if (sourceTextField == nome) { clienteExistente.setVisible(false); }
+
+    sourceTextField.pseudoClassStateChanged(error, false);
   }
 
   @FXML

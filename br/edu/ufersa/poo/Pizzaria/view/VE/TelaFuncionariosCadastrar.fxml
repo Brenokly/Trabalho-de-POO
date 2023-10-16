@@ -28,7 +28,7 @@
             <Button id="menu_button" fx:id="clientes" mnemonicParsing="false" onAction="#carregarClientes" styleClass="icon_button" text="Clientes" />
             <Button id="menu_button" fx:id="pedidos" mnemonicParsing="false" onAction="#carregarPedidos" styleClass="icon_button" text="Pedidos" />
             <Button id="menu_button" fx:id="sabores" mnemonicParsing="false" onAction="#carregarSabores" styleClass="icon_button" text="Sabores" />
-            <Label id="menu_button" styleClass="icon_button" text="Adicionais" />
+            <Button id="menu_button" fx:id="adicionais" mnemonicParsing="false" onAction="#carregarAdicionais" styleClass="icon_button" text="Adicionais" />
             <Button id="menu_button" fx:id="funcionarios" disable="true" mnemonicParsing="false" onAction="#carregarFuncionarios" styleClass="icon_button" text="Funcionários" />
             <Button id="menu_button" fx:id="sair" mnemonicParsing="false" onAction="#carregarLogin" styleClass="icon_button" text="Sair" />
          </children>
@@ -72,7 +72,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="nome" layoutX="122.0" layoutY="180.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="180.0">
+            <TextField fx:id="nome" layoutX="122.0" layoutY="180.0" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="180.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -82,7 +82,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="cpf" layoutX="122.0" layoutY="246.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="230.0">
+            <TextField fx:id="cpf" layoutX="122.0" layoutY="246.0" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="230.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -103,7 +103,7 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField fx:id="email" layoutX="137.0" layoutY="267.0" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="350.0">
+            <TextField fx:id="email" layoutX="137.0" layoutY="267.0" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="410.0" styleClass="textfield" AnchorPane.leftAnchor="150.0" AnchorPane.topAnchor="350.0">
                <font>
                   <Font size="14.0" />
                </font>
@@ -113,13 +113,13 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="senha1" layoutX="137.0" layoutY="332.0" prefHeight="30.0" prefWidth="330.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="400.0" />
+            <PasswordField fx:id="senha1" layoutX="137.0" layoutY="332.0" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="330.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="400.0" />
             <Label layoutX="52.0" layoutY="402.0" prefHeight="30.0" text="Confirme a Senha" AnchorPane.leftAnchor="70.0" AnchorPane.topAnchor="450.0">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
-            <PasswordField fx:id="senha2" layoutX="214.0" layoutY="399.0" prefHeight="30.0" prefWidth="330.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="450.0" />
+            <PasswordField fx:id="senha2" layoutX="214.0" layoutY="399.0" onKeyReleased="#onTextFieldContentChanged" prefHeight="30.0" prefWidth="330.0" styleClass="textfield" AnchorPane.rightAnchor="50.0" AnchorPane.topAnchor="450.0" />
          </children>
       </AnchorPane>
    </children>

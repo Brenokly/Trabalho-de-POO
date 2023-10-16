@@ -4,6 +4,7 @@ import Exceptions.*;
 import br.edu.ufersa.poo.Pizzaria.model.bo.UserBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.view.Telas;
+import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -14,25 +15,17 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyEvent;
 
 public class TelaFuncionariosCadastro {
 
-  @FXML
-  private Button salvar;
-  @FXML
-  private Button cancelar;
-  @FXML
-  private TextField nome;
-  @FXML
-  private TextField cpf;
-  @FXML
-  private TextField email;
-  @FXML
-  private PasswordField senha1;
-  @FXML
-  private PasswordField senha2;
-  @FXML
-  private Label FuncionarioExistente;
+  private PseudoClass error = PseudoClass.getPseudoClass("error");
+  
+  @FXML private Label FuncionarioExistente;
+  @FXML private Button inicio, clientes, pedidos, sabores, adicionais, funcionarios, sair;
+  @FXML private Button salvar, cancelar;
+  @FXML private TextField nome, cpf, email;
+  @FXML private PasswordField senha1, senha2;
 
   @FXML
   void salvarFuncionario(ActionEvent event) throws Exception {
@@ -50,15 +43,15 @@ public class TelaFuncionariosCadastro {
     boolean cpfValido = !cpfTexto.isEmpty();
     boolean cpfApenasNumeros = cpfTexto.matches("^[0-9]*$");
     boolean cpfTamanhoValido = cpfTexto.length() == 11 || cpfTexto.length() == 14;
-
+    
     boolean emailValido = !emailTexto.isEmpty() && emailTexto.contains("@") && emailTexto.contains(".");
     boolean senhaValida = !senhaTexto.isEmpty() && senhaTexto.length() >= 8;
     boolean senhasIguais = senhaTexto.equals(senhaTexto2); // Verifica se as senhas são iguais
-
+    
     if (nomeValido && nomeApenasLetras && cpfValido && cpfApenasNumeros && cpfTamanhoValido && emailValido
-        && senhaValida && senhasIguais) {
+    && senhaValida && senhasIguais) {
       // Todas as entradas são válidas, continue com a criação do Funcionário
-
+      
       Usuario usuario = new Usuario();
       usuario.setNome(nomeTexto);
       usuario.setCpf(cpfTexto);
@@ -72,11 +65,11 @@ public class TelaFuncionariosCadastro {
         alert.setTitle("Sucesso");
         alert.setHeaderText("Inserção Bem-sucedida");
         alert.setContentText("O funcionário foi inserido com sucesso!");
-
+        
         // Crie um botão "OK" no alerta
         ButtonType okButton = new ButtonType("OK", ButtonData.OK_DONE);
         alert.getButtonTypes().setAll(okButton);
-
+        
         // Exiba o alerta e aguarde o clique no botão "OK"
         alert.showAndWait();
 
@@ -89,38 +82,54 @@ public class TelaFuncionariosCadastro {
     } else {
       // Alguma entrada é inválida, exiba alertas de erro
       if (!nomeValido) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome não pode estar vazio.");
       } else if (!nomeApenasLetras) {
+        nome.pseudoClassStateChanged(error, true);
         displayAlert("Nome inválido", "O nome deve conter apenas letras.");
       }
-
+      
       if (!cpfValido) {
+        cpf.pseudoClassStateChanged(error, true);
         displayAlert("CPF inválido", "O CPF não pode estar vazio.");
       }
-
+      
       if (!cpfApenasNumeros) {
+        cpf.pseudoClassStateChanged(error, true);
         displayAlert("CPF inválido", "O CPF deve conter apenas números.");
       }
 
       if (!emailValido) {
+        email.pseudoClassStateChanged(error, true);
         displayAlert("Email inválido", "O email não pode estar vazio e deve conter um @ e um .");
       }
 
       if (!senhaValida) {
+        senha1.pseudoClassStateChanged(error, true);
         displayAlert("Senha inválida", "A senha não pode estar vazia e deve conter pelo menos 8 caracteres.");
       }
 
       if (!senhasIguais) {
+        senha2.pseudoClassStateChanged(error, true);
         displayAlert("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");
       }
     }
   }
-
+  
   @FXML
   void cancelarFuncionario(ActionEvent event) throws Exception {
     Telas.TelaFuncionariosListagem();
   }
 
+  @FXML
+  void onTextFieldContentChanged(KeyEvent event) {
+    TextField sourceTextField = (TextField) event.getSource();
+
+    if (sourceTextField == nome) { FuncionarioExistente.setVisible(false); }
+
+    sourceTextField.pseudoClassStateChanged(error, false);
+  }
+  
   private void displayAlert(String title, String message) {
     Alert alert = new Alert(AlertType.ERROR);
     alert.setTitle("Erro");
@@ -128,57 +137,36 @@ public class TelaFuncionariosCadastro {
     alert.setContentText(message);
     alert.showAndWait();
   }
-
-  @FXML
-  private Button inicio;
-
+  
   @FXML
   void carregarInicio(ActionEvent event) throws Exception {
     Telas.TelaInicial();
   }
-
-  @FXML
-  private Button clientes;
-
+  
   @FXML
   void carregarClientes(ActionEvent event) throws Exception {
     Telas.TelaClientes();
   }
-
-  @FXML
-  private Button pedidos;
-
+  
   @FXML
   void carregarPedidos(ActionEvent event) throws Exception {
     Telas.TelaPedidos();
   }
-
-  @FXML
-  private Button sabores;
-
+  
   @FXML
   void carregarSabores(ActionEvent event) throws Exception {
     Telas.TelaSabores();
-  }
-
-  @FXML
-  private Button adicionais;
+  }  
 
   @FXML
   void carregarAdicionais(ActionEvent event) throws Exception {
     Telas.TelaAdicionalListagem();
-  }
-
-  @FXML
-  private Button funcionarios;
+  }  
 
   @FXML
   void carregarFuncionarios(ActionEvent event) throws Exception {
     Telas.TelaFuncionariosListagem();
   }
-
-  @FXML
-  private Button sair;
 
   @FXML
   void carregarLogin(ActionEvent event) throws Exception {
