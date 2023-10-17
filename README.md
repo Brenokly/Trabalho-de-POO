@@ -1,3 +1,8 @@
+PARTICIPANTES:
+JUHAN DEFFREN MESSIAS DE FREITAS
+MATHEUS VYNICIUS SILVA JALES
+BRENO KLYWER OLEGARIO DE MOURA
+
 # Trabalho-de-POO
 Esse arquivo conterá a descrição do nosso projeto, que se trata de um software para uma pizzaria que precisa administrar os pedidos de seus clientes com mais facilidade.
 
