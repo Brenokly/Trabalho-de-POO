@@ -233,6 +233,16 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   }
 
   @FXML
+  void adicionarPizza(ActionEvent event) {
+    // To do
+  }
+  
+  @FXML
+  void removerPizza(ActionEvent event) {
+    // ItensPedidosDao itensPedidosDao
+  }
+
+  @FXML
   void AdicionalADD(ActionEvent event) {
     List<Adicional> adicional = new ArrayList<>();
     try {
