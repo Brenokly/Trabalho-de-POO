@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
+import br.edu.ufersa.poo.Pizzaria.model.bo.ItensPedidosBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.TiposPizzasBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
@@ -24,6 +26,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -33,6 +37,7 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
+  private Long pedidoID = null;
 
   @FXML
   private Pagination Pagina;
@@ -230,17 +235,52 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
       alert.showAndWait();
       e.printStackTrace();
     }
+
   }
 
   @FXML
   void adicionarPizza(ActionEvent event) {
     // To do
   }
-  
+
   @FXML
-  void removerPizza(ActionEvent event) {
-    // ItensPedidosDao itensPedidosDao
-  }
+void removerPizza(ActionEvent event) {
+    // First, check if the user confirms the deletion action
+    Alert confirmacao = new Alert(AlertType.CONFIRMATION);
+    confirmacao.setTitle("Confirmar Exclusão");
+    confirmacao.setHeaderText("Você tem certeza que deseja excluir este item?");
+
+    ButtonType simButton = new ButtonType("Sim", ButtonData.YES);
+    ButtonType naoButton = new ButtonType("Não", ButtonData.NO);
+
+    confirmacao.getButtonTypes().setAll(simButton, naoButton);
+
+    Optional<ButtonType> resultado = confirmacao.showAndWait();
+
+    if (resultado.isPresent() && resultado.get() == simButton) {
+        ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
+        try {
+            ItensPedidos item = new ItensPedidos();
+            item.setId(pedidoID);
+            itensPedidosBO.deletar(item);
+
+            // Remove the item from the current list
+            pedido.getItensPedido().remove(currentPageIndex);
+
+            // Update the number of pages in the Pagination control
+            Pagina.setPageCount(pedido.getItensPedido().size());
+
+            // Set the current page to page 0 (or the first page)
+            Pagina.setCurrentPageIndex(0);
+
+            // Now create the page for the current page index (0 in this case)
+            createPage(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
   @FXML
   void AdicionalADD(ActionEvent event) {
@@ -378,7 +418,8 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
 
       // Adicione elementos relevantes ao Pane
       Label label = new Label("ID do Item: " + itemId);
-        pageContent.getChildren().add(label);
+      pedidoID = itemId;
+      pageContent.getChildren().add(label);
 
       // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas
       Adicional1Box.setVisible(false);
