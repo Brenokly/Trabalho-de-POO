@@ -93,16 +93,16 @@ public class TelaPedidosListagem implements Initializable {
         startDatePicker.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(minDate) || date.isAfter(currentDate));
+                setDisable(date.isBefore(minDate) || date.isAfter(currentDate) || endDatePicker.getValue() != null && date.isAfter(endDatePicker.getValue()));
             }
         });
-
 
         endDatePicker.setValue(currentDate);
         endDatePicker.setDayCellFactory(picker -> new DateCell() {
             public void updateItem(LocalDate date, boolean empty) {
                 super.updateItem(date, empty);
-                setDisable(date.isBefore(minDate) || date.isAfter(currentDate) || startDatePicker.getValue() != null && date.isBefore(startDatePicker.getValue()));
+                setDisable(date.isBefore(minDate) || date.isAfter(currentDate)
+                        || startDatePicker.getValue() != null && date.isBefore(startDatePicker.getValue()));
             }
         });
     }
@@ -266,7 +266,7 @@ public class TelaPedidosListagem implements Initializable {
                 List<Pedido> resultados = new ArrayList<>();
 
                 for (Pedido pedido : allPedidos) {
-                    if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm) ||
+                    if (pedido.getCliente().getNome().toLowerCase().contains(searchTerm.toLowerCase()) ||
                             pedido.getEstado().getDescricao().toLowerCase().contains(searchTerm) ||
                             pedido.getItensPedido().get(0).getPizza().getNome().toLowerCase().contains(searchTerm)) {
                         resultados.add(pedido);
