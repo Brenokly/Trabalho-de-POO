@@ -1,5 +1,6 @@
 .root {
     -fx-background-color: #F3F3F3;
+    -fx-font-family: "Montserrat";
 }
 
 /* Button styling */
@@ -34,7 +35,7 @@
 }
 .icon_button {
     -fx-background-color: transparent;
-    -fx-padding: 0;
+    -fx-padding: 0.1em 0.1em 0.1em 0.1em;
     -fx-font-size: 18;
     -fx-font-family: "Montserrat";
     -fx-text-fill: #0D0106;
@@ -68,6 +69,15 @@
     -fx-text-fill: #F55F51;
 }
 
+#secondary_button {
+    -fx-background-color: #2E382E, #F3F3F3; /* error color */
+    -fx-text-fill: #2E382E;
+}
+#secondary_button:hover {
+    -fx-background-color: #2E382E, #F3F3F3, #2E382E33; /* 20% error color */
+    -fx-text-fill: #2E382E;
+}
+
 /* TextField styling */
 
 .textfield, .textfield:starter {
@@ -91,10 +101,43 @@
     -fx-background-color: transparent, #0D0106;
     -fx-background-insets: 0, 29 0 0 0;
     -fx-background-radius: 0;
+    -fx-font-family: "Montserrat";
+    -fx-font-size: 12;
 }
 
 .dropdown .list-cell:focused:focus-within:selected:filled {
     -fx-background-color: transparent;
+    -fx-text-fill: #0D0106;
+    -fx-font-size: 14;
+}
+
+.dropdown .virtual-flow .list-cell:hover {
+    -fx-background-color: #2E382ECC;
+    -fx-text-fill: #F3F3F3;
+    -fx-font-weight: bold;
+}
+
+.dropdown .virtual-flow .scroll-bar:vertical,
+.dropdown .virtual-flow .scroll-bar:vertical .track-background,
+.dropdown .virtual-flow .scroll-bar:horizontal,
+.dropdown .virtual-flow .scroll-bar:horizontal .track-background {
+    -fx-background-color: transparent;
+}
+
+.dropdown .virtual-flow .scroll-bar:vertical .track,
+.dropdown .virtual-flow .scroll-bar:horizontal .track {
+    -fx-background-color: #F3F3F3;
+}
+
+.dropdown .virtual-flow .scroll-bar .increment-button,
+.dropdown .virtual-flow .scroll-bar .decrement-button {
+    -fx-opacity: 0;
+    -fx-padding: 2;
+}
+
+.dropdown .virtual-flow .scroll-bar:vertical .thumb,
+.dropdown .virtual-flow .scroll-bar:horizontal .thumb {
+    -fx-background-color: #2E382EA6;
 }
 
 /* DatePicker styling */

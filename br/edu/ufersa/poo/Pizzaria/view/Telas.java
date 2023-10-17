@@ -12,9 +12,11 @@ import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 public class Telas extends Application {
@@ -47,6 +49,9 @@ public class Telas extends Application {
     primaryStage.setTitle("Pizzaria Michelangelo");
     primaryStage.getIcons().add(new Image(Telas.class.getResourceAsStream("VE/Assets/Logo.png")));
     primaryStage.setResizable(false);
+    Rectangle2D primScreenBounds = Screen.getPrimary().getVisualBounds();
+    primaryStage.setX((primScreenBounds.getWidth() - 840) / 2);
+    primaryStage.setY((primScreenBounds.getHeight() - 600) / 2);
     primaryStage.show();
     TelaLogin();
   }
