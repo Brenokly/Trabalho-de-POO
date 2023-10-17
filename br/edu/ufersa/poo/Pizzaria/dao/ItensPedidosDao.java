@@ -106,6 +106,28 @@ public class ItensPedidosDao extends BaseDaoImpl<ItensPedidos> {
         }
     }
 
+    public void alterarItens(ItensPedidos entity) {
+        Connection con = getConnection();
+        String sql = "UPDATE tb_itenspedido SET id_tipopizza = ?, tamanho = ?, valor = ?, descricao = ? WHERE id = ?";
+
+        try {
+            PreparedStatement ps = con.prepareStatement(sql);
+            ps.setLong(1, entity.getPizza().getId());
+            ps.setString(2, entity.getTamanho().getDescricao());
+            ps.setDouble(3, entity.getValor());
+            ps.setString(4, entity.getDescricao());
+            ps.setLong(5, entity.getId());
+            ps.executeUpdate();
+
+        } catch (
+
+        Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeConnection();
+        }
+    }
+
     public ItensPedidos buscar(ItensPedidos entity) {
         Connection con = getConnection();
         ItensPedidos pizza = null;

@@ -113,6 +113,8 @@ public class PedidoBO implements BaseBO<Pedido> {
             } else {
                 itensPedidosBO.update(pedido.getItensPedido().get(i));
             }
+
+            itensPedidosBO.updateItens(pedido.getItensPedido().get(i));
         }
 
         PedidoDao.alterar(pedido);

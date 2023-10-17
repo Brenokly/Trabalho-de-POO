@@ -81,6 +81,22 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
     itensPedidosDao.alterar(bo);
   }
 
+  public void updateItens(ItensPedidos bo) throws Exception {
+    ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
+
+    if (bo.getPizza().getId() <= 0) {
+      throw new TipoPizzaInvalido("Tipo de pizza inválido");
+    }
+    if (bo.getValor() <= 0) {
+      throw new ValorInvalido("Valor inválido");
+    }
+    if (bo.getDescricao().isEmpty()) {
+      throw new DescricaoInvalida("Descrição inválida");
+    }
+
+    itensPedidosDao.alterarItens(bo);
+  }
+
   @Override
   public void deletar(ItensPedidos bo) throws Exception {
 
