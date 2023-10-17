@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import br.edu.ufersa.poo.Pizzaria.model.bo.AdicionalBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.ClienteBO;
+import br.edu.ufersa.poo.Pizzaria.model.bo.ItensPedidosBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.PedidoBO;
 import br.edu.ufersa.poo.Pizzaria.model.bo.TiposPizzasBO;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
@@ -24,6 +26,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
@@ -33,6 +37,7 @@ import br.edu.ufersa.poo.Pizzaria.view.Telas;
 
 public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   private Pedido pedido = new Pedido();
+  private Long pedidoID = null;
 
   @FXML
   private Pagination Pagina;
@@ -230,17 +235,52 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
       alert.showAndWait();
       e.printStackTrace();
     }
+
   }
 
   @FXML
   void adicionarPizza(ActionEvent event) {
     // To do
   }
-  
+
   @FXML
-  void removerPizza(ActionEvent event) {
-    // ItensPedidosDao itensPedidosDao
-  }
+void removerPizza(ActionEvent event) {
+    // First, check if the user confirms the deletion action
+    Alert confirmacao = new Alert(AlertType.CONFIRMATION);
+    confirmacao.setTitle("Confirmar Exclusão");
+    confirmacao.setHeaderText("Você tem certeza que deseja excluir este item?");
+
+    ButtonType simButton = new ButtonType("Sim", ButtonData.YES);
+    ButtonType naoButton = new ButtonType("Não", ButtonData.NO);
+
+    confirmacao.getButtonTypes().setAll(simButton, naoButton);
+
+    Optional<ButtonType> resultado = confirmacao.showAndWait();
+
+    if (resultado.isPresent() && resultado.get() == simButton) {
+        ItensPedidosBO itensPedidosBO = new ItensPedidosBO();
+        try {
+            ItensPedidos item = new ItensPedidos();
+            item.setId(pedidoID);
+            itensPedidosBO.deletar(item);
+
+            // Remove the item from the current list
+            pedido.getItensPedido().remove(currentPageIndex);
+
+            // Update the number of pages in the Pagination control
+            Pagina.setPageCount(pedido.getItensPedido().size());
+
+            // Set the current page to page 0 (or the first page)
+            Pagina.setCurrentPageIndex(0);
+
+            // Now create the page for the current page index (0 in this case)
+            createPage(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+}
+
 
   @FXML
   void AdicionalADD(ActionEvent event) {
@@ -369,107 +409,110 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
   public Node createPage(int pageIndex) {
     // Crie um novo Pane para agrupar os elementos
     Pane pageContent = new Pane();
-    int numItens = 1;
-    numItens += pageIndex;
 
     Adicionar.setDisable(false);
 
-    // Adicione elementos relevantes ao Pane
-    Label label = new Label("Pizza  " + numItens + ":");
-    pageContent.getChildren().add(label);
-
-    // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas
-    Adicional1Box.setVisible(false);
-    Adicional2Box.setVisible(false);
-    Adicional3Box.setVisible(false);
-
-    // Obtenha a lista de nomes de pizzas
-    TiposPizzasBO tiposPizzasBo = new TiposPizzasBO(); // será o bo
-    List<TiposPizzas> tiposPizzas = new ArrayList<>();
-    try {
-      tiposPizzas = tiposPizzasBo.buscarTodos();
-    } catch (Exception e) {
-      e.printStackTrace();
-    }
-    List<String> nomesP = new ArrayList<>();
-
-    PizzaBox.setValue(pedido.getItensPedido().get(pageIndex).getPizza().getNome());
-
-    for (TiposPizzas tp : tiposPizzas) {
-      nomesP.add(tp.getNome());
-    }
-
-    PizzaBox.getItems().addAll(nomesP);
-
-    TamanhoBox.setValue(pedido.getItensPedido().get(pageIndex).getTamanho().getDescricao());
-
-    EstadoBox.setValue(pedido.getEstado().getDescricao());
-
-    if (!pedido.getItensPedido().isEmpty() && pageIndex >= 0 && pageIndex < pedido.getItensPedido().size()) {
+    if (pageIndex >= 0 && pageIndex < pedido.getItensPedido().size()) {
       ItensPedidos itemAtual = pedido.getItensPedido().get(pageIndex);
+      Long itemId = itemAtual.getId();
 
-      if (!itemAtual.getAdicionais().isEmpty()) {
-        List<Adicional> adicionais = itemAtual.getAdicionais();
+      // Adicione elementos relevantes ao Pane
+      Label label = new Label("ID do Item: " + itemId);
+      pedidoID = itemId;
+      pageContent.getChildren().add(label);
 
-        List<Adicional> adicional = new ArrayList<>();
-        try {
-          adicional = new AdicionalBO().buscarTodos();
-        } catch (Exception e) {
-          e.printStackTrace();
-        }
-        List<String> nomesA = new ArrayList<>();
+      // Limpar e ocultar as ChoiceBoxes que precisam ser ocultadas ou redefinidas
+      Adicional1Box.setVisible(false);
+      Adicional2Box.setVisible(false);
+      Adicional3Box.setVisible(false);
 
-        for (Adicional ad : adicional) {
-          nomesA.add(ad.getNome());
-        }
+      // Obtenha a lista de nomes de pizzas
+      TiposPizzasBO tiposPizzasBo = new TiposPizzasBO(); // será o bo
+      List<TiposPizzas> tiposPizzas = new ArrayList<>();
+      try {
+        tiposPizzas = tiposPizzasBo.buscarTodos();
+      } catch (Exception e) {
+        e.printStackTrace();
+      }
+      List<String> nomesP = new ArrayList<>();
 
-        if (!adicionais.isEmpty()) {
-          if (adicionais.size() >= 1) {
-            Adicional1Box.setValue(adicionais.get(0).getNome());
-            Adicional1Box.setVisible(true);
-            Adicional1Box.getItems().addAll(nomesA);
-            Remover.setDisable(false);
+      PizzaBox.setValue(pedido.getItensPedido().get(pageIndex).getPizza().getNome());
 
-            if (adicionais.get(0).getQuantidade() > 1) {
-              Adicional2Box.setValue(adicionais.get(0).getNome());
-              Adicional2Box.setVisible(true);
-              Adicional2Box.getItems().addAll(nomesA);
-            }
+      for (TiposPizzas tp : tiposPizzas) {
+        nomesP.add(tp.getNome());
+      }
 
-            if (adicionais.get(0).getQuantidade() > 2) {
-              Adicional3Box.setValue(adicionais.get(0).getNome());
-              Adicional3Box.setVisible(true);
-              Adicional3Box.getItems().addAll(nomesA);
+      PizzaBox.getItems().addAll(nomesP);
 
-              Adicionar.setDisable(true);
-            }
+      TamanhoBox.setValue(pedido.getItensPedido().get(pageIndex).getTamanho().getDescricao());
 
-            if (adicionais.size() >= 2 && adicionais.get(0).getQuantidade() == 1) {
-              Adicional2Box.setValue(adicionais.get(1).getNome());
-              Adicional2Box.setVisible(true);
-              Adicional2Box.getItems().addAll(nomesA);
-            }
+      EstadoBox.setValue(pedido.getEstado().getDescricao());
 
-            if (adicionais.size() >= 2 && adicionais.get(1).getQuantidade() == 2) {
-              Adicional3Box.setValue(adicionais.get(1).getNome());
-              Adicional3Box.setVisible(true);
-              Adicional3Box.getItems().addAll(nomesA);
+      if (!pedido.getItensPedido().isEmpty() && pageIndex >= 0 && pageIndex < pedido.getItensPedido().size()) {
+        // ItensPedidos itemAtual = pedido.getItensPedido().get(pageIndex);
 
-              Adicionar.setDisable(true);
-            }
+        if (!itemAtual.getAdicionais().isEmpty()) {
+          List<Adicional> adicionais = itemAtual.getAdicionais();
 
-            if (adicionais.size() >= 3) {
-              Adicional3Box.setValue(adicionais.get(2).getNome());
-              Adicional3Box.setVisible(true);
-              Adicional3Box.getItems().addAll(nomesA);
+          List<Adicional> adicional = new ArrayList<>();
+          try {
+            adicional = new AdicionalBO().buscarTodos();
+          } catch (Exception e) {
+            e.printStackTrace();
+          }
+          List<String> nomesA = new ArrayList<>();
 
-              Adicionar.setDisable(true);
+          for (Adicional ad : adicional) {
+            nomesA.add(ad.getNome());
+          }
+
+          if (!adicionais.isEmpty()) {
+            if (adicionais.size() >= 1) {
+              Adicional1Box.setValue(adicionais.get(0).getNome());
+              Adicional1Box.setVisible(true);
+              Adicional1Box.getItems().addAll(nomesA);
+              Remover.setDisable(false);
+
+              if (adicionais.get(0).getQuantidade() > 1) {
+                Adicional2Box.setValue(adicionais.get(0).getNome());
+                Adicional2Box.setVisible(true);
+                Adicional2Box.getItems().addAll(nomesA);
+              }
+
+              if (adicionais.get(0).getQuantidade() > 2) {
+                Adicional3Box.setValue(adicionais.get(0).getNome());
+                Adicional3Box.setVisible(true);
+                Adicional3Box.getItems().addAll(nomesA);
+
+                Adicionar.setDisable(true);
+              }
+
+              if (adicionais.size() >= 2 && adicionais.get(0).getQuantidade() == 1) {
+                Adicional2Box.setValue(adicionais.get(1).getNome());
+                Adicional2Box.setVisible(true);
+                Adicional2Box.getItems().addAll(nomesA);
+              }
+
+              if (adicionais.size() >= 2 && adicionais.get(1).getQuantidade() == 2) {
+                Adicional3Box.setValue(adicionais.get(1).getNome());
+                Adicional3Box.setVisible(true);
+                Adicional3Box.getItems().addAll(nomesA);
+
+                Adicionar.setDisable(true);
+              }
+
+              if (adicionais.size() >= 3) {
+                Adicional3Box.setValue(adicionais.get(2).getNome());
+                Adicional3Box.setVisible(true);
+                Adicional3Box.getItems().addAll(nomesA);
+
+                Adicionar.setDisable(true);
+              }
             }
           }
         }
       }
     }
-
     // Retorne o Pane como conteúdo da página
     return pageContent;
   }

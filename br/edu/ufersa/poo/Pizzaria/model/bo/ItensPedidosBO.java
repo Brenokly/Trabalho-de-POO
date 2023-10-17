@@ -99,8 +99,13 @@ public class ItensPedidosBO implements BaseBO<ItensPedidos> {
 
   @Override
   public void deletar(ItensPedidos bo) throws Exception {
-
-    throw new UnsupportedOperationException("Unimplemented method 'deletar'");
+    ItensPedidosDao itensPedidosDao = new ItensPedidosDao();
+    if (bo != null) {
+      itensPedidosDao.deletar(bo);
+    } else {
+      throw new TipoPizzaInvalido("Tipo de pizza inválido");
+    }
+    // throw new UnsupportedOperationException("Unimplemented method 'deletar'");
   }
 
   @Override

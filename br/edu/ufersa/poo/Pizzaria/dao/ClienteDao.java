@@ -104,10 +104,10 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
 
     public Cliente buscarPorCpf(Cliente cliente){
         Connection con = getConnection();
-        Cliente resultado;
-        resultado = new Cliente();
-
+        Cliente resultado = null;
         String sql = "SELECT * FROM tb_cliente WHERE cpf = ?";
+        
+       System.out.println(cliente.getCpf());
 
         try {
             PreparedStatement ps = con.prepareStatement(sql);
@@ -116,6 +116,7 @@ public class ClienteDao extends BaseDaoImpl<Cliente> {
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
                 try {
+                    resultado = new Cliente();
                     resultado.setId(rs.getLong("id"));
                     resultado.setNome(rs.getString("nome"));
                     resultado.setCpf(rs.getString("cpf"));

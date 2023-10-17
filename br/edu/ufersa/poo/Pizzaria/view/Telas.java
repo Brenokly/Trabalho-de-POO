@@ -1,15 +1,15 @@
 package br.edu.ufersa.poo.Pizzaria.view;
 
-import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicionalEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionariosEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaClientesEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaPedidosEditar;
-import br.edu.ufersa.poo.Pizzaria.controller.TelaSaboresEditar;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Adicional;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Pedido;
 import br.edu.ufersa.poo.Pizzaria.model.entity.TiposPizzas;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Usuario;
 import br.edu.ufersa.poo.Pizzaria.model.entity.Cliente;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaAdicionalEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaClientesEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaFuncionariosEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaPedidosEditar;
+import br.edu.ufersa.poo.Pizzaria.controller.TelaSaboresEditar;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Rectangle2D;
