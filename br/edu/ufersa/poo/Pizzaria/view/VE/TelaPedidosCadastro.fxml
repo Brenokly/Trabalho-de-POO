@@ -49,7 +49,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="600.0" maxWidth="840.0" minHeight="600.0" minWidth="840.0" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaInicialEditar">
+<Pane maxHeight="600.0" maxWidth="840.0" minHeight="600.0" minWidth="840.0" prefHeight="600.0" prefWidth="840.0" stylesheets="@Styles/ComponentsStyles.css" xmlns="http://javafx.com/javafx/20.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ufersa.poo.Pizzaria.controller.TelaPedidosCadastro">
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="600.0" prefWidth="230.0" spacing="28.0" style="-fx-background-color: #2E382E;">
          <children>
@@ -73,12 +73,12 @@
       <AnchorPane id="cancel_button" layoutX="230.0" prefHeight="600.0" prefWidth="610.0" style="-fx-background-color: #F3F3F3;">
          <children>
             <Region prefHeight="60.0" prefWidth="610.0" style="-fx-background-color: #C0BDA5;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0" />
-            <Label minHeight="-Infinity" prefHeight="30.0" text="Cadastrar pedidos" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
+            <Label minHeight="-Infinity" prefHeight="30.0" text="Pedidos" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="15.0">
                <font>
                   <Font name="Montserrat Regular" size="18.0" />
                </font>
             </Label>
-            <Pagination fx:id="Pagina" layoutX="114.0" layoutY="296.0" prefHeight="445.0" prefWidth="610.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0" />
+            <Pagination fx:id="Pagina" layoutX="114.0" layoutY="296.0" prefHeight="455.0" prefWidth="610.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="60.0" />
             <Button id="back_button" fx:id="back_button" mnemonicParsing="false" onAction="#CancelarPedido" styleClass="icon_button" text="Voltar" AnchorPane.leftAnchor="30.0" AnchorPane.topAnchor="80.0">
                <cursor>
                   <Cursor fx:constant="HAND" />
@@ -110,7 +110,7 @@
                   <Font name="Montserrat Regular" size="12.0" />
                </font>
             </Button>
-            <GridPane hgap="5.0" layoutX="45.0" layoutY="135.0" prefHeight="260.0" prefWidth="520.0" vgap="15.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="125.0">
+            <GridPane hgap="5.0" layoutX="45.0" layoutY="135.0" prefHeight="260.0" prefWidth="520.0" vgap="12.0" AnchorPane.leftAnchor="45.0" AnchorPane.rightAnchor="45.0" AnchorPane.topAnchor="120.0">
               <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="120.0" minWidth="100.0" prefWidth="120.0" />
                 <ColumnConstraints hgrow="SOMETIMES" maxWidth="100.0" minWidth="10.0" prefWidth="100.0" />
@@ -127,6 +127,7 @@
                   <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
                   <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints maxHeight="30.0" minHeight="30.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
                   <Label prefHeight="30.0" prefWidth="100.0" text="Cliente">
@@ -135,30 +136,40 @@
                      </font>
                   </Label>
                   <ComboBox fx:id="ClienteBox" prefHeight="30.0" prefWidth="420.0" styleClass="dropdown" GridPane.columnIndex="1" GridPane.columnSpan="5" />
-                  <Label prefHeight="30.0" prefWidth="100.0" text="Pizza" GridPane.halignment="LEFT" GridPane.rowIndex="1" GridPane.valignment="CENTER">
+                  <Button id="secondary_button" fx:id="adicionarPizza" alignment="CENTER" graphicTextGap="25.0" mnemonicParsing="false" onAction="#adicionarPizza" prefHeight="30.0" prefWidth="140.0" styleClass="outlined_button" text="Adicionar Pizza" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Montserrat Regular" size="12.0" />
+                     </font>
+                  </Button>
+                  <Button id="cancel_button" fx:id="removerPizza" alignment="CENTER" graphicTextGap="25.0" mnemonicParsing="false" onAction="#removerPizza" prefHeight="30.0" prefWidth="140.0" styleClass="outlined_button" text="Remover Pizza" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="1">
+                     <font>
+                        <Font name="Montserrat Regular" size="12.0" />
+                     </font>
+                  </Button>
+                  <Label prefHeight="30.0" prefWidth="100.0" text="Pizza" GridPane.halignment="LEFT" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                      <font>
                         <Font name="Montserrat Regular" size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="PizzaBox" prefHeight="30.0" prefWidth="570.0" styleClass="dropdown" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="1" />
-                  <Label prefHeight="30.0" prefWidth="100.0" text="Tamanho" GridPane.rowIndex="2">
+                  <ComboBox fx:id="PizzaBox" prefHeight="30.0" prefWidth="570.0" styleClass="dropdown" GridPane.columnIndex="1" GridPane.columnSpan="5" GridPane.rowIndex="2" />
+                  <Label prefHeight="30.0" prefWidth="100.0" text="Tamanho" GridPane.rowIndex="3">
                      <font>
                         <Font name="Montserrat Regular" size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="TamanhoBox" prefHeight="30.0" prefWidth="210.0" styleClass="dropdown" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Estado" GridPane.columnIndex="3" GridPane.rowIndex="2">
+                  <ComboBox fx:id="TamanhoBox" prefHeight="30.0" prefWidth="210.0" styleClass="dropdown" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <Label alignment="CENTER" prefHeight="30.0" prefWidth="100.0" text="Estado" GridPane.columnIndex="3" GridPane.rowIndex="3">
                      <font>
                         <Font name="Montserrat Regular" size="18.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="EstadoBox" prefHeight="30.0" prefWidth="210.0" styleClass="dropdown" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="2" />
-                  <Label prefHeight="30.0" prefWidth="100.0" text="Adicionais" GridPane.rowIndex="3">
+                  <ComboBox fx:id="EstadoBox" prefHeight="30.0" prefWidth="210.0" styleClass="dropdown" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.rowIndex="3" />
+                  <Label prefHeight="30.0" prefWidth="100.0" text="Adicionais" GridPane.rowIndex="4">
                      <font>
                         <Font name="Montserrat Regular" size="18.0" />
                      </font>
                   </Label>
-                  <Button fx:id="Adicionar" alignment="TOP_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#AdicionalADD" prefHeight="30.0" prefWidth="150.0" styleClass="icon_button" text="Adicionar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Button fx:id="Adicionar" alignment="TOP_LEFT" graphicTextGap="25.0" mnemonicParsing="false" onAction="#AdicionalADD" prefHeight="30.0" prefWidth="150.0" styleClass="icon_button" text="Adicionar" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -170,7 +181,7 @@
                         <Font name="Montserrat Regular" size="12.0" />
                      </font>
                   </Button>
-                  <Button fx:id="Remover" alignment="TOP_LEFT" disable="true" graphicTextGap="25.0" mnemonicParsing="false" onAction="#RemoverADD" prefHeight="30.0" prefWidth="150.0" styleClass="icon_button" text="Remover" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="3">
+                  <Button fx:id="Remover" alignment="TOP_LEFT" disable="true" graphicTextGap="25.0" mnemonicParsing="false" onAction="#RemoverADD" prefHeight="30.0" prefWidth="150.0" styleClass="icon_button" text="Remover" GridPane.columnIndex="4" GridPane.columnSpan="2" GridPane.halignment="RIGHT" GridPane.rowIndex="4">
                      <graphic>
                         <ImageView fitHeight="20.0" fitWidth="20.0" pickOnBounds="true" preserveRatio="true">
                            <image>
@@ -182,9 +193,9 @@
                         <Font name="Montserrat Regular" size="12.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="Adicional1Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="4" />
-                  <ComboBox fx:id="Adicional2Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="5" />
-                  <ComboBox fx:id="Adicional3Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="Adicional1Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="5" />
+                  <ComboBox fx:id="Adicional2Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="6" />
+                  <ComboBox fx:id="Adicional3Box" prefHeight="30.0" prefWidth="520.0" styleClass="dropdown" GridPane.columnSpan="6" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </children>
