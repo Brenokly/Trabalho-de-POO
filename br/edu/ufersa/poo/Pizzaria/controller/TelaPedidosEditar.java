@@ -221,7 +221,7 @@ public class TelaPedidosEditar extends Dialog<Pedido> implements Initializable {
       alert.setContentText("Alteração concluída com sucesso.");
       alert.showAndWait();
 
-      Telas.TelaInicial();
+      // Telas.TelaInicial();
     } catch (Exception e) {
       Alert alert = new Alert(AlertType.ERROR);
       alert.setTitle("Erro");

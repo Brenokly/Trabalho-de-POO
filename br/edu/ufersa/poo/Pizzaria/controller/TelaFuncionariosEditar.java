@@ -82,7 +82,7 @@ public class TelaFuncionariosEditar extends Dialog<Usuario> {
                     userBO.update(funcionario);
 
                     // Redirecione para a tela desejada após o salvamento bem-sucedido
-                    Telas.TelaFuncionariosListagem();
+                    // Telas.TelaFuncionariosListagem();
                 } else {
                     senha2.pseudoClassStateChanged(error, false);
                     exibirMensagemDeErro("Senhas diferentes", "As senhas não coincidem. Verifique novamente.");

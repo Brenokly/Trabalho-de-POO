@@ -77,7 +77,7 @@ public class TelaClientesEditar extends Dialog<Cliente> {
                 clienteBO.update(cliente);
 
                 // Redirecione para a tela desejada após o salvamento bem-sucedido
-                Telas.TelaClientes();
+                // Telas.TelaClientes();
             } catch (Exception e) {
                 exibirMensagemDeErro("Erro ao carregar cliente", e.getMessage());
                 if (e.getMessage().equals("Cliente já cadastrado")) {

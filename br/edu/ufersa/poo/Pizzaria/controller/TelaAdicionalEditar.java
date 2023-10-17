@@ -85,7 +85,7 @@ public class TelaAdicionalEditar extends Dialog<Adicional> {
         adicionalBo.update(adicional);
 
         // Redireciona para a tela desejada após o salvamento bem-sucedido
-        Telas.TelaAdicionalListagem();
+        // Telas.TelaAdicionalListagem();
       } catch (NomeInvalido e) {
         nome.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Nome inválido", e.getMessage());
