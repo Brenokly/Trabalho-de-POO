@@ -52,6 +52,7 @@
 #menu_button {
     -fx-text-fill: #F3F3F3;
     -fx-font-size: 20;
+    -fx-padding: 0;
 }
 #menu_button:disabled {
     -fx-text-fill: #F3F3F3;

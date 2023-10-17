@@ -76,8 +76,6 @@ public class TelaClientesEditar extends Dialog<Cliente> {
                 ClienteBO clienteBO = new ClienteBO();
                 clienteBO.update(cliente);
 
-                System.out.println(cliente.getCpf());
-
                 // Redirecione para a tela desejada após o salvamento bem-sucedido
                 Telas.TelaClientes();
             } catch (Exception e) {
