@@ -85,7 +85,7 @@ public class TelaSaboresEditar extends Dialog<TiposPizzas> {
         tiposPizzasBO.update(sabor);
 
         // Redireciona para a tela desejada após o salvamento bem-sucedido
-        // Telas.TelaSabores();
+        Telas.TelaSabores();
       } catch (NomeInvalido e) {
         nome.pseudoClassStateChanged(error, true);
         exibirMensagemDeErro("Nome inválido", e.getMessage());
