@@ -14,7 +14,7 @@ public class ClienteBO implements BaseBO<Cliente> {
     // banco de dados com o mesmo nome
     ClienteDao ClienteDao = new ClienteDao();
     Cliente cliente = ClienteDao.buscarPorCpf(bo);
-    
+
     if (bo.getId() == null || bo.getId() < 1) {
       throw new UsuarioInvalido("ID inválido");
     }
@@ -35,8 +35,7 @@ public class ClienteBO implements BaseBO<Cliente> {
     if (clienteID != null) {
       if (cliente == null) {
         clienteDao.alterar(bo);
-      }
-      else {
+      } else {
         throw new UsuarioInvalido("Cliente já cadastrado");
       }
     } else {
