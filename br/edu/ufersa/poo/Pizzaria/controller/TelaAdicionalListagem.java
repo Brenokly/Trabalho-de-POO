@@ -57,6 +57,15 @@ public class TelaAdicionalListagem implements Initializable {
 
     // Adicionar os dados originais à lista allAdicionais
     allAdicionais.addAll(adicionais);
+
+    if (Telas.getAdmin() == false) {
+        adicionar.setVisible(false);
+        adicionar.setFocusTraversable(false);
+        adicionar.setMouseTransparent(true);
+        editar.setVisible(false);
+        editar.setFocusTraversable(false);
+        editar.setMouseTransparent(true);
+    }
   }
 
   @FXML
